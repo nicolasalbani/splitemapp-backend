@@ -1,8 +1,8 @@
 -- -----------------------------------------------------
--- Schema splitshares
+-- Schema splitemapp
 -- -----------------------------------------------------
---CREATE SCHEMA IF NOT EXISTS "splitshares" DEFAULT CHARACTER SET utf8 ;
---USE "splitshares" ;
+--CREATE SCHEMA IF NOT EXISTS "splitemapp" DEFAULT CHARACTER SET utf8 ;
+--USE "splitemapp" ;
 
 -- -----------------------------------------------------
 -- Enable foreign keys support
