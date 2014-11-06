@@ -159,6 +159,8 @@ CREATE TABLE `user_to_group` (
   `user_id` bigint(20) unsigned NOT NULL,
   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
   `group_id` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id__group_id_u_idx` (`user_id`,`group_id`),
   KEY `user_to_group__user_id_idx` (`user_id`),
@@ -191,6 +193,8 @@ CREATE TABLE `user_to_project` (
   `user_id` bigint(20) unsigned NOT NULL,
   `project_id` bigint(20) unsigned NOT NULL,
   `expenses_share` decimal(3,2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id__project_id_u_idx` (`user_id`,`project_id`),
   KEY `user_to_project__user_id` (`user_id`),
@@ -247,7 +251,7 @@ insert into expense_category values(1,'car','Automovil');
 -- -----------------------------------------------------
 -- Table `user_expenses`
 -- -----------------------------------------------------
-CREATE TABLE `user_expenses` (
+CREATE TABLE `user_expense` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL,
   `project_id` bigint(20) unsigned NOT NULL,
@@ -255,6 +259,8 @@ CREATE TABLE `user_expenses` (
   `expense` decimal(16,6) NOT NULL,
   `expense_date` timestamp NULL,
   `note` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `user_expenses__user_id` (`user_id`),
   KEY `user_expenses__project_id` (`project_id`),

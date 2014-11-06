@@ -150,6 +150,8 @@ CREATE TABLE "user_to_group" (
   "user_id" bigint(20)  NOT NULL,
   "is_admin" tinyint(1) NOT NULL DEFAULT "0",
   "group_id" bigint(20)  NOT NULL,
+  "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
   FOREIGN KEY(user_id) REFERENCES user(id),
   FOREIGN KEY(group_id) REFERENCES "group"(id),
   FOREIGN KEY(user_status_id) REFERENCES user_to_group_status(id)
@@ -178,6 +180,8 @@ CREATE TABLE "user_to_project" (
   "user_id" bigint(20)  NOT NULL,
   "project_id" bigint(20)  NOT NULL,
   "expenses_share" decimal(3,2) NOT NULL,
+  "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
   FOREIGN KEY(user_id) REFERENCES user(id),
   FOREIGN KEY(project_id) REFERENCES project(id),
   FOREIGN KEY(user_status_id) REFERENCES user_to_project_status(id)
@@ -227,7 +231,7 @@ insert into expense_category values(1,"car","Automovil");
 -- -----------------------------------------------------
 -- Table "user_expenses"
 -- -----------------------------------------------------
-CREATE TABLE "user_expenses" (
+CREATE TABLE "user_expense" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "user_id" bigint(20)  NOT NULL,
   "project_id" bigint(20)  NOT NULL,
@@ -235,6 +239,8 @@ CREATE TABLE "user_expenses" (
   "expense" decimal(16,6) NOT NULL,
   "expense_date" timestamp NULL,
   "note" text DEFAULT NULL,
+  "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updated_at" timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
   FOREIGN KEY(user_id) REFERENCES user(id),
   FOREIGN KEY(project_id) REFERENCES project(id),
   FOREIGN KEY(category_id) REFERENCES expense_category(id)
