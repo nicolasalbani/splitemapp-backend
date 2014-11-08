@@ -16,7 +16,7 @@ public abstract class DomainDAO <E extends Serializable> {
 
 private static Logger logger = Logger.getLogger(DomainDAO.class);
 	
-	private SessionFactory sessionFactory = null;
+	protected SessionFactory sessionFactory = null;
 	
 	public DomainDAO(){
 		sessionFactory = SessionFactoryProvider.getSessionFactory();
