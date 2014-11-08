@@ -3,6 +3,7 @@ package com.splitemapp.service.backendrest.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
+import java.util.UUID;
 
 public class BackendUtils {
 
@@ -29,5 +30,11 @@ public class BackendUtils {
 			}
 		} 
 		return newPassword;
+	}
+	
+	public static String createSessionToken(){
+		UUID token = UUID.randomUUID();
+		
+		return token.toString();
 	}
 }
