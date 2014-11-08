@@ -90,7 +90,8 @@ private static Logger logger = Logger.getLogger(DomainDAO.class);
 		
 		Session session = sessionFactory.openSession();
 		try {
-			Query query = session.createQuery("FROM " +getEntityClass().getSimpleName()+ " E WHERE E.id =" +id);
+			Query query = session.createQuery("FROM " +getEntityClass().getSimpleName()+ " E WHERE E.id = :id");
+			query.setParameter("id", id);
 			List<E> resultList = query.list();
 			if(resultList.size() == 1){
 				logger.debug("get successful");
@@ -108,5 +109,4 @@ private static Logger logger = Logger.getLogger(DomainDAO.class);
 			session.close();
 		}
 	}
-
 }
