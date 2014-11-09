@@ -1,7 +1,5 @@
-package com.splitemapp.service.domainmodel.dto;
+package com.splitemapp.domainmodel.domain.dto;
 
-@javax.xml.bind.annotation.XmlRootElement
-@javax.xml.bind.annotation.XmlAccessorType(value = javax.xml.bind.annotation.XmlAccessType.FIELD)
 public class LoginRequest {
 
 	private String username;
