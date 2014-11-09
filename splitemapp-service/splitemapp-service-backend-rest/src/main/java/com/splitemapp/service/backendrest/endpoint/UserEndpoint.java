@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.splitemapp.service.domainmodel.domain.User;
+import com.splitemapp.domainmodel.domain.User;
 import com.splitemapp.service.backendrest.dao.DomainDAO;
 
 public class UserEndpoint extends DomainDAO<User> {
@@ -24,7 +24,7 @@ public class UserEndpoint extends DomainDAO<User> {
 
 		Session session = sessionFactory.openSession();
 		try {
-			Query query = session.createQuery("FROM " +getEntityClass().getSimpleName()+ " E WHERE E.username = :user_name");
+			Query query = session.createQuery("FROM " +getTableName()+ " E WHERE E.username = :user_name");
 			query.setParameter("user_name", userName);
 			List<User> resultList = query.list();
 			if(resultList.size() == 1){

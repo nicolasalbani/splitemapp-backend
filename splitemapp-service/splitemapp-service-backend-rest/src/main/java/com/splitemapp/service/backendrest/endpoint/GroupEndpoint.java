@@ -1,6 +1,6 @@
 package com.splitemapp.service.backendrest.endpoint;
 
-import com.splitemapp.service.domainmodel.domain.Group;
+import com.splitemapp.domainmodel.domain.Group;
 import com.splitemapp.service.backendrest.dao.DomainDAO;
 
 public class GroupEndpoint extends DomainDAO<Group> {

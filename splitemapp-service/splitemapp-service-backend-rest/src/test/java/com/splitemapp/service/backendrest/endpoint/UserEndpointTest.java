@@ -1,6 +1,6 @@
 package com.splitemapp.service.backendrest.endpoint;
 
-import com.splitemapp.service.domainmodel.domain.User;
+import com.splitemapp.domainmodel.domain.User;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 
 public class UserEndpointTest extends BaseEndpointTest<UserEndpoint, User>{

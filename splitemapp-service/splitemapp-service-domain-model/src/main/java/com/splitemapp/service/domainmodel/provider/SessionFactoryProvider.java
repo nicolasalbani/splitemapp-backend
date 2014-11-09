@@ -5,22 +5,22 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.splitemapp.service.domainmodel.domain.ExpenseCategory;
-import com.splitemapp.service.domainmodel.domain.Group;
-import com.splitemapp.service.domainmodel.domain.GroupStatus;
-import com.splitemapp.service.domainmodel.domain.InviteStatus;
-import com.splitemapp.service.domainmodel.domain.Project;
-import com.splitemapp.service.domainmodel.domain.ProjectStatus;
-import com.splitemapp.service.domainmodel.domain.ProjectType;
-import com.splitemapp.service.domainmodel.domain.User;
-import com.splitemapp.service.domainmodel.domain.UserContactData;
-import com.splitemapp.service.domainmodel.domain.UserExpenses;
-import com.splitemapp.service.domainmodel.domain.UserInvite;
-import com.splitemapp.service.domainmodel.domain.UserStatus;
-import com.splitemapp.service.domainmodel.domain.UserToGroup;
-import com.splitemapp.service.domainmodel.domain.UserToGroupStatus;
-import com.splitemapp.service.domainmodel.domain.UserToProject;
-import com.splitemapp.service.domainmodel.domain.UserToProjectStatus;
+import com.splitemapp.domainmodel.domain.ExpenseCategory;
+import com.splitemapp.domainmodel.domain.Group;
+import com.splitemapp.domainmodel.domain.GroupStatus;
+import com.splitemapp.domainmodel.domain.InviteStatus;
+import com.splitemapp.domainmodel.domain.Project;
+import com.splitemapp.domainmodel.domain.ProjectStatus;
+import com.splitemapp.domainmodel.domain.ProjectType;
+import com.splitemapp.domainmodel.domain.User;
+import com.splitemapp.domainmodel.domain.UserContactData;
+import com.splitemapp.domainmodel.domain.UserExpenses;
+import com.splitemapp.domainmodel.domain.UserInvite;
+import com.splitemapp.domainmodel.domain.UserStatus;
+import com.splitemapp.domainmodel.domain.UserToGroup;
+import com.splitemapp.domainmodel.domain.UserToGroupStatus;
+import com.splitemapp.domainmodel.domain.UserToProject;
+import com.splitemapp.domainmodel.domain.UserToProjectStatus;
 
 public class SessionFactoryProvider {
 

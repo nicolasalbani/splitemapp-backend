@@ -47,15 +47,17 @@
 
 		<!-- Testing dependencies version -->
 		<junit.version>4.8.1</junit.version>
-		
+
 		<!-- REST Easy dependencies version -->
 		<resteasy.version>3.0.9.Final</resteasy.version>
-		
-		
+
+		<!-- SplitemApp Common Domain Model -->
+		<common.domain.version>0.0.1-SNAPSHOT</common.domain.version>
+
 		<!-- Source code version -->
 		<source.java.version>1.7</source.java.version>
 		<target.java.version>1.7</target.java.version>
-		
+
 		<!-- Spring Framework dependencies version -->
 		<spring.version>4.1.1.RELEASE</spring.version>
 	</properties>
@@ -153,6 +155,13 @@
 			<artifactId>h2</artifactId>
 			<version>${h2.jdbc.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- Common Domain Model dependencies -->
+		<dependency>
+			<groupId>com.splitemapp</groupId>
+			<artifactId>common-domain-model</artifactId>
+			<version>${common.domain.version}</version>
 		</dependency>
 	</dependencies>
 
