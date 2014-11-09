@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.splitemapp</groupId>
-	<artifactId>common-domain-model</artifactId>
+	<artifactId>splitemapp-common-domain-model</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SplitemApp CDM</name>
 	<description>SplitemApp Common Domain Model</description>
