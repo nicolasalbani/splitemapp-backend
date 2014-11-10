@@ -59,7 +59,7 @@ public class Project implements java.io.Serializable {
 	private Date updatedAt;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
-	private Set<UserExpenses> userExpenseses = new HashSet<UserExpenses>(0);
+	private Set<UserExpense> userExpenses = new HashSet<UserExpense>(0);
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
 	private Set<UserInvite> userInvites = new HashSet<UserInvite>(0);
@@ -80,7 +80,7 @@ public class Project implements java.io.Serializable {
 
 	public Project(ProjectType projectType, ProjectStatus projectStatus,
 			String title, String imgCover, BigDecimal budget, Date createdAt,
-			Date updatedAt, Set<UserExpenses> userExpenseses,
+			Date updatedAt, Set<UserExpense> userExpenses,
 			Set<UserInvite> userInvites, Set<UserToProject> userToProjects) {
 		this.projectType = projectType;
 		this.projectStatus = projectStatus;
@@ -89,7 +89,7 @@ public class Project implements java.io.Serializable {
 		this.budget = budget;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.userExpenseses = userExpenseses;
+		this.userExpenses = userExpenses;
 		this.userInvites = userInvites;
 		this.userToProjects = userToProjects;
 	}
@@ -158,12 +158,12 @@ public class Project implements java.io.Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public Set<UserExpenses> getUserExpenseses() {
-		return this.userExpenseses;
+	public Set<UserExpense> getUserExpenses() {
+		return this.userExpenses;
 	}
 
-	public void setUserExpenseses(Set<UserExpenses> userExpenseses) {
-		this.userExpenseses = userExpenseses;
+	public void setUserExpenses(Set<UserExpense> userExpenses) {
+		this.userExpenses = userExpenses;
 	}
 
 	public Set<UserInvite> getUserInvites() {

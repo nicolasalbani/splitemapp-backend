@@ -14,7 +14,7 @@ import com.splitemapp.domainmodel.domain.ProjectStatus;
 import com.splitemapp.domainmodel.domain.ProjectType;
 import com.splitemapp.domainmodel.domain.User;
 import com.splitemapp.domainmodel.domain.UserContactData;
-import com.splitemapp.domainmodel.domain.UserExpenses;
+import com.splitemapp.domainmodel.domain.UserExpense;
 import com.splitemapp.domainmodel.domain.UserInvite;
 import com.splitemapp.domainmodel.domain.UserStatus;
 import com.splitemapp.domainmodel.domain.UserToGroup;
@@ -49,7 +49,7 @@ public class SessionFactoryProvider {
 		configuration.addAnnotatedClass(User.class)
 		.addAnnotatedClass(UserStatus.class)
 		.addAnnotatedClass(UserContactData.class)
-		.addAnnotatedClass(UserExpenses.class)
+		.addAnnotatedClass(UserExpense.class)
 		.addAnnotatedClass(ExpenseCategory.class)
 		.addAnnotatedClass(Project.class)
 		.addAnnotatedClass(ProjectStatus.class)

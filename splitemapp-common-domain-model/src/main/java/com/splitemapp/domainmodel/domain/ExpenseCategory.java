@@ -32,7 +32,7 @@ public class ExpenseCategory implements java.io.Serializable {
 	private String title;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expenseCategory")
-	private Set<UserExpenses> userExpenseses = new HashSet<UserExpenses>(0);
+	private Set<UserExpense> userExpenses = new HashSet<UserExpense>(0);
 
 	public ExpenseCategory() {
 	}
@@ -44,11 +44,11 @@ public class ExpenseCategory implements java.io.Serializable {
 	}
 
 	public ExpenseCategory(short id, String cod, String title,
-			Set<UserExpenses> userExpenseses) {
+			Set<UserExpense> userExpenses) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
-		this.userExpenseses = userExpenseses;
+		this.userExpenses = userExpenses;
 	}
 
 	public short getId() {
@@ -75,12 +75,12 @@ public class ExpenseCategory implements java.io.Serializable {
 		this.title = title;
 	}
 
-	public Set<UserExpenses> getUserExpenseses() {
-		return this.userExpenseses;
+	public Set<UserExpense> getUserExpenses() {
+		return this.userExpenses;
 	}
 
-	public void setUserExpenseses(Set<UserExpenses> userExpenseses) {
-		this.userExpenseses = userExpenseses;
+	public void setUserExpenses(Set<UserExpense> userExpenses) {
+		this.userExpenses = userExpenses;
 	}
 	
 }
