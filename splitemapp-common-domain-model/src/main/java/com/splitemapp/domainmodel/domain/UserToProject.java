@@ -3,15 +3,21 @@ package com.splitemapp.domainmodel.domain;
 // Generated Sep 15, 2014 8:09:15 PM by Hibernate Tools 4.0.0
 
 import java.math.BigDecimal;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 /**
@@ -40,6 +46,14 @@ public class UserToProject implements java.io.Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_status_id", nullable = false)
 	private UserToProjectStatus userToProjectStatus;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at", nullable = false, length = 19)
+	private Date createdAt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updated_at", nullable = false, length = 19)
+	private Date updatedAt;
 
 	@Column(name = "expenses_share", nullable = false, precision = 3)
 	private BigDecimal expensesShare;
@@ -93,6 +107,22 @@ public class UserToProject implements java.io.Serializable {
 
 	public void setExpensesShare(BigDecimal expensesShare) {
 		this.expensesShare = expensesShare;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 	
 }

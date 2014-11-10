@@ -44,6 +44,14 @@ public class UserExpenses implements java.io.Serializable {
 
 	@Column(name = "expense", nullable = false, precision = 16, scale = 6)
 	private BigDecimal expense;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "created_at", nullable = false, length = 19)
+	private Date createdAt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "updated_at", nullable = false, length = 19)
+	private Date updatedAt;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "expense_date", length = 19)
@@ -128,6 +136,22 @@ public class UserExpenses implements java.io.Serializable {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 }
