@@ -249,7 +249,7 @@ CREATE TABLE `expense_category` (
 insert into expense_category values(1,'car','Automovil');
 
 -- -----------------------------------------------------
--- Table `user_expenses`
+-- Table `user_expense`
 -- -----------------------------------------------------
 CREATE TABLE `user_expense` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -262,9 +262,24 @@ CREATE TABLE `user_expense` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
-  KEY `user_expenses__user_id` (`user_id`),
-  KEY `user_expenses__project_id` (`project_id`),
-  CONSTRAINT `user_expenses__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `user_expenses__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
-  CONSTRAINT `user_expenses__category_id` FOREIGN KEY (`category_id`) REFERENCES `expense_category` (`id`)
+  KEY `user_expense__user_id` (`user_id`),
+  KEY `user_expense__project_id` (`project_id`),
+  CONSTRAINT `user_expense__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_expense__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
+  CONSTRAINT `user_expense__category_id` FOREIGN KEY (`category_id`) REFERENCES `expense_category` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- -----------------------------------------------------
+-- Table `user_session`
+-- -----------------------------------------------------
+CREATE TABLE `user_session` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `token` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `device` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `last_used_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token_u_idx` (`token`),
+  KEY `user_session__user_id` (`user_id`),
+  CONSTRAINT `user_session__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

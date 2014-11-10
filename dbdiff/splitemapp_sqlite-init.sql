@@ -245,3 +245,16 @@ CREATE TABLE "user_expense" (
   FOREIGN KEY(project_id) REFERENCES project(id),
   FOREIGN KEY(category_id) REFERENCES expense_category(id)
 );
+
+-- -----------------------------------------------------
+-- Table `user_session`
+-- -----------------------------------------------------
+CREATE TABLE "user_session" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "user_id" bigint(20)  NOT NULL,
+  "token" varchar(64) NOT NULL,
+  "device" varchar(64) NOT NULL,
+  "last_used_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(user_id) REFERENCES user(id),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE UNIQUE INDEX token_u_idx ON user_session(token);
