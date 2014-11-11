@@ -19,4 +19,7 @@
 	<bean id="userEndpoint" class="com.splitemapp.service.backendrest.endpoint.UserEndpoint">
 	</bean>
 	
+	<bean id="userSessionEndpoint" class="com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint">
+	</bean>
+	
 </beans>

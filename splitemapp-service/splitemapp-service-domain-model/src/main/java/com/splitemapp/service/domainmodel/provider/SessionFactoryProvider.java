@@ -16,6 +16,7 @@ import com.splitemapp.domainmodel.domain.User;
 import com.splitemapp.domainmodel.domain.UserContactData;
 import com.splitemapp.domainmodel.domain.UserExpense;
 import com.splitemapp.domainmodel.domain.UserInvite;
+import com.splitemapp.domainmodel.domain.UserSession;
 import com.splitemapp.domainmodel.domain.UserStatus;
 import com.splitemapp.domainmodel.domain.UserToGroup;
 import com.splitemapp.domainmodel.domain.UserToGroupStatus;
@@ -61,6 +62,7 @@ public class SessionFactoryProvider {
 		.addAnnotatedClass(UserToProjectStatus.class)
 		.addAnnotatedClass(UserToGroupStatus.class)
 		.addAnnotatedClass(Group.class)
-		.addAnnotatedClass(GroupStatus.class);
+		.addAnnotatedClass(GroupStatus.class)
+		.addAnnotatedClass(UserSession.class);
 	}
 }
