@@ -1,6 +1,6 @@
 package com.splitemapp.service.backendrest.endpoint;
 
-import com.splitemapp.domainmodel.domain.UserToProject;
+import com.splitemapp.commons.domain.UserToProject;
 import com.splitemapp.service.backendrest.dao.DomainDAO;
 
 public class UserToGroupEndpoint extends DomainDAO<UserToProject> {

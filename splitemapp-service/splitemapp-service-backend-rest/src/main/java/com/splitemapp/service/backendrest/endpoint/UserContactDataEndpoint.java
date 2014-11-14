@@ -1,6 +1,6 @@
 package com.splitemapp.service.backendrest.endpoint;
 
-import com.splitemapp.domainmodel.domain.User;
+import com.splitemapp.commons.domain.User;
 import com.splitemapp.service.backendrest.dao.DomainDAO;
 
 public class UserContactDataEndpoint extends DomainDAO<User> {

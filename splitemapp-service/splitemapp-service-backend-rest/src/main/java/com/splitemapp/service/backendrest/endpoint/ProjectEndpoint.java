@@ -1,6 +1,6 @@
 package com.splitemapp.service.backendrest.endpoint;
 
-import com.splitemapp.domainmodel.domain.Project;
+import com.splitemapp.commons.domain.Project;
 import com.splitemapp.service.backendrest.dao.DomainDAO;
 
 public class ProjectEndpoint extends DomainDAO<Project> {

@@ -52,7 +52,7 @@
 		<resteasy.version>3.0.9.Final</resteasy.version>
 
 		<!-- SplitemApp Common Domain Model -->
-		<common.domain.version>0.0.1-SNAPSHOT</common.domain.version>
+		<commons.version>0.0.1-SNAPSHOT</commons.version>
 
 		<!-- Source code version -->
 		<source.java.version>1.7</source.java.version>
@@ -160,8 +160,8 @@
 		<!-- Common Domain Model dependencies -->
 		<dependency>
 			<groupId>com.splitemapp</groupId>
-			<artifactId>splitemapp-common-domain-model</artifactId>
-			<version>${common.domain.version}</version>
+			<artifactId>splitemapp-commons</artifactId>
+			<version>${commons.version}</version>
 		</dependency>
 	</dependencies>
 

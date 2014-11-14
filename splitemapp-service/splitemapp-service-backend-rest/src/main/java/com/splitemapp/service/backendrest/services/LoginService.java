@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 import com.splitemapp.service.backendrest.utils.BackendUtils;
-import com.splitemapp.domainmodel.domain.User;
-import com.splitemapp.domainmodel.domain.UserSession;
+import com.splitemapp.commons.domain.User;
+import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.service.domainmodel.dto.LoginRequest;
 import com.splitemapp.service.domainmodel.dto.LoginResponse;
 

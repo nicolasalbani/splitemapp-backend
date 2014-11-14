@@ -1,6 +1,6 @@
 package com.splitemapp.service.backendrest.endpoint;
 
-import com.splitemapp.domainmodel.domain.UserSession;
+import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.service.backendrest.dao.DomainDAO;
 
 public class UserSessionEndpoint extends DomainDAO<UserSession> {

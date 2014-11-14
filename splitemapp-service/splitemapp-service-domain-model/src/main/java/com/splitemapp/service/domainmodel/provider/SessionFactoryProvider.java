@@ -5,23 +5,23 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.splitemapp.domainmodel.domain.ExpenseCategory;
-import com.splitemapp.domainmodel.domain.Group;
-import com.splitemapp.domainmodel.domain.GroupStatus;
-import com.splitemapp.domainmodel.domain.InviteStatus;
-import com.splitemapp.domainmodel.domain.Project;
-import com.splitemapp.domainmodel.domain.ProjectStatus;
-import com.splitemapp.domainmodel.domain.ProjectType;
-import com.splitemapp.domainmodel.domain.User;
-import com.splitemapp.domainmodel.domain.UserContactData;
-import com.splitemapp.domainmodel.domain.UserExpense;
-import com.splitemapp.domainmodel.domain.UserInvite;
-import com.splitemapp.domainmodel.domain.UserSession;
-import com.splitemapp.domainmodel.domain.UserStatus;
-import com.splitemapp.domainmodel.domain.UserToGroup;
-import com.splitemapp.domainmodel.domain.UserToGroupStatus;
-import com.splitemapp.domainmodel.domain.UserToProject;
-import com.splitemapp.domainmodel.domain.UserToProjectStatus;
+import com.splitemapp.commons.domain.ExpenseCategory;
+import com.splitemapp.commons.domain.Group;
+import com.splitemapp.commons.domain.GroupStatus;
+import com.splitemapp.commons.domain.InviteStatus;
+import com.splitemapp.commons.domain.Project;
+import com.splitemapp.commons.domain.ProjectStatus;
+import com.splitemapp.commons.domain.ProjectType;
+import com.splitemapp.commons.domain.User;
+import com.splitemapp.commons.domain.UserContactData;
+import com.splitemapp.commons.domain.UserExpense;
+import com.splitemapp.commons.domain.UserInvite;
+import com.splitemapp.commons.domain.UserSession;
+import com.splitemapp.commons.domain.UserStatus;
+import com.splitemapp.commons.domain.UserToGroup;
+import com.splitemapp.commons.domain.UserToGroupStatus;
+import com.splitemapp.commons.domain.UserToProject;
+import com.splitemapp.commons.domain.UserToProjectStatus;
 
 public class SessionFactoryProvider {
 

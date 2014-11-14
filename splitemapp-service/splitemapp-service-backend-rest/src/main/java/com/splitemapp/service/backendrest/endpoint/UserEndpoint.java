@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import com.splitemapp.domainmodel.domain.User;
+import com.splitemapp.commons.domain.User;
 import com.splitemapp.service.backendrest.dao.DomainDAO;
 
 public class UserEndpoint extends DomainDAO<User> {

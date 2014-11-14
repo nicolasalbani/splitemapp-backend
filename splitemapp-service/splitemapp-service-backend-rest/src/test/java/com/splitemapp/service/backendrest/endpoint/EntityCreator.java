@@ -2,8 +2,8 @@ package com.splitemapp.service.backendrest.endpoint;
 
 import java.util.Date;
 
-import com.splitemapp.domainmodel.domain.User;
-import com.splitemapp.domainmodel.domain.UserStatus;
+import com.splitemapp.commons.domain.User;
+import com.splitemapp.commons.domain.UserStatus;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 
 public class EntityCreator {

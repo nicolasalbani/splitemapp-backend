@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.splitemapp</groupId>
+	<artifactId>splitemapp-commons</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>SplitemApp Commons</name>
+	<description>SplitemApp Commons</description>
+	<packaging>jar</packaging>
+
+	<developers>
+		<developer>
+			<name>Diego Ghersi</name>
+			<email>diego@ghersi.com.ar</email>
+		</developer>
+		<developer>
+			<name>Nicolas Albani</name>
+			<email>nicolasalbani@gmail.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<!-- Encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Plugins version -->
+		<maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+
+		<!-- JPA dependencies version -->
+		<javax.persistence.version>1.0.2</javax.persistence.version>
+
+		<!-- Testing dependencies version -->
+		<junit.version>4.8.1</junit.version>
+
+		<!-- Source code version -->
+		<source.java.version>1.7</source.java.version>
+		<target.java.version>1.7</target.java.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<source>${source.java.version}</source>
+						<target>${target.java.version}</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+		<!-- javax dependencies -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>${javax.persistence.version}</version>
+		</dependency>
+
+		<!-- Testing dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+	</dependencies>
+</project>
