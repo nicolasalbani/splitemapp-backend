@@ -22,6 +22,6 @@ public class UserEndpointTest extends BaseEndpointTest<UserEndpoint, User>{
 
 	@Override
 	protected Long getNonExistingEntityId() {
-		return 2L;
+		return 3L;
 	}
 }

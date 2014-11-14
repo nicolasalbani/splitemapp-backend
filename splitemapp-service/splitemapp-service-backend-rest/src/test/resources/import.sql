@@ -68,8 +68,8 @@ values							(1,1,'cod','first_group',null,'2014-09-21 02:17:36','2014-09-21 02:
 insert into splitemapp.user_contact_data	(id,user_id,contact_data,verified,verified_at,created_at,updated_at) 
 values										(1,1,'juan@perez.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36');
 
--- Populating the user_expenses table
-insert into splitemapp.user_expenses	(id,user_id,project_id,category_id,expense,expense_date,note) 
+-- Populating the user_expense table
+insert into splitemapp.user_expense		(id,user_id,project_id,category_id,expense,expense_date,note) 
 values									(1,1,1,1,200,'2014-09-21 02:17:36','Nafta');
 
 -- Populating the user_to_group table
