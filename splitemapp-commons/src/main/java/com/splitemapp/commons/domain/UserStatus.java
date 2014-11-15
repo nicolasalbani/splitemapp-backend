@@ -31,7 +31,7 @@ public class UserStatus implements java.io.Serializable {
 	@Column(name = "title", nullable = false, length = 64)
 	private String title;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userStatus")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userStatus")
 	private Set<User> users = new HashSet<User>(0);
 
 	public UserStatus() {

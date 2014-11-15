@@ -31,7 +31,7 @@ public class ProjectType implements java.io.Serializable {
 	@Column(name = "title", nullable = false, length = 64)
 	private String title;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectType")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "projectType")
 	private Set<Project> projects = new HashSet<Project>(0);
 
 	public ProjectType() {

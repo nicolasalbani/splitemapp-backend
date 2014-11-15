@@ -10,6 +10,8 @@ public class ExpenseCategoryDTO implements java.io.Serializable {
 	private String cod;
 	private String title;
 
+	public ExpenseCategoryDTO(){}
+	
 	public ExpenseCategoryDTO(ExpenseCategory expenseCategory) {
 		this.id = expenseCategory.getId();
 		this.cod = expenseCategory.getCod();

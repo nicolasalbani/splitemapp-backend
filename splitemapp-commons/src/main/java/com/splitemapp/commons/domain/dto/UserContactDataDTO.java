@@ -15,6 +15,8 @@ public class UserContactDataDTO implements java.io.Serializable {
 	private Date verifiedAt;
 	private Date createdAt;
 	private Date updatedAt;
+	
+	public UserContactDataDTO(){}
 
 	public UserContactDataDTO(UserContactData userContactData) {
 		this.userDTO = new UserDTO(userContactData.getUser());

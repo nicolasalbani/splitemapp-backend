@@ -10,6 +10,8 @@ public class UserStatusDTO implements java.io.Serializable {
 	private short id;
 	private String cod;
 	private String title;
+	
+	public UserStatusDTO(){}
 
 	public UserStatusDTO(UserStatus userStatus) {
 		this.id = userStatus.getId();

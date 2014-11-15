@@ -20,6 +20,8 @@ public class UserDTO implements java.io.Serializable {
 	private String createdIpAddress;
 	private Date updatedAt;
 	private String updatedIpAddress;
+	
+	public UserDTO(){}
 
 	public UserDTO(User user) {
 		this.userStatusDTO = new UserStatusDTO(user.getUserStatus());

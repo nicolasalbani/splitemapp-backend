@@ -33,11 +33,11 @@ public class Project implements java.io.Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "type_id", nullable = false)
 	private ProjectType projectType;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "status_id", nullable = false)
 	private ProjectStatus projectStatus;
 	
@@ -58,13 +58,13 @@ public class Project implements java.io.Serializable {
 	@Column(name = "updated_at", nullable = false, length = 19)
 	private Date updatedAt;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<UserExpense> userExpenses = new HashSet<UserExpense>(0);
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<UserInvite> userInvites = new HashSet<UserInvite>(0);
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<UserToProject> userToProjects = new HashSet<UserToProject>(0);
 
 	public Project() {

@@ -31,7 +31,7 @@ public class UserToGroupStatus implements java.io.Serializable {
 	@Column(name = "title", nullable = false, length = 64)
 	private String title;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userToGroupStatus")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "userToGroupStatus")
 	private Set<UserToGroup> userToGroups = new HashSet<UserToGroup>(0);
 
 	public UserToGroupStatus() {

@@ -9,6 +9,8 @@ public class UserToProjectStatusDTO implements java.io.Serializable {
 	private short id;
 	private String cod;
 	private String title;
+	
+	public UserToProjectStatusDTO(){}
 
 	public UserToProjectStatusDTO(UserToProjectStatus userToProjectStatus) {
 		this.id = userToProjectStatus.getId();

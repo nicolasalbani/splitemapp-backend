@@ -15,6 +15,8 @@ public class UserInviteDTO implements java.io.Serializable {
 	private String email;
 	private Date createdAt;
 	private Date updatedAt;
+	
+	public UserInviteDTO(){}
 
 	public UserInviteDTO(UserInvite userInvite) {
 		this.userDTO = new UserDTO(userInvite.getUser());

@@ -10,6 +10,8 @@ public class UserToGroupStatusDTO implements java.io.Serializable {
 	private short id;
 	private String cod;
 	private String title;
+	
+	public UserToGroupStatusDTO(){}
 
 	public UserToGroupStatusDTO(UserToGroupStatus userToGroupStatus) {
 		this.id = userToGroupStatus.getId();

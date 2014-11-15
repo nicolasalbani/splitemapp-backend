@@ -18,6 +18,8 @@ public class UserExpenseDTO implements java.io.Serializable {
 	private Date updatedAt;
 	private Date expenseDate;
 	private String note;
+	
+	public UserExpenseDTO(){}
 
 	public UserExpenseDTO(UserExpense userExpense) {
 		this.userDTO = new UserDTO(userExpense.getUser());

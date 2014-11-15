@@ -9,6 +9,8 @@ public class InviteStatusDTO implements java.io.Serializable {
 	private short id;
 	private String cod;
 	private String title;
+	
+	public InviteStatusDTO(){}
 
 	public InviteStatusDTO(InviteStatus inviteStatus) {
 		this.id = inviteStatus.getId();

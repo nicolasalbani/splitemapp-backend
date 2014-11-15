@@ -17,6 +17,8 @@ public class ProjectDTO implements java.io.Serializable {
 	private BigDecimal budget;
 	private Date createdAt;
 	private Date updatedAt;
+	
+	public ProjectDTO(){}
 
 	public ProjectDTO(Project project) {
 		this.projectTypeDTO = new ProjectTypeDTO(project.getProjectType());

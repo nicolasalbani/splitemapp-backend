@@ -31,7 +31,7 @@ public class GroupStatus implements java.io.Serializable {
 	@Column(name = "title", nullable = false, length = 64)
 	private String title;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "groupStatus")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "groupStatus")
 	private Set<Group> groups = new HashSet<Group>(0);
 
 	public GroupStatus() {

@@ -33,7 +33,7 @@ public class Group implements java.io.Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "status_id", nullable = false)
 	private GroupStatus groupStatus;
 	
@@ -54,7 +54,7 @@ public class Group implements java.io.Serializable {
 	@Column(name = "updated_at", nullable = false, length = 19)
 	private Date updatedAt;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
 	private Set<UserToGroup> userToGroups = new HashSet<UserToGroup>(0);
 
 	public Group() {

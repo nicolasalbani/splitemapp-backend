@@ -15,6 +15,8 @@ public class UserToGroupDTO implements java.io.Serializable {
 	private Date createdAt;
 	private Date updatedAt;
 	private boolean isAdmin;
+	
+	public UserToGroupDTO(){}
 
 	public UserToGroupDTO(UserToGroup userToGroup) {
 		this.userDTO = new UserDTO(userToGroup.getUser());

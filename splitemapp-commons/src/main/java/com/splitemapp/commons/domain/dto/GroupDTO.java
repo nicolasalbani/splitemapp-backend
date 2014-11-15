@@ -15,6 +15,8 @@ public class GroupDTO implements java.io.Serializable {
 	private String imgCover;
 	private Date createdAt;
 	private Date updatedAt;
+	
+	public GroupDTO(){}
 
 	public GroupDTO(Group group) {
 		this.groupStatusDTO = new GroupStatusDTO(group.getGroupStatus());

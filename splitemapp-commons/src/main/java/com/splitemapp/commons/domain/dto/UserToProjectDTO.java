@@ -17,6 +17,8 @@ public class UserToProjectDTO implements java.io.Serializable {
 	private Date createdAt;
 	private Date updatedAt;
 	private BigDecimal expensesShare;
+	
+	public UserToProjectDTO(){}
 
 	public UserToProjectDTO(UserToProject userToProject) {
 		this.userDTO = new UserDTO(userToProject.getUser());

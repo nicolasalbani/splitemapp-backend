@@ -14,6 +14,8 @@ public class UserSessionDTO implements java.io.Serializable {
 	private String device;
 	private String osVersion;
 	private Date lastUsedAt;
+	
+	public UserSessionDTO(){}
 
 	public UserSessionDTO(UserSession userSession) {
 		this.userDTO = new UserDTO(userSession.getUser());
