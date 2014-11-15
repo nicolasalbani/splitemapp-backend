@@ -38,6 +38,9 @@ public class UserSession implements java.io.Serializable {
 	
 	@Column(name = "device", length = 64, nullable = false)
 	private String device;
+	
+	@Column(name = "os_version", length = 64, nullable = false)
+	private String osVersion;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "last_used_at", length = 19, nullable = false)
@@ -46,10 +49,11 @@ public class UserSession implements java.io.Serializable {
 	public UserSession() {
 	}
 
-	public UserSession(User user, String token, String device, Date lastUsedAt) {
+	public UserSession(User user, String token, String device, String osVersion, Date lastUsedAt) {
 		this.user = user;
 		this.token = token;
 		this.device = device;
+		this.osVersion = osVersion;
 		this.lastUsedAt = lastUsedAt;
 	}
 
@@ -83,6 +87,14 @@ public class UserSession implements java.io.Serializable {
 
 	public void setDevice(String device) {
 		this.device = device;
+	}
+
+	public String getOsVersion() {
+		return osVersion;
+	}
+
+	public void setOsVersion(String osVersion) {
+		this.osVersion = osVersion;
 	}
 
 	public Date getLastUsedAt() {

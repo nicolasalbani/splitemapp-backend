@@ -254,6 +254,7 @@ CREATE TABLE "user_session" (
   "user_id" bigint(20)  NOT NULL,
   "token" varchar(64) NOT NULL,
   "device" varchar(64) NOT NULL,
+  "os_version" varchar(64) NOT NULL,
   "last_used_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY(user_id) REFERENCES user(id),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -277,6 +277,7 @@ CREATE TABLE `user_session` (
   `user_id` bigint(20) unsigned NOT NULL,
   `token` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `device` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `os_version` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `last_used_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `token_u_idx` (`token`),
