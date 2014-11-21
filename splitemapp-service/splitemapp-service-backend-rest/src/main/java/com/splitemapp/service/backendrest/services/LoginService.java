@@ -15,7 +15,9 @@ import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 import com.splitemapp.service.backendrest.utils.BackendUtils;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserSession;
+import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserSessionDTO;
+import com.splitemapp.commons.domain.dto.UserStatusDTO;
 import com.splitemapp.service.domainmodel.dto.LoginRequest;
 import com.splitemapp.service.domainmodel.dto.LoginResponse;
 
@@ -57,6 +59,8 @@ public class LoginService {
 				// We generate the response
 				loginResponse.setSuccess(true);
 				loginResponse.setUserSessionDTO(new UserSessionDTO(userSession));
+				loginResponse.setUserDTO(new UserDTO(userSession.getUser()));
+				loginResponse.setUserStatusDTO(new UserStatusDTO(userSession.getUser().getUserStatus()));
 				loginResponse.setChangePassword(false);
 			} 
 		}
