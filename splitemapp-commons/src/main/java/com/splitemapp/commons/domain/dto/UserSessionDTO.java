@@ -9,7 +9,7 @@ public class UserSessionDTO implements java.io.Serializable {
 	private static final long serialVersionUID = 935924848642967248L;
 
 	private Long id;
-	private UserDTO userDTO;
+	private Long userId;
 	private String token;
 	private String device;
 	private String osVersion;
@@ -18,15 +18,15 @@ public class UserSessionDTO implements java.io.Serializable {
 	public UserSessionDTO(){}
 
 	public UserSessionDTO(UserSession userSession) {
-		this.userDTO = new UserDTO(userSession.getUser());
+		this.userId = userSession.getUser().getId();
 		this.token = userSession.getToken();
 		this.device = userSession.getDevice();
 		this.osVersion = userSession.getOsVersion();
 		this.lastUsedAt = userSession.getLastUsedAt();
 	}
 
-	public UserSessionDTO(UserDTO userDTO, String token, String device, String osVersion, Date lastUsedAt) {
-		this.userDTO = userDTO;
+	public UserSessionDTO(Long userId, String token, String device, String osVersion, Date lastUsedAt) {
+		this.userId = userId;
 		this.token = token;
 		this.device = device;
 		this.osVersion = osVersion;
@@ -41,12 +41,12 @@ public class UserSessionDTO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserDTO getUserDTO() {
-		return this.userDTO;
+	public Long getUserId() {
+		return this.userId;
 	}
 
-	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getToken() {

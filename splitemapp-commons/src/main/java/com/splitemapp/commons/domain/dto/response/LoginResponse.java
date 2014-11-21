@@ -1,11 +1,15 @@
 package com.splitemapp.commons.domain.dto.response;
 
+import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserSessionDTO;
+import com.splitemapp.commons.domain.dto.UserStatusDTO;
 
 public class LoginResponse {
 
 	private Boolean success;
 	private UserSessionDTO userSessionDTO;
+	private UserDTO userDTO;
+	private UserStatusDTO userStatusDTO;
 	private Boolean changePassword;
 	
 	public LoginResponse() {}
@@ -30,6 +34,22 @@ public class LoginResponse {
 
 	public void setUserSessionDTO(UserSessionDTO userSessionDTO) {
 		this.userSessionDTO = userSessionDTO;
+	}
+
+	public UserDTO getUserDTO() {
+		return userDTO;
+	}
+
+	public void setUserDTO(UserDTO userDTO) {
+		this.userDTO = userDTO;
+	}
+
+	public UserStatusDTO getUserStatusDTO() {
+		return userStatusDTO;
+	}
+
+	public void setUserStatusDTO(UserStatusDTO userStatusDTO) {
+		this.userStatusDTO = userStatusDTO;
 	}
 
 	public Boolean getChangePassword() {

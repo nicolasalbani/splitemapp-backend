@@ -9,7 +9,7 @@ public class UserDTO implements java.io.Serializable {
 	private static final long serialVersionUID = 8018834364942997890L;
 
 	private Long id;
-	private UserStatusDTO userStatusDTO;
+	private Short userStatusId;
 	private String username;
 	private String password;
 	private String firstName;
@@ -24,7 +24,8 @@ public class UserDTO implements java.io.Serializable {
 	public UserDTO(){}
 
 	public UserDTO(User user) {
-		this.userStatusDTO = new UserStatusDTO(user.getUserStatus());
+		this.id = user.getId();
+		this.userStatusId = user.getUserStatus().getId();
 		this.username = user.getUsername();
 		this.password = user.getPassword();
 		this.firstName = user.getFirstName();
@@ -37,11 +38,11 @@ public class UserDTO implements java.io.Serializable {
 		this.updatedIpAddress = user.getUpdatedIpAddress();
 	}
 
-	public UserDTO(UserStatusDTO userStatusDTO, String username, String password,
+	public UserDTO(Short userStatusId, String username, String password,
 			String firstName, String lastName, Date lastLogin, int loginCnt,
 			Date createdAt, String createdIpAddress, Date updatedAt,
 			String updatedIpAddress) {
-		this.userStatusDTO = userStatusDTO;
+		this.userStatusId = userStatusId;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
@@ -62,12 +63,12 @@ public class UserDTO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserStatusDTO getUserStatusDTO() {
-		return this.userStatusDTO;
+	public Short getUserStatusId() {
+		return this.userStatusId;
 	}
 
-	public void setUserStatusDTO(UserStatusDTO userStatusDTO) {
-		this.userStatusDTO = userStatusDTO;
+	public void setUserStatusId(Short userStatusId) {
+		this.userStatusId = userStatusId;
 	}
 
 	public String getUsername() {
