@@ -6,7 +6,7 @@ public class ProjectStatusDTO implements java.io.Serializable {
 
 	private static final long serialVersionUID = -1826170015585538581L;
 	
-	private short id;
+	private Short id;
 	private String cod;
 	private String title;
 	
@@ -18,17 +18,17 @@ public class ProjectStatusDTO implements java.io.Serializable {
 		this.title = projectStatus.getTitle();
 	}
 
-	public ProjectStatusDTO(short id, String cod, String title) {
+	public ProjectStatusDTO(Short id, String cod, String title) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 	}
 
-	public short getId() {
+	public Short getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(Short id) {
 		this.id = id;
 	}
 

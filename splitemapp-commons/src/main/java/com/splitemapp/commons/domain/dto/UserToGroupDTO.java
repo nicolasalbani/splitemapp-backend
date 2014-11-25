@@ -9,9 +9,9 @@ public class UserToGroupDTO implements java.io.Serializable {
 	private static final long serialVersionUID = 9173640802573250421L;
 
 	private Long id;
-	private UserDTO userDTO;
-	private GroupDTO groupDTO;
-	private UserToGroupStatusDTO userToGroupStatusDTO;
+	private Long userId;
+	private Long groupId;
+	private Short userToGroupStatusId;
 	private Date createdAt;
 	private Date updatedAt;
 	private boolean isAdmin;
@@ -19,18 +19,18 @@ public class UserToGroupDTO implements java.io.Serializable {
 	public UserToGroupDTO(){}
 
 	public UserToGroupDTO(UserToGroup userToGroup) {
-		this.userDTO = new UserDTO(userToGroup.getUser());
-		this.groupDTO = new GroupDTO(userToGroup.getGroup());
-		this.userToGroupStatusDTO = new UserToGroupStatusDTO(userToGroup.getUserToGroupStatus());
+		this.userId = userToGroup.getUser().getId();
+		this.groupId = userToGroup.getGroup().getId();
+		this.userToGroupStatusId = userToGroup.getUserToGroupStatus().getId();
 		this.isAdmin = userToGroup.isIsAdmin();
 
 	}
 
-	public UserToGroupDTO(UserDTO user, GroupDTO groupDTO,
-			UserToGroupStatusDTO userToGroupStatusDTO, boolean isAdmin) {
-		this.userDTO = user;
-		this.groupDTO = groupDTO;
-		this.userToGroupStatusDTO = userToGroupStatusDTO;
+	public UserToGroupDTO(Long userId, Long groupId,
+			Short userToGroupStatusId, boolean isAdmin) {
+		this.userId = userId;
+		this.groupId = groupId;
+		this.userToGroupStatusId = userToGroupStatusId;
 		this.isAdmin = isAdmin;
 	}
 
@@ -42,28 +42,28 @@ public class UserToGroupDTO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserDTO getUserDTO() {
-		return this.userDTO;
+	public Long getUserId() {
+		return this.userId;
 	}
 
-	public void setUserDTO(UserDTO user) {
-		this.userDTO = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public GroupDTO getGroupDTO() {
-		return this.groupDTO;
+	public Long getGroupId() {
+		return this.groupId;
 	}
 
-	public void setGroupDTO(GroupDTO groupDTO) {
-		this.groupDTO = groupDTO;
+	public void setGroupId(Long groupId) {
+		this.groupId = groupId;
 	}
 
-	public UserToGroupStatusDTO getUserToGroupStatusDTO() {
-		return this.userToGroupStatusDTO;
+	public Short getUserToGroupStatusId() {
+		return this.userToGroupStatusId;
 	}
 
-	public void setUserToGroupStatusDTO(UserToGroupStatusDTO userToGroupStatusDTO) {
-		this.userToGroupStatusDTO = userToGroupStatusDTO;
+	public void setUserToGroupStatusId(Short userToGroupStatusId) {
+		this.userToGroupStatusId = userToGroupStatusId;
 	}
 
 	public boolean isIsAdmin() {

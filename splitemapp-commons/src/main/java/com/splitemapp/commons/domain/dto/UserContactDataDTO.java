@@ -9,7 +9,7 @@ public class UserContactDataDTO implements java.io.Serializable {
 	private static final long serialVersionUID = 8927823575372766924L;
 
 	private Long id;
-	private UserDTO userDTO;
+	private Long userId;
 	private String contactData;
 	private boolean verified;
 	private Date verifiedAt;
@@ -19,7 +19,7 @@ public class UserContactDataDTO implements java.io.Serializable {
 	public UserContactDataDTO(){}
 
 	public UserContactDataDTO(UserContactData userContactData) {
-		this.userDTO = new UserDTO(userContactData.getUser());
+		this.userId = userContactData.getUser().getId();
 		this.contactData = userContactData.getContactData();
 		this.verified = userContactData.isVerified();
 		this.verifiedAt = userContactData.getVerifiedAt();
@@ -27,9 +27,9 @@ public class UserContactDataDTO implements java.io.Serializable {
 		this.updatedAt = userContactData.getUpdatedAt();
 	}
 
-	public UserContactDataDTO(UserDTO userDTO, String contactData, boolean verified,
+	public UserContactDataDTO(Long userId, String contactData, boolean verified,
 			Date verifiedAt, Date createdAt, Date updatedAt) {
-		this.userDTO = userDTO;
+		this.userId = userId;
 		this.contactData = contactData;
 		this.verified = verified;
 		this.verifiedAt = verifiedAt;
@@ -45,12 +45,12 @@ public class UserContactDataDTO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserDTO getUserDTO() {
-		return this.userDTO;
+	public Long getUserId() {
+		return this.userId;
 	}
 
-	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getContactData() {

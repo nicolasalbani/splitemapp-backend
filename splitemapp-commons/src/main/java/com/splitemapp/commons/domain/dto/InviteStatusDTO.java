@@ -6,7 +6,7 @@ public class InviteStatusDTO implements java.io.Serializable {
 
 	private static final long serialVersionUID = -1943633347091729409L;
 	
-	private short id;
+	private Short id;
 	private String cod;
 	private String title;
 	
@@ -18,17 +18,17 @@ public class InviteStatusDTO implements java.io.Serializable {
 		this.title = inviteStatus.getTitle();
 	}
 
-	public InviteStatusDTO(short id, String cod, String title) {
+	public InviteStatusDTO(Short id, String cod, String title) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 	}
 
-	public short getId() {
+	public Short getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(Short id) {
 		this.id = id;
 	}
 

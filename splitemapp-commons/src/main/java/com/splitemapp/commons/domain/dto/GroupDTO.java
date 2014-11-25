@@ -9,7 +9,7 @@ public class GroupDTO implements java.io.Serializable {
 	private static final long serialVersionUID = 7350514135837582153L;
 	
 	private Long id;
-	private GroupStatusDTO groupStatusDTO;
+	private Short groupStatusId;
 	private String cod;
 	private String title;
 	private String imgCover;
@@ -19,7 +19,7 @@ public class GroupDTO implements java.io.Serializable {
 	public GroupDTO(){}
 
 	public GroupDTO(Group group) {
-		this.groupStatusDTO = new GroupStatusDTO(group.getGroupStatus());
+		this.groupStatusId = group.getGroupStatus().getId();
 		this.cod = group.getCod();
 		this.title = group.getTitle();
 		this.imgCover = group.getImgCover();
@@ -27,9 +27,9 @@ public class GroupDTO implements java.io.Serializable {
 		this.updatedAt = group.getUpdatedAt();
 	}
 	
-	public GroupDTO(GroupStatusDTO groupStatusDTO, String cod, String title,
+	public GroupDTO(Short groupStatusId, String cod, String title,
 			String imgCover, Date createdAt, Date updatedAt) {
-		this.groupStatusDTO = groupStatusDTO;
+		this.groupStatusId = groupStatusId;
 		this.cod = cod;
 		this.title = title;
 		this.imgCover = imgCover;
@@ -45,12 +45,12 @@ public class GroupDTO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public GroupStatusDTO getGroupStatusDTO() {
-		return this.groupStatusDTO;
+	public Short getGroupStatusId() {
+		return this.groupStatusId;
 	}
 
-	public void setGroupStatusDTO(GroupStatusDTO groupStatus) {
-		this.groupStatusDTO = groupStatus;
+	public void setGroupStatusId(Short groupStatus) {
+		this.groupStatusId = groupStatus;
 	}
 
 	public String getCod() {

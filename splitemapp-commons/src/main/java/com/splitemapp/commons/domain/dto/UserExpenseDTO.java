@@ -10,9 +10,9 @@ public class UserExpenseDTO implements java.io.Serializable {
 	private static final long serialVersionUID = 2204965154783892793L;
 
 	private Long id;
-	private UserDTO userDTO;
-	private ProjectDTO projectDTO;
-	private ExpenseCategoryDTO expenseCategoryDTO;
+	private Long userId;
+	private Long projectId;
+	private Short expenseCategoryId;
 	private BigDecimal expense;
 	private Date createdAt;
 	private Date updatedAt;
@@ -22,20 +22,20 @@ public class UserExpenseDTO implements java.io.Serializable {
 	public UserExpenseDTO(){}
 
 	public UserExpenseDTO(UserExpense userExpense) {
-		this.userDTO = new UserDTO(userExpense.getUser());
-		this.projectDTO = new ProjectDTO(userExpense.getProject());
-		this.expenseCategoryDTO = new ExpenseCategoryDTO(userExpense.getExpenseCategory());
+		this.userId = userExpense.getUser().getId();
+		this.projectId = userExpense.getProject().getId();
+		this.expenseCategoryId = userExpense.getExpenseCategory().getId();
 		this.expense = userExpense.getExpense();
 		this.expenseDate = userExpense.getExpenseDate();
 		this.note = userExpense.getNote();
 	}
 
-	public UserExpenseDTO(UserDTO user, ProjectDTO projectDTO,
-			ExpenseCategoryDTO expenseCategoryDTO, BigDecimal expense,
+	public UserExpenseDTO(Long userId, Long projectId,
+			Short expenseCategoryId, BigDecimal expense,
 			Date expenseDate, String note) {
-		this.userDTO = user;
-		this.projectDTO = projectDTO;
-		this.expenseCategoryDTO = expenseCategoryDTO;
+		this.userId = userId;
+		this.projectId = projectId;
+		this.expenseCategoryId = expenseCategoryId;
 		this.expense = expense;
 		this.expenseDate = expenseDate;
 		this.note = note;
@@ -49,28 +49,28 @@ public class UserExpenseDTO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserDTO getUser() {
-		return this.userDTO;
+	public Long getUserId() {
+		return this.userId;
 	}
 
-	public void setUser(UserDTO user) {
-		this.userDTO = user;
+	public void setUser(Long userId) {
+		this.userId = userId;
 	}
 
-	public ProjectDTO getProjectDTO() {
-		return this.projectDTO;
+	public Long getProjectId() {
+		return this.projectId;
 	}
 
-	public void setProjectDTO(ProjectDTO projectDTO) {
-		this.projectDTO = projectDTO;
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 
-	public ExpenseCategoryDTO getExpenseCategoryDTO() {
-		return this.expenseCategoryDTO;
+	public Short getExpenseCategoryId() {
+		return this.expenseCategoryId;
 	}
 
-	public void setExpenseCategoryDTO(ExpenseCategoryDTO expenseCategoryDTO) {
-		this.expenseCategoryDTO = expenseCategoryDTO;
+	public void setExpenseCategoryDTO(Short expenseCategoryId) {
+		this.expenseCategoryId = expenseCategoryId;
 	}
 
 	public BigDecimal getExpense() {

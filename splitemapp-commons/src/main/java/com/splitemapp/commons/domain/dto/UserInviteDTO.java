@@ -9,9 +9,9 @@ public class UserInviteDTO implements java.io.Serializable {
 	private static final long serialVersionUID = -2499430771175807337L;
 
 	private Long id;
-	private UserDTO userDTO;
-	private ProjectDTO projectDTO;
-	private InviteStatusDTO inviteStatusDTO;
+	private Long userId;
+	private Long projectId;
+	private Short inviteStatusId;
 	private String email;
 	private Date createdAt;
 	private Date updatedAt;
@@ -19,18 +19,18 @@ public class UserInviteDTO implements java.io.Serializable {
 	public UserInviteDTO(){}
 
 	public UserInviteDTO(UserInvite userInvite) {
-		this.userDTO = new UserDTO(userInvite.getUser());
-		this.projectDTO = new ProjectDTO(userInvite.getProject());
-		this.inviteStatusDTO = new InviteStatusDTO(userInvite.getInviteStatus());
+		this.userId = userInvite.getUser().getId();
+		this.projectId = userInvite.getProject().getId();
+		this.inviteStatusId = userInvite.getInviteStatus().getId();
 		this.createdAt = userInvite.getCreatedAt();
 		this.updatedAt = userInvite.getUpdatedAt();
 	}
 
-	public UserInviteDTO(UserDTO user, ProjectDTO projectDTO, InviteStatusDTO inviteStatusDTO,
+	public UserInviteDTO(Long userId, Long projectId, Short inviteStatusId,
 			String email, Date createdAt, Date updatedAt) {
-		this.userDTO = user;
-		this.projectDTO = projectDTO;
-		this.inviteStatusDTO = inviteStatusDTO;
+		this.userId = userId;
+		this.projectId = projectId;
+		this.inviteStatusId = inviteStatusId;
 		this.email = email;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -44,28 +44,28 @@ public class UserInviteDTO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserDTO getUserDTO() {
-		return this.userDTO;
+	public Long getUserId() {
+		return this.userId;
 	}
 
-	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public ProjectDTO getProjectDTO() {
-		return this.projectDTO;
+	public Long getProjectId() {
+		return this.projectId;
 	}
 
-	public void setProjectDTO(ProjectDTO projectDTO) {
-		this.projectDTO = projectDTO;
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 
-	public InviteStatusDTO getInviteStatusDTO() {
-		return this.inviteStatusDTO;
+	public Short getInviteStatusId() {
+		return this.inviteStatusId;
 	}
 
-	public void setInviteStatusDTO(InviteStatusDTO inviteStatusDTO) {
-		this.inviteStatusDTO = inviteStatusDTO;
+	public void setInviteStatusId(Short inviteStatusId) {
+		this.inviteStatusId = inviteStatusId;
 	}
 
 	public String getEmail() {

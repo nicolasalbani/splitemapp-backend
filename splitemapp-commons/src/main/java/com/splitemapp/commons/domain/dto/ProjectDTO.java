@@ -10,8 +10,8 @@ public class ProjectDTO implements java.io.Serializable {
 	private static final long serialVersionUID = -1186403556721128678L;
 	
 	private Long id;
-	private ProjectTypeDTO projectTypeDTO;
-	private ProjectStatusDTO projectStatusDTO;
+	private Short projectTypeId;
+	private Short projectStatusId;
 	private String title;
 	private String imgCover;
 	private BigDecimal budget;
@@ -21,8 +21,8 @@ public class ProjectDTO implements java.io.Serializable {
 	public ProjectDTO(){}
 
 	public ProjectDTO(Project project) {
-		this.projectTypeDTO = new ProjectTypeDTO(project.getProjectType());
-		this.projectStatusDTO = new ProjectStatusDTO(project.getProjectStatus());
+		this.projectTypeId = project.getProjectType().getId();
+		this.projectStatusId = project.getProjectStatus().getId();
 		this.title = project.getTitle();
 		this.imgCover = project.getImgCover();
 		this.budget = project.getBudget();
@@ -30,11 +30,11 @@ public class ProjectDTO implements java.io.Serializable {
 		this.updatedAt = project.getUpdatedAt();
 	}
 
-	public ProjectDTO(ProjectTypeDTO projectType, ProjectStatusDTO projectStatus,
+	public ProjectDTO(Short projectTypeId, Short projectStatusId,
 			String title, String imgCover, BigDecimal budget, Date createdAt,
 			Date updatedAt) {
-		this.projectTypeDTO = projectType;
-		this.projectStatusDTO = projectStatus;
+		this.projectTypeId = projectTypeId;
+		this.projectStatusId = projectStatusId;
 		this.title = title;
 		this.imgCover = imgCover;
 		this.budget = budget;
@@ -50,20 +50,20 @@ public class ProjectDTO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public ProjectTypeDTO getProjectTypeDTO() {
-		return this.projectTypeDTO;
+	public Short getProjectTypeId() {
+		return this.projectTypeId;
 	}
 
-	public void setProjectTypeDTO(ProjectTypeDTO projectTypeDTO) {
-		this.projectTypeDTO = projectTypeDTO;
+	public void setProjectTypeId(Short projectTypeId) {
+		this.projectTypeId = projectTypeId;
 	}
 
-	public ProjectStatusDTO getProjectStatusDTO() {
-		return this.projectStatusDTO;
+	public Short getProjectStatusId() {
+		return this.projectStatusId;
 	}
 
-	public void setProjectStatusDTO(ProjectStatusDTO projectStatusDTO) {
-		this.projectStatusDTO = projectStatusDTO;
+	public void setProjectStatusId(Short projectStatusId) {
+		this.projectStatusId = projectStatusId;
 	}
 
 	public String getTitle() {

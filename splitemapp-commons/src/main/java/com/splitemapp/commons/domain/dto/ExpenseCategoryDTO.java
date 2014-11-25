@@ -6,7 +6,7 @@ public class ExpenseCategoryDTO implements java.io.Serializable {
 
 	private static final long serialVersionUID = -6784777617407039226L;
 	
-	private short id;
+	private Short id;
 	private String cod;
 	private String title;
 
@@ -18,17 +18,17 @@ public class ExpenseCategoryDTO implements java.io.Serializable {
 		this.title = expenseCategory.getTitle();
 	}
 
-	public ExpenseCategoryDTO(short id, String cod, String title) {
+	public ExpenseCategoryDTO(Short id, String cod, String title) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 	}
 
-	public short getId() {
+	public Short getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(Short id) {
 		this.id = id;
 	}
 

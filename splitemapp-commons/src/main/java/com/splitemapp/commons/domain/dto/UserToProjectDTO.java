@@ -11,9 +11,9 @@ public class UserToProjectDTO implements java.io.Serializable {
 	private static final long serialVersionUID = 7814066964126398718L;
 
 	private Long id;
-	private UserDTO userDTO;
-	private ProjectDTO projectDTO;
-	private UserToProjectStatusDTO userToProjectStatusDTO;
+	private Long userId;
+	private Long projectId;
+	private Short userToProjectStatusId;
 	private Date createdAt;
 	private Date updatedAt;
 	private BigDecimal expensesShare;
@@ -21,17 +21,17 @@ public class UserToProjectDTO implements java.io.Serializable {
 	public UserToProjectDTO(){}
 
 	public UserToProjectDTO(UserToProject userToProject) {
-		this.userDTO = new UserDTO(userToProject.getUser());
-		this.projectDTO = new ProjectDTO(userToProject.getProject());
-		this.userToProjectStatusDTO = new UserToProjectStatusDTO(userToProject.getUserToProjectStatus());
+		this.userId = userToProject.getUser().getId();
+		this.projectId = userToProject.getProject().getId();
+		this.userToProjectStatusId = userToProject.getUserToProjectStatus().getId();
 		this.expensesShare = userToProject.getExpensesShare();
 	}
 
-	public UserToProjectDTO(UserDTO userDTO, ProjectDTO projectDTO,
-			UserToProjectStatusDTO userToProjectStatusDTO, BigDecimal expensesShare) {
-		this.userDTO = userDTO;
-		this.projectDTO = projectDTO;
-		this.userToProjectStatusDTO = userToProjectStatusDTO;
+	public UserToProjectDTO(Long userId, Long projectId,
+			Short userToProjectStatusId, BigDecimal expensesShare) {
+		this.userId = userId;
+		this.projectId = projectId;
+		this.userToProjectStatusId = userToProjectStatusId;
 		this.expensesShare = expensesShare;
 	}
 
@@ -43,28 +43,28 @@ public class UserToProjectDTO implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public UserDTO getUserDTO() {
-		return this.userDTO;
+	public Long getUserId() {
+		return this.userId;
 	}
 
-	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public ProjectDTO getProjectDTO() {
-		return this.projectDTO;
+	public Long getProjectId() {
+		return this.projectId;
 	}
 
-	public void setProjectDTO(ProjectDTO projectDTO) {
-		this.projectDTO = projectDTO;
+	public void setProjectDTO(Long projectId) {
+		this.projectId = projectId;
 	}
 
-	public UserToProjectStatusDTO getUserToProjectStatusDTO() {
-		return this.userToProjectStatusDTO;
+	public Short getUserToProjectStatusId() {
+		return this.userToProjectStatusId;
 	}
 
-	public void setUserToProjectStatusDTO(UserToProjectStatusDTO userToProjectStatusDTO) {
-		this.userToProjectStatusDTO = userToProjectStatusDTO;
+	public void setUserToProjectStatusId(Short userToProjectStatusId) {
+		this.userToProjectStatusId = userToProjectStatusId;
 	}
 
 	public BigDecimal getExpensesShare() {
