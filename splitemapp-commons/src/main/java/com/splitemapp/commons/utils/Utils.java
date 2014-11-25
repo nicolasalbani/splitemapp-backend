@@ -30,4 +30,28 @@ public class Utils {
 		} 
 		return newPassword;
 	}
+	
+	public static String getTableName(String entityName){
+		final int FIRST_CHARACTER = 0;
+		
+		StringBuilder tableName = new StringBuilder();
+		
+		if(entityName != null){
+			 tableName.append(entityName);
+
+			// First we change the first letter of the entity name to lower case
+			tableName.replace(FIRST_CHARACTER, FIRST_CHARACTER+1, ""+Character.toLowerCase(tableName.charAt(FIRST_CHARACTER)));
+			
+			// We now replace every uppercase for <underscore>+<lowercase> to match table naming convention
+			int length = tableName.length();
+			for(int i = 1; i<length; i++){
+				char charAt = tableName.charAt(i);
+				if(Character.isUpperCase(charAt)){
+					tableName.replace(i, i+1, "_"+Character.toLowerCase(tableName.charAt(i)));
+				}
+			}
+		}
+		
+		return tableName.toString();
+	}
 }
