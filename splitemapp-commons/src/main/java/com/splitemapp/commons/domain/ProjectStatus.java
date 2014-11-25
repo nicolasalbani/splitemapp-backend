@@ -23,7 +23,7 @@ public class ProjectStatus implements java.io.Serializable {
 	
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	private short id;
+	private Short id;
 	
 	@Column(name = "cod", unique = true, nullable = false, length = 64)
 	private String cod;
@@ -37,13 +37,13 @@ public class ProjectStatus implements java.io.Serializable {
 	public ProjectStatus() {
 	}
 
-	public ProjectStatus(short id, String cod, String title) {
+	public ProjectStatus(Short id, String cod, String title) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 	}
 
-	public ProjectStatus(short id, String cod, String title,
+	public ProjectStatus(Short id, String cod, String title,
 			Set<Project> projects) {
 		this.id = id;
 		this.cod = cod;
@@ -51,11 +51,11 @@ public class ProjectStatus implements java.io.Serializable {
 		this.projects = projects;
 	}
 
-	public short getId() {
+	public Short getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(Short id) {
 		this.id = id;
 	}
 

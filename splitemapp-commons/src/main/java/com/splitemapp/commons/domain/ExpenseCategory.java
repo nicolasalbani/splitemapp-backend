@@ -23,7 +23,7 @@ public class ExpenseCategory implements java.io.Serializable {
 	
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	private short id;
+	private Short id;
 	
 	@Column(name = "cod", unique = true, nullable = false, length = 64)
 	private String cod;
@@ -37,13 +37,13 @@ public class ExpenseCategory implements java.io.Serializable {
 	public ExpenseCategory() {
 	}
 
-	public ExpenseCategory(short id, String cod, String title) {
+	public ExpenseCategory(Short id, String cod, String title) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 	}
 
-	public ExpenseCategory(short id, String cod, String title,
+	public ExpenseCategory(Short id, String cod, String title,
 			Set<UserExpense> userExpenses) {
 		this.id = id;
 		this.cod = cod;
@@ -51,11 +51,11 @@ public class ExpenseCategory implements java.io.Serializable {
 		this.userExpenses = userExpenses;
 	}
 
-	public short getId() {
+	public Short getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(Short id) {
 		this.id = id;
 	}
 

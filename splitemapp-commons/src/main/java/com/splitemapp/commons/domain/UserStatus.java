@@ -26,7 +26,7 @@ public class UserStatus implements java.io.Serializable {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	private short id;
+	private Short id;
 
 	@Column(name = "cod", unique = true, nullable = false, length = 64)
 	private String cod;
@@ -46,24 +46,24 @@ public class UserStatus implements java.io.Serializable {
 		this.title = userStatusDTO.getTitle();
 	}
 
-	public UserStatus(short id, String cod, String title) {
+	public UserStatus(Short id, String cod, String title) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 	}
 
-	public UserStatus(short id, String cod, String title, Set<User> users) {
+	public UserStatus(Short id, String cod, String title, Set<User> users) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 		this.users = users;
 	}
 
-	public short getId() {
+	public Short getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(Short id) {
 		this.id = id;
 	}
 

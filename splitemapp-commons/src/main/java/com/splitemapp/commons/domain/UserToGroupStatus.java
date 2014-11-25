@@ -23,7 +23,7 @@ public class UserToGroupStatus implements java.io.Serializable {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	private short id;
+	private Short id;
 
 	@Column(name = "cod", unique = true, nullable = false, length = 64)
 	private String cod;
@@ -37,13 +37,13 @@ public class UserToGroupStatus implements java.io.Serializable {
 	public UserToGroupStatus() {
 	}
 
-	public UserToGroupStatus(short id, String cod, String title) {
+	public UserToGroupStatus(Short id, String cod, String title) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 	}
 
-	public UserToGroupStatus(short id, String cod, String title,
+	public UserToGroupStatus(Short id, String cod, String title,
 			Set<UserToGroup> userToGroups) {
 		this.id = id;
 		this.cod = cod;
@@ -51,11 +51,11 @@ public class UserToGroupStatus implements java.io.Serializable {
 		this.userToGroups = userToGroups;
 	}
 
-	public short getId() {
+	public Short getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(Short id) {
 		this.id = id;
 	}
 

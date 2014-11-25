@@ -23,7 +23,7 @@ public class GroupStatus implements java.io.Serializable {
 	
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	private short id;
+	private Short id;
 	
 	@Column(name = "cod", unique = true, nullable = false, length = 64)
 	private String cod;
@@ -37,24 +37,24 @@ public class GroupStatus implements java.io.Serializable {
 	public GroupStatus() {
 	}
 
-	public GroupStatus(short id, String cod, String title) {
+	public GroupStatus(Short id, String cod, String title) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 	}
 
-	public GroupStatus(short id, String cod, String title, Set<Group> groups) {
+	public GroupStatus(Short id, String cod, String title, Set<Group> groups) {
 		this.id = id;
 		this.cod = cod;
 		this.title = title;
 		this.groups = groups;
 	}
 
-	public short getId() {
+	public Short getId() {
 		return this.id;
 	}
 
-	public void setId(short id) {
+	public void setId(Short id) {
 		this.id = id;
 	}
 
