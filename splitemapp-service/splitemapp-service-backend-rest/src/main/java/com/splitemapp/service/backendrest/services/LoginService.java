@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 import com.splitemapp.service.backendrest.utils.BackendUtils;
+import com.splitemapp.commons.constants.ServicePath;
+import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.UserDTO;
@@ -22,7 +24,7 @@ import com.splitemapp.service.domainmodel.dto.LoginRequest;
 import com.splitemapp.service.domainmodel.dto.LoginResponse;
 
 @Service
-@Path("/login")
+@Path(ServicePath.LOGIN)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class LoginService {
@@ -38,7 +40,7 @@ public class LoginService {
 		loginResponse.setSuccess(false);
 
 		// We look for the user
-		User user = userEndpoint.findByUsername(request.getUsername());
+		User user = userEndpoint.findByField(TableField.USER_USERNAME, request.getUsername());
 
 		// If we found the user then we validate
 		if(user!=null){
@@ -55,6 +57,11 @@ public class LoginService {
 				userSession.setToken(sessionToken);
 				userSession.setUser(user);
 				userSessionEndpoint.persist(userSession);
+				
+				// We update the last login time and login count for the user
+				user.setLastLogin(new Date());
+				user.setLoginCnt(user.getLoginCnt()+1);
+				userEndpoint.merge(user);
 				
 				// We generate the response
 				loginResponse.setSuccess(true);

@@ -6,17 +6,17 @@ public class LoginRequest {
 	private String password;
 	private String device;
 	private String osVersion;
-	
+
 	/**
 	 * Required by FasterXML.
 	 */
 	public LoginRequest() {}
-	
+
 	public LoginRequest(String username, String password, String device, String osVersion) {
-		this.username      		= username;
-		this.password     		= password;
-		this.device     		= device;
-		this.osVersion			= osVersion;
+		this.username = username;
+		this.password = password;
+		this.device = device;
+		this.osVersion = osVersion;
 	}
 
 	public String getUsername() {

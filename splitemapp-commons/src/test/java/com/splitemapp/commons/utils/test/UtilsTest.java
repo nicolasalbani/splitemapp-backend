@@ -13,6 +13,8 @@ public class UtilsTest {
 	public void testHashPassword(){
 		String password = "1234567890";
 		assertEquals("01b307acba4f54f55aafc33bb06bbbf6ca803e9a", Utils.hashPassword(password));
+		password = "123";
+		assertEquals("40bd001563085fc35165329ea1ff5c5ecbdbbeef", Utils.hashPassword(password));
 	}
 
 	@Test

@@ -16,10 +16,20 @@
 	<context:component-scan base-package="com.splitemapp.service.backendrest" />
 
 
-	<bean id="userEndpoint" class="com.splitemapp.service.backendrest.endpoint.UserEndpoint">
+	<bean id="userEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserEndpoint">
 	</bean>
-	
-	<bean id="userSessionEndpoint" class="com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint">
+
+	<bean id="userSessionEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint">
 	</bean>
-	
+
+	<bean id="userContactDataEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint">
+	</bean>
+
+	<bean id="userStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserStatusEndpoint">
+	</bean>
+
 </beans>

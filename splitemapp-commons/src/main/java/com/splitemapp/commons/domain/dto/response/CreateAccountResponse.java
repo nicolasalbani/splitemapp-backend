@@ -1,23 +1,23 @@
 package com.splitemapp.commons.domain.dto.response;
 
+import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.UserDTO;
-import com.splitemapp.commons.domain.dto.UserSessionDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
 
-public class LoginResponse {
+public class CreateAccountResponse {
 
 	private Boolean success;
-	private UserSessionDTO userSessionDTO;
 	private UserDTO userDTO;
 	private UserStatusDTO userStatusDTO;
-	private Boolean changePassword;
+	private UserContactDataDTO userContactDataDTO;
 
-	public LoginResponse() {}
+	public CreateAccountResponse() {}
 
-	public LoginResponse(Boolean success,UserSessionDTO userSessionDTO,Boolean changePassword) {
+	public CreateAccountResponse(Boolean success, UserDTO userDTO, UserStatusDTO userStatusDTO, UserContactDataDTO userContactDataDTO) {
 		this.setSuccess(success);
-		this.userSessionDTO = userSessionDTO;
-		this.changePassword	= changePassword;	
+		this.setUserDTO(userDTO);
+		this.setUserStatusDTO(userStatusDTO);
+		this.setUserContactDataDTO(userContactDataDTO);
 	}
 
 	public Boolean getSuccess() {
@@ -28,12 +28,12 @@ public class LoginResponse {
 		this.success = success;
 	}
 
-	public UserSessionDTO getUserSessionDTO() {
-		return userSessionDTO;
+	public UserContactDataDTO getUserContactDataDTO() {
+		return userContactDataDTO;
 	}
 
-	public void setUserSessionDTO(UserSessionDTO userSessionDTO) {
-		this.userSessionDTO = userSessionDTO;
+	public void setUserContactDataDTO(UserContactDataDTO userContactDataDTO) {
+		this.userContactDataDTO = userContactDataDTO;
 	}
 
 	public UserDTO getUserDTO() {
@@ -50,13 +50,5 @@ public class LoginResponse {
 
 	public void setUserStatusDTO(UserStatusDTO userStatusDTO) {
 		this.userStatusDTO = userStatusDTO;
-	}
-
-	public Boolean getChangePassword() {
-		return changePassword;
-	}
-
-	public void setChangePassword(Boolean changePassword) {
-		this.changePassword = changePassword;
 	}
 }
