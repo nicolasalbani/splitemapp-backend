@@ -13,7 +13,7 @@ import javax.persistence.UniqueConstraint;
 import com.splitemapp.commons.constants.TableName;
 
 @Entity(name = TableName.SYNC_STATUS)
-@Table(name = TableName.SYNC_STATUS, catalog = "splitemapp", uniqueConstraints = @UniqueConstraint(columnNames = "table_name"))
+@Table(name = TableName.SYNC_STATUS, catalog = TableName.SCHEMA, uniqueConstraints = @UniqueConstraint(columnNames = "table_name"))
 public class SyncStatus implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8700853389002247470L;

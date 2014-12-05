@@ -1,6 +1,8 @@
 package com.splitemapp.commons.constants;
 
 public class TableName {
+	public static final String SCHEMA = "splitemapp";
+	
 	public static final String EXPENSE_CATEGORY = "expense_category";
 	public static final String GROUP = "group";
 	public static final String GROUP_STATUS = "group_status";
