@@ -32,4 +32,32 @@
 		class="com.splitemapp.service.backendrest.endpoint.UserStatusEndpoint">
 	</bean>
 
+	<bean id="expenseCategoryEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ExpenseCategoryEndpoint">
+	</bean>
+
+	<bean id="groupEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.GroupEndpoint">
+	</bean>
+
+	<bean id="projectEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ProjectEndpoint">
+	</bean>
+
+	<bean id="userExpenseEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserExpenseEndpoint">
+	</bean>
+	
+	<bean id="userInviteEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserInviteEndpoint">
+	</bean>
+	
+	<bean id="userToGroupEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserToGroupEndpoint">
+	</bean>
+	
+	<bean id="userToProjectEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserToProjectEndpoint">
+	</bean>
+
 </beans>
