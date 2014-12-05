@@ -3,6 +3,7 @@ package com.splitemapp.commons.domain.dto.response;
 import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserSessionDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
+import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 
 public class LoginResponse {
 
@@ -10,14 +11,16 @@ public class LoginResponse {
 	private UserSessionDTO userSessionDTO;
 	private UserDTO userDTO;
 	private UserStatusDTO userStatusDTO;
+	private UserContactDataDTO userContactDataDTO;
 	private Boolean changePassword;
 
 	public LoginResponse() {}
 
-	public LoginResponse(Boolean success,UserSessionDTO userSessionDTO,Boolean changePassword) {
+	public LoginResponse(Boolean success,UserSessionDTO userSessionDTO,UserContactDataDTO userContactDataDTO,Boolean changePassword) {
 		this.setSuccess(success);
 		this.userSessionDTO = userSessionDTO;
-		this.changePassword	= changePassword;	
+		this.userContactDataDTO = userContactDataDTO;
+		this.changePassword	= changePassword;
 	}
 
 	public Boolean getSuccess() {
@@ -50,6 +53,14 @@ public class LoginResponse {
 
 	public void setUserStatusDTO(UserStatusDTO userStatusDTO) {
 		this.userStatusDTO = userStatusDTO;
+	}
+
+	public UserContactDataDTO getUserContactDataDTO() {
+		return userContactDataDTO;
+	}
+
+	public void setUserContactDataDTO(UserContactDataDTO userContactDataDTO) {
+		this.userContactDataDTO = userContactDataDTO;
 	}
 
 	public Boolean getChangePassword() {

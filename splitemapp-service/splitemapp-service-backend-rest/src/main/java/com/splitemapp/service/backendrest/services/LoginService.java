@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -10,13 +11,16 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Service;
 
+import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 import com.splitemapp.service.backendrest.utils.BackendUtils;
 import com.splitemapp.commons.constants.ServicePath;
 import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
+import com.splitemapp.commons.domain.UserContactData;
 import com.splitemapp.commons.domain.UserSession;
+import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserSessionDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
@@ -30,6 +34,7 @@ import com.splitemapp.service.domainmodel.dto.LoginResponse;
 public class LoginService {
 
 	private UserEndpoint userEndpoint;
+	private UserContactDataEndpoint userContactDataEndpoint;
 	private UserSessionEndpoint userSessionEndpoint;
 
 	@POST
@@ -62,12 +67,20 @@ public class LoginService {
 				user.setLastLogin(new Date());
 				user.setLoginCnt(user.getLoginCnt()+1);
 				userEndpoint.merge(user);
+
+				// We get the existing user contact data from the user
+				UserContactData userContactData = null;
+				Set<UserContactData> userContactDatas = user.getUserContactDatas();
+				for(UserContactData ucd:userContactDatas){
+					userContactData = ucd;
+				}
 				
 				// We generate the response
 				loginResponse.setSuccess(true);
 				loginResponse.setUserSessionDTO(new UserSessionDTO(userSession));
 				loginResponse.setUserDTO(new UserDTO(userSession.getUser()));
 				loginResponse.setUserStatusDTO(new UserStatusDTO(userSession.getUser().getUserStatus()));
+				loginResponse.setUserContactDataDTO(new UserContactDataDTO(userContactData));
 				loginResponse.setChangePassword(false);
 			} 
 		}
@@ -82,6 +95,14 @@ public class LoginService {
 
 	public void setUserEndpoint(UserEndpoint userEndpoint) {
 		this.userEndpoint = userEndpoint;
+	}
+
+	public UserContactDataEndpoint getUserContactDataEndpoint() {
+		return userContactDataEndpoint;
+	}
+
+	public void setUserContactDataEndpoint(UserContactDataEndpoint userContactDataEndpoint) {
+		this.userContactDataEndpoint = userContactDataEndpoint;
 	}
 
 	public UserSessionEndpoint getUserSessionEndpoint() {

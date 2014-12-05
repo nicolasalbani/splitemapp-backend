@@ -58,6 +58,8 @@ public class CreateAccountService {
 			newUser.setUpdatedIpAddress(request.getIpAddress());
 			newUser.setPassword(request.getPassword());
 			newUser.setUsername(request.getUsername());
+			//TODO We need to change the getUsername for the actual first name. Add first and last in the create account page?
+			newUser.setFirstName(request.getUsername());
 			newUser.setUserStatus(userStatus);
 			userEndpoint.persist(newUser);
 
