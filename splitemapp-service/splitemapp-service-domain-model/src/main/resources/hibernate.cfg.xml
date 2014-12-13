@@ -13,7 +13,7 @@
 		<property name="hibernate.connection.password">hell0!</property>
         
         <!-- Hibernate Configuration -->
-		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.format_sql">true</property>
 		<property name="hibernate.use_sql_comments">true</property>
 		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>

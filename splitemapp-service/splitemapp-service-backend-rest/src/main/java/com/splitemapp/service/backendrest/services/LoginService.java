@@ -15,7 +15,7 @@ import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 import com.splitemapp.service.backendrest.utils.BackendUtils;
-import com.splitemapp.commons.constants.ServicePath;
+import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserContactData;
@@ -28,7 +28,7 @@ import com.splitemapp.service.domainmodel.dto.LoginRequest;
 import com.splitemapp.service.domainmodel.dto.LoginResponse;
 
 @Service
-@Path(ServicePath.LOGIN)
+@Path(ServiceConstants.LOGIN_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class LoginService {
@@ -36,6 +36,9 @@ public class LoginService {
 	private UserEndpoint userEndpoint;
 	private UserContactDataEndpoint userContactDataEndpoint;
 	private UserSessionEndpoint userSessionEndpoint;
+
+	public LoginService() {
+	}
 
 	@POST
 	public LoginResponse printMessage(LoginRequest request) {
@@ -53,7 +56,7 @@ public class LoginService {
 			if(user.getPassword().equals(request.getPassword())){
 				// We generate a new session token
 				String sessionToken = BackendUtils.createSessionToken();
-				
+
 				// We write in the user_session table
 				UserSession userSession = new UserSession();
 				userSession.setDevice(request.getDevice());
@@ -62,7 +65,7 @@ public class LoginService {
 				userSession.setToken(sessionToken);
 				userSession.setUser(user);
 				userSessionEndpoint.persist(userSession);
-				
+
 				// We update the last login time and login count for the user
 				user.setLastLogin(new Date());
 				user.setLoginCnt(user.getLoginCnt()+1);
@@ -74,7 +77,7 @@ public class LoginService {
 				for(UserContactData ucd:userContactDatas){
 					userContactData = ucd;
 				}
-				
+
 				// We generate the response
 				loginResponse.setSuccess(true);
 				loginResponse.setUserSessionDTO(new UserSessionDTO(userSession));

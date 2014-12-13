@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Service;
 
-import com.splitemapp.commons.constants.ServicePath;
+import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.constants.TableFieldCod;
 import com.splitemapp.commons.domain.User;
@@ -26,7 +26,7 @@ import com.splitemapp.service.domainmodel.dto.CreateAccountRequest;
 import com.splitemapp.service.domainmodel.dto.CreateAccountResponse;
 
 @Service
-@Path(ServicePath.CREATE_ACCOUNT)
+@Path(ServiceConstants.CREATE_ACCOUNT_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CreateAccountService {

@@ -2,10 +2,23 @@ package com.splitemapp.commons.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Formatter;
 
 public class Utils {
 
+	public static String dateToString(Date date, String dateFormat){
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		return sdf.format(date); 
+	}
+	
+	public static Date stringToDate(String date, String dateFormat) throws ParseException{
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		return sdf.parse(date);
+	}
+	
 	public static String hashPassword(String password) {
 		String newPassword=null;
 		if (password != null && !password.isEmpty()) {

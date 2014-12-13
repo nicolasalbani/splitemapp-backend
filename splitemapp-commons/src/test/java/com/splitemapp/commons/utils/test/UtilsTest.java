@@ -1,13 +1,48 @@
 package com.splitemapp.commons.utils.test;
 
 import static org.junit.Assert.assertEquals;
+
+import java.text.ParseException;
+import java.util.Calendar;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
 
+import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.utils.Utils;
 
 public class UtilsTest {
+	
+	@Test
+	public void testStringToDate(){
+		String date = "31-08-1982 10:20:56";
+		Calendar dateCal = Calendar.getInstance();
+		dateCal.set(Calendar.YEAR, 1982);
+		dateCal.set(Calendar.MONTH, 7);
+		dateCal.set(Calendar.DAY_OF_MONTH, 31);
+		dateCal.set(Calendar.HOUR_OF_DAY, 10);
+		dateCal.set(Calendar.MINUTE, 20);
+		dateCal.set(Calendar.SECOND, 56);
+		try {
+			Assert.assertEquals(dateCal.getTime().toString(),Utils.stringToDate(date, ServiceConstants.DATE_FORMAT).toString());
+		} catch (ParseException e) {
+			Assert.fail("Should not be getting a ParseException!");
+		}
+	}
+	
+	@Test
+	public void testDateToString() throws ParseException{
+		String date = "31-08-1982 10:20:56";
+		Calendar dateCal = Calendar.getInstance();
+		dateCal.set(Calendar.YEAR, 1982);
+		dateCal.set(Calendar.MONTH, 7);
+		dateCal.set(Calendar.DAY_OF_MONTH, 31);
+		dateCal.set(Calendar.HOUR_OF_DAY, 10);
+		dateCal.set(Calendar.MINUTE, 20);
+		dateCal.set(Calendar.SECOND, 56);
+		Assert.assertEquals(date,Utils.dateToString(dateCal.getTime(), ServiceConstants.DATE_FORMAT).toString());
+	}
 	
 	@Test
 	public void testHashPassword(){

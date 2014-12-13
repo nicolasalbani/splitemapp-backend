@@ -2,6 +2,7 @@ package com.splitemapp.commons.domain.dto.request;
 
 import java.util.Date;
 
+
 public class PullAllSyncRequest {
 
 	private String token;
