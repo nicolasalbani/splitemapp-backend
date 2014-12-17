@@ -1,19 +1,18 @@
 package com.splitemapp.commons.domain.dto.request;
 
-import java.util.Date;
 
 
 public class PullAllSyncRequest {
 
 	private String token;
-	private Date lastPullSuccessAt;
+	private String lastPullSuccessAt;
 
 	/**
 	 * Required by FasterXML.
 	 */
 	public PullAllSyncRequest() {}
 
-	public PullAllSyncRequest(String token, Date lastPullSuccessAt) {
+	public PullAllSyncRequest(String token, String lastPullSuccessAt) {
 		this.token = token;
 		this.lastPullSuccessAt = lastPullSuccessAt;
 	}
@@ -26,11 +25,11 @@ public class PullAllSyncRequest {
 		this.token = token;
 	}
 
-	public Date getLastPullSuccessAt() {
+	public String getLastPullSuccessAt() {
 		return lastPullSuccessAt;
 	}
 
-	public void setLastPullSuccessAt(Date lastPullSuccessAt) {
+	public void setLastPullSuccessAt(String lastPullSuccessAt) {
 		this.lastPullSuccessAt = lastPullSuccessAt;
 	}
 
