@@ -2,7 +2,11 @@ package com.splitemapp.commons.domain.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.UserSession;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
 public class UserSessionDTO implements java.io.Serializable {
 
@@ -13,11 +17,15 @@ public class UserSessionDTO implements java.io.Serializable {
 	private String token;
 	private String device;
 	private String osVersion;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date lastUsedAt;
 	
 	public UserSessionDTO(){}
 
 	public UserSessionDTO(UserSession userSession) {
+		this.id = userSession.getId();
 		this.userId = userSession.getUser().getId();
 		this.token = userSession.getToken();
 		this.device = userSession.getDevice();

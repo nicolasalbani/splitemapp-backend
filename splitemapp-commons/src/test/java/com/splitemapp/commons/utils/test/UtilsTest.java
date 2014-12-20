@@ -41,7 +41,7 @@ public class UtilsTest {
 		dateCal.set(Calendar.HOUR_OF_DAY, 10);
 		dateCal.set(Calendar.MINUTE, 20);
 		dateCal.set(Calendar.SECOND, 56);
-		Assert.assertEquals(date,Utils.dateToString(dateCal.getTime(), ServiceConstants.DATE_FORMAT).toString());
+		Assert.assertEquals(date,Utils.dateToString(dateCal.getTime(), ServiceConstants.DATE_FORMAT));
 	}
 	
 	@Test

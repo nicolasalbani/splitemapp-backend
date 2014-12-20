@@ -2,7 +2,11 @@ package com.splitemapp.commons.domain.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.UserToGroup;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
 public class UserToGroupDTO implements java.io.Serializable {
 
@@ -12,18 +16,26 @@ public class UserToGroupDTO implements java.io.Serializable {
 	private Long userId;
 	private Long groupId;
 	private Short userToGroupStatusId;
-	private Date createdAt;
-	private Date updatedAt;
 	private boolean isAdmin;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date createdAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date updatedAt;
 	
 	public UserToGroupDTO(){}
 
 	public UserToGroupDTO(UserToGroup userToGroup) {
+		this.id = userToGroup.getId();
 		this.userId = userToGroup.getUser().getId();
 		this.groupId = userToGroup.getGroup().getId();
 		this.userToGroupStatusId = userToGroup.getUserToGroupStatus().getId();
 		this.isAdmin = userToGroup.isIsAdmin();
-
+		this.createdAt = userToGroup.getCreatedAt();
+		this.updatedAt = userToGroup.getUpdatedAt();
 	}
 
 	public UserToGroupDTO(Long userId, Long groupId,

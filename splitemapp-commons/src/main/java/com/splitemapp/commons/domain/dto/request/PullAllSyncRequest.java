@@ -1,18 +1,27 @@
 package com.splitemapp.commons.domain.dto.request;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
 
 
 public class PullAllSyncRequest {
 
 	private String token;
-	private String lastPullSuccessAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date lastPullSuccessAt;
 
 	/**
 	 * Required by FasterXML.
 	 */
 	public PullAllSyncRequest() {}
 
-	public PullAllSyncRequest(String token, String lastPullSuccessAt) {
+	public PullAllSyncRequest(String token, Date lastPullSuccessAt) {
 		this.token = token;
 		this.lastPullSuccessAt = lastPullSuccessAt;
 	}
@@ -25,11 +34,11 @@ public class PullAllSyncRequest {
 		this.token = token;
 	}
 
-	public String getLastPullSuccessAt() {
+	public Date getLastPullSuccessAt() {
 		return lastPullSuccessAt;
 	}
 
-	public void setLastPullSuccessAt(String lastPullSuccessAt) {
+	public void setLastPullSuccessAt(Date lastPullSuccessAt) {
 		this.lastPullSuccessAt = lastPullSuccessAt;
 	}
 

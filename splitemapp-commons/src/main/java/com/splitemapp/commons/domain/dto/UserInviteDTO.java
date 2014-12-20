@@ -2,7 +2,11 @@ package com.splitemapp.commons.domain.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.UserInvite;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
 public class UserInviteDTO implements java.io.Serializable {
 
@@ -13,12 +17,19 @@ public class UserInviteDTO implements java.io.Serializable {
 	private Long projectId;
 	private Short inviteStatusId;
 	private String email;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date createdAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date updatedAt;
 	
 	public UserInviteDTO(){}
 
 	public UserInviteDTO(UserInvite userInvite) {
+		this.id = userInvite.getId();
 		this.userId = userInvite.getUser().getId();
 		this.projectId = userInvite.getProject().getId();
 		this.inviteStatusId = userInvite.getInviteStatus().getId();

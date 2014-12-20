@@ -3,7 +3,11 @@ package com.splitemapp.commons.domain.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.UserExpense;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
 public class UserExpenseDTO implements java.io.Serializable {
 
@@ -14,20 +18,32 @@ public class UserExpenseDTO implements java.io.Serializable {
 	private Long projectId;
 	private Short expenseCategoryId;
 	private BigDecimal expense;
-	private Date createdAt;
-	private Date updatedAt;
-	private Date expenseDate;
 	private String note;
+
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date createdAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date updatedAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date expenseDate;
 	
 	public UserExpenseDTO(){}
 
 	public UserExpenseDTO(UserExpense userExpense) {
+		this.id = userExpense.getId();
 		this.userId = userExpense.getUser().getId();
 		this.projectId = userExpense.getProject().getId();
 		this.expenseCategoryId = userExpense.getExpenseCategory().getId();
 		this.expense = userExpense.getExpense();
 		this.expenseDate = userExpense.getExpenseDate();
 		this.note = userExpense.getNote();
+		this.createdAt = userExpense.getCreatedAt();
+		this.updatedAt = userExpense.getUpdatedAt();
 	}
 
 	public UserExpenseDTO(Long userId, Long projectId,

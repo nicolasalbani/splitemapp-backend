@@ -2,7 +2,11 @@ package com.splitemapp.commons.domain.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.User;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
 public class UserDTO implements java.io.Serializable {
 
@@ -14,12 +18,21 @@ public class UserDTO implements java.io.Serializable {
 	private String password;
 	private String firstName;
 	private String lastName;
-	private Date lastLogin;
 	private int loginCnt;
-	private Date createdAt;
 	private String createdIpAddress;
-	private Date updatedAt;
 	private String updatedIpAddress;
+
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date lastLogin;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date createdAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date updatedAt;
 	
 	public UserDTO(){}
 

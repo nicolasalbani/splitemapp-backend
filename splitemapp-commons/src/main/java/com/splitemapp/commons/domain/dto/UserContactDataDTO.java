@@ -2,7 +2,11 @@ package com.splitemapp.commons.domain.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.UserContactData;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
 public class UserContactDataDTO implements java.io.Serializable {
 
@@ -12,13 +16,23 @@ public class UserContactDataDTO implements java.io.Serializable {
 	private Long userId;
 	private String contactData;
 	private boolean verified;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date verifiedAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date createdAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date updatedAt;
 	
 	public UserContactDataDTO(){}
 
 	public UserContactDataDTO(UserContactData userContactData) {
+		this.id = userContactData.getId();
 		this.userId = userContactData.getUser().getId();
 		this.contactData = userContactData.getContactData();
 		this.verified = userContactData.isVerified();

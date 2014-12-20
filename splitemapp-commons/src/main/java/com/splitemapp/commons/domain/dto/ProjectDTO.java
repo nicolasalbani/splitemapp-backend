@@ -3,7 +3,11 @@ package com.splitemapp.commons.domain.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.Project;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
 public class ProjectDTO implements java.io.Serializable {
 
@@ -15,12 +19,19 @@ public class ProjectDTO implements java.io.Serializable {
 	private String title;
 	private String imgCover;
 	private BigDecimal budget;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date createdAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date updatedAt;
 	
 	public ProjectDTO(){}
 
 	public ProjectDTO(Project project) {
+		this.id = project.getId();
 		this.projectTypeId = project.getProjectType().getId();
 		this.projectStatusId = project.getProjectStatus().getId();
 		this.title = project.getTitle();

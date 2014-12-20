@@ -4,7 +4,11 @@ package com.splitemapp.commons.domain.dto;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.UserToProject;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
 public class UserToProjectDTO implements java.io.Serializable {
 
@@ -14,17 +18,26 @@ public class UserToProjectDTO implements java.io.Serializable {
 	private Long userId;
 	private Long projectId;
 	private Short userToProjectStatusId;
-	private Date createdAt;
-	private Date updatedAt;
 	private BigDecimal expensesShare;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date createdAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date updatedAt;
 	
 	public UserToProjectDTO(){}
 
 	public UserToProjectDTO(UserToProject userToProject) {
+		this.id = userToProject.getId();
 		this.userId = userToProject.getUser().getId();
 		this.projectId = userToProject.getProject().getId();
 		this.userToProjectStatusId = userToProject.getUserToProjectStatus().getId();
 		this.expensesShare = userToProject.getExpensesShare();
+		this.createdAt = userToProject.getCreatedAt();
+		this.updatedAt = userToProject.getUpdatedAt();
 	}
 
 	public UserToProjectDTO(Long userId, Long projectId,

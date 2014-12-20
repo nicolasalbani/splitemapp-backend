@@ -33,7 +33,6 @@ import com.splitemapp.commons.domain.dto.UserToGroupDTO;
 import com.splitemapp.commons.domain.dto.UserToProjectDTO;
 import com.splitemapp.commons.domain.dto.request.PullAllSyncRequest;
 import com.splitemapp.commons.domain.dto.response.PullAllSyncResponse;
-import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.GroupEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
@@ -72,21 +71,21 @@ public class PullAllSyncService {
 			
 			// We set the user contact data set
 			Set<UserContactDataDTO> userContactDataDTOs = new HashSet<UserContactDataDTO>();
-			for(UserContactData userContactData:userContactDataEndpoint.findUpdatedAfter(Utils.stringToDate(request.getLastPullSuccessAt(),ServiceConstants.DATE_FORMAT), user.getId())){
+			for(UserContactData userContactData:userContactDataEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userContactDataDTOs.add(new UserContactDataDTO(userContactData));
 			}
 			response.setUserContactDataDTOs(userContactDataDTOs);
 
 			// We set the group set
 			Set<GroupDTO> groupDTOs = new HashSet<GroupDTO>();
-			for(Group group:groupEndpoint.findUpdatedAfter(Utils.stringToDate(request.getLastPullSuccessAt(),ServiceConstants.DATE_FORMAT), user.getId())){
+			for(Group group:groupEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				groupDTOs.add(new GroupDTO(group));
 			}
 			response.setGroupDTOs(groupDTOs);
 
 			// We set the project set
 			Set<ProjectDTO> projectDTOs = new HashSet<ProjectDTO>();
-			List<Project> findUpdatedAfter = projectEndpoint.findUpdatedAfter(Utils.stringToDate(request.getLastPullSuccessAt(),ServiceConstants.DATE_FORMAT), user.getId());
+			List<Project> findUpdatedAfter = projectEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId());
 			for(Project project:findUpdatedAfter){
 				projectDTOs.add(new ProjectDTO(project));
 			}
@@ -94,28 +93,28 @@ public class PullAllSyncService {
 
 			// We set the user expense set
 			Set<UserExpenseDTO> userExpenseDTOs = new HashSet<UserExpenseDTO>();
-			for(UserExpense userExpense:userExpenseEndpoint.findUpdatedAfter(Utils.stringToDate(request.getLastPullSuccessAt(),ServiceConstants.DATE_FORMAT), user.getId())){
+			for(UserExpense userExpense:userExpenseEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userExpenseDTOs.add(new UserExpenseDTO(userExpense));
 			}
 			response.setUserExpenseDTOs(userExpenseDTOs);
 
 			// We set the user invite set
 			Set<UserInviteDTO> userInviteDTOs = new HashSet<UserInviteDTO>();
-			for(UserInvite userInvite:userInviteEndpoint.findUpdatedAfter(Utils.stringToDate(request.getLastPullSuccessAt(),ServiceConstants.DATE_FORMAT), user.getId())){
+			for(UserInvite userInvite:userInviteEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userInviteDTOs.add(new UserInviteDTO(userInvite));
 			}
 			response.setUserInviteDTOs(userInviteDTOs);
 
 			// We set the user to group set
 			Set<UserToGroupDTO> userToGroupDTOs = new HashSet<UserToGroupDTO>();
-			for(UserToGroup userToGroup:userToGroupEndpoint.findUpdatedAfter(Utils.stringToDate(request.getLastPullSuccessAt(),ServiceConstants.DATE_FORMAT), user.getId())){
+			for(UserToGroup userToGroup:userToGroupEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userToGroupDTOs.add(new UserToGroupDTO(userToGroup));
 			}
 			response.setUserToGroupDTOs(userToGroupDTOs);
 
 			// We set the user to project set
 			Set<UserToProjectDTO> userToProjectDTOs = new HashSet<UserToProjectDTO>();
-			for(UserToProject userToProject:userToProjectEndpoint.findUpdatedAfter(Utils.stringToDate(request.getLastPullSuccessAt(),ServiceConstants.DATE_FORMAT), user.getId())){
+			for(UserToProject userToProject:userToProjectEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userToProjectDTOs.add(new UserToProjectDTO(userToProject));
 			}
 			response.setUserToProjectDTOs(userToProjectDTOs);

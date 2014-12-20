@@ -2,7 +2,11 @@ package com.splitemapp.commons.domain.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.Group;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
+import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
 public class GroupDTO implements java.io.Serializable {
 
@@ -13,12 +17,19 @@ public class GroupDTO implements java.io.Serializable {
 	private String cod;
 	private String title;
 	private String imgCover;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date createdAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date updatedAt;
 	
 	public GroupDTO(){}
 
 	public GroupDTO(Group group) {
+		this.id = group.getId();
 		this.groupStatusId = group.getGroupStatus().getId();
 		this.cod = group.getCod();
 		this.title = group.getTitle();
