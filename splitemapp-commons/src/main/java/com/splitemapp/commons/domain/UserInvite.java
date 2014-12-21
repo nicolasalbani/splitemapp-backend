@@ -53,6 +53,7 @@ public class UserInvite implements java.io.Serializable {
 	private Date updatedAt;
 
 	public UserInvite() {
+		this.createdAt = this.updatedAt = new Date();
 	}
 
 	public UserInvite(User user, Project project, InviteStatus inviteStatus,

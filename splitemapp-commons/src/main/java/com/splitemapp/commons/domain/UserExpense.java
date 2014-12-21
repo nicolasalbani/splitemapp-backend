@@ -61,6 +61,7 @@ public class UserExpense implements java.io.Serializable {
 	private String note;
 
 	public UserExpense() {
+		this.createdAt = this.updatedAt = new Date();
 	}
 
 	public UserExpense(User user, Project project,

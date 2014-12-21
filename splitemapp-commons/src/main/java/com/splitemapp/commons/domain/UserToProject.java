@@ -61,6 +61,7 @@ public class UserToProject implements java.io.Serializable {
 	private BigDecimal expensesShare;
 
 	public UserToProject() {
+		this.createdAt = this.updatedAt = new Date();
 	}
 	
 	public UserToProject(User user, Project project,

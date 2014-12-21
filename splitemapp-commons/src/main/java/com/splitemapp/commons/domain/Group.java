@@ -58,6 +58,7 @@ public class Group implements java.io.Serializable {
 	private Set<UserToGroup> userToGroups = new HashSet<UserToGroup>(0);
 
 	public Group() {
+		this.createdAt = this.updatedAt = new Date();
 	}
 
 	public Group(GroupStatus groupStatus, String cod, String title,

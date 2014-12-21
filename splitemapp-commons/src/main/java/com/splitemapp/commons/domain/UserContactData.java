@@ -58,6 +58,7 @@ public class UserContactData implements java.io.Serializable {
 	private Date updatedAt;
 
 	public UserContactData() {
+		this.createdAt = this.updatedAt = new Date();
 	}
 	
 	public UserContactData(User user, UserContactDataDTO userContactDataDTO){

@@ -73,6 +73,7 @@ public class Project implements java.io.Serializable {
 	private Set<UserToProject> userToProjects = new HashSet<UserToProject>(0);
 
 	public Project() {
+		this.createdAt = this.updatedAt = new Date();
 	}
 
 	public Project(ProjectType projectType, ProjectStatus projectStatus,

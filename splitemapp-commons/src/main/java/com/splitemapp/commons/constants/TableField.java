@@ -20,4 +20,9 @@ public class TableField {
 	 * 'contact_data' table
 	 */
 	public static final String USER_CONTACT_DATA_USER_ID = "user";
+	
+	/**
+	 * 'project_type' table
+	 */
+	public static final String PROJECT_TYPE_COD = "cod";
 }

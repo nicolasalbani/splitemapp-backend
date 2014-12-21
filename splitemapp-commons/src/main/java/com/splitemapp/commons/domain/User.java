@@ -91,6 +91,7 @@ public class User implements java.io.Serializable {
 	private Set<UserToGroup> userToGroups = new HashSet<UserToGroup>(0);
 
 	public User() {
+		this.createdAt = this.updatedAt = new Date();
 	}
 	
 	public User(UserStatus userStatus, UserDTO userDTO) {

@@ -58,6 +58,7 @@ public class UserToGroup implements java.io.Serializable {
 	private boolean isAdmin;
 
 	public UserToGroup() {
+		this.createdAt = this.updatedAt = new Date();
 	}
 
 	public UserToGroup(User user, Group group,
