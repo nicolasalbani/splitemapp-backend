@@ -7,6 +7,11 @@ public class TableField {
 	public static final String USER_USERNAME = "username";
 	
 	/**
+	 * 'user_expense' table
+	 */
+	public static final String USER_EXPENSE_PROJECT_ID = "project_id";
+	
+	/**
 	 * 'user_session' table
 	 */
 	public static final String USER_SESSION_TOKEN = "token";
