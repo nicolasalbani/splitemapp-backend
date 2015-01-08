@@ -30,4 +30,9 @@ public class TableField {
 	 * 'project_type' table
 	 */
 	public static final String PROJECT_TYPE_COD = "cod";
+	
+	/**
+	 * 'sync_status' table
+	 */
+	public static final String SYNC_STATUS_TABLE_NAME = "table_name";
 }

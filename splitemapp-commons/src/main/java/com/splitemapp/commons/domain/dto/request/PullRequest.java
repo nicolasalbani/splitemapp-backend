@@ -8,7 +8,7 @@ import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
 
 
-public class PullAllSyncRequest {
+public class PullRequest {
 
 	private String token;
 	
@@ -19,9 +19,9 @@ public class PullAllSyncRequest {
 	/**
 	 * Required by FasterXML.
 	 */
-	public PullAllSyncRequest() {}
+	public PullRequest() {}
 
-	public PullAllSyncRequest(String token, Date lastPullSuccessAt) {
+	public PullRequest(String token, Date lastPullSuccessAt) {
 		this.token = token;
 		this.lastPullSuccessAt = lastPullSuccessAt;
 	}
