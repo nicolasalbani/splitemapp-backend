@@ -4,21 +4,40 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
 
 public class Utils {
 
+	/**
+	 * Converts the given Date to a String using the given date format
+	 * @param date
+	 * @param dateFormat
+	 * @return
+	 */
 	public static String dateToString(Date date, String dateFormat){
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 		return sdf.format(date); 
 	}
 	
+	/**
+	 * Converts the given String to a Date using the given date format
+	 * @param date
+	 * @param dateFormat
+	 * @return
+	 * @throws ParseException
+	 */
 	public static Date stringToDate(String date, String dateFormat) throws ParseException{
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 		return sdf.parse(date);
 	}
 	
+	/**
+	 * Hashes the password in SHA-1
+	 * @param password
+	 * @return
+	 */
 	public static String hashPassword(String password) {
 		String newPassword=null;
 		if (password != null && !password.isEmpty()) {
@@ -44,6 +63,11 @@ public class Utils {
 		return newPassword;
 	}
 	
+	/**
+	 * Converts the entity name to its corresponding table name
+	 * @param entityName
+	 * @return
+	 */
 	public static String getTableName(String entityName){
 		final int FIRST_CHARACTER = 0;
 		
@@ -66,5 +90,28 @@ public class Utils {
 		}
 		
 		return tableName.toString();
+	}
+	
+	/**
+	 * Calculates whether the left operand date is greater than the right operand date
+	 * @param leftOperand
+	 * @param rightOperand
+	 * @return
+	 */
+	public static Boolean isDateGreaterThan(Date leftOperand, Date rightOperand){
+		// We set the left operand
+		Calendar leftOperandCal = Calendar.getInstance();
+		leftOperandCal.setTime(leftOperand);
+		
+		// We set the right operand
+		Calendar rightOperandCal = Calendar.getInstance();
+		rightOperandCal.setTime(rightOperand);
+		
+		// We compare the returned values
+		if(leftOperandCal.after(rightOperand)){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

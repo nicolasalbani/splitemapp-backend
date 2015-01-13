@@ -9,6 +9,13 @@ public class TableFieldCod {
 	public static final String USER_STATUS_DELETED = "deleted";
 	
 	/**
+	 * 'group_status' table cods
+	 */
+	public static final String GROUP_STATUS_ACTIVE = "active";
+	public static final String GROUP_STATUS_DISABLED = "disabled";
+	public static final String GROUP_STATUS_DELETED = "deleted";
+	
+	/**
 	 * 'project_status' table cods
 	 */
 	public static final String PROJECT_STATUS_ACTIVE = "active";

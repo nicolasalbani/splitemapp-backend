@@ -13,7 +13,7 @@ import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.provider.SessionFactoryProvider;
 
 
-public abstract class DomainDAO <E extends Serializable> {
+public abstract class DomainDAO <E extends Serializable, F extends Number> {
 
 private static Logger logger = Logger.getLogger(DomainDAO.class);
 	
@@ -86,7 +86,7 @@ private static Logger logger = Logger.getLogger(DomainDAO.class);
 	}
 
 	@SuppressWarnings("unchecked")
-	public E findById(Long id) {
+	public E findById(F id) {
 		logger.debug("getting " +getEntityClass().getSimpleName()+ " instance with id: " + id);
 		
 		Session session = sessionFactory.openSession();

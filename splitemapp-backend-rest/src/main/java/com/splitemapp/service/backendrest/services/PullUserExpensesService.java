@@ -19,7 +19,7 @@ import com.splitemapp.commons.domain.UserExpense;
 import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.UserExpenseDTO;
 import com.splitemapp.commons.domain.dto.request.PullRequest;
-import com.splitemapp.commons.domain.dto.response.PullUserExpensesResponse;
+import com.splitemapp.commons.domain.dto.response.PullResponse;
 import com.splitemapp.service.backendrest.endpoint.UserExpenseEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
@@ -33,10 +33,10 @@ public class PullUserExpensesService {
 	UserExpenseEndpoint userExpenseEndpoint;
 
 	@POST
-	public PullUserExpensesResponse printMessage(PullRequest request) throws ParseException {
+	public PullResponse<UserExpenseDTO> printMessage(PullRequest request) throws ParseException {
 
 		// We create a pull all sync response object setting success to false by default
-		PullUserExpensesResponse response = new PullUserExpensesResponse();
+		PullResponse<UserExpenseDTO> response = new PullResponse<UserExpenseDTO>();
 		response.setSuccess(false);
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
@@ -49,7 +49,7 @@ public class PullUserExpensesService {
 			for(UserExpense userExpense:userExpenseEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userExpenseDTOs.add(new UserExpenseDTO(userExpense));
 			}
-			response.setUserExpenseDTOs(userExpenseDTOs);
+			response.setItemSet(userExpenseDTOs);
 
 			// We set the success flag
 			response.setSuccess(true);

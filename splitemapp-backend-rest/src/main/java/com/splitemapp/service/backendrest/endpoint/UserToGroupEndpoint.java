@@ -3,7 +3,7 @@ package com.splitemapp.service.backendrest.endpoint;
 import com.splitemapp.commons.domain.UserToGroup;
 import com.splitemapp.service.backendrest.dao.UpdateableDomainDAO;
 
-public class UserToGroupEndpoint extends UpdateableDomainDAO<UserToGroup> {
+public class UserToGroupEndpoint extends UpdateableDomainDAO<UserToGroup,Long> {
 
 	@Override
 	public Class<UserToGroup> getEntityClass() {

@@ -20,7 +20,7 @@ import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.ProjectDTO;
 import com.splitemapp.commons.domain.dto.request.PullRequest;
-import com.splitemapp.commons.domain.dto.response.PullProjectsResponse;
+import com.splitemapp.commons.domain.dto.response.PullResponse;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
@@ -34,10 +34,10 @@ public class PullProjectsService {
 	ProjectEndpoint projectEndpoint;
 
 	@POST
-	public PullProjectsResponse printMessage(PullRequest request) throws ParseException {
+	public PullResponse<ProjectDTO> printMessage(PullRequest request) throws ParseException {
 
 		// We create a pull projects object setting success to false by default
-		PullProjectsResponse response = new PullProjectsResponse();
+		PullResponse<ProjectDTO> response = new PullResponse<ProjectDTO>();
 		response.setSuccess(false);
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
@@ -51,7 +51,7 @@ public class PullProjectsService {
 			for(Project project:findUpdatedAfter){
 				projectDTOs.add(new ProjectDTO(project));
 			}
-			response.setProjectDTOs(projectDTOs);
+			response.setItemSet(projectDTOs);
 
 			// We set the success flag
 			response.setSuccess(true);

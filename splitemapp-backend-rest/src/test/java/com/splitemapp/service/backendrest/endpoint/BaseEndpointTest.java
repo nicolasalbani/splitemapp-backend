@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.splitemapp.service.backendrest.dao.DomainDAO;
 
-public abstract class BaseEndpointTest <E extends DomainDAO<F>, F extends Serializable> {
+public abstract class BaseEndpointTest <E extends DomainDAO<F,G>, F extends Serializable, G extends Number> {
 	
 	E entityEndpoint = null;
 	
@@ -106,11 +106,11 @@ public abstract class BaseEndpointTest <E extends DomainDAO<F>, F extends Serial
 	 * 
 	 * @return an ID of an existing entity
 	 */
-	protected abstract Long getExistingEntityId();
+	protected abstract G getExistingEntityId();
 	
 	/**
 	 * 
 	 * @return an ID of a non existing entity
 	 */
-	protected abstract Long getNonExistingEntityId();
+	protected abstract G getNonExistingEntityId();
 }

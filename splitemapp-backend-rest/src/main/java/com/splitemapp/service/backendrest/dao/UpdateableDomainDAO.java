@@ -9,7 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 
-public abstract class UpdateableDomainDAO <E extends Serializable> extends DomainDAO<E> {
+public abstract class UpdateableDomainDAO <E extends Serializable,F extends Number> extends DomainDAO<E,F> {
 
 	private static Logger logger = Logger.getLogger(UpdateableDomainDAO.class);
 

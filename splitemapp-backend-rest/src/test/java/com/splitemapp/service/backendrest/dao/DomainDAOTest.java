@@ -5,11 +5,11 @@ import java.io.Serializable;
 import org.junit.Before;
 
 public class DomainDAOTest {
-	DomainDAO<SerializableStub> domainDao;
+	DomainDAO<SerializableStub,Short> domainDao;
 	
 	@Before
 	public void setUp() throws Exception {
-		domainDao = new DomainDAO<SerializableStub>(){
+		domainDao = new DomainDAO<SerializableStub,Short>(){
 
 			@Override
 			public Class<SerializableStub> getEntityClass() {

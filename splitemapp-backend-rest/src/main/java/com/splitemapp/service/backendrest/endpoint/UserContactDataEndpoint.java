@@ -3,7 +3,7 @@ package com.splitemapp.service.backendrest.endpoint;
 import com.splitemapp.commons.domain.UserContactData;
 import com.splitemapp.service.backendrest.dao.UpdateableDomainDAO;
 
-public class UserContactDataEndpoint extends UpdateableDomainDAO<UserContactData> {
+public class UserContactDataEndpoint extends UpdateableDomainDAO<UserContactData,Long> {
 
 	@Override
 	public Class<UserContactData> getEntityClass() {

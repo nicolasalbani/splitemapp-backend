@@ -19,7 +19,7 @@ import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.UserToGroup;
 import com.splitemapp.commons.domain.dto.UserToGroupDTO;
 import com.splitemapp.commons.domain.dto.request.PullRequest;
-import com.splitemapp.commons.domain.dto.response.PullUserToGroupsResponse;
+import com.splitemapp.commons.domain.dto.response.PullResponse;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserToGroupEndpoint;
 
@@ -33,10 +33,10 @@ public class PullUserToGroupsService {
 	UserToGroupEndpoint userToGroupEndpoint;
 
 	@POST
-	public PullUserToGroupsResponse printMessage(PullRequest request) throws ParseException {
+	public PullResponse<UserToGroupDTO> printMessage(PullRequest request) throws ParseException {
 
 		// We create a pull all sync response object setting success to false by default
-		PullUserToGroupsResponse response = new PullUserToGroupsResponse();
+		PullResponse<UserToGroupDTO> response = new PullResponse<UserToGroupDTO>();
 		response.setSuccess(false);
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
@@ -49,7 +49,7 @@ public class PullUserToGroupsService {
 			for(UserToGroup userToGroup:userToGroupEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userToGroupDTOs.add(new UserToGroupDTO(userToGroup));
 			}
-			response.setUserToGroupDTOs(userToGroupDTOs);
+			response.setItemSet(userToGroupDTOs);
 
 			// We set the success flag
 			response.setSuccess(true);

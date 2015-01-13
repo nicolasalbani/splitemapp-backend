@@ -19,7 +19,7 @@ import com.splitemapp.commons.domain.UserContactData;
 import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.request.PullRequest;
-import com.splitemapp.commons.domain.dto.response.PullUserContactDatasResponse;
+import com.splitemapp.commons.domain.dto.response.PullResponse;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
@@ -33,10 +33,10 @@ public class PullUserContactDatasService {
 	UserContactDataEndpoint userContactDataEndpoint;
 
 	@POST
-	public PullUserContactDatasResponse printMessage(PullRequest request) throws ParseException {
+	public PullResponse<UserContactDataDTO> printMessage(PullRequest request) throws ParseException {
 
 		// We create a pull user contact datas response object setting success to false by default
-		PullUserContactDatasResponse response = new PullUserContactDatasResponse();
+		PullResponse<UserContactDataDTO> response = new PullResponse<UserContactDataDTO>();
 		response.setSuccess(false);
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
@@ -49,8 +49,7 @@ public class PullUserContactDatasService {
 			for(UserContactData userContactData:userContactDataEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userContactDataDTOs.add(new UserContactDataDTO(userContactData));
 			}
-			response.setUserContactDataDTOs(userContactDataDTOs);
-
+			response.setItemSet(userContactDataDTOs);
 
 			// We set the success flag
 			response.setSuccess(true);

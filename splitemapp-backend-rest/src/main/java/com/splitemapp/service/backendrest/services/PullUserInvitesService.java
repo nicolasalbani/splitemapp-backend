@@ -19,7 +19,7 @@ import com.splitemapp.commons.domain.UserInvite;
 import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.UserInviteDTO;
 import com.splitemapp.commons.domain.dto.request.PullRequest;
-import com.splitemapp.commons.domain.dto.response.PullUserInvitesResponse;
+import com.splitemapp.commons.domain.dto.response.PullResponse;
 import com.splitemapp.service.backendrest.endpoint.UserInviteEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
@@ -33,10 +33,10 @@ public class PullUserInvitesService {
 	UserInviteEndpoint userInviteEndpoint;
 
 	@POST
-	public PullUserInvitesResponse printMessage(PullRequest request) throws ParseException {
+	public PullResponse<UserInviteDTO> printMessage(PullRequest request) throws ParseException {
 
 		// We create a pull all sync response object setting success to false by default
-		PullUserInvitesResponse response = new PullUserInvitesResponse();
+		PullResponse<UserInviteDTO> response = new PullResponse<UserInviteDTO>();
 		response.setSuccess(false);
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
@@ -49,7 +49,7 @@ public class PullUserInvitesService {
 			for(UserInvite userInvite:userInviteEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userInviteDTOs.add(new UserInviteDTO(userInvite));
 			}
-			response.setUserInviteDTOs(userInviteDTOs);
+			response.setItemSet(userInviteDTOs);
 
 			// We set the success flag
 			response.setSuccess(true);

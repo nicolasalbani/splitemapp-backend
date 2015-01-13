@@ -3,7 +3,7 @@ package com.splitemapp.service.backendrest.endpoint;
 import com.splitemapp.commons.domain.UserExpense;
 import com.splitemapp.service.backendrest.dao.UpdateableDomainDAO;
 
-public class UserExpenseEndpoint extends UpdateableDomainDAO<UserExpense> {
+public class UserExpenseEndpoint extends UpdateableDomainDAO<UserExpense,Long> {
 
 	@Override
 	public Class<UserExpense> getEntityClass() {

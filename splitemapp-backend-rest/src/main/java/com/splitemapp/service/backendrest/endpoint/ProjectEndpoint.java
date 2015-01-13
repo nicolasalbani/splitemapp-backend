@@ -3,7 +3,7 @@ package com.splitemapp.service.backendrest.endpoint;
 import com.splitemapp.commons.domain.Project;
 import com.splitemapp.service.backendrest.dao.UpdateableDomainDAO;
 
-public class ProjectEndpoint extends UpdateableDomainDAO<Project> {
+public class ProjectEndpoint extends UpdateableDomainDAO<Project,Long> {
 
 	@Override
 	public Class<Project> getEntityClass() {

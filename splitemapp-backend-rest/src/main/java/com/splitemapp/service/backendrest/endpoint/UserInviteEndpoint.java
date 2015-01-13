@@ -3,7 +3,7 @@ package com.splitemapp.service.backendrest.endpoint;
 import com.splitemapp.commons.domain.UserInvite;
 import com.splitemapp.service.backendrest.dao.UpdateableDomainDAO;
 
-public class UserInviteEndpoint extends UpdateableDomainDAO<UserInvite> {
+public class UserInviteEndpoint extends UpdateableDomainDAO<UserInvite,Long> {
 
 	@Override
 	public Class<UserInvite> getEntityClass() {

@@ -5,9 +5,8 @@ import com.splitemapp.commons.domain.dto.UserSessionDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
 import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 
-public class LoginResponse {
+public class LoginResponse extends ServiceResponse{
 
-	private Boolean success;
 	private UserSessionDTO userSessionDTO;
 	private UserDTO userDTO;
 	private UserStatusDTO userStatusDTO;
@@ -17,18 +16,10 @@ public class LoginResponse {
 	public LoginResponse() {}
 
 	public LoginResponse(Boolean success,UserSessionDTO userSessionDTO,UserContactDataDTO userContactDataDTO,Boolean changePassword) {
-		this.setSuccess(success);
+		super(success);
 		this.userSessionDTO = userSessionDTO;
 		this.userContactDataDTO = userContactDataDTO;
 		this.changePassword	= changePassword;
-	}
-
-	public Boolean getSuccess() {
-		return success;
-	}
-
-	public void setSuccess(Boolean success) {
-		this.success = success;
 	}
 
 	public UserSessionDTO getUserSessionDTO() {
