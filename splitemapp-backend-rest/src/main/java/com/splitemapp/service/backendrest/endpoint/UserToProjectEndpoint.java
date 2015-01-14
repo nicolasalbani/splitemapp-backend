@@ -12,12 +12,12 @@ public class UserToProjectEndpoint extends UpdateableDomainDAO<UserToProject,Lon
 
 	@Override
 	public String getCreatedAfterQuery() {
-		return "FROM user_to_project UTP WHERE UTP.user.id  = :" +USER_ID_PARAMETER  + " AND UTP.createdAt > :" +CREATED_AT_PARAMETER;
+		return "SELECT DISTINCT FROM user_to_project UTP WHERE UTP.user.id  = :" +USER_ID_PARAMETER  + " AND UTP.createdAt > :" +CREATED_AT_PARAMETER;
 	}
 
 	@Override
 	public String getUpdatedAfterQuery() {
-		return "FROM user_to_project UTP WHERE UTP.user.id  = :" +USER_ID_PARAMETER  + " AND UTP.updatedAt > :" +UPDATED_AT_PARAMETER;
+		return "SELECT DISTINCT FROM user_to_project UTP WHERE UTP.user.id  = :" +USER_ID_PARAMETER  + " AND UTP.updatedAt > :" +UPDATED_AT_PARAMETER;
 	}
 
 }

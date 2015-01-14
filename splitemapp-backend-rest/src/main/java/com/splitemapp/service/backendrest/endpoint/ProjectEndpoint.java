@@ -12,12 +12,12 @@ public class ProjectEndpoint extends UpdateableDomainDAO<Project,Long> {
 
 	@Override
 	public String getCreatedAfterQuery() {
-		return "SELECT P FROM project P LEFT JOIN P.userToProjects UTP WHERE P.id = UTP.project.id AND UTP.user.id = :" +USER_ID_PARAMETER + " AND P.createdAt > :" +CREATED_AT_PARAMETER;
+		return "SELECT DISTINCT P FROM project P LEFT JOIN P.userToProjects UTP WHERE P.id = UTP.project.id AND UTP.user.id = :" +USER_ID_PARAMETER + " AND P.createdAt > :" +CREATED_AT_PARAMETER;
 	}
 
 	@Override
 	public String getUpdatedAfterQuery() {
-		return "SELECT P FROM project P LEFT JOIN P.userToProjects UTP WHERE P.id = UTP.project.id AND UTP.user.id = :" +USER_ID_PARAMETER + " AND P.updatedAt > :" +UPDATED_AT_PARAMETER;
+		return "SELECT DISTINCT P FROM project P LEFT JOIN P.userToProjects UTP WHERE P.id = UTP.project.id AND UTP.user.id = :" +USER_ID_PARAMETER + " AND P.updatedAt > :" +UPDATED_AT_PARAMETER;
 	}
 
 }

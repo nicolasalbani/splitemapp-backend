@@ -12,12 +12,12 @@ public class UserToGroupEndpoint extends UpdateableDomainDAO<UserToGroup,Long> {
 
 	@Override
 	public String getCreatedAfterQuery() {
-		return "FROM user_to_group UTG WHERE UTG.user.id  = :" +USER_ID_PARAMETER  + " AND UTG.createdAt > :" +CREATED_AT_PARAMETER;
+		return "SELECT DISTINCT FROM user_to_group UTG WHERE UTG.user.id  = :" +USER_ID_PARAMETER  + " AND UTG.createdAt > :" +CREATED_AT_PARAMETER;
 	}
 
 	@Override
 	public String getUpdatedAfterQuery() {
-		return "FROM user_to_group UTG WHERE UTG.user.id  = :" +USER_ID_PARAMETER  + " AND UTG.updatedAt > :" +UPDATED_AT_PARAMETER;
+		return "SELECT DISTINCT FROM user_to_group UTG WHERE UTG.user.id  = :" +USER_ID_PARAMETER  + " AND UTG.updatedAt > :" +UPDATED_AT_PARAMETER;
 	}
 
 }
