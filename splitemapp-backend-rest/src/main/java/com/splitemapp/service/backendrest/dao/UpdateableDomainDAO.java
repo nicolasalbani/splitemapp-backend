@@ -57,7 +57,7 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 
 	@SuppressWarnings("unchecked")
 	public List<E> findUpdatedAfter(Date updatedAt, Long userId) {
-		logger.debug("getting " +getEntityClass().getSimpleName()+ " instances created after " +updatedAt+ " for userId " +userId);
+		logger.debug("getting " +getEntityClass().getSimpleName()+ " instances updated after " +updatedAt+ " for userId " +userId);
 
 		Session session = sessionFactory.openSession();
 		try {
