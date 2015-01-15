@@ -3,6 +3,7 @@ package com.splitemapp.service.backendrest.services;
 import java.text.ParseException;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -35,6 +36,11 @@ public class PushGroupsService {
 	GroupStatusEndpoint groupStatusEndpoint;
 	GroupEndpoint groupEndpoint;
 
+	@GET
+	public String printMessage() {
+		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
+	}
+	
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<GroupDTO> request) throws ParseException {
 

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -32,6 +33,11 @@ public class PullUserToGroupsService {
 	UserSessionEndpoint userSessionEndpoint;
 	UserToGroupEndpoint userToGroupEndpoint;
 
+	@GET
+	public String printMessage() {
+		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
+	}
+	
 	@POST
 	public PullResponse<UserToGroupDTO> printMessage(PullRequest request) throws ParseException {
 
@@ -71,6 +77,10 @@ public class PullUserToGroupsService {
 
 	public UserToGroupEndpoint getUserToGroupEndpoint() {
 		return userToGroupEndpoint;
+	}
+
+	public void setUserToGroupEndpoint(UserToGroupEndpoint userToGroupEndpoint) {
+		this.userToGroupEndpoint = userToGroupEndpoint;
 	}
 
 }

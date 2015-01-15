@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -31,6 +32,11 @@ public class PullUsersService {
 	UserSessionEndpoint userSessionEndpoint;
 	UserEndpoint userEndpoint;
 
+	@GET
+	public String printMessage() {
+		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
+	}
+	
 	@POST
 	public PullResponse<UserDTO> printMessage(PullRequest request) throws ParseException {
 

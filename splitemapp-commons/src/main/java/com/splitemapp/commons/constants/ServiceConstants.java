@@ -1,6 +1,9 @@
 package com.splitemapp.commons.constants;
 
 public class ServiceConstants {
+	// General service GET success response
+	public static final String GET_SUCCESS = "Your GET request was successfull. Service is alive!";
+	
 	// General service constants
 	public static final String DATE_FORMAT = "dd-MM-yyyy hh:mm:ss";
 	
@@ -24,12 +27,4 @@ public class ServiceConstants {
 	public static final String PUSH_USER_TO_GROUPS_PATH = "/push_user_to_groups";
 	public static final String PUSH_USER_TO_PROJECTS_PATH = "/push_user_to_projects";
 	
-	
-	// JSON ROOT names
-	public static final String LOGIN_REQUEST_ROOT = "LoginRequest";
-	public static final String LOGIN_RESPONSE_ROOT = "LoginResponse";
-	public static final String CREATE_ACCOUNT_REQUEST_ROOT = "CreateAccountRequest";
-	public static final String CREATE_ACCOUNT_RESPONSE_ROOT = "CreateAccountResponse";
-	public static final String PULL_ALL_SYNC_REQUEST_ROOT = "PullAllSyncRequest";
-	public static final String PULL_ALL_SYNC_RESPONSE_ROOT = "PullAllSyncResponse";
 }

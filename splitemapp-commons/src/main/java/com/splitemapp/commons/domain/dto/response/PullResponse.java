@@ -8,7 +8,7 @@ public class PullResponse<E> extends ServiceResponse implements Serializable {
 	private static final long serialVersionUID = 7262133901637892203L;
 	
 	private Set<E> itemSet;
-
+	
 	public PullResponse() {}
 	
 	public PullResponse(Boolean success, Set<E> itemSet) {
@@ -23,5 +23,4 @@ public class PullResponse<E> extends ServiceResponse implements Serializable {
 	public void setItemSet(Set<E> itemSet) {
 		this.itemSet = itemSet;
 	}
-	
 }

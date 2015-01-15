@@ -12,12 +12,12 @@ public class UserContactDataEndpoint extends UpdateableDomainDAO<UserContactData
 
 	@Override
 	public String getCreatedAfterQuery() {
-		return "SELECT DISTINCT FROM user_contact_data UCD WHERE UCD.user.id = :" +USER_ID_PARAMETER+ " AND UCD.createdAt > :" +CREATED_AT_PARAMETER;
+		return "SELECT DISTINCT UCD FROM user_contact_data UCD WHERE UCD.user.id = :" +USER_ID_PARAMETER+ " AND UCD.createdAt > :" +CREATED_AT_PARAMETER;
 	}
 
 	@Override
 	public String getUpdatedAfterQuery() {
-		return "SELECT DISTINCT FROM user_contact_data UCD WHERE UCD.user.id = :" +USER_ID_PARAMETER+ " AND UCD.updatedAt > :" +UPDATED_AT_PARAMETER;
+		return "SELECT DISTINCT UCD FROM user_contact_data UCD WHERE UCD.user.id = :" +USER_ID_PARAMETER+ " AND UCD.updatedAt > :" +UPDATED_AT_PARAMETER;
 	}
 
 }
