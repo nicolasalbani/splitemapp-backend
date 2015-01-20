@@ -43,6 +43,14 @@
 	<bean id="projectEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.ProjectEndpoint">
 	</bean>
+	
+	<bean id="projectStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ProjectStatusEndpoint">
+	</bean>
+	
+	<bean id="projectTypeEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ProjectTypeEndpoint">
+	</bean>
 
 	<bean id="userExpenseEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.UserExpenseEndpoint">
