@@ -146,7 +146,7 @@ insert into user_to_group_status values(3,"left_group","Dejo el grupo");
 -- -----------------------------------------------------
 CREATE TABLE "user_to_group" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "user_status_id" smallint(6)  NOT NULL,
+  "user_to_group_status_id" smallint(6)  NOT NULL,
   "user_id" bigint(20)  NOT NULL,
   "is_admin" tinyint(1) NOT NULL DEFAULT "0",
   "group_id" bigint(20)  NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE "user_to_group" (
   "updated_at" timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
   FOREIGN KEY(user_id) REFERENCES user(id),
   FOREIGN KEY(group_id) REFERENCES "group"(id),
-  FOREIGN KEY(user_status_id) REFERENCES user_to_group_status(id)
+  FOREIGN KEY(user_to_group_status_id) REFERENCES user_to_group_status(id)
 );
 CREATE UNIQUE INDEX user_id__group_id_u_idx ON user_to_group(user_id,group_id);
 
@@ -176,7 +176,7 @@ insert into user_to_project_status values(3,"left_project","Dejo el proyecto");
 -- -----------------------------------------------------
 CREATE TABLE "user_to_project" (
   "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-  "user_status_id" smallint(6)  NOT NULL,
+  "user_to_project_status_id" smallint(6)  NOT NULL,
   "user_id" bigint(20)  NOT NULL,
   "project_id" bigint(20)  NOT NULL,
   "expenses_share" decimal(3,2) NOT NULL,
@@ -184,7 +184,7 @@ CREATE TABLE "user_to_project" (
   "updated_at" timestamp NOT NULL DEFAULT "0000-00-00 00:00:00",
   FOREIGN KEY(user_id) REFERENCES user(id),
   FOREIGN KEY(project_id) REFERENCES project(id),
-  FOREIGN KEY(user_status_id) REFERENCES user_to_project_status(id)
+  FOREIGN KEY(user_to_project_status_id) REFERENCES user_to_project_status(id)
 );
 CREATE UNIQUE INDEX user_id__project_id_u_idx ON user_to_project(user_id,project_id);
 

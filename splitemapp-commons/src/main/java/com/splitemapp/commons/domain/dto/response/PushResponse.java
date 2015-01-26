@@ -1,6 +1,7 @@
 package com.splitemapp.commons.domain.dto.response;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.splitemapp.commons.domain.id.IdUpdate;
@@ -13,6 +14,7 @@ public class PushResponse<E extends Number> extends ServiceResponse implements S
 	
 	public PushResponse() {
 		super();
+		idUpdateList = new ArrayList<IdUpdate<E>>();
 	}
 
 	public PushResponse(Boolean success, List<IdUpdate<E>> idUpdateList) {

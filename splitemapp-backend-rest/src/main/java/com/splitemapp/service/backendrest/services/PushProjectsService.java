@@ -61,8 +61,9 @@ public class PushProjectsService {
 				ProjectType projectType = projectTypeEndpoint.findById(projectDTO.getProjectTypeId());
 				Project project = new Project(projectType, projectStatus, projectDTO);
 				
-				if(Utils.isDateGreaterThan(projectDTO.getCreatedAt(),request.getLastPushSuccessAt())){
+				if(Utils.isDateAfter(projectDTO.getCreatedAt(),request.getLastPushSuccessAt())){
 					// We persist the entry to the database
+					project.setId(null);
 					projectEndpoint.persist(project);
 					
 					// We add the IdUpdate element to the response list

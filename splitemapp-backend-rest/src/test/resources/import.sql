@@ -73,11 +73,11 @@ insert into splitemapp.user_expense		(id,user_id,project_id,category_id,expense,
 values									(1,1,1,1,200,'2014-09-21 02:17:36','Nafta');
 
 -- Populating the user_to_group table
-insert into splitemapp.user_to_group	(id,user_status_id,user_id,is_admin,group_id) 
+insert into splitemapp.user_to_group	(id,user_to_group_status_id,user_id,is_admin,group_id) 
 values									(1,1,1,1,1);
 
 -- Populating the user_to_project table
-insert into splitemapp.user_to_project	(id,user_status_id,user_id,project_id,expenses_share) 
+insert into splitemapp.user_to_project	(id,user_to_project_status_id,user_id,project_id,expenses_share) 
 values									(1,1,1,1,100);
 
 -- Populating the user_invite table

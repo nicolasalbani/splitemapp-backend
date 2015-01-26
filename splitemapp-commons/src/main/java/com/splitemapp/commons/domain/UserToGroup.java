@@ -44,7 +44,7 @@ public class UserToGroup implements java.io.Serializable {
 	private Group group;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_status_id", nullable = false)
+	@JoinColumn(name = "user_to_group_status_id", nullable = false)
 	private UserToGroupStatus userToGroupStatus;
 
 	@Temporal(TemporalType.TIMESTAMP)

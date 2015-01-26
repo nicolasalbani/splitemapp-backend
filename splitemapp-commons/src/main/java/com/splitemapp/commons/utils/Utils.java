@@ -98,7 +98,7 @@ public class Utils {
 	 * @param rightOperand
 	 * @return
 	 */
-	public static Boolean isDateGreaterThan(Date leftOperand, Date rightOperand){
+	public static boolean isDateAfter(Date leftOperand, Date rightOperand){
 		// We set the left operand
 		Calendar leftOperandCal = Calendar.getInstance();
 		leftOperandCal.setTime(leftOperand);
@@ -108,10 +108,6 @@ public class Utils {
 		rightOperandCal.setTime(rightOperand);
 		
 		// We compare the returned values
-		if(leftOperandCal.after(rightOperand)){
-			return true;
-		} else {
-			return false;
-		}
+		return leftOperandCal.compareTo(rightOperandCal)>0;
 	}
 }

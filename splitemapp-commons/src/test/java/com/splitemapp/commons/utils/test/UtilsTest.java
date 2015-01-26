@@ -1,11 +1,13 @@
 package com.splitemapp.commons.utils.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
 
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -25,9 +27,9 @@ public class UtilsTest {
 		dateCal.set(Calendar.MINUTE, 20);
 		dateCal.set(Calendar.SECOND, 56);
 		try {
-			Assert.assertEquals(dateCal.getTime().toString(),Utils.stringToDate(date, ServiceConstants.DATE_FORMAT).toString());
+			assertEquals(dateCal.getTime().toString(),Utils.stringToDate(date, ServiceConstants.DATE_FORMAT).toString());
 		} catch (ParseException e) {
-			Assert.fail("Should not be getting a ParseException!");
+			fail("Should not be getting a ParseException!");
 		}
 	}
 	
@@ -41,7 +43,16 @@ public class UtilsTest {
 		dateCal.set(Calendar.HOUR_OF_DAY, 10);
 		dateCal.set(Calendar.MINUTE, 20);
 		dateCal.set(Calendar.SECOND, 56);
-		Assert.assertEquals(date,Utils.dateToString(dateCal.getTime(), ServiceConstants.DATE_FORMAT));
+		assertEquals(date,Utils.dateToString(dateCal.getTime(), ServiceConstants.DATE_FORMAT));
+	}
+	
+	@Test
+	public void testIsDateAfter(){
+		Date todayDate = Calendar.getInstance().getTime();
+		Calendar yesterday = Calendar.getInstance();
+		yesterday.add(Calendar.DAY_OF_MONTH, -1);
+		Date yesterdayDate = yesterday.getTime();
+		assertTrue(Utils.isDateAfter(todayDate, yesterdayDate));
 	}
 	
 	@Test
@@ -54,22 +65,22 @@ public class UtilsTest {
 
 	@Test
 	public void testGetTableName(){
-		Assert.assertEquals("user", Utils.getTableName("User"));
-		Assert.assertEquals("expense_category", Utils.getTableName("ExpenseCategory"));
-		Assert.assertEquals("group", Utils.getTableName("Group"));
-		Assert.assertEquals("group_status", Utils.getTableName("GroupStatus"));
-		Assert.assertEquals("invite_status", Utils.getTableName("InviteStatus"));
-		Assert.assertEquals("project_status", Utils.getTableName("ProjectStatus"));
-		Assert.assertEquals("project", Utils.getTableName("Project"));
-		Assert.assertEquals("project_type", Utils.getTableName("ProjectType"));
-		Assert.assertEquals("user_contact_data", Utils.getTableName("UserContactData"));
-		Assert.assertEquals("user_expenses", Utils.getTableName("UserExpenses"));
-		Assert.assertEquals("user_invite", Utils.getTableName("UserInvite"));
-		Assert.assertEquals("user_status", Utils.getTableName("UserStatus"));
-		Assert.assertEquals("user_to_group", Utils.getTableName("UserToGroup"));
-		Assert.assertEquals("user_to_group_status", Utils.getTableName("UserToGroupStatus"));
-		Assert.assertEquals("user_to_project", Utils.getTableName("UserToProject"));
-		Assert.assertEquals("user_to_project_status", Utils.getTableName("UserToProjectStatus"));
-		Assert.assertEquals("sync_status", Utils.getTableName("SyncStatus"));
+		assertEquals("user", Utils.getTableName("User"));
+		assertEquals("expense_category", Utils.getTableName("ExpenseCategory"));
+		assertEquals("group", Utils.getTableName("Group"));
+		assertEquals("group_status", Utils.getTableName("GroupStatus"));
+		assertEquals("invite_status", Utils.getTableName("InviteStatus"));
+		assertEquals("project_status", Utils.getTableName("ProjectStatus"));
+		assertEquals("project", Utils.getTableName("Project"));
+		assertEquals("project_type", Utils.getTableName("ProjectType"));
+		assertEquals("user_contact_data", Utils.getTableName("UserContactData"));
+		assertEquals("user_expenses", Utils.getTableName("UserExpenses"));
+		assertEquals("user_invite", Utils.getTableName("UserInvite"));
+		assertEquals("user_status", Utils.getTableName("UserStatus"));
+		assertEquals("user_to_group", Utils.getTableName("UserToGroup"));
+		assertEquals("user_to_group_status", Utils.getTableName("UserToGroupStatus"));
+		assertEquals("user_to_project", Utils.getTableName("UserToProject"));
+		assertEquals("user_to_project_status", Utils.getTableName("UserToProjectStatus"));
+		assertEquals("sync_status", Utils.getTableName("SyncStatus"));
 	}
 }

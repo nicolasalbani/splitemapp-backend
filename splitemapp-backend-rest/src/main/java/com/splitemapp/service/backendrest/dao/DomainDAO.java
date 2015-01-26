@@ -44,6 +44,25 @@ private static Logger logger = Logger.getLogger(DomainDAO.class);
 			session.close();
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public F save(E transientInstance) {
+		logger.debug("saving " +transientInstance.getClass().getSimpleName()+ " instance");
+		
+		Session session = sessionFactory.openSession();
+		F id = null;
+		try {
+			id = (F)session.save(transientInstance);
+			logger.debug("save successful");
+		} catch (RuntimeException re) {
+			logger.error("save failed", re);
+			throw re;
+		} finally {
+			session.close();
+		}
+		
+		return id;
+	}
 
 	public void remove(E persistentInstance) {
 		logger.debug("removing " +getEntityClass().getSimpleName()+ " instance");

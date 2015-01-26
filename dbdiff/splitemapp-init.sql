@@ -155,7 +155,7 @@ insert into user_to_group_status values(3,'left_group','Dejo el grupo');
 -- -----------------------------------------------------
 CREATE TABLE `user_to_group` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_status_id` smallint(6) unsigned NOT NULL,
+  `user_to_group_status_id` smallint(6) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
   `group_id` bigint(20) unsigned NOT NULL,
@@ -167,7 +167,7 @@ CREATE TABLE `user_to_group` (
   KEY `user_to_group__group_id_idx` (`group_id`),
   CONSTRAINT `user_to_group__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_to_group__group_id` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`),
-  CONSTRAINT `user_to_group__user_status_id` FOREIGN KEY (`user_status_id`) REFERENCES `user_to_group_status` (`id`)
+  CONSTRAINT `user_to_group__user_to_group_status_id` FOREIGN KEY (`user_to_group_status_id`) REFERENCES `user_to_group_status` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
@@ -189,7 +189,7 @@ insert into user_to_project_status values(3,'left_project','Dejo el proyecto');
 -- -----------------------------------------------------
 CREATE TABLE `user_to_project` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_status_id` smallint(6) unsigned NOT NULL,
+  `user_to_project_status_id` smallint(6) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   `project_id` bigint(20) unsigned NOT NULL,
   `expenses_share` decimal(3,2) NOT NULL,
@@ -201,7 +201,7 @@ CREATE TABLE `user_to_project` (
   KEY `user_to_project__project_id` (`project_id`),
   CONSTRAINT `user_to_project__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_to_project__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
-  CONSTRAINT `user_to_project__user_status_id` FOREIGN KEY (`user_status_id`) REFERENCES `user_to_project_status` (`id`)
+  CONSTRAINT `user_to_project__user_to_project_status_id` FOREIGN KEY (`user_to_project_status_id`) REFERENCES `user_to_project_status` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------

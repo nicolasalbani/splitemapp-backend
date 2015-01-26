@@ -46,7 +46,7 @@ public class UserToProject implements java.io.Serializable {
 	private Project project;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_status_id", nullable = false)
+	@JoinColumn(name = "user_to_project_status_id", nullable = false)
 	private UserToProjectStatus userToProjectStatus;
 	
 	@Temporal(TemporalType.TIMESTAMP)
