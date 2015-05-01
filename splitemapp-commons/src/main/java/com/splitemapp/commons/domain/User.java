@@ -279,4 +279,16 @@ public class User implements java.io.Serializable {
 		this.userToGroups = userToGroups;
 	}
 
+	@Override
+	public int hashCode() {
+		return this.id.intValue();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj != null && obj instanceof User){
+			return this.getId().equals(((User)obj).getId());
+		}
+		return false;
+	}
 }

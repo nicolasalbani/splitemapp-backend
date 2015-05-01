@@ -26,5 +26,6 @@ public class ServiceConstants {
 	public static final String PUSH_USER_INVITES_PATH = "/push_user_invites";
 	public static final String PUSH_USER_TO_GROUPS_PATH = "/push_user_to_groups";
 	public static final String PUSH_USER_TO_PROJECTS_PATH = "/push_user_to_projects";
+	public static final String SYNCHRONIZE_CONTACTS_PATH = "/synchronize_contacts";
 	
 }

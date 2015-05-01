@@ -25,6 +25,7 @@ public class TableField {
 	 * 'contact_data' table
 	 */
 	public static final String USER_CONTACT_DATA_USER_ID = "user";
+	public static final String USER_CONTACT_DATA_CONTACT_DATA = "contact_data";
 	
 	/**
 	 * 'project' table
@@ -35,6 +36,7 @@ public class TableField {
 	 * 'user_to_project' table
 	 */
 	public static final String USER_TO_PROJECT_PROJECT_ID = "project_id";
+	public static final String USER_TO_PROJECT_USER_ID = "user_id";
 	
 	/**
 	 * 'project_type' table

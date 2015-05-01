@@ -83,4 +83,25 @@ public class UtilsTest {
 		assertEquals("user_to_project_status", Utils.getTableName("UserToProjectStatus"));
 		assertEquals("sync_status", Utils.getTableName("SyncStatus"));
 	}
+	
+	@Test
+	public void testGetEntityName(){
+		assertEquals("User", Utils.getEntityName("user"));
+		assertEquals("ExpenseCategory", Utils.getEntityName("expense_category"));
+		assertEquals("Group", Utils.getEntityName("group"));
+		assertEquals("GroupStatus", Utils.getEntityName("group_status"));
+		assertEquals("InviteStatus", Utils.getEntityName("invite_status"));
+		assertEquals("ProjectStatus", Utils.getEntityName("project_status"));
+		assertEquals("Project", Utils.getEntityName("project"));
+		assertEquals("ProjectType", Utils.getEntityName("project_type"));
+		assertEquals("UserContactData", Utils.getEntityName("user_contact_data"));
+		assertEquals("UserExpenses", Utils.getEntityName("user_expenses"));
+		assertEquals("UserInvite", Utils.getEntityName("user_invite"));
+		assertEquals("UserStatus", Utils.getEntityName("user_status"));
+		assertEquals("UserToGroup", Utils.getEntityName("user_to_group"));
+		assertEquals("UserToGroupStatus", Utils.getEntityName("user_to_group_status"));
+		assertEquals("UserToProject", Utils.getEntityName("user_to_project"));
+		assertEquals("UserToProjectStatus", Utils.getEntityName("user_to_project_status"));
+		assertEquals("SyncStatus", Utils.getEntityName("sync_status"));
+	}
 }
