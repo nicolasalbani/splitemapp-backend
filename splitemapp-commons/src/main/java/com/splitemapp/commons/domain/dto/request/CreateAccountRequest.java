@@ -6,17 +6,19 @@ public class CreateAccountRequest {
 	private String ipAddress;
 	private String password;
 	private String email;
+	private byte[] avatar;
 
 	/**
 	 * Required by FasterXML.
 	 */
 	public CreateAccountRequest() {}
 
-	public CreateAccountRequest(String username, String ipAddress, String password, String email) {
+	public CreateAccountRequest(String username, String ipAddress, String password, String email, byte[] avatar) {
 		this.username = username;
 		this.ipAddress = ipAddress;
 		this.password = password;
 		this.email = email;
+		this.setAvatar(avatar);
 	}
 
 	public String getUsername() {
@@ -49,6 +51,14 @@ public class CreateAccountRequest {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public byte[] getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
 	}
 
 }

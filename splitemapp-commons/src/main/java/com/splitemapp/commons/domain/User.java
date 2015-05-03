@@ -2,6 +2,8 @@ package com.splitemapp.commons.domain;
 
 // Generated Sep 15, 2014 8:09:15 PM by Hibernate Tools 4.0.0
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,9 +12,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
-import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,6 +21,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
 import com.splitemapp.commons.domain.dto.UserDTO;
 
 /**
@@ -74,6 +75,10 @@ public class User implements java.io.Serializable {
 
 	@Column(name = "updated_ip_address", length = 15)
 	private String updatedIpAddress;
+	
+	@Column(name = "avatar")
+	@DatabaseField(dataType = DataType.BYTE_ARRAY)
+	private byte[] avatar;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
 	private Set<UserToProject> userToProjects = new HashSet<UserToProject>(0);
@@ -107,21 +112,23 @@ public class User implements java.io.Serializable {
 		this.createdIpAddress = userDTO.getCreatedIpAddress();
 		this.updatedAt = userDTO.getUpdatedAt();
 		this.updatedIpAddress = userDTO.getUpdatedIpAddress();
+		this.avatar = userDTO.getAvatar();
 	}
 
 	public User(UserStatus userStatus, String username, int loginCnt,
-			Date createdAt, String createdIpAddress, Date updatedAt) {
+			Date createdAt, String createdIpAddress, Date updatedAt, byte[] avatar) {
 		this.userStatus = userStatus;
 		this.username = username;
 		this.loginCnt = loginCnt;
 		this.createdAt = createdAt;
 		this.createdIpAddress = createdIpAddress;
 		this.updatedAt = updatedAt;
+		this.avatar = avatar;
 	}
 
 	public User(UserStatus userStatus, String username, String password,
 			String firstName, String lastName, Date lastLogin, int loginCnt,
-			Date createdAt, String createdIpAddress, Date updatedAt,
+			Date createdAt, String createdIpAddress, Date updatedAt, byte[] avatar,
 			String updatedIpAddress, Set<UserToProject> userToProjects,
 			Set<UserExpense> userExpenses, Set<UserInvite> userInvites,
 			Set<UserContactData> userContactDatas, Set<UserToGroup> userToGroups) {
@@ -133,6 +140,7 @@ public class User implements java.io.Serializable {
 		this.lastLogin = lastLogin;
 		this.loginCnt = loginCnt;
 		this.createdAt = createdAt;
+		this.avatar = avatar;
 		this.createdIpAddress = createdIpAddress;
 		this.updatedAt = updatedAt;
 		this.updatedIpAddress = updatedIpAddress;
@@ -221,6 +229,14 @@ public class User implements java.io.Serializable {
 
 	public void setCreatedIpAddress(String createdIpAddress) {
 		this.createdIpAddress = createdIpAddress;
+	}
+
+	public byte[] getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
 	}
 
 	public Date getUpdatedAt() {
