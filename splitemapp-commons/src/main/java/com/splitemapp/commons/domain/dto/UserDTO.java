@@ -21,6 +21,7 @@ public class UserDTO implements java.io.Serializable {
 	private int loginCnt;
 	private String createdIpAddress;
 	private String updatedIpAddress;
+	private byte[] avatar;
 
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
@@ -46,6 +47,7 @@ public class UserDTO implements java.io.Serializable {
 		this.lastLogin = user.getLastLogin();
 		this.loginCnt = user.getLoginCnt();
 		this.createdAt = user.getCreatedAt();
+		this.avatar = user.getAvatar();
 		this.createdIpAddress = user.getCreatedIpAddress();
 		this.updatedAt = user.getUpdatedAt();
 		this.updatedIpAddress = user.getUpdatedIpAddress();
@@ -54,7 +56,7 @@ public class UserDTO implements java.io.Serializable {
 	public UserDTO(Short userStatusId, String username, String password,
 			String firstName, String lastName, Date lastLogin, int loginCnt,
 			Date createdAt, String createdIpAddress, Date updatedAt,
-			String updatedIpAddress) {
+			String updatedIpAddress, byte[] avatar) {
 		this.userStatusId = userStatusId;
 		this.username = username;
 		this.password = password;
@@ -66,6 +68,7 @@ public class UserDTO implements java.io.Serializable {
 		this.createdIpAddress = createdIpAddress;
 		this.updatedAt = updatedAt;
 		this.updatedIpAddress = updatedIpAddress;
+		this.avatar = avatar;
 	}
 
 	public Long getId() {
@@ -162,6 +165,14 @@ public class UserDTO implements java.io.Serializable {
 
 	public void setUpdatedIpAddress(String updatedIpAddress) {
 		this.updatedIpAddress = updatedIpAddress;
+	}
+
+	public byte[] getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(byte[] avatar) {
+		this.avatar = avatar;
 	}
 
 }

@@ -67,6 +67,7 @@ public class CreateAccountService {
 			//TODO We need to change the getUsername for the actual first name. Add first and last in the create account page?
 			newUser.setFirstName(request.getUsername());
 			newUser.setUserStatus(userStatus);
+			newUser.setAvatar(request.getAvatar());
 			userEndpoint.persist(newUser);
 
 			// We create and persist the user contact data

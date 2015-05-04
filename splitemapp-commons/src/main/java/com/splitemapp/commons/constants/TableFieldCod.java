@@ -20,4 +20,9 @@ public class TableFieldCod {
 	 */
 	public static final String PROJECT_STATUS_ACTIVE = "active";
 	public static final String PROJECT_STATUS_CLOSED = "closed";
+	
+	/**
+	 * 'user_to_project' table cods
+	 */
+	public static final String USER_TO_PROJECT_STATUS_ACTIVE = "active";
 }

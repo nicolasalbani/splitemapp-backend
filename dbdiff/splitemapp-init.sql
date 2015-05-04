@@ -34,6 +34,7 @@ CREATE TABLE `user` (
   `created_ip_address` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_ip_address` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` BLOB NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_u_username` (`username`),
   KEY `user__status_id` (`status_id`),

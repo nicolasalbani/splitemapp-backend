@@ -30,6 +30,7 @@
 
 		<!-- JPA dependencies version -->
 		<javax.persistence.version>1.0.2</javax.persistence.version>
+		<ormlite.version>4.48</ormlite.version>
 
 		<!-- Testing dependencies version -->
 		<junit.version>4.8.1</junit.version>
@@ -67,6 +68,18 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.4.3</version>
+		</dependency>
+
+		<!-- ORM Lite dependencies -->
+		<dependency>
+			<groupId>com.j256.ormlite</groupId>
+			<artifactId>ormlite-core</artifactId>
+			<version>${ormlite.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.j256.ormlite</groupId>
+			<artifactId>ormlite-android</artifactId>
+			<version>${ormlite.version}</version>
 		</dependency>
 
 		<!-- Testing dependencies -->

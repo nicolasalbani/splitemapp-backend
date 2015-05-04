@@ -83,4 +83,46 @@ public class UtilsTest {
 		assertEquals("user_to_project_status", Utils.getTableName("UserToProjectStatus"));
 		assertEquals("sync_status", Utils.getTableName("SyncStatus"));
 	}
+	
+	@Test
+	public void testGetEntityName(){
+		assertEquals("User", Utils.getEntityName("user"));
+		assertEquals("ExpenseCategory", Utils.getEntityName("expense_category"));
+		assertEquals("Group", Utils.getEntityName("group"));
+		assertEquals("GroupStatus", Utils.getEntityName("group_status"));
+		assertEquals("InviteStatus", Utils.getEntityName("invite_status"));
+		assertEquals("ProjectStatus", Utils.getEntityName("project_status"));
+		assertEquals("Project", Utils.getEntityName("project"));
+		assertEquals("ProjectType", Utils.getEntityName("project_type"));
+		assertEquals("UserContactData", Utils.getEntityName("user_contact_data"));
+		assertEquals("UserExpenses", Utils.getEntityName("user_expenses"));
+		assertEquals("UserInvite", Utils.getEntityName("user_invite"));
+		assertEquals("UserStatus", Utils.getEntityName("user_status"));
+		assertEquals("UserToGroup", Utils.getEntityName("user_to_group"));
+		assertEquals("UserToGroupStatus", Utils.getEntityName("user_to_group_status"));
+		assertEquals("UserToProject", Utils.getEntityName("user_to_project"));
+		assertEquals("UserToProjectStatus", Utils.getEntityName("user_to_project_status"));
+		assertEquals("SyncStatus", Utils.getEntityName("sync_status"));
+	}
+	
+	@Test
+	public void testGetCamelCaseName(){
+		assertEquals("user", Utils.getCamelCaseName("user"));
+		assertEquals("expenseCategory", Utils.getCamelCaseName("expense_category"));
+		assertEquals("group", Utils.getCamelCaseName("group"));
+		assertEquals("groupStatus", Utils.getCamelCaseName("group_status"));
+		assertEquals("inviteStatus", Utils.getCamelCaseName("invite_status"));
+		assertEquals("projectStatus", Utils.getCamelCaseName("project_status"));
+		assertEquals("project", Utils.getCamelCaseName("project"));
+		assertEquals("projectType", Utils.getCamelCaseName("project_type"));
+		assertEquals("userContactData", Utils.getCamelCaseName("user_contact_data"));
+		assertEquals("userExpenses", Utils.getCamelCaseName("user_expenses"));
+		assertEquals("userInvite", Utils.getCamelCaseName("user_invite"));
+		assertEquals("userStatus", Utils.getCamelCaseName("user_status"));
+		assertEquals("userToGroup", Utils.getCamelCaseName("user_to_group"));
+		assertEquals("userToGroupStatus", Utils.getCamelCaseName("user_to_group_status"));
+		assertEquals("userToProject", Utils.getCamelCaseName("user_to_project"));
+		assertEquals("userToProjectStatus", Utils.getCamelCaseName("user_to_project_status"));
+		assertEquals("syncStatus", Utils.getCamelCaseName("sync_status"));
+	}
 }
