@@ -41,6 +41,22 @@ CREATE TABLE `user` (
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
+-- Table `user_avatar`
+-- -----------------------------------------------------
+CREATE TABLE `user_avatar` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `avatar_size` bigint(20) DEFAULT NULL,
+  `avatar_type` varchar(64) DEFAULT NULL,
+  `avatar_data` mediumtext,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_u_user_id` (`user_id`),
+  CONSTRAINT `user_avatar__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- -----------------------------------------------------
 -- Table `user_contact_data`
 -- -----------------------------------------------------
 CREATE TABLE `user_contact_data` (
@@ -90,85 +106,102 @@ insert into project_type values(2,'one_time','Solo una vez');
 -- -----------------------------------------------------
 -- Table `project`
 -- -----------------------------------------------------
-  CREATE TABLE `project` (
-    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `status_id` smallint(6) unsigned NOT NULL,
-    `type_id` smallint(6) unsigned NOT NULL,
-    `title` varchar(128) NULL,
-    `img_cover` varchar(128) NULL,
-    `budget` decimal(16,6) NULL,
-    `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-    PRIMARY KEY (`id`),
-    KEY `project__status_id` (`status_id`),
-    KEY `project__type_id` (`type_id`),
-    CONSTRAINT `project__status_id` FOREIGN KEY (`status_id`) REFERENCES `project_status` (`id`),
-    CONSTRAINT `project__type_id` FOREIGN KEY (`type_id`) REFERENCES `project_type` (`id`)
-  ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `project` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `status_id` smallint(6) unsigned NOT NULL,
+  `type_id` smallint(6) unsigned NOT NULL,
+  `title` varchar(128) NULL,
+  `img_cover` varchar(128) NULL,
+  `budget` decimal(16,6) NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `project__status_id` (`status_id`),
+  KEY `project__type_id` (`type_id`),
+  CONSTRAINT `project__status_id` FOREIGN KEY (`status_id`) REFERENCES `project_status` (`id`),
+  CONSTRAINT `project__type_id` FOREIGN KEY (`type_id`) REFERENCES `project_type` (`id`)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+
+-- -----------------------------------------------------
+-- Table `project_image_cover`
+-- -----------------------------------------------------
+CREATE TABLE `project_image_cover` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `project_id` bigint(20) unsigned NOT NULL,
+  `cover_size` bigint(20) DEFAULT NULL,
+  `cover_type` varchar(64) DEFAULT NULL,
+  `avatar_data` mediumtext,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_u_project_id` (`project_id`),
+  CONSTRAINT `project_image_cover__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- Table `group_status`
 -- -----------------------------------------------------
-CREATE TABLE `group_status` (
-  `id` smallint(6) unsigned NOT NULL,
-  `cod` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `cod_u_idx` (`cod`)
-) ENGINE = InnoDB DEFAULT CHARSET=utf8;
-insert into group_status values(1,'active','Activo');
-insert into group_status values(2,'disabled','Desactivado');
-insert into group_status values(3,'deleted','Borrado');
+-- CREATE TABLE `group_status` (
+--   `id` smallint(6) unsigned NOT NULL,
+--   `cod` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+--   `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+--   PRIMARY KEY (`id`),
+--   UNIQUE KEY `cod_u_idx` (`cod`)
+-- ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+-- insert into group_status values(1,'active','Activo');
+-- insert into group_status values(2,'disabled','Desactivado');
+-- insert into group_status values(3,'deleted','Borrado');
 
 -- -----------------------------------------------------
 -- Table `group`
 -- -----------------------------------------------------
-CREATE TABLE `group` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `status_id` smallint(6) unsigned NOT NULL,
-  `cod` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `img_cover` varchar(128) NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `cod_u_idx` (`cod`),
-  CONSTRAINT `group__status_id` FOREIGN KEY (`status_id`) REFERENCES `group_status` (`id`)
-) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+-- CREATE TABLE `group` (
+--   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+--   `status_id` smallint(6) unsigned NOT NULL,
+--   `cod` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+--   `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+--   `img_cover` varchar(128) NULL,
+--   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+--   PRIMARY KEY (`id`),
+--   UNIQUE KEY `cod_u_idx` (`cod`),
+--   CONSTRAINT `group__status_id` FOREIGN KEY (`status_id`) REFERENCES `group_status` (`id`)
+-- ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- Table `user_to_group_status`
 -- -----------------------------------------------------
-CREATE TABLE `user_to_group_status` (
-  `id` smallint(6) unsigned NOT NULL,
-  `cod` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `cod_u_idx` (`cod`)
-) ENGINE = InnoDB DEFAULT CHARSET=utf8;
-insert into user_to_group_status values(1,'active','Activo');
-insert into user_to_group_status values(2,'removed','Eliminado');
-insert into user_to_group_status values(3,'left_group','Dejo el grupo');
+-- CREATE TABLE `user_to_group_status` (
+--   `id` smallint(6) unsigned NOT NULL,
+--   `cod` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+--   `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+--   PRIMARY KEY (`id`),
+--   UNIQUE KEY `cod_u_idx` (`cod`)
+-- ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+-- insert into user_to_group_status values(1,'active','Activo');
+-- insert into user_to_group_status values(2,'removed','Eliminado');
+-- insert into user_to_group_status values(3,'left_group','Dejo el grupo');
 
 -- -----------------------------------------------------
 -- Table `user_to_user_group`
 -- -----------------------------------------------------
-CREATE TABLE `user_to_group` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_to_group_status_id` smallint(6) unsigned NOT NULL,
-  `user_id` bigint(20) unsigned NOT NULL,
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
-  `group_id` bigint(20) unsigned NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id__group_id_u_idx` (`user_id`,`group_id`),
-  KEY `user_to_group__user_id_idx` (`user_id`),
-  KEY `user_to_group__group_id_idx` (`group_id`),
-  CONSTRAINT `user_to_group__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `user_to_group__group_id` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`),
-  CONSTRAINT `user_to_group__user_to_group_status_id` FOREIGN KEY (`user_to_group_status_id`) REFERENCES `user_to_group_status` (`id`)
-) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+-- CREATE TABLE `user_to_group` (
+--   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+--   `user_to_group_status_id` smallint(6) unsigned NOT NULL,
+--   `user_id` bigint(20) unsigned NOT NULL,
+--   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+--   `group_id` bigint(20) unsigned NOT NULL,
+--   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+--   PRIMARY KEY (`id`),
+--   UNIQUE KEY `user_id__group_id_u_idx` (`user_id`,`group_id`),
+--   KEY `user_to_group__user_id_idx` (`user_id`),
+--   KEY `user_to_group__group_id_idx` (`group_id`),
+--   CONSTRAINT `user_to_group__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+--   CONSTRAINT `user_to_group__group_id` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`),
+--   CONSTRAINT `user_to_group__user_to_group_status_id` FOREIGN KEY (`user_to_group_status_id`) REFERENCES `user_to_group_status` (`id`)
+-- ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
 -- Table `user_to_project_status`
