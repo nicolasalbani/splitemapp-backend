@@ -131,6 +131,39 @@ public class Utils {
 	}
 	
 	/**
+	 * Converts the table or field name to its corresponding camel case
+	 * @param name Table or field name
+	 * @return
+	 */
+	public static String getCamelCaseName(String name){
+		StringBuilder entityName = new StringBuilder();
+		
+		if(name != null){
+			 entityName.append(name);
+
+			// Getting the final lenth, without the underscores
+			int length = entityName.length();
+			for(int i = 0; i<length; i++){
+				Character charAt = entityName.charAt(i);
+				if(charAt.equals('_')){
+					length -=1;
+				}
+			}
+			
+			// We now replace every <underscore>+<lowercase> for uppercase to match entity naming convention
+			for(int i = 1; i<length; i++){
+				Character charAt = entityName.charAt(i);
+				if(charAt.equals('_')){
+					entityName.replace(i, i+1, "");
+					entityName.replace(i, i+1, ""+Character.toUpperCase(entityName.charAt(i)));
+				}
+			}
+		}
+		
+		return entityName.toString();
+	}
+	
+	/**
 	 * Calculates whether the left operand date is greater than the right operand date
 	 * @param leftOperand
 	 * @param rightOperand

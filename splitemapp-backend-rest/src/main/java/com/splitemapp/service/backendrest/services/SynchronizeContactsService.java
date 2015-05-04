@@ -53,13 +53,15 @@ public class SynchronizeContactsService {
 
 		// Adding all found User and UserContactData information to the response list
 		for(String emailAddress:request.getContactsEmailAddressList()){
-			// Processing user contact data information
-			UserContactData userContactData = userContactDataEndpoint.findByField(Utils.getEntityName(TableField.USER_CONTACT_DATA_CONTACT_DATA), emailAddress);
-			userContactDataDTOList.add(new UserContactDataDTO(userContactData));
-			
-			// Processing user information
-			User user = userContactData.getUser();
-			userDTOList.add(new UserDTO(user));
+			// Processing user contact data information if there is any
+			UserContactData userContactData = userContactDataEndpoint.findByField(Utils.getCamelCaseName(TableField.USER_CONTACT_DATA_CONTACT_DATA), emailAddress);
+			if(userContactData != null){
+				userContactDataDTOList.add(new UserContactDataDTO(userContactData));
+				
+				// Processing user information
+				User user = userContactData.getUser();
+				userDTOList.add(new UserDTO(user));
+			}
 		}
 
 		// Setting the success flag to true
