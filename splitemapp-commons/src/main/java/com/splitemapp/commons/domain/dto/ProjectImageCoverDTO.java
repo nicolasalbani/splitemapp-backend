@@ -4,16 +4,16 @@ import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.splitemapp.commons.domain.UserAvatar;
+import com.splitemapp.commons.domain.ProjectImageCover;
 import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
 import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
-public class UserAvatarDTO implements java.io.Serializable {
+public class ProjectImageCoverDTO implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8018834364942997890L;
 
 	private Long id;
-	private Long userId;
+	private Long projectId;
 	private byte[] avatarData;
 	
 	@JsonSerialize(using=CustomDateSerializer.class)
@@ -24,20 +24,20 @@ public class UserAvatarDTO implements java.io.Serializable {
 	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date updatedAt;
 	
-	public UserAvatarDTO(){}
+	public ProjectImageCoverDTO(){}
 
-	public UserAvatarDTO(UserAvatar userAvatar) {
-		this.id = userAvatar.getId();
-		this.userId = userAvatar.getUser().getId();
-		this.avatarData = userAvatar.getAvatarData();
-		this.createdAt = userAvatar.getCreatedAt();
-		this.updatedAt = userAvatar.getUpdatedAt();
+	public ProjectImageCoverDTO(ProjectImageCover projectImageCover) {
+		this.id = projectImageCover.getId();
+		this.projectId = projectImageCover.getProject().getId();
+		this.avatarData = projectImageCover.getAvatarData();
+		this.createdAt = projectImageCover.getCreatedAt();
+		this.updatedAt = projectImageCover.getUpdatedAt();
 	}
 
-	public UserAvatarDTO(Long id, Long userId, byte[] avatarData,
+	public ProjectImageCoverDTO(Long id, Long projectId, byte[] avatarData,
 			Date createdAt, Date updatedAt) {
 		this.id = id;
-		this.userId = userId;
+		this.projectId = projectId;
 		this.avatarData = avatarData;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -68,12 +68,12 @@ public class UserAvatarDTO implements java.io.Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Long getProjectId() {
+		return projectId;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 
 	public byte[] getAvatarData() {

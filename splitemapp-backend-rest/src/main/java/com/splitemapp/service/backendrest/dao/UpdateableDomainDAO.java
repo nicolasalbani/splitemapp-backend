@@ -14,6 +14,7 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 	private static Logger logger = Logger.getLogger(UpdateableDomainDAO.class);
 
 	protected static final String USER_ID_PARAMETER = "userId";
+	protected static final String PROJECT_ID_PARAMETER = "projectId";
 	protected static final String CREATED_AT_PARAMETER = "createdAt";
 	protected static final String UPDATED_AT_PARAMETER = "updatedAt";
 
