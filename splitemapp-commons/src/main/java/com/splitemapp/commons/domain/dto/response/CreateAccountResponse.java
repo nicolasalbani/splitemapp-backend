@@ -1,5 +1,6 @@
 package com.splitemapp.commons.domain.dto.response;
 
+import com.splitemapp.commons.domain.dto.UserAvatarDTO;
 import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
@@ -7,14 +8,16 @@ import com.splitemapp.commons.domain.dto.UserStatusDTO;
 public class CreateAccountResponse extends ServiceResponse{
 
 	private UserDTO userDTO;
+	private UserAvatarDTO userAvatarDTO;
 	private UserStatusDTO userStatusDTO;
 	private UserContactDataDTO userContactDataDTO;
 
 	public CreateAccountResponse() {}
 
-	public CreateAccountResponse(Boolean success, UserDTO userDTO, UserStatusDTO userStatusDTO, UserContactDataDTO userContactDataDTO) {
+	public CreateAccountResponse(Boolean success, UserDTO userDTO, UserAvatarDTO userAvatarDTO, UserStatusDTO userStatusDTO, UserContactDataDTO userContactDataDTO) {
 		super(success);
 		this.setUserDTO(userDTO);
+		this.setUserAvatarDTO(userAvatarDTO);
 		this.setUserStatusDTO(userStatusDTO);
 		this.setUserContactDataDTO(userContactDataDTO);
 	}
@@ -41,5 +44,13 @@ public class CreateAccountResponse extends ServiceResponse{
 
 	public void setUserStatusDTO(UserStatusDTO userStatusDTO) {
 		this.userStatusDTO = userStatusDTO;
+	}
+
+	public UserAvatarDTO getUserAvatarDTO() {
+		return userAvatarDTO;
+	}
+
+	public void setUserAvatarDTO(UserAvatarDTO userAvatarDTO) {
+		this.userAvatarDTO = userAvatarDTO;
 	}
 }

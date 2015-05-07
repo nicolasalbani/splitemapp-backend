@@ -15,13 +15,16 @@ import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.constants.TableFieldCod;
 import com.splitemapp.commons.domain.User;
+import com.splitemapp.commons.domain.UserAvatar;
 import com.splitemapp.commons.domain.UserContactData;
 import com.splitemapp.commons.domain.UserStatus;
+import com.splitemapp.commons.domain.dto.UserAvatarDTO;
 import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
 import com.splitemapp.commons.domain.dto.request.CreateAccountRequest;
 import com.splitemapp.commons.domain.dto.response.CreateAccountResponse;
+import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserStatusEndpoint;
@@ -34,6 +37,7 @@ public class CreateAccountService {
 
 	private UserStatusEndpoint userStatusEndpoint;
 	private UserEndpoint userEndpoint;
+	private UserAvatarEndpoint userAvatarEndpoint;
 	private UserContactDataEndpoint userContactDataEndpoint;
 
 	@GET
@@ -67,7 +71,6 @@ public class CreateAccountService {
 			//TODO We need to change the getUsername for the actual first name. Add first and last in the create account page?
 			newUser.setFirstName(request.getUsername());
 			newUser.setUserStatus(userStatus);
-			newUser.setAvatar(request.getAvatar());
 			userEndpoint.persist(newUser);
 
 			// We create and persist the user contact data
@@ -76,11 +79,19 @@ public class CreateAccountService {
 			userContactData.setCreatedAt(new Date());
 			userContactData.setUser(newUser);
 			userContactDataEndpoint.persist(userContactData);
+			
+			// We create and persist the user avatar
+			UserAvatar userAvatar = new UserAvatar();
+			userAvatar.setAvatarData(request.getAvatar());
+			userAvatar.setCreatedAt(new Date());
+			userAvatar.setUser(newUser);
+			userAvatarEndpoint.persist(userAvatar);
 
 			// We set the response values
 			response.setSuccess(true);
 			response.setUserContactDataDTO(new UserContactDataDTO(userContactData));
 			response.setUserDTO(new UserDTO(newUser));
+			response.setUserAvatarDTO(new UserAvatarDTO(userAvatar));
 			response.setUserStatusDTO(new UserStatusDTO(userStatus));
 		} else {
 			//TODO check the status of the user, if it's disabled we can enable it?
@@ -114,5 +125,13 @@ public class CreateAccountService {
 	public void setUserContactDataEndpoint(
 			UserContactDataEndpoint userContactDataEndpoint) {
 		this.userContactDataEndpoint = userContactDataEndpoint;
+	}
+
+	public UserAvatarEndpoint getUserAvatarEndpoint() {
+		return userAvatarEndpoint;
+	}
+
+	public void setUserAvatarEndpoint(UserAvatarEndpoint userAvatarEndpoint) {
+		this.userAvatarEndpoint = userAvatarEndpoint;
 	}
 }

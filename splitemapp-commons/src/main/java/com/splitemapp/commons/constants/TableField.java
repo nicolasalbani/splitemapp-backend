@@ -7,6 +7,11 @@ public class TableField {
 	public static final String USER_USERNAME = "username";
 	
 	/**
+	 * 'user_avatar'
+	 */
+	public static final String USER_AVATAR_USER_ID = "user_id";
+	
+	/**
 	 * 'user_expense' table
 	 */
 	public static final String USER_EXPENSE_PROJECT_ID = "project_id";

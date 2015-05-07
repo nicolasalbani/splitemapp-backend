@@ -6,20 +6,17 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import com.splitemapp.commons.domain.ExpenseCategory;
-import com.splitemapp.commons.domain.Group;
-import com.splitemapp.commons.domain.GroupStatus;
 import com.splitemapp.commons.domain.InviteStatus;
 import com.splitemapp.commons.domain.Project;
 import com.splitemapp.commons.domain.ProjectStatus;
 import com.splitemapp.commons.domain.ProjectType;
 import com.splitemapp.commons.domain.User;
+import com.splitemapp.commons.domain.UserAvatar;
 import com.splitemapp.commons.domain.UserContactData;
 import com.splitemapp.commons.domain.UserExpense;
 import com.splitemapp.commons.domain.UserInvite;
 import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.UserStatus;
-import com.splitemapp.commons.domain.UserToGroup;
-import com.splitemapp.commons.domain.UserToGroupStatus;
 import com.splitemapp.commons.domain.UserToProject;
 import com.splitemapp.commons.domain.UserToProjectStatus;
 
@@ -48,6 +45,7 @@ public class SessionFactoryProvider {
 	//We add the entire domain model as annotated classes to the configuration
 	private static void addAnnotatedClasses(Configuration configuration){
 		configuration.addAnnotatedClass(User.class)
+		.addAnnotatedClass(UserAvatar.class)
 		.addAnnotatedClass(UserStatus.class)
 		.addAnnotatedClass(UserContactData.class)
 		.addAnnotatedClass(UserExpense.class)
@@ -57,12 +55,8 @@ public class SessionFactoryProvider {
 		.addAnnotatedClass(ProjectType.class)
 		.addAnnotatedClass(UserInvite.class)
 		.addAnnotatedClass(InviteStatus.class)
-		.addAnnotatedClass(UserToGroup.class)
 		.addAnnotatedClass(UserToProject.class)
 		.addAnnotatedClass(UserToProjectStatus.class)
-		.addAnnotatedClass(UserToGroupStatus.class)
-		.addAnnotatedClass(Group.class)
-		.addAnnotatedClass(GroupStatus.class)
 		.addAnnotatedClass(UserSession.class);
 	}
 }

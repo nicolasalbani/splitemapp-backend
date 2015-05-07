@@ -19,6 +19,10 @@
 	<bean id="userEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.UserEndpoint">
 	</bean>
+	
+	<bean id="userAvatarEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint">
+	</bean>
 
 	<bean id="userSessionEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint">
@@ -34,10 +38,6 @@
 
 	<bean id="expenseCategoryEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.ExpenseCategoryEndpoint">
-	</bean>
-
-	<bean id="groupEndpoint"
-		class="com.splitemapp.service.backendrest.endpoint.GroupEndpoint">
 	</bean>
 
 	<bean id="projectEndpoint"
@@ -58,10 +58,6 @@
 	
 	<bean id="userInviteEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.UserInviteEndpoint">
-	</bean>
-	
-	<bean id="userToGroupEndpoint"
-		class="com.splitemapp.service.backendrest.endpoint.UserToGroupEndpoint">
 	</bean>
 	
 	<bean id="userToProjectEndpoint"
