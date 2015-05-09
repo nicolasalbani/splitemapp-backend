@@ -44,8 +44,8 @@
 		class="com.splitemapp.service.backendrest.endpoint.ProjectEndpoint">
 	</bean>
 	
-	<bean id="projectImageCoverEndpoint"
-		class="com.splitemapp.service.backendrest.endpoint.ProjectImageCoverEndpoint">
+	<bean id="projectCoverImageEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ProjectCoverImageEndpoint">
 	</bean>
 	
 	<bean id="projectStatusEndpoint"

@@ -1,5 +1,6 @@
 package com.splitemapp.commons.domain.dto.response;
 
+import com.splitemapp.commons.domain.dto.UserAvatarDTO;
 import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserSessionDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
@@ -11,13 +12,15 @@ public class LoginResponse extends ServiceResponse{
 	private UserDTO userDTO;
 	private UserStatusDTO userStatusDTO;
 	private UserContactDataDTO userContactDataDTO;
+	private UserAvatarDTO userAvatarDTO;
 	private Boolean changePassword;
 
 	public LoginResponse() {}
 
-	public LoginResponse(Boolean success,UserSessionDTO userSessionDTO,UserContactDataDTO userContactDataDTO,Boolean changePassword) {
+	public LoginResponse(Boolean success,UserSessionDTO userSessionDTO,UserContactDataDTO userContactDataDTO,UserAvatarDTO userAvatarDTO,Boolean changePassword) {
 		super(success);
 		this.userSessionDTO = userSessionDTO;
+		this.setUserAvatarDTO(userAvatarDTO);
 		this.userContactDataDTO = userContactDataDTO;
 		this.changePassword	= changePassword;
 	}
@@ -60,5 +63,13 @@ public class LoginResponse extends ServiceResponse{
 
 	public void setChangePassword(Boolean changePassword) {
 		this.changePassword = changePassword;
+	}
+
+	public UserAvatarDTO getUserAvatarDTO() {
+		return userAvatarDTO;
+	}
+
+	public void setUserAvatarDTO(UserAvatarDTO userAvatarDTO) {
+		this.userAvatarDTO = userAvatarDTO;
 	}
 }

@@ -35,7 +35,6 @@ public class ProjectDTO implements java.io.Serializable {
 		this.projectTypeId = project.getProjectType().getId();
 		this.projectStatusId = project.getProjectStatus().getId();
 		this.title = project.getTitle();
-		this.imgCover = project.getImgCover();
 		this.budget = project.getBudget();
 		this.createdAt = project.getCreatedAt();
 		this.updatedAt = project.getUpdatedAt();

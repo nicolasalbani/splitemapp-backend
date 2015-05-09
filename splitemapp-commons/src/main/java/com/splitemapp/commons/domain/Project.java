@@ -49,9 +49,6 @@ public class Project implements java.io.Serializable {
 	@Column(name = "title", length = 128)
 	private String title;
 	
-	@Column(name = "img_cover", length = 128)
-	private String imgCover;
-	
 	@Column(name = "budget", precision = 16, scale = 6)
 	private BigDecimal budget;
 	
@@ -71,6 +68,9 @@ public class Project implements java.io.Serializable {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
 	private Set<UserToProject> userToProjects = new HashSet<UserToProject>(0);
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+	private Set<ProjectCoverImage> projectCoverImages = new HashSet<ProjectCoverImage>(0);
 
 	public Project() {
 		this.createdAt = this.updatedAt = new Date();
@@ -89,7 +89,6 @@ public class Project implements java.io.Serializable {
 		this.projectType = projectType;
 		this.projectStatus = projectStatus;
 		this.title = projectDTO.getTitle();
-		this.imgCover = projectDTO.getImgCover();
 		this.budget = projectDTO.getBudget();
 		this.createdAt = projectDTO.getCreatedAt();
 		this.updatedAt = projectDTO.getUpdatedAt();
@@ -98,17 +97,18 @@ public class Project implements java.io.Serializable {
 	public Project(ProjectType projectType, ProjectStatus projectStatus,
 			String title, String imgCover, BigDecimal budget, Date createdAt,
 			Date updatedAt, Set<UserExpense> userExpenses,
-			Set<UserInvite> userInvites, Set<UserToProject> userToProjects) {
+			Set<UserInvite> userInvites, Set<UserToProject> userToProjects, 
+			Set<ProjectCoverImage> projectCoverImages) {
 		this.projectType = projectType;
 		this.projectStatus = projectStatus;
 		this.title = title;
-		this.imgCover = imgCover;
 		this.budget = budget;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.userExpenses = userExpenses;
 		this.userInvites = userInvites;
 		this.userToProjects = userToProjects;
+		this.projectCoverImages = projectCoverImages;
 	}
 
 	public Long getId() {
@@ -141,14 +141,6 @@ public class Project implements java.io.Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getImgCover() {
-		return this.imgCover;
-	}
-
-	public void setImgCover(String imgCover) {
-		this.imgCover = imgCover;
 	}
 
 	public BigDecimal getBudget() {
@@ -197,6 +189,14 @@ public class Project implements java.io.Serializable {
 
 	public void setUserToProjects(Set<UserToProject> userToProjects) {
 		this.userToProjects = userToProjects;
+	}
+
+	public Set<ProjectCoverImage> getProjectCoverImages() {
+		return projectCoverImages;
+	}
+
+	public void setProjectCoverImages(Set<ProjectCoverImage> projectCoverImages) {
+		this.projectCoverImages = projectCoverImages;
 	}
 	
 }

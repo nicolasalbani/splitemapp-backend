@@ -46,7 +46,7 @@ CREATE TABLE `user` (
 CREATE TABLE `user_avatar` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL,
-  `avatar_data` BLOB NULL,
+  `avatar_data` MEDIUMBLOB NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
@@ -109,7 +109,6 @@ CREATE TABLE `project` (
   `status_id` smallint(6) unsigned NOT NULL,
   `type_id` smallint(6) unsigned NOT NULL,
   `title` varchar(128) NULL,
-  `img_cover` varchar(128) NULL,
   `budget` decimal(16,6) NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -127,7 +126,7 @@ CREATE TABLE `project` (
 CREATE TABLE `project_image_cover` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `project_id` bigint(20) unsigned NOT NULL,
-  `avatar_data` BLOB null,
+  `avatar_data` MEDIUMBLOB null,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),

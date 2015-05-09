@@ -4,11 +4,11 @@ import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.splitemapp.commons.domain.ProjectImageCover;
+import com.splitemapp.commons.domain.ProjectCoverImage;
 import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
 import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 
-public class ProjectImageCoverDTO implements java.io.Serializable {
+public class ProjectCoverImageDTO implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8018834364942997890L;
 
@@ -24,17 +24,17 @@ public class ProjectImageCoverDTO implements java.io.Serializable {
 	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date updatedAt;
 	
-	public ProjectImageCoverDTO(){}
+	public ProjectCoverImageDTO(){}
 
-	public ProjectImageCoverDTO(ProjectImageCover projectImageCover) {
-		this.id = projectImageCover.getId();
-		this.projectId = projectImageCover.getProject().getId();
-		this.avatarData = projectImageCover.getAvatarData();
-		this.createdAt = projectImageCover.getCreatedAt();
-		this.updatedAt = projectImageCover.getUpdatedAt();
+	public ProjectCoverImageDTO(ProjectCoverImage projectCoverImage) {
+		this.id = projectCoverImage.getId();
+		this.projectId = projectCoverImage.getProject().getId();
+		this.avatarData = projectCoverImage.getAvatarData();
+		this.createdAt = projectCoverImage.getCreatedAt();
+		this.updatedAt = projectCoverImage.getUpdatedAt();
 	}
 
-	public ProjectImageCoverDTO(Long id, Long projectId, byte[] avatarData,
+	public ProjectCoverImageDTO(Long id, Long projectId, byte[] avatarData,
 			Date createdAt, Date updatedAt) {
 		this.id = id;
 		this.projectId = projectId;

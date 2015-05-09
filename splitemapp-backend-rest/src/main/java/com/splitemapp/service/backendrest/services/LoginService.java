@@ -15,14 +15,17 @@ import org.springframework.stereotype.Service;
 import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
+import com.splitemapp.commons.domain.UserAvatar;
 import com.splitemapp.commons.domain.UserContactData;
 import com.splitemapp.commons.domain.UserSession;
+import com.splitemapp.commons.domain.dto.UserAvatarDTO;
 import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserSessionDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
 import com.splitemapp.commons.domain.dto.request.LoginRequest;
 import com.splitemapp.commons.domain.dto.response.LoginResponse;
+import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
@@ -35,6 +38,7 @@ import com.splitemapp.service.backendrest.utils.BackendUtils;
 public class LoginService {
 
 	private UserEndpoint userEndpoint;
+	private UserAvatarEndpoint userAvatarEndpoint;
 	private UserContactDataEndpoint userContactDataEndpoint;
 	private UserSessionEndpoint userSessionEndpoint;
 
@@ -80,6 +84,13 @@ public class LoginService {
 				for(UserContactData ucd:userContactDatas){
 					userContactData = ucd;
 				}
+				
+				// Getting the existing user avatar from the user
+				UserAvatar userAvatar = null;
+				Set<UserAvatar> userAvatars = user.getUserAvatars();
+				for(UserAvatar ua:userAvatars){
+					userAvatar = ua;
+				}
 
 				// We generate the response
 				loginResponse.setSuccess(true);
@@ -87,6 +98,7 @@ public class LoginService {
 				loginResponse.setUserDTO(new UserDTO(userSession.getUser()));
 				loginResponse.setUserStatusDTO(new UserStatusDTO(userSession.getUser().getUserStatus()));
 				loginResponse.setUserContactDataDTO(new UserContactDataDTO(userContactData));
+				loginResponse.setUserAvatarDTO(new UserAvatarDTO(userAvatar));
 				loginResponse.setChangePassword(false);
 			} 
 		}
@@ -117,5 +129,13 @@ public class LoginService {
 
 	public void setUserSessionEndpoint(UserSessionEndpoint userSessionEndpoint) {
 		this.userSessionEndpoint = userSessionEndpoint;
+	}
+
+	public UserAvatarEndpoint getUserAvatarEndpoint() {
+		return userAvatarEndpoint;
+	}
+
+	public void setUserAvatarEndpoint(UserAvatarEndpoint userAvatarEndpoint) {
+		this.userAvatarEndpoint = userAvatarEndpoint;
 	}
 }

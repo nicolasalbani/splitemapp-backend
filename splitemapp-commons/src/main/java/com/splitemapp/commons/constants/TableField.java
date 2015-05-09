@@ -38,6 +38,11 @@ public class TableField {
 	public static final String PROJECT_ID = "id";
 	
 	/**
+	 * 'project_cover_image' table
+	 */
+	public static final String PROJECT_COVER_IMAGE_PROJECT_ID = "project_id";
+	
+	/**
 	 * 'user_to_project' table
 	 */
 	public static final String USER_TO_PROJECT_PROJECT_ID = "project_id";

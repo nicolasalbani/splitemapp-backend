@@ -8,7 +8,7 @@ import org.hibernate.service.ServiceRegistry;
 import com.splitemapp.commons.domain.ExpenseCategory;
 import com.splitemapp.commons.domain.InviteStatus;
 import com.splitemapp.commons.domain.Project;
-import com.splitemapp.commons.domain.ProjectImageCover;
+import com.splitemapp.commons.domain.ProjectCoverImage;
 import com.splitemapp.commons.domain.ProjectStatus;
 import com.splitemapp.commons.domain.ProjectType;
 import com.splitemapp.commons.domain.User;
@@ -52,7 +52,7 @@ public class SessionFactoryProvider {
 		.addAnnotatedClass(UserExpense.class)
 		.addAnnotatedClass(ExpenseCategory.class)
 		.addAnnotatedClass(Project.class)
-		.addAnnotatedClass(ProjectImageCover.class)
+		.addAnnotatedClass(ProjectCoverImage.class)
 		.addAnnotatedClass(ProjectStatus.class)
 		.addAnnotatedClass(ProjectType.class)
 		.addAnnotatedClass(UserInvite.class)
