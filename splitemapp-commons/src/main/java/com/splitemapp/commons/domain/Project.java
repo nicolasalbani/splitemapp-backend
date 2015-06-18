@@ -199,4 +199,16 @@ public class Project implements java.io.Serializable {
 		this.projectCoverImages = projectCoverImages;
 	}
 	
+	@Override
+	public int hashCode() {
+		return this.id.intValue();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj != null && obj instanceof Project){
+			return this.getId().equals(((Project)obj).getId());
+		}
+		return false;
+	}
 }
