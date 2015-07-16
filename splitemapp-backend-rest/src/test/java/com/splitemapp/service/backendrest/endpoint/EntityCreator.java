@@ -12,9 +12,8 @@ public class EntityCreator {
 		User user = new User();
 		user.setCreatedAt(new Date());
 		user.setCreatedIpAddress("127.0.0.1");
-		user.setFirstName("pablo");
+		user.setFullName("pablo marmol");
 		user.setLastLogin(new Date());
-		user.setLastName("marmol");
 		user.setLoginCnt(0);
 		user.setPassword("!$#&!#$&!#$&!#$");
 		user.setUpdatedAt(new Date());

@@ -16,8 +16,7 @@ public class UserDTO implements java.io.Serializable {
 	private Short userStatusId;
 	private String username;
 	private String password;
-	private String firstName;
-	private String lastName;
+	private String fullName;
 	private int loginCnt;
 	private String createdIpAddress;
 	private String updatedIpAddress;
@@ -41,8 +40,7 @@ public class UserDTO implements java.io.Serializable {
 		this.userStatusId = user.getUserStatus().getId();
 		this.username = user.getUsername();
 		this.password = user.getPassword();
-		this.firstName = user.getFirstName();
-		this.lastName = user.getLastName();
+		this.fullName = user.getFullName();
 		this.lastLogin = user.getLastLogin();
 		this.loginCnt = user.getLoginCnt();
 		this.createdAt = user.getCreatedAt();
@@ -52,14 +50,13 @@ public class UserDTO implements java.io.Serializable {
 	}
 
 	public UserDTO(Short userStatusId, String username, String password,
-			String firstName, String lastName, Date lastLogin, int loginCnt,
+			String fullName, String lastName, Date lastLogin, int loginCnt,
 			Date createdAt, String createdIpAddress, Date updatedAt,
 			String updatedIpAddress) {
 		this.userStatusId = userStatusId;
 		this.username = username;
 		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.fullName = fullName;
 		this.lastLogin = lastLogin;
 		this.loginCnt = loginCnt;
 		this.createdAt = createdAt;
@@ -100,20 +97,12 @@ public class UserDTO implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return this.firstName;
+	public String getFullName() {
+		return this.fullName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public Date getLastLogin() {

@@ -57,7 +57,7 @@ insert into splitemapp.project	(id,status_id,type_id,title,img_cover,budget,crea
 values							(1,1,1,'Primer Proyecto',null,4000,'2014-09-21 02:17:36','2014-09-21 02:17:36');
 
 -- Populating the user table
-insert into splitemapp.user	(id,status_id,username,password,first_name,last_name,last_login,login_cnt,created_at,created_ip_address,updated_at,updated_ip_address)  
+insert into splitemapp.user	(id,status_id,username,password,full_name,last_name,last_login,login_cnt,created_at,created_ip_address,updated_at,updated_ip_address)  
 values							(1,1,'juanperez','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan','perez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1');
 
 -- Populating the group table

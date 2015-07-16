@@ -53,7 +53,7 @@ public class CreateAccountService {
 		response.setSuccess(false);
 
 		// We check if the user already exists
-		User user = userEndpoint.findByField(TableField.USER_USERNAME, request.getUsername());
+		User user = userEndpoint.findByField(TableField.USER_USERNAME, request.getEmail());
 
 		// If we did not find the user then we create it
 		if(user==null){
@@ -67,9 +67,9 @@ public class CreateAccountService {
 			newUser.setUpdatedAt(new Date());
 			newUser.setUpdatedIpAddress(request.getIpAddress());
 			newUser.setPassword(request.getPassword());
-			newUser.setUsername(request.getUsername());
+			newUser.setUsername(request.getEmail());
 			//TODO We need to change the getUsername for the actual first name. Add first and last in the create account page?
-			newUser.setFirstName(request.getUsername());
+			newUser.setFullName(request.getFullName());
 			newUser.setUserStatus(userStatus);
 			userEndpoint.persist(newUser);
 

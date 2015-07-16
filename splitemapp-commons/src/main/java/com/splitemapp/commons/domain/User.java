@@ -47,11 +47,8 @@ public class User implements java.io.Serializable {
 	@Column(name = "password", length = 40)
 	private String password;
 
-	@Column(name = "first_name", length = 45)
-	private String firstName;
-
-	@Column(name = "last_name", length = 45)
-	private String lastName;
+	@Column(name = "full_name", length = 45)
+	private String fullName;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "last_login", length = 19)
@@ -98,8 +95,7 @@ public class User implements java.io.Serializable {
 		this.userStatus = userStatus;
 		this.username = userDTO.getUsername();
 		this.password = userDTO.getPassword();
-		this.firstName = userDTO.getFirstName();
-		this.lastName = userDTO.getLastName();
+		this.fullName = userDTO.getFullName();
 		this.lastLogin = userDTO.getLastLogin();
 		this.loginCnt = userDTO.getLoginCnt();
 		this.createdAt = userDTO.getCreatedAt();
@@ -119,7 +115,7 @@ public class User implements java.io.Serializable {
 	}
 
 	public User(UserStatus userStatus, String username, String password,
-			String firstName, String lastName, Date lastLogin, int loginCnt,
+			String fullName, String lastName, Date lastLogin, int loginCnt,
 			Date createdAt, String createdIpAddress, Date updatedAt, byte[] avatar,
 			String updatedIpAddress, Set<UserToProject> userToProjects,
 			Set<UserExpense> userExpenses, Set<UserInvite> userInvites,
@@ -127,8 +123,7 @@ public class User implements java.io.Serializable {
 		this.userStatus = userStatus;
 		this.username = username;
 		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.fullName = fullName;
 		this.lastLogin = lastLogin;
 		this.loginCnt = loginCnt;
 		this.createdAt = createdAt;
@@ -174,20 +169,12 @@ public class User implements java.io.Serializable {
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return this.firstName;
+	public String getFullName() {
+		return this.fullName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public Date getLastLogin() {
