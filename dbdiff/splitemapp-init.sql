@@ -120,9 +120,9 @@ CREATE TABLE `project` (
 
 
 -- -----------------------------------------------------
--- Table `project_image_cover`
+-- Table `project_cover_image`
 -- -----------------------------------------------------
-CREATE TABLE `project_image_cover` (
+CREATE TABLE `project_cover_image` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `project_id` bigint(20) unsigned NOT NULL,
   `avatar_data` MEDIUMBLOB null,
@@ -130,7 +130,7 @@ CREATE TABLE `project_image_cover` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_u_project_id` (`project_id`),
-  CONSTRAINT `project_image_cover__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`)
+  CONSTRAINT `project_cover_image__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
