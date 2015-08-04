@@ -208,7 +208,7 @@ CREATE TABLE `user_to_project_status` (
   UNIQUE KEY `cod_u_idx` (`cod`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 insert into user_to_project_status values(1,'active','Activo');
-insert into user_to_project_status values(2,'removed','Eliminado');
+insert into user_to_project_status values(2,'archived','Archivado');
 insert into user_to_project_status values(3,'left_project','Dejo el proyecto');
 
 -- -----------------------------------------------------
