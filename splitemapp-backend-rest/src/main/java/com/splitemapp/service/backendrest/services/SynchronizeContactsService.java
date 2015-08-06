@@ -16,11 +16,13 @@ import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserContactData;
+import com.splitemapp.commons.domain.dto.UserAvatarDTO;
 import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.request.SynchronizeContactsRequest;
 import com.splitemapp.commons.domain.dto.response.SynchronizeContactsResponse;
 import com.splitemapp.commons.utils.Utils;
+import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 
@@ -32,6 +34,7 @@ public class SynchronizeContactsService {
 
 	private UserEndpoint userEndpoint;
 	private UserContactDataEndpoint userContactDataEndpoint;
+	private UserAvatarEndpoint userAvatarEndpoint;
 
 	@GET
 	public String printMessage() {
@@ -48,8 +51,10 @@ public class SynchronizeContactsService {
 		// Setting the references for the User and UserContactData DTO lists
 		List<UserDTO> userDTOList = new  ArrayList<UserDTO>();
 		synchronizeContactsResponse.setUserDTOList(userDTOList);
-		List<UserContactDataDTO> userContactDataDTOList = new  ArrayList<UserContactDataDTO>();
+		List<UserContactDataDTO> userContactDataDTOList = new ArrayList<UserContactDataDTO>();
 		synchronizeContactsResponse.setUserContactDataDTOList(userContactDataDTOList);
+		List<UserAvatarDTO> userAvatarDTOList = new ArrayList<UserAvatarDTO>();
+		synchronizeContactsResponse.setUserAvatarDTOList(userAvatarDTOList);
 
 		// Adding all found User and UserContactData information to the response list
 		for(String emailAddress:request.getContactsEmailAddressList()){
@@ -61,6 +66,9 @@ public class SynchronizeContactsService {
 				// Processing user information
 				User user = userContactData.getUser();
 				userDTOList.add(new UserDTO(user));
+				
+				// Processing user avatar
+				userAvatarDTOList.add(new UserAvatarDTO(user.getUserAvatars().iterator().next()));
 			}
 		}
 
@@ -85,5 +93,13 @@ public class SynchronizeContactsService {
 
 	public void setUserContactDataEndpoint(UserContactDataEndpoint userContactDataEndpoint) {
 		this.userContactDataEndpoint = userContactDataEndpoint;
+	}
+
+	public UserAvatarEndpoint getUserAvatarEndpoint() {
+		return userAvatarEndpoint;
+	}
+
+	public void setUserAvatarEndpoint(UserAvatarEndpoint userAvatarEndpoint) {
+		this.userAvatarEndpoint = userAvatarEndpoint;
 	}
 }
