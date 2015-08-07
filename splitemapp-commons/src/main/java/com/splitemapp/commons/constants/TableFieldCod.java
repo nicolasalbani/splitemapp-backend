@@ -26,4 +26,5 @@ public class TableFieldCod {
 	 */
 	public static final String USER_TO_PROJECT_STATUS_ACTIVE = "active";
 	public static final String USER_TO_PROJECT_STATUS_ARCHIVED = "archived";
+	public static final String USER_TO_PROJECT_STATUS_LEFT = "left_project";
 }
