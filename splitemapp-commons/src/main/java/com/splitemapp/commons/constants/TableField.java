@@ -29,7 +29,7 @@ public class TableField {
 	/**
 	 * 'contact_data' table
 	 */
-	public static final String USER_CONTACT_DATA_USER_ID = "user";
+	public static final String USER_CONTACT_DATA_USER_ID = "user_id";
 	public static final String USER_CONTACT_DATA_CONTACT_DATA = "contact_data";
 	
 	/**
