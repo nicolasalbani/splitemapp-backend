@@ -1,10 +1,6 @@
 package com.splitemapp.commons.domain;
 
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-
-import com.splitemapp.commons.comparator.UserExpenseComparator;
 
 public class SingleUserExpenses {
 
@@ -41,20 +37,6 @@ public class SingleUserExpenses {
 		}
 
 		return fullAmount;
-	}
-
-	/**
-	 * Returns the newest 
-	 * @return
-	 */
-	public Date getLastUpdatedExpenseDate(){
-		Date lastUpdatedExpenseDate = null;
-
-		// Sorting the expense list by creation date and getting the newest record
-		Collections.sort(expenseList, new UserExpenseComparator());
-		lastUpdatedExpenseDate = expenseList.get(0).getUpdatedAt();
-
-		return lastUpdatedExpenseDate;
 	}
 
 }
