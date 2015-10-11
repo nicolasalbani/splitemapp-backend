@@ -4,11 +4,11 @@ import java.util.Date;
 
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserStatus;
-import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 
 public class EntityCreator {
 
 	public static User createUserEntity(long existingUserId){
+		// Creating new user
 		User user = new User();
 		user.setCreatedAt(new Date());
 		user.setCreatedIpAddress("127.0.0.1");
@@ -20,9 +20,10 @@ public class EntityCreator {
 		user.setUpdatedIpAddress("127.0.0.1");
 		user.setUsername("pablomarmol");
 		
-		UserEndpoint userEndpoint = new UserEndpoint();
-		UserStatus userStatus = userEndpoint.findById(existingUserId).getUserStatus();
-		
+		// Getting active status from DB
+		UserStatusEndpoint userStatusEndpoint = new UserStatusEndpoint();
+		UserStatus userStatus = userStatusEndpoint.findById((short)1);
+
 		user.setUserStatus(userStatus);
 		return user;
 	}
