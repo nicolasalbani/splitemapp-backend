@@ -2,6 +2,7 @@ package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
@@ -39,23 +40,26 @@ public class PullUsersService {
 	
 	@POST
 	public PullResponse<UserDTO> printMessage(PullRequest request) throws ParseException {
-
-		// We create a pull user contact datas response object setting success to false by default
+		// We create a pull user response object setting success to false by default
 		PullResponse<UserDTO> response = new PullResponse<UserDTO>();
 		response.setSuccess(false);
 
+		// Retrieving user session
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 
 		if(userSession != null){
+			// Getting the logged user from the session
 			User loggedUser = userSession.getUser();
+			
+			// Getting all users linked with the logged user through a project
+			List<User> linkedUsers = userEndpoint.findLinkedByProjectUserIds(request.getLastPullSuccessAt(), loggedUser.getId());
 
-			// We set the user contact data set
+			// We set the users
 			Set<UserDTO> userDTOs = new HashSet<UserDTO>();
-			for(User user:userEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), loggedUser.getId())){
+			for(User user:linkedUsers){
 				userDTOs.add(new UserDTO(user));
 			}
 			response.setItemSet(userDTOs);
-
 
 			// We set the success flag
 			response.setSuccess(true);

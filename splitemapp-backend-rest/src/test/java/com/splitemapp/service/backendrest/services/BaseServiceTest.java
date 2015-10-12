@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mortbay.jetty.Handler;
 import org.mortbay.jetty.HttpStatus;
@@ -23,13 +23,14 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 
 public abstract class BaseServiceTest {
 	
-	public final String SERVICE_TEST_BASE_PATH = "http://localhost:9090/splitemapp-backend-rest";
+	public static final String SERVICE_TEST_BASE_PATH = "http://localhost:9090/splitemapp-backend-rest";
+	public static final String TOKEN = "554686b8-7646-402e-9911-f28b8b417d46";
 	
-	private final String JETTY_CONTEXT_FILE = "jetty.xml";
-	private final String JETTY_SERVER_BEAN = "jettyServer";
+	private static final String JETTY_CONTEXT_FILE = "jetty.xml";
+	private static final String JETTY_SERVER_BEAN = "jettyServer";
 	
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 		// load the Jetty configuration XML file
 		AbstractApplicationContext ctx = new ClassPathXmlApplicationContext(JETTY_CONTEXT_FILE);
 		// register to cleanup everything before shutting down server

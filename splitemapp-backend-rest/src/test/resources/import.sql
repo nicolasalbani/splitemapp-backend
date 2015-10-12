@@ -46,8 +46,12 @@ values							(1,1,1,'Primer Proyecto',4000,'2014-09-21 02:17:36','2014-09-21 02:
 
 -- Populating the user table
 insert into splitemapp.user	(id,status_id,username,password,full_name,last_login,login_cnt,created_at,created_ip_address,updated_at,updated_ip_address)  
-values							(1,1,'juanperez','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan perez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1');
+values							(1,1,'juanperez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan perez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1'),
+								(2,1,'juangomez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan gomez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1');
 
+-- Populating the user_session table
+insert into splitemapp.user_session	(id,user_id,token,device,os_version,last_used_at)  
+values								(1,1,'554686b8-7646-402e-9911-f28b8b417d46','samsung GT-I9100','Android REL-4.1.2 SDK-16','2015-08-02 15:59:05.0');
 
 -- Populating the user_contact_data table
 insert into splitemapp.user_contact_data	(id,user_id,contact_data,verified,verified_at,created_at,updated_at) 
@@ -59,7 +63,8 @@ values									(1,1,1,1,200,'2014-09-21 02:17:36','Nafta');
 
 -- Populating the user_to_project table
 insert into splitemapp.user_to_project	(id,user_to_project_status_id,user_id,project_id,expenses_share) 
-values									(1,1,1,1,100);
+values									(1,1,1,1,50),
+										(2,1,2,1,50);
 
 -- Populating the user_invite table
 insert into splitemapp.user_invite	(id,status_id,user_id,project_id,email,created_at,updated_at) 
