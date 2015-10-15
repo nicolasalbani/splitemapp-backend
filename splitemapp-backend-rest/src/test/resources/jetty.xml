@@ -19,7 +19,7 @@
 			<list>
 				<bean id="Connector" class="org.mortbay.jetty.nio.SelectChannelConnector">
 					<!-- Jetty port to use -->
-					<property name="port" value="9090" />
+					<property name="port" value="9999" />
 					<property name="maxIdleTime" value="30000" />
 					<property name="acceptors" value="2" />
 					<property name="confidentialPort" value="0" />

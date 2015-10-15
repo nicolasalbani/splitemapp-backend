@@ -23,7 +23,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 
 public abstract class BaseServiceTest {
 	
-	public static final String SERVICE_TEST_BASE_PATH = "http://localhost:9090/splitemapp-backend-rest";
+	public static final String SERVICE_TEST_BASE_PATH = "http://localhost:9999/splitemapp-backend-rest";
 	public static final String TOKEN = "554686b8-7646-402e-9911-f28b8b417d46";
 	
 	private static final String JETTY_CONTEXT_FILE = "jetty.xml";
