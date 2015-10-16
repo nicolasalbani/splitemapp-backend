@@ -42,14 +42,15 @@ public class UserServicesTest extends BaseServiceTest{
 
 		// Validating successful response
 		assertTrue(response.getSuccess());
-		
+
 		// Validating that users linked by projects are also retrieved
 		boolean hasLinkedUsers = false;
 		Iterator<UserDTO> iterator = response.getItemSet().iterator();
-		if(iterator.hasNext()){
+		while(iterator.hasNext()){
 			UserDTO userDTO = iterator.next();
-			if(userDTO.getUsername().equals("juangomez@splitemapp.com"));
-			hasLinkedUsers = true;
+			if(userDTO.getUsername().equals("juangomez@splitemapp.com")){
+				hasLinkedUsers = true;
+			}
 		}
 		assertTrue(hasLinkedUsers);
 	}
