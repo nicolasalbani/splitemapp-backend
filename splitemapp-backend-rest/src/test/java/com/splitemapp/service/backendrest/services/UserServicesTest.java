@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.splitemapp.commons.constants.ServiceConstants;
@@ -50,6 +51,8 @@ public class UserServicesTest extends BaseServiceTest{
 			UserDTO userDTO = iterator.next();
 			if(userDTO.getUsername().equals("juangomez@splitemapp.com")){
 				hasLinkedUsers = true;
+			} else if(userDTO.getUsername().equals("juangutierrez@splitemapp.com")){
+				Assert.fail("Should not be obtaining a user from an unlinked project");
 			}
 		}
 		assertTrue(hasLinkedUsers);

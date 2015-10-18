@@ -71,19 +71,19 @@ public class User implements java.io.Serializable {
 	@Column(name = "updated_ip_address", length = 15)
 	private String updatedIpAddress;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<UserToProject> userToProjects = new HashSet<UserToProject>(0);
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<UserExpense> userExpenses = new HashSet<UserExpense>(0);
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<UserInvite> userInvites = new HashSet<UserInvite>(0);
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<UserContactData> userContactDatas = new HashSet<UserContactData>(0);
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<UserAvatar> userAvatars = new HashSet<UserAvatar>(0);
 
 	public User() {

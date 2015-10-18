@@ -35,7 +35,7 @@ public class ExpenseCategory implements java.io.Serializable {
 	@Column(name = "title", nullable = false, length = 64)
 	private String title;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "expenseCategory")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "expenseCategory")
 	private Set<UserExpense> userExpenses = new HashSet<UserExpense>(0);
 
 	public ExpenseCategory() {

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.splitemapp.commons.constants.ServiceConstants;
@@ -44,15 +45,17 @@ public class UserContactDataServicesTest extends BaseServiceTest{
 		assertTrue(response.getSuccess());
 
 		// Validating that users linked by projects are also retrieved
-		boolean contactDataValidated = false;
+		boolean hasLinkedUserContactData = false;
 		Iterator<UserContactDataDTO> iterator = response.getItemSet().iterator();
 		if(iterator.hasNext()){
 			UserContactDataDTO userContactDataDTO = iterator.next();
 			if(userContactDataDTO.getContactData().equals("juangomez@splitemapp.com")){
-				contactDataValidated = true;
+				hasLinkedUserContactData = true;
+			} else if(userContactDataDTO.getContactData().equals("juangutierrez@splitemapp.com")){
+				Assert.fail("Should not be obtaining a user from an unlinked project");
 			}
 		}
-		assertTrue(contactDataValidated);
+		assertTrue(hasLinkedUserContactData);
 	}
 
 	@Test

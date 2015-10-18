@@ -156,6 +156,28 @@ private static Logger logger = Logger.getLogger(DomainDAO.class);
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<E> findWithQuery(String sqlQuery) {
+		logger.debug("Running Query: " +sqlQuery);
+
+		Session session = sessionFactory.openSession();
+		try {
+			Query query = session.createQuery(sqlQuery);
+			List<E> resultList = query.list();
+			if(resultList.size() > 0){
+				logger.debug("get successful");
+			} else {
+				logger.debug("no record found for custom query");
+			}
+			return resultList;
+		} catch (RuntimeException re) {
+			logger.error("get failed", re);
+			throw re;
+		} finally {
+			session.close();
+		}
+	}
+	
 	protected String getTableName(){
 		return Utils.getTableName(getEntityClass().getSimpleName());
 	}

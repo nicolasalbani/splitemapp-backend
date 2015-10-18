@@ -34,7 +34,7 @@ public class ProjectStatus implements java.io.Serializable {
 	@Column(name = "title", nullable = false, length = 64)
 	private String title;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "projectStatus")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectStatus")
 	private Set<Project> projects = new HashSet<Project>(0);
 
 	public ProjectStatus() {

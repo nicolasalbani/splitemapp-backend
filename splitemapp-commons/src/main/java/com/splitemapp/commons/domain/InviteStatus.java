@@ -34,7 +34,7 @@ public class InviteStatus implements java.io.Serializable {
 	@Column(name = "title", nullable = false, length = 64)
 	private String title;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "inviteStatus")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inviteStatus")
 	private Set<UserInvite> userInvites = new HashSet<UserInvite>(0);
 
 	public InviteStatus() {
