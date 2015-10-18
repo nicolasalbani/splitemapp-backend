@@ -47,7 +47,7 @@ public class UserContactDataServicesTest extends BaseServiceTest{
 		// Validating that users linked by projects are also retrieved
 		boolean hasLinkedUserContactData = false;
 		Iterator<UserContactDataDTO> iterator = response.getItemSet().iterator();
-		if(iterator.hasNext()){
+		while(iterator.hasNext()){
 			UserContactDataDTO userContactDataDTO = iterator.next();
 			if(userContactDataDTO.getContactData().equals("juangomez@splitemapp.com")){
 				hasLinkedUserContactData = true;
