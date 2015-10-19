@@ -84,7 +84,7 @@ public class UserContactDataServicesTest extends BaseServiceTest{
 	private UserContactDataDTO createUserContactDataDTO(String userName){
 		// Creating user contact data DTO object. We always use the same ID because it will be updated on the server side
 		UserContactDataDTO userContactDataDTO = new UserContactDataDTO();
-		userContactDataDTO.setContactData("juangomez@splitemapp.com");
+		userContactDataDTO.setContactData("juangutierrez@splitemapp.com");
 		userContactDataDTO.setCreatedAt(new Date(100));
 		userContactDataDTO.setUpdatedAt(new Date(100));
 		userContactDataDTO.setUserId(1L);
