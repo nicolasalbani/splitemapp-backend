@@ -67,6 +67,10 @@
 	<bean id="userToProjectEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.UserToProjectEndpoint" depends-on="H2Server">
 	</bean>
+	
+	<bean id="userToProjectStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserToProjectStatusEndpoint" depends-on="H2Server">
+	</bean>
 
 	<bean id="H2Server" class="org.h2.tools.Server"
 		factory-method="createTcpServer" init-method="start" destroy-method="stop">

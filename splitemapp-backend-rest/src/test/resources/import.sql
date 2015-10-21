@@ -43,7 +43,8 @@ values										(1,'car','Automovil');
 -- Populating the project table
 insert into splitemapp.project	(id,status_id,type_id,title,budget,created_at,updated_at) 
 values							(1,1,1,'Primer Proyecto',4000,'2014-09-21 02:17:36','2014-09-21 02:17:36'),
-								(2,1,1,'Segundo Proyecto',6000,'2014-09-21 02:17:36','2014-09-21 02:17:36');
+								(2,1,1,'Segundo Proyecto',6000,'2014-09-21 02:17:36','2014-09-21 02:17:36'),
+								(3,1,1,'Tercer Proyecto',8000,'2014-09-21 02:17:36','2014-09-21 02:17:36');
 
 -- Populating the user table
 insert into splitemapp.user	(id,status_id,username,password,full_name,last_login,login_cnt,created_at,created_ip_address,updated_at,updated_ip_address)  
