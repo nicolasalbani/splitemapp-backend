@@ -73,4 +73,5 @@ values									(1,1,1,1,50),
 
 -- Populating the user_invite table
 insert into splitemapp.user_invite	(id,status_id,user_id,project_id,email,created_at,updated_at) 
-values								(1,1,1,1,'pablo@perez.com','2014-09-21 02:17:36','2014-09-21 02:17:36');
+values								(1,1,1,1,'juanperez@splitemapp.com','2014-09-21 02:17:36','2014-09-21 02:17:36'),
+									(2,1,1,2,'juanperez@splitemapp.com','2014-09-21 02:17:36','2014-09-21 02:17:36');

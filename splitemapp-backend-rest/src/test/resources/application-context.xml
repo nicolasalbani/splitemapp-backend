@@ -63,6 +63,10 @@
 	<bean id="userInviteEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.UserInviteEndpoint" depends-on="H2Server">
 	</bean>
+	
+	<bean id="inviteStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.InviteStatusEndpoint" depends-on="H2Server">
+	</bean>
 
 	<bean id="userToProjectEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.UserToProjectEndpoint" depends-on="H2Server">

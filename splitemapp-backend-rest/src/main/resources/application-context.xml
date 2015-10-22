@@ -64,6 +64,10 @@
 		class="com.splitemapp.service.backendrest.endpoint.UserInviteEndpoint">
 	</bean>
 
+	<bean id="inviteStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.InviteStatusEndpoint">
+	</bean>
+
 	<bean id="userToProjectEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.UserToProjectEndpoint">
 	</bean>

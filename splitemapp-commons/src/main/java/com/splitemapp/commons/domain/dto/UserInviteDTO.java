@@ -32,6 +32,7 @@ public class UserInviteDTO implements java.io.Serializable {
 		this.id = userInvite.getId();
 		this.userId = userInvite.getUser().getId();
 		this.projectId = userInvite.getProject().getId();
+		this.email = userInvite.getEmail();
 		this.inviteStatusId = userInvite.getInviteStatus().getId();
 		this.createdAt = userInvite.getCreatedAt();
 		this.updatedAt = userInvite.getUpdatedAt();

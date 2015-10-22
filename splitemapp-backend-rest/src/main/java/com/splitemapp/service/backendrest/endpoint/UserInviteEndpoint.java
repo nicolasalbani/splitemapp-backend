@@ -12,12 +12,12 @@ public class UserInviteEndpoint extends UpdateableDomainDAO<UserInvite,Long> {
 
 	@Override
 	public String getCreatedAfterQuery() {
-		return "SELECT DISTINCT UI FROM user_invite UI, user_to_project UTP WHERE UI.project.id = UTP.project.id AND UTP.user.id = :" +USER_ID_PARAMETER + " AND UI.createdAt > :" +CREATED_AT_PARAMETER;
+		return "SELECT DISTINCT UI FROM user_invite UI WHERE UI.user.id = :" +USER_ID_PARAMETER + " AND UI.createdAt > :" +CREATED_AT_PARAMETER;
 	}
 
 	@Override
 	public String getUpdatedAfterQuery() {
-		return "SELECT DISTINCT UI FROM user_invite UI, user_to_project UTP WHERE UI.project.id = UTP.project.id AND UTP.user.id = :" +USER_ID_PARAMETER + " AND UI.updatedAt > :" +UPDATED_AT_PARAMETER;
+		return "SELECT DISTINCT UI FROM user_invite UI WHERE UI.user.id = :" +USER_ID_PARAMETER + " AND UI.updatedAt > :" +UPDATED_AT_PARAMETER;
 	}
 
 }
