@@ -46,14 +46,17 @@ public class UserToProjectServicesTest extends BaseServiceTest{
 
 		// Validating that users linked by projects are also retrieved
 		boolean userAssociatedWithProject = false;
+		boolean otherUserAssociatedWithProject = false;
 		Iterator<UserToProjectDTO> iterator = response.getItemSet().iterator();
 		while(iterator.hasNext()){
 			UserToProjectDTO userToProjectDTO = iterator.next();
 			if(userToProjectDTO.getProjectId().equals(1L) && userToProjectDTO.getUserId().equals(1L)){
 				userAssociatedWithProject = true;
+			} else if(userToProjectDTO.getProjectId().equals(1L) && userToProjectDTO.getUserId().equals(2L)){
+				otherUserAssociatedWithProject = true;
 			}
 		}
-		assertTrue(userAssociatedWithProject);
+		assertTrue(userAssociatedWithProject && otherUserAssociatedWithProject);
 	}
 
 	@Test

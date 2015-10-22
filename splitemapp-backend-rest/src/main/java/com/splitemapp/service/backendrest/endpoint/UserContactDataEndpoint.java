@@ -12,12 +12,12 @@ public class UserContactDataEndpoint extends UpdateableDomainDAO<UserContactData
 
 	@Override
 	public String getCreatedAfterQuery() {
-		return "SELECT DISTINCT UCD FROM user_contact_data UCD LEFT JOIN UCD.user.userToProjects UTP WHERE UTP.project.id IN (SELECT DISTINCT UTP.id FROM user_to_project UTP WHERE UTP.user.id = :" +USER_ID_PARAMETER+ ") AND UCD.createdAt > :" +CREATED_AT_PARAMETER;
+		return "SELECT DISTINCT UCD FROM user_contact_data UCD LEFT JOIN UCD.user.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UCD.createdAt > :" +CREATED_AT_PARAMETER;
 	}
 
 	@Override
 	public String getUpdatedAfterQuery() {
-		return "SELECT DISTINCT UCD FROM user_contact_data UCD LEFT JOIN UCD.user.userToProjects UTP WHERE UTP.project.id IN (SELECT DISTINCT UTP.id FROM user_to_project UTP WHERE UTP.user.id = :" +USER_ID_PARAMETER+ ") AND UCD.updatedAt > :" +UPDATED_AT_PARAMETER;
+		return "SELECT DISTINCT UCD FROM user_contact_data UCD LEFT JOIN UCD.user.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UCD.updatedAt > :" +UPDATED_AT_PARAMETER;
 	}
 
 }
