@@ -63,7 +63,9 @@ values										(1,1,'juanperez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09
 
 -- Populating the user_expense table
 insert into splitemapp.user_expense		(id,user_id,project_id,category_id,expense,expense_date,note) 
-values									(1,1,1,1,200,'2014-09-21 02:17:36','Nafta');
+values									(1,1,1,1,200,'2014-09-21 02:17:36','Nafta'),
+										(2,2,1,1,140,'2014-09-21 02:17:36','Gaseosas'),
+										(3,3,3,1,140,'2014-09-21 02:17:36','Carne');
 
 -- Populating the user_to_project table
 insert into splitemapp.user_to_project	(id,user_to_project_status_id,user_id,project_id,expenses_share) 
