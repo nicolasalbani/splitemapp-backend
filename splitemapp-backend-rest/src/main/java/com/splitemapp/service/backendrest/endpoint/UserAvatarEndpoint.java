@@ -12,12 +12,12 @@ public class UserAvatarEndpoint extends UpdateableDomainDAO<UserAvatar,Long> {
 
 	@Override
 	public String getCreatedAfterQuery() {
-		return "SELECT DISTINCT UA FROM user_avatar UA WHERE UA.userId = :" +USER_ID_PARAMETER + " AND UA.createdAt > :" +CREATED_AT_PARAMETER;
+		return "SELECT DISTINCT UA FROM user_avatar UA LEFT JOIN UA.user.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UA.createdAt > :" +CREATED_AT_PARAMETER;
 	}
 
 	@Override
 	public String getUpdatedAfterQuery() {
-		return "SELECT DISTINCT UA FROM user_avatar UA WHERE UA.userId = :" +USER_ID_PARAMETER + " AND UA.updatedAt > :" +UPDATED_AT_PARAMETER;
+		return "SELECT DISTINCT UA FROM user_avatar UA LEFT JOIN UA.user.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UA.updatedAt > :" +UPDATED_AT_PARAMETER;
 	}
 
 }

@@ -52,6 +52,11 @@ values							(1,1,'juanperez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca
 								(2,1,'juangomez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan gomez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1'),
 								(3,1,'juangutierrez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan gutierrez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1');
 
+-- Populating the user_avatar table
+insert into splitemapp.user_avatar		(id,user_id,avatar_data,created_at,updated_at) 
+values									(1,1,'','2014-09-21 02:17:36','2014-09-21 02:17:36'),
+										(2,2,'','2014-09-21 02:17:36','2014-09-21 02:17:36');								
+								
 -- Populating the user_session table
 insert into splitemapp.user_session	(id,user_id,token,device,os_version,last_used_at)  
 values								(1,1,'554686b8-7646-402e-9911-f28b8b417d46','samsung GT-I9100','Android REL-4.1.2 SDK-16','2015-08-02 15:59:05.0');
