@@ -44,7 +44,8 @@ values										(1,'car','Automovil');
 insert into splitemapp.project	(id,status_id,type_id,title,budget,created_at,updated_at) 
 values							(1,1,1,'Primer Proyecto',4000,'2014-09-21 02:17:36','2014-09-21 02:17:36'),
 								(2,1,1,'Segundo Proyecto',6000,'2014-09-21 02:17:36','2014-09-21 02:17:36'),
-								(3,1,1,'Tercer Proyecto',8000,'2014-09-21 02:17:36','2014-09-21 02:17:36');
+								(3,1,1,'Tercer Proyecto',8000,'2014-09-21 02:17:36','2014-09-21 02:17:36'),
+								(10,1,1,'Decimo Proyecto',5000,'2014-09-21 02:17:36','2014-09-21 02:17:36');
 								
 -- Populating the project_cover_image table
 insert into splitemapp.project_cover_image	(id,project_id,avatar_data,created_at,updated_at) 

@@ -60,10 +60,10 @@ public class ProjectServicesTest extends BaseServiceTest{
 	}
 
 	@Test
-	public void pushServiceTest(){
+	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<ProjectDTO> itemList = new ArrayList<ProjectDTO>();
-		ProjectDTO project = createProjectDTO(3L,1L);
+		ProjectDTO project = createProjectDTO(4L, "Cuarto Proyecto");
 		itemList.add(project);
 
 		// Crafting the full service URL
@@ -81,15 +81,38 @@ public class ProjectServicesTest extends BaseServiceTest{
 		// Validating successful response
 		assertTrue(response.getSuccess());
 	}
+	
+	@Test
+	public void pushUpdateServiceTest(){
+		// Creating the user list to push
+		List<ProjectDTO> itemList = new ArrayList<ProjectDTO>();
+		ProjectDTO project = createProjectDTO(10L, "Decimo Proyecto Actualizado");
+		itemList.add(project);
 
-	private ProjectDTO createProjectDTO(Long projectId, Long userId){
+		// Crafting the full service URL
+		String serviceUrl = SERVICE_TEST_BASE_PATH + ServiceConstants.PUSH_PROJECTS_PATH;
+
+		// Crafting the request object
+		PushProjectRequest request = new PushProjectRequest();
+		request.setLastPushSuccessAt(new Date());
+		request.setToken(TOKEN);
+		request.setItemList(itemList);
+
+		// Making rest service call
+		PushLongResponse response = RestUtils.callRestService(serviceUrl, request, PushLongResponse.class);
+
+		// Validating successful response
+		assertTrue(response.getSuccess());
+	}
+
+	private ProjectDTO createProjectDTO(Long id, String title){
 		// Creating user DTO object. We always use the same ID because it will be updated on the server side
 		ProjectDTO project = new ProjectDTO();
 		project.setBudget(new BigDecimal(100));
 		project.setProjectStatusId((short)1);
 		project.setProjectTypeId((short)1);
-		project.setId(4L);
-		project.setTitle("Cuarto Proyecto");
+		project.setId(id);
+		project.setTitle(title);
 		project.setCreatedAt(new Date(10000));
 		project.setUpdatedAt(new Date(10000));
 		return project;
