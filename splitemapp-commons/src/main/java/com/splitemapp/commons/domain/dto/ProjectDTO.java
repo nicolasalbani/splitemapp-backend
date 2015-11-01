@@ -17,7 +17,6 @@ public class ProjectDTO implements java.io.Serializable {
 	private Short projectTypeId;
 	private Short projectStatusId;
 	private String title;
-	private String imgCover;
 	private BigDecimal budget;
 	
 	@JsonSerialize(using=CustomDateSerializer.class)
@@ -46,7 +45,6 @@ public class ProjectDTO implements java.io.Serializable {
 		this.projectTypeId = projectTypeId;
 		this.projectStatusId = projectStatusId;
 		this.title = title;
-		this.imgCover = imgCover;
 		this.budget = budget;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -82,14 +80,6 @@ public class ProjectDTO implements java.io.Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getImgCover() {
-		return this.imgCover;
-	}
-
-	public void setImgCover(String imgCover) {
-		this.imgCover = imgCover;
 	}
 
 	public BigDecimal getBudget() {

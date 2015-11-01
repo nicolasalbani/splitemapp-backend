@@ -66,7 +66,8 @@ values									(1,1,'','2014-09-21 02:17:36','2014-09-21 02:17:36'),
 insert into splitemapp.user_to_project	(id,user_to_project_status_id,user_id,project_id,expenses_share) 
 values									(1,1,1,1,50),
 										(2,1,2,1,50),
-										(3,1,3,2,50);
+										(3,1,3,2,50),
+										(4,1,1,2,50);
 								
 -- Populating the user_session table
 insert into splitemapp.user_session	(id,user_id,token,device,os_version,last_used_at)  
