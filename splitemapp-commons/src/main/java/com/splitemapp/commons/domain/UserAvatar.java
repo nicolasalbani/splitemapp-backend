@@ -57,6 +57,7 @@ public class UserAvatar implements java.io.Serializable {
 	}
 	
 	public UserAvatar(User user, UserAvatarDTO userAvatarDTO){
+		this.id = userAvatarDTO.getId();
 		this.user = user;
 		this.avatarData = userAvatarDTO.getAvatarData();
 		this.createdAt = userAvatarDTO.getCreatedAt();
@@ -64,6 +65,7 @@ public class UserAvatar implements java.io.Serializable {
 	}
 
 	public UserAvatar(User user, byte[] avatarData, Date createdAt, Date updatedAt) {
+		this.id = user.getId();
 		this.user = user;
 		this.avatarData = avatarData;
 		this.createdAt = createdAt;

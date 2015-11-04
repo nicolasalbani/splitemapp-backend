@@ -59,10 +59,10 @@ public class UserAvatarServicesTest extends BaseServiceTest{
 	}
 
 	@Test
-	public void pushServiceTest(){
+	public void pushServiceCreateTest(){
 		// Creating the user list to push
 		List<UserAvatarDTO> itemList = new ArrayList<UserAvatarDTO>();
-		UserAvatarDTO userAvatar = createUserAvatarDTO();
+		UserAvatarDTO userAvatar = createUserAvatarDTO(3L,3L);
 		itemList.add(userAvatar);
 
 		// Crafting the full service URL
@@ -80,15 +80,38 @@ public class UserAvatarServicesTest extends BaseServiceTest{
 		// Validating successful response
 		assertTrue(response.getSuccess());
 	}
+	
+	@Test
+	public void pushServiceUpdateTest(){
+		// Creating the user list to push
+		List<UserAvatarDTO> itemList = new ArrayList<UserAvatarDTO>();
+		UserAvatarDTO userAvatar = createUserAvatarDTO(10L,10L);
+		itemList.add(userAvatar);
 
-	private UserAvatarDTO createUserAvatarDTO(){
-		// Creating user avatar DTO object. We always use the same ID because it will be updated on the server side
+		// Crafting the full service URL
+		String serviceUrl = SERVICE_TEST_BASE_PATH + ServiceConstants.PUSH_USER_AVATARS_PATH;
+
+		// Crafting the request object
+		PushUserAvatarRequest request = new PushUserAvatarRequest();
+		request.setLastPushSuccessAt(new Date());
+		request.setToken(TOKEN);
+		request.setItemList(itemList);
+
+		// Making rest service call
+		PushLongResponse response = RestUtils.callRestService(serviceUrl, request, PushLongResponse.class);
+
+		// Validating successful response
+		assertTrue(response.getSuccess());
+	}
+
+	private UserAvatarDTO createUserAvatarDTO(Long id, Long userId){
+		// Creating user avatar DTO object.
 		UserAvatarDTO user = new UserAvatarDTO();
-		user.setCreatedAt(new Date(1000));
-		user.setId(1L);
-		user.setUserId(3L);
+		user.setId(id);
+		user.setUserId(userId);
 		user.setAvatarData(new byte[1]);
-		user.setUpdatedAt(new Date(1000));
+		user.setCreatedAt(new Date(10000));
+		user.setUpdatedAt(new Date(10000));
 		return user;
 	}
 }

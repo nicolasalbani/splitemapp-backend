@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -65,6 +66,7 @@ public class PushUserService {
 					response.getIdUpdateList().add(new IdUpdate<Long>(userDTO.getId(), user.getId()));
 				} else {
 					// We merge the entry to the database
+					user.setUpdatedAt(new Date());
 					userEndpoint.merge(user);
 				}
 			}
