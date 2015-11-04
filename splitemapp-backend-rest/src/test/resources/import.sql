@@ -56,7 +56,8 @@ values										(1,1,'','2014-09-21 02:17:36','2014-09-21 02:17:36'),
 insert into splitemapp.user	(id,status_id,username,password,full_name,last_login,login_cnt,created_at,created_ip_address,updated_at,updated_ip_address)  
 values							(1,1,'juanperez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan perez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1'),
 								(2,1,'juangomez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan gomez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1'),
-								(3,1,'juangutierrez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan gutierrez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1');
+								(3,1,'juangutierrez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','juan gutierrez','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1'),
+								(10,1,'decimousuario@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca803e9a','decimo usuario','2014-09-21 02:17:36',1,'2014-09-21 02:17:36','127.0.0.1','2014-09-21 02:17:36','127.0.0.1');
 
 -- Populating the user_avatar table
 insert into splitemapp.user_avatar		(id,user_id,avatar_data,created_at,updated_at) 

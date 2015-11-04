@@ -106,7 +106,7 @@ public class ProjectServicesTest extends BaseServiceTest{
 	}
 
 	private ProjectDTO createProjectDTO(Long id, String title){
-		// Creating user DTO object. We always use the same ID because it will be updated on the server side
+		// Creating user DTO object.
 		ProjectDTO project = new ProjectDTO();
 		project.setBudget(new BigDecimal(100));
 		project.setProjectStatusId((short)1);

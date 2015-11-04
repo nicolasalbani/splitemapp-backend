@@ -59,10 +59,10 @@ public class UserServicesTest extends BaseServiceTest{
 	}
 
 	@Test
-	public void pushServiceTest(){
+	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<UserDTO> itemList = new ArrayList<UserDTO>();
-		UserDTO user = createUserDTO("newtestuser2@splitemapp.com");
+		UserDTO user = createUserDTO(4L, "newtestuser@splitemapp.com", "New Test User");
 		itemList.add(user);
 
 		// Crafting the full service URL
@@ -80,21 +80,44 @@ public class UserServicesTest extends BaseServiceTest{
 		// Validating successful response
 		assertTrue(response.getSuccess());
 	}
+	
+	@Test
+	public void pushUpdateServiceTest(){
+		// Creating the user list to push
+		List<UserDTO> itemList = new ArrayList<UserDTO>();
+		UserDTO user = createUserDTO(10L, "decimousuarioactualizado@splitemapp.com", "decimo usuario actualizado");
+		itemList.add(user);
 
-	private UserDTO createUserDTO(String userName){
-		// Creating user DTO object. We always use the same ID because it will be updated on the server side
+		// Crafting the full service URL
+		String serviceUrl = SERVICE_TEST_BASE_PATH + ServiceConstants.PUSH_USERS_PATH;
+
+		// Crafting the request object
+		PushUserRequest request = new PushUserRequest();
+		request.setLastPushSuccessAt(new Date());
+		request.setToken(TOKEN);
+		request.setItemList(itemList);
+
+		// Making rest service call
+		PushLongResponse response = RestUtils.callRestService(serviceUrl, request, PushLongResponse.class);
+
+		// Validating successful response
+		assertTrue(response.getSuccess());
+	}
+
+	private UserDTO createUserDTO(Long id, String userName, String fullName){
+		// Creating user DTO object.
 		UserDTO user = new UserDTO();
-		user.setCreatedAt(new Date(1000));
-		user.setCreatedIpAddress("127.0.0.1");
-		user.setFullName("New Test User");
-		user.setId(1L);
+		user.setId(id);
+		user.setUsername(userName);
+		user.setFullName(fullName);
 		user.setLastLogin(null);
 		user.setLoginCnt(1);
 		user.setPassword("12345");
-		user.setUpdatedAt(new Date(1000));
+		user.setCreatedIpAddress("127.0.0.1");
 		user.setUpdatedIpAddress("127.0.0.1");
-		user.setUsername(userName);
 		user.setUserStatusId((short)1);
+		user.setCreatedAt(new Date(10000));
+		user.setUpdatedAt(new Date(10000));
 		return user;
 	}
 }
