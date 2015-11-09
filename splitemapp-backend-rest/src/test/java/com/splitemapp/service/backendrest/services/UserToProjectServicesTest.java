@@ -60,10 +60,10 @@ public class UserToProjectServicesTest extends BaseServiceTest{
 	}
 
 	@Test
-	public void pushServiceTest(){
+	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<UserToProjectDTO> itemList = new ArrayList<UserToProjectDTO>();
-		UserToProjectDTO userToProject = createUserToProjectDTO(3L,1L);
+		UserToProjectDTO userToProject = createUserToProjectDTO(5L,2L,2L,100);
 		itemList.add(userToProject);
 
 		// Crafting the full service URL
@@ -81,16 +81,40 @@ public class UserToProjectServicesTest extends BaseServiceTest{
 		// Validating successful response
 		assertTrue(response.getSuccess());
 	}
+	
+	@Test
+	public void pushUpdateServiceTest(){
+		// Creating the user list to push
+		List<UserToProjectDTO> itemList = new ArrayList<UserToProjectDTO>();
+		UserToProjectDTO userToProject = createUserToProjectDTO(4L,3L,1L,100);
+		itemList.add(userToProject);
 
-	private UserToProjectDTO createUserToProjectDTO(Long projectId, Long userId){
+		// Crafting the full service URL
+		String serviceUrl = SERVICE_TEST_BASE_PATH + ServiceConstants.PUSH_USER_TO_PROJECTS_PATH;
+
+		// Crafting the request object
+		PushUserToProjectRequest request = new PushUserToProjectRequest();
+		request.setLastPushSuccessAt(new Date());
+		request.setToken(TOKEN);
+		request.setItemList(itemList);
+
+		// Making rest service call
+		PushLongResponse response = RestUtils.callRestService(serviceUrl, request, PushLongResponse.class);
+
+		// Validating successful response
+		assertTrue(response.getSuccess());
+	}
+
+	private UserToProjectDTO createUserToProjectDTO(Long id, Long projectId, Long userId, int expenseShare){
 		// Creating user DTO object. We always use the same ID because it will be updated on the server side
 		UserToProjectDTO userToProject = new UserToProjectDTO();
-		userToProject.setCreatedAt(new Date(10000));
-		userToProject.setExpensesShare(new BigDecimal(100));
-		userToProject.setProjectDTO(projectId);
-		userToProject.setUpdatedAt(new Date(10000));
+		userToProject.setId(id);
 		userToProject.setUserId(userId);
+		userToProject.setProjectDTO(projectId);
+		userToProject.setExpensesShare(new BigDecimal(expenseShare));
 		userToProject.setUserToProjectStatusId((short)1);
+		userToProject.setCreatedAt(new Date(10000));
+		userToProject.setUpdatedAt(new Date(10000));
 		return userToProject;
 	}
 }

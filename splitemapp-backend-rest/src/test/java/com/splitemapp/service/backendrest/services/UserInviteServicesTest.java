@@ -59,10 +59,10 @@ public class UserInviteServicesTest extends BaseServiceTest{
 	}
 
 	@Test
-	public void pushServiceTest(){
+	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<UserInviteDTO> itemList = new ArrayList<UserInviteDTO>();
-		UserInviteDTO userToProject = createUserInviteDTO();
+		UserInviteDTO userToProject = createUserInviteDTO(3L,1L,1L,"diegoghersi@splitemapp.com");
 		itemList.add(userToProject);
 
 		// Crafting the full service URL
@@ -80,16 +80,40 @@ public class UserInviteServicesTest extends BaseServiceTest{
 		// Validating successful response
 		assertTrue(response.getSuccess());
 	}
+	
+	@Test
+	public void pushUpdateCreateServiceTest(){
+		// Creating the user list to push
+		List<UserInviteDTO> itemList = new ArrayList<UserInviteDTO>();
+		UserInviteDTO userToProject = createUserInviteDTO(2L,2L,1L,"nicolasalbani@splitemapp.com");
+		itemList.add(userToProject);
 
-	private UserInviteDTO createUserInviteDTO(){
+		// Crafting the full service URL
+		String serviceUrl = SERVICE_TEST_BASE_PATH + ServiceConstants.PUSH_USER_INVITES_PATH;
+
+		// Crafting the request object
+		PushUserInviteRequest request = new PushUserInviteRequest();
+		request.setLastPushSuccessAt(new Date());
+		request.setToken(TOKEN);
+		request.setItemList(itemList);
+
+		// Making rest service call
+		PushLongResponse response = RestUtils.callRestService(serviceUrl, request, PushLongResponse.class);
+
+		// Validating successful response
+		assertTrue(response.getSuccess());
+	}
+
+	private UserInviteDTO createUserInviteDTO(Long id, Long projectId, Long userId, String email){
 		// Creating user DTO object. We always use the same ID because it will be updated on the server side
 		UserInviteDTO userInvite = new UserInviteDTO();
-		userInvite.setCreatedAt(new Date(20000));
-		userInvite.setEmail("juanperez@splitemapp.com");
+		userInvite.setId(id);
+		userInvite.setUserId(userId);
+		userInvite.setProjectId(projectId);
+		userInvite.setEmail(email);
 		userInvite.setInviteStatusId((short)1);
-		userInvite.setProjectId(3L);
+		userInvite.setCreatedAt(new Date(20000));
 		userInvite.setUpdatedAt(new Date(20000));
-		userInvite.setUserId(1L);
 		return userInvite;
 	}
 }
