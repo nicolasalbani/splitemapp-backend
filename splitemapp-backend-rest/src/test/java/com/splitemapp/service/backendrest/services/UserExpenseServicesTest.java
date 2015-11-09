@@ -60,10 +60,10 @@ public class UserExpenseServicesTest extends BaseServiceTest{
 	}
 
 	@Test
-	public void pushServiceTest(){
+	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<UserExpenseDTO> itemList = new ArrayList<UserExpenseDTO>();
-		UserExpenseDTO user = createUserExpenseDTO("Varios", 240);
+		UserExpenseDTO user = createUserExpenseDTO(10L,1L,1L,"Varios", 240);
 		itemList.add(user);
 
 		// Crafting the full service URL
@@ -71,7 +71,30 @@ public class UserExpenseServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserExpenseRequest request = new PushUserExpenseRequest();
-		request.setLastPushSuccessAt(new Date(100));
+		request.setLastPushSuccessAt(new Date(10000));
+		request.setToken(TOKEN);
+		request.setItemList(itemList);
+
+		// Making rest service call
+		PushLongResponse response = RestUtils.callRestService(serviceUrl, request, PushLongResponse.class);
+
+		// Validating successful response
+		assertTrue(response.getSuccess());
+	}
+	
+	@Test
+	public void pushUpdateServiceTest(){
+		// Creating the user list to push
+		List<UserExpenseDTO> itemList = new ArrayList<UserExpenseDTO>();
+		UserExpenseDTO user = createUserExpenseDTO(3L,3L,3L,"Carne Actualizada", 240);
+		itemList.add(user);
+
+		// Crafting the full service URL
+		String serviceUrl = SERVICE_TEST_BASE_PATH + ServiceConstants.PUSH_USER_EXPENSES_PATH;
+
+		// Crafting the request object
+		PushUserExpenseRequest request = new PushUserExpenseRequest();
+		request.setLastPushSuccessAt(new Date());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 
@@ -82,17 +105,18 @@ public class UserExpenseServicesTest extends BaseServiceTest{
 		assertTrue(response.getSuccess());
 	}
 
-	private UserExpenseDTO createUserExpenseDTO(String note, int expense){
-		// Creating user DTO object. We always use the same ID because it will be updated on the server side
+	private UserExpenseDTO createUserExpenseDTO(Long id, Long projectId, Long userId, String note, int expense){
+		// Creating user expense DTO object.
 		UserExpenseDTO userExpense = new UserExpenseDTO();
-		userExpense.setCreatedAt(new Date(1000));
+		userExpense.setId(id);
+		userExpense.setUser(userId);
+		userExpense.setProjectId(projectId);
 		userExpense.setExpense(new BigDecimal(expense));
 		userExpense.setExpenseCategoryDTO((short)1);
-		userExpense.setExpenseDate(new Date(100));
 		userExpense.setNote(note);
-		userExpense.setProjectId(1L);
-		userExpense.setUser(1L);
-		userExpense.setUpdatedAt(new Date(1000));
+		userExpense.setExpenseDate(new Date(10000));
+		userExpense.setCreatedAt(new Date(10000));
+		userExpense.setUpdatedAt(new Date(10000));
 		return userExpense;
 	}
 }
