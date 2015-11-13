@@ -63,6 +63,7 @@ public class UserContactData implements java.io.Serializable {
 	
 	public UserContactData(User user, UserContactDataDTO userContactDataDTO){
 		this.user = user;
+		this.id = userContactDataDTO.getId();
 		this.contactData = userContactDataDTO.getContactData();
 		this.verified = userContactDataDTO.isVerified();
 		this.verifiedAt = userContactDataDTO.getVerifiedAt();

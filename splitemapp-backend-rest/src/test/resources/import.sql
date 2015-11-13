@@ -80,7 +80,8 @@ values								(1,1,'554686b8-7646-402e-9911-f28b8b417d46','samsung GT-I9100','An
 -- Populating the user_contact_data table
 insert into splitemapp.user_contact_data	(id,user_id,contact_data,verified,verified_at,created_at,updated_at) 
 values										(1,1,'juanperez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36'),
-											(2,2,'juangomez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36');
+											(2,2,'juangomez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36'),
+											(3,3,'juangutierrez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36');
 
 -- Populating the user_expense table
 insert into splitemapp.user_expense		(id,user_id,project_id,category_id,expense,expense_date,note) 

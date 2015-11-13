@@ -59,10 +59,10 @@ public class UserContactDataServicesTest extends BaseServiceTest{
 	}
 
 	@Test
-	public void pushServiceTest(){
+	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<UserContactDataDTO> itemList = new ArrayList<UserContactDataDTO>();
-		UserContactDataDTO userContactData = createUserContactDataDTO("newtestuser2@splitemapp.com");
+		UserContactDataDTO userContactData = createUserContactDataDTO(4l,10l,"newtestuser@splitemapp.com");
 		itemList.add(userContactData);
 
 		// Crafting the full service URL
@@ -80,16 +80,40 @@ public class UserContactDataServicesTest extends BaseServiceTest{
 		// Validating successful response
 		assertTrue(response.getSuccess());
 	}
+	
+	@Test
+	public void pushUpdateServiceTest(){
+		// Creating the user list to push
+		List<UserContactDataDTO> itemList = new ArrayList<UserContactDataDTO>();
+		UserContactDataDTO userContactData = createUserContactDataDTO(3l,3l,"updateduser@splitemapp.com");
+		itemList.add(userContactData);
 
-	private UserContactDataDTO createUserContactDataDTO(String userName){
-		// Creating user contact data DTO object. We always use the same ID because it will be updated on the server side
+		// Crafting the full service URL
+		String serviceUrl = SERVICE_TEST_BASE_PATH + ServiceConstants.PUSH_USER_CONTACT_DATAS_PATH;
+
+		// Crafting the request object
+		PushUserContactDataRequest request = new PushUserContactDataRequest();
+		request.setLastPushSuccessAt(new Date());
+		request.setToken(TOKEN);
+		request.setItemList(itemList);
+
+		// Making rest service call
+		PushLongResponse response = RestUtils.callRestService(serviceUrl, request, PushLongResponse.class);
+
+		// Validating successful response
+		assertTrue(response.getSuccess());
+	}
+
+	private UserContactDataDTO createUserContactDataDTO(Long id, Long userId, String userName){
+		// Creating user contact data DTO object
 		UserContactDataDTO userContactDataDTO = new UserContactDataDTO();
-		userContactDataDTO.setContactData("juangutierrez@splitemapp.com");
-		userContactDataDTO.setCreatedAt(new Date(100));
-		userContactDataDTO.setUpdatedAt(new Date(100));
-		userContactDataDTO.setUserId(1L);
+		userContactDataDTO.setId(id);
+		userContactDataDTO.setUserId(userId);
+		userContactDataDTO.setContactData(userName);
 		userContactDataDTO.setVerified(true);
 		userContactDataDTO.setVerifiedAt(new Date(100));
+		userContactDataDTO.setCreatedAt(new Date(100));
+		userContactDataDTO.setUpdatedAt(new Date(100));
 		return userContactDataDTO;
 	}
 }
