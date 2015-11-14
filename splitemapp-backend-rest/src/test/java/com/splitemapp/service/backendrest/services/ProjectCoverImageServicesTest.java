@@ -59,10 +59,10 @@ public class ProjectCoverImageServicesTest extends BaseServiceTest{
 	}
 
 	@Test
-	public void pushServiceTest(){
+	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<ProjectCoverImageDTO> itemList = new ArrayList<ProjectCoverImageDTO>();
-		ProjectCoverImageDTO projectCoverImageDTO = createProjectCoverImageDTO();
+		ProjectCoverImageDTO projectCoverImageDTO = createProjectCoverImageDTO(3l, 10l);
 		itemList.add(projectCoverImageDTO);
 
 		// Crafting the full service URL
@@ -80,14 +80,37 @@ public class ProjectCoverImageServicesTest extends BaseServiceTest{
 		// Validating successful response
 		assertTrue(response.getSuccess());
 	}
+	
+	@Test
+	public void pushUpdateServiceTest(){
+		// Creating the user list to push
+		List<ProjectCoverImageDTO> itemList = new ArrayList<ProjectCoverImageDTO>();
+		ProjectCoverImageDTO projectCoverImageDTO = createProjectCoverImageDTO(2l, 3l);
+		itemList.add(projectCoverImageDTO);
 
-	private ProjectCoverImageDTO createProjectCoverImageDTO(){
-		// Creating project cover image DTO object. We always use the same ID because it will be updated on the server side
+		// Crafting the full service URL
+		String serviceUrl = SERVICE_TEST_BASE_PATH + ServiceConstants.PUSH_PROJECT_COVER_IMAGES_PATH;
+
+		// Crafting the request object
+		PushProjectCoverImageRequest request = new PushProjectCoverImageRequest();
+		request.setLastPushSuccessAt(new Date());
+		request.setToken(TOKEN);
+		request.setItemList(itemList);
+
+		// Making rest service call
+		PushLongResponse response = RestUtils.callRestService(serviceUrl, request, PushLongResponse.class);
+
+		// Validating successful response
+		assertTrue(response.getSuccess());
+	}
+
+	private ProjectCoverImageDTO createProjectCoverImageDTO(Long id, Long projectId){
+		// Creating project cover image DTO object
 		ProjectCoverImageDTO user = new ProjectCoverImageDTO();
-		user.setCreatedAt(new Date(1000));
-		user.setId(1L);
-		user.setProjectId(3L);
+		user.setId(id);
+		user.setProjectId(projectId);
 		user.setAvatarData(new byte[1]);
+		user.setCreatedAt(new Date(1000));
 		user.setUpdatedAt(new Date(1000));
 		return user;
 	}

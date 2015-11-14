@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -29,7 +30,7 @@ import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 @Path(ServiceConstants.PUSH_PROJECT_COVER_IMAGES_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PushProjectCoverImagessService {
+public class PushProjectCoverImagesService {
 
 	UserSessionEndpoint userSessionEndpoint;
 	ProjectEndpoint projectEndpoint;
@@ -65,6 +66,7 @@ public class PushProjectCoverImagessService {
 					response.getIdUpdateList().add(new IdUpdate<Long>(projectCoverImageDTO.getId(), projectCoverImage.getId()));
 				} else {
 					// We merge the entry to the database
+					projectCoverImage.setUpdatedAt(new Date());
 					projectCoverImageEndpoint.merge(projectCoverImage);
 				}
 			}

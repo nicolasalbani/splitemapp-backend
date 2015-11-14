@@ -58,6 +58,7 @@ public class ProjectCoverImage implements java.io.Serializable {
 	
 	public ProjectCoverImage(Project project, ProjectCoverImageDTO projectCoverImageDTO){
 		this.project = project;
+		this.id = projectCoverImageDTO.getId();
 		this.avatarData = projectCoverImageDTO.getAvatarData();
 		this.createdAt = projectCoverImageDTO.getCreatedAt();
 		this.updatedAt = projectCoverImageDTO.getUpdatedAt();
