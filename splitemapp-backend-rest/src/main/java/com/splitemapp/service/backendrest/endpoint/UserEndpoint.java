@@ -1,6 +1,5 @@
 package com.splitemapp.service.backendrest.endpoint;
 
-import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.service.backendrest.dao.UpdateableDomainDAO;
 
