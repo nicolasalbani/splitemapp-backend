@@ -157,6 +157,37 @@ private static Logger logger = Logger.getLogger(DomainDAO.class);
 	}
 	
 	@SuppressWarnings("unchecked")
+	public E findByFieldWithJoins(String fieldName, String fieldValue, String... joins) {
+		logger.debug("getting " +getEntityClass().getSimpleName()+ " instance with " +fieldName+ ": " + fieldValue);
+
+		Session session = sessionFactory.openSession();
+		try {
+			StringBuilder queryString = new StringBuilder("SELECT DISTINCT E FROM " +getTableName()+ " E");
+			for(String join:joins){
+				queryString.append(" LEFT JOIN FETCH E."+join);
+			}
+			queryString.append(" WHERE E." +fieldName+ " = :" +fieldName);
+			Query query = session.createQuery(queryString.toString());
+			query.setParameter(fieldName, fieldValue);
+			List<E> resultList = query.list();
+			if(resultList.size() == 1){
+				logger.debug("get successful");
+				return resultList.get(0);
+			} else if (resultList.size() > 1){
+				throw new RuntimeException("more than one record with the same " +fieldName);
+			} else {
+				logger.debug("no record found for " +fieldName+ ": " +fieldValue);
+				return null;
+			}
+		} catch (RuntimeException re) {
+			logger.error("get failed", re);
+			throw re;
+		} finally {
+			session.close();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<E> findWithQuery(String sqlQuery) {
 		logger.debug("Running Query: " +sqlQuery);
 

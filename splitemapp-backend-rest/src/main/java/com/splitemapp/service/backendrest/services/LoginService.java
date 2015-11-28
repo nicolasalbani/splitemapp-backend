@@ -55,7 +55,7 @@ public class LoginService {
 		loginResponse.setSuccess(false);
 
 		// We look for the user
-		User user = userEndpoint.findByField(TableField.USER_USERNAME, request.getUsername());
+		User user = userEndpoint.findUserForLogin(TableField.USER_USERNAME, request.getUsername());
 
 		// If we found the user then we validate
 		if(user!=null){
