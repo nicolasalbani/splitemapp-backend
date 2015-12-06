@@ -1,7 +1,6 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
-import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -66,7 +65,6 @@ public class PushProjectCoverImagesService {
 					response.getIdUpdateList().add(new IdUpdate<Long>(projectCoverImageDTO.getId(), projectCoverImage.getId()));
 				} else {
 					// We merge the entry to the database
-					projectCoverImage.setUpdatedAt(new Date());
 					projectCoverImageEndpoint.merge(projectCoverImage);
 				}
 			}

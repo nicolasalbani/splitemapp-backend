@@ -2,7 +2,6 @@ package com.splitemapp.service.backendrest.services;
 
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -63,7 +62,7 @@ public class UserToProjectServicesTest extends BaseServiceTest{
 	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<UserToProjectDTO> itemList = new ArrayList<UserToProjectDTO>();
-		UserToProjectDTO userToProject = createUserToProjectDTO(5L,2L,2L,100);
+		UserToProjectDTO userToProject = createUserToProjectDTO(5L,2L,2L,100f);
 		itemList.add(userToProject);
 
 		// Crafting the full service URL
@@ -86,7 +85,7 @@ public class UserToProjectServicesTest extends BaseServiceTest{
 	public void pushUpdateServiceTest(){
 		// Creating the user list to push
 		List<UserToProjectDTO> itemList = new ArrayList<UserToProjectDTO>();
-		UserToProjectDTO userToProject = createUserToProjectDTO(4L,3L,1L,100);
+		UserToProjectDTO userToProject = createUserToProjectDTO(4L,3L,1L,100f);
 		itemList.add(userToProject);
 
 		// Crafting the full service URL
@@ -105,13 +104,13 @@ public class UserToProjectServicesTest extends BaseServiceTest{
 		assertTrue(response.getSuccess());
 	}
 
-	private UserToProjectDTO createUserToProjectDTO(Long id, Long projectId, Long userId, int expenseShare){
+	private UserToProjectDTO createUserToProjectDTO(Long id, Long projectId, Long userId, Float expenseShare){
 		// Creating user DTO object. We always use the same ID because it will be updated on the server side
 		UserToProjectDTO userToProject = new UserToProjectDTO();
 		userToProject.setId(id);
 		userToProject.setUserId(userId);
 		userToProject.setProjectDTO(projectId);
-		userToProject.setExpensesShare(new BigDecimal(expenseShare));
+		userToProject.setExpensesShare(expenseShare);
 		userToProject.setUserToProjectStatusId((short)1);
 		userToProject.setCreatedAt(new Date(10000));
 		userToProject.setUpdatedAt(new Date(10000));

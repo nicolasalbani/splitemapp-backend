@@ -4,6 +4,7 @@ public class TableField {
 	/**
 	 * 'user' table
 	 */
+	public static final String USER_ID = "id";
 	public static final String USER_USERNAME = "username";
 	
 	/**
@@ -12,8 +13,17 @@ public class TableField {
 	public static final String USER_AVATAR_USER_ID = "user_id";
 	
 	/**
+	 * 'user_invite'
+	 */
+	public static final String USER_INVITE_ID = "id";
+	public static final String USER_INVITE_USER_ID = "user_id";
+	public static final String USER_INVITE_PROJECT_ID = "project_id";
+	
+	/**
 	 * 'user_expense' table
 	 */
+	public static final String USER_EXPENSE_ID = "id";
+	public static final String USER_EXPENSE_USER_ID = "user_id";
 	public static final String USER_EXPENSE_PROJECT_ID = "project_id";
 	
 	/**
@@ -29,6 +39,7 @@ public class TableField {
 	/**
 	 * 'contact_data' table
 	 */
+	public static final String USER_CONTACT_DATA_ID = "id";
 	public static final String USER_CONTACT_DATA_USER_ID = "user_id";
 	public static final String USER_CONTACT_DATA_CONTACT_DATA = "contact_data";
 	
@@ -40,11 +51,13 @@ public class TableField {
 	/**
 	 * 'project_cover_image' table
 	 */
+	public static final String PROJECT_COVER_IMAGE_ID = "id";
 	public static final String PROJECT_COVER_IMAGE_PROJECT_ID = "project_id";
 	
 	/**
 	 * 'user_to_project' table
 	 */
+	public static final String USER_TO_PROJECT_ID = "id";
 	public static final String USER_TO_PROJECT_PROJECT_ID = "project_id";
 	public static final String USER_TO_PROJECT_USER_ID = "user_id";
 	public static final String USER_TO_PROJECT_COD = "cod";

@@ -219,7 +219,7 @@ CREATE TABLE `user_to_project` (
   `user_to_project_status_id` smallint(6) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
   `project_id` bigint(20) unsigned NOT NULL,
-  `expenses_share` decimal(3,2) NOT NULL,
+  `expenses_share` float(6,3) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),

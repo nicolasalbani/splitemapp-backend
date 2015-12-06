@@ -1,7 +1,6 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
-import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -74,7 +73,6 @@ public class PushUserInvitesService {
 					response.getIdUpdateList().add(new IdUpdate<Long>(userInviteDTO.getId(), userInvite.getId()));
 				} else {
 					// We merge the entry to the database
-					userInvite.setUpdatedAt(new Date());
 					userInviteEndpoint.merge(userInvite);
 				}
 			}

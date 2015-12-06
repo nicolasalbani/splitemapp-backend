@@ -34,6 +34,7 @@ public class ProjectCoverImage implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
+	@DatabaseField(allowGeneratedIdInsert = true, generatedId = true)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.EAGER)

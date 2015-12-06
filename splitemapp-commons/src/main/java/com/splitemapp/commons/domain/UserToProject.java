@@ -2,16 +2,14 @@ package com.splitemapp.commons.domain;
 
 // Generated Sep 15, 2014 8:09:15 PM by Hibernate Tools 4.0.0
 
-import java.math.BigDecimal;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
-import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.j256.ormlite.field.DatabaseField;
 import com.splitemapp.commons.domain.dto.UserToProjectDTO;
 
 /**
@@ -35,6 +34,7 @@ public class UserToProject implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
+	@DatabaseField(allowGeneratedIdInsert = true, generatedId = true)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -58,7 +58,7 @@ public class UserToProject implements java.io.Serializable {
 	private Date updatedAt;
 
 	@Column(name = "expenses_share", nullable = false, precision = 3)
-	private BigDecimal expensesShare;
+	private Float expensesShare;
 
 	public UserToProject() {
 		this.createdAt = this.updatedAt = new Date();
@@ -76,7 +76,7 @@ public class UserToProject implements java.io.Serializable {
 	}
 
 	public UserToProject(User user, Project project,
-			UserToProjectStatus userToProjectStatus, BigDecimal expensesShare) {
+			UserToProjectStatus userToProjectStatus, Float expensesShare) {
 		this.user = user;
 		this.project = project;
 		this.userToProjectStatus = userToProjectStatus;
@@ -85,7 +85,7 @@ public class UserToProject implements java.io.Serializable {
 	
 	public UserToProject(Long id, User user, Project project,
 			UserToProjectStatus userToProjectStatus, Date createdAt,
-			Date updatedAt, BigDecimal expensesShare) {
+			Date updatedAt, Float expensesShare) {
 		this.id = id;
 		this.user = user;
 		this.project = project;
@@ -127,11 +127,11 @@ public class UserToProject implements java.io.Serializable {
 		this.userToProjectStatus = userToProjectStatus;
 	}
 
-	public BigDecimal getExpensesShare() {
+	public Float getExpensesShare() {
 		return this.expensesShare;
 	}
 
-	public void setExpensesShare(BigDecimal expensesShare) {
+	public void setExpensesShare(Float expensesShare) {
 		this.expensesShare = expensesShare;
 	}
 

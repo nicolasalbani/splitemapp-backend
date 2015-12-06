@@ -1,7 +1,6 @@
 package com.splitemapp.commons.domain.dto;
 
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -18,7 +17,7 @@ public class UserToProjectDTO implements java.io.Serializable {
 	private Long userId;
 	private Long projectId;
 	private Short userToProjectStatusId;
-	private BigDecimal expensesShare;
+	private Float expensesShare;
 	
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
@@ -41,7 +40,7 @@ public class UserToProjectDTO implements java.io.Serializable {
 	}
 
 	public UserToProjectDTO(Long userId, Long projectId,
-			Short userToProjectStatusId, BigDecimal expensesShare) {
+			Short userToProjectStatusId, Float expensesShare) {
 		this.userId = userId;
 		this.projectId = projectId;
 		this.userToProjectStatusId = userToProjectStatusId;
@@ -80,11 +79,11 @@ public class UserToProjectDTO implements java.io.Serializable {
 		this.userToProjectStatusId = userToProjectStatusId;
 	}
 
-	public BigDecimal getExpensesShare() {
+	public Float getExpensesShare() {
 		return this.expensesShare;
 	}
 
-	public void setExpensesShare(BigDecimal expensesShare) {
+	public void setExpensesShare(Float expensesShare) {
 		this.expensesShare = expensesShare;
 	}
 

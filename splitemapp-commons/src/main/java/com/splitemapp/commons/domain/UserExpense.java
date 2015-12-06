@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.j256.ormlite.field.DatabaseField;
 import com.splitemapp.commons.domain.dto.UserExpenseDTO;
 
 /**
@@ -32,6 +33,7 @@ public class UserExpense implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
+	@DatabaseField(allowGeneratedIdInsert = true, generatedId = true)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
