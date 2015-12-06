@@ -274,6 +274,14 @@ CREATE TABLE `expense_category` (
   UNIQUE KEY `cod_u_idx` (`cod`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 insert into expense_category values(1,'car','Automovil');
+insert into expense_category values(2,"travel","Viajes");
+insert into expense_category values(3,"food","Comida y Bebidas");
+insert into expense_category values(4,"family","Familia y Personal");
+insert into expense_category values(5,"bills","Cuentas");
+insert into expense_category values(6,"entertainment","Entretenimiento");
+insert into expense_category values(7,"home","Hogar");
+insert into expense_category values(8,"utilities","Utilidades");
+insert into expense_category values(9,"shopping","Shopping");
 
 -- -----------------------------------------------------
 -- Table `user_expense`
