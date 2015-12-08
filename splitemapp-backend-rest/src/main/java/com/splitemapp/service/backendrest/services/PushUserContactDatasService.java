@@ -19,8 +19,6 @@ import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
-import com.splitemapp.commons.domain.id.IdUpdate;
-import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
@@ -39,7 +37,7 @@ public class PushUserContactDatasService {
 	public String printMessage() {
 		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
 	}
-	
+
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<UserContactDataDTO> request) throws ParseException {
 
@@ -55,18 +53,9 @@ public class PushUserContactDatasService {
 				// We create the user contact data object
 				User user = userEndpoint.findById(userContactDataDTO.getUserId());
 				UserContactData userContactData = new UserContactData(user, userContactDataDTO);
-				
-				if(Utils.isDateAfter(userContactDataDTO.getCreatedAt(),request.getLastPushSuccessAt())){
-					// We persist the entry to the database
-					userContactData.setId(null);
-					userContactDataEndpoint.persist(userContactData);
-					
-					// We add the IdUpdate element to the response list
-					response.getIdUpdateList().add(new IdUpdate<Long>(userContactDataDTO.getId(), userContactData.getId()));
-				} else {
-					// We merge the entry to the database
-					userContactDataEndpoint.merge(userContactData);
-				}
+
+				// We merge the entry to the database
+				userContactDataEndpoint.merge(userContactData);
 			}
 
 			// We set the success flag
@@ -78,7 +67,7 @@ public class PushUserContactDatasService {
 
 
 	// Getters and setters
-	
+
 	public UserSessionEndpoint getUserSessionEndpoint() {
 		return userSessionEndpoint;
 	}

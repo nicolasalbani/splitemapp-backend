@@ -17,7 +17,7 @@ import com.splitemapp.commons.utils.Utils;
 public class UtilsTest {
 	
 	@Test
-	public void testStringToDate(){
+	public void testStringToDateAm(){
 		String date = "31-08-1982 10:20:56";
 		Calendar dateCal = Calendar.getInstance();
 		dateCal.set(Calendar.YEAR, 1982);
@@ -34,13 +34,43 @@ public class UtilsTest {
 	}
 	
 	@Test
-	public void testDateToString() throws ParseException{
+	public void testDateToStringAm() throws ParseException{
 		String date = "31-08-1982 10:20:56";
 		Calendar dateCal = Calendar.getInstance();
 		dateCal.set(Calendar.YEAR, 1982);
 		dateCal.set(Calendar.MONTH, 7);
 		dateCal.set(Calendar.DAY_OF_MONTH, 31);
 		dateCal.set(Calendar.HOUR_OF_DAY, 10);
+		dateCal.set(Calendar.MINUTE, 20);
+		dateCal.set(Calendar.SECOND, 56);
+		assertEquals(date,Utils.dateToString(dateCal.getTime(), ServiceConstants.DATE_FORMAT));
+	}
+	
+	@Test
+	public void testStringToDatePm(){
+		String date = "31-08-1982 22:20:56";
+		Calendar dateCal = Calendar.getInstance();
+		dateCal.set(Calendar.YEAR, 1982);
+		dateCal.set(Calendar.MONTH, 7);
+		dateCal.set(Calendar.DAY_OF_MONTH, 31);
+		dateCal.set(Calendar.HOUR_OF_DAY, 22);
+		dateCal.set(Calendar.MINUTE, 20);
+		dateCal.set(Calendar.SECOND, 56);
+		try {
+			assertEquals(dateCal.getTime().toString(),Utils.stringToDate(date, ServiceConstants.DATE_FORMAT).toString());
+		} catch (ParseException e) {
+			fail("Should not be getting a ParseException!");
+		}
+	}
+	
+	@Test
+	public void testDateToStringPm() throws ParseException{
+		String date = "31-08-1982 22:20:56";
+		Calendar dateCal = Calendar.getInstance();
+		dateCal.set(Calendar.YEAR, 1982);
+		dateCal.set(Calendar.MONTH, 7);
+		dateCal.set(Calendar.DAY_OF_MONTH, 31);
+		dateCal.set(Calendar.HOUR_OF_DAY, 22);
 		dateCal.set(Calendar.MINUTE, 20);
 		dateCal.set(Calendar.SECOND, 56);
 		assertEquals(date,Utils.dateToString(dateCal.getTime(), ServiceConstants.DATE_FORMAT));

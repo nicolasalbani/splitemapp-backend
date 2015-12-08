@@ -5,7 +5,7 @@ public class ServiceConstants {
 	public static final String GET_SUCCESS = "Your GET request was successfull. Service is alive!";
 	
 	// General service constants
-	public static final String DATE_FORMAT = "dd-MM-yyyy hh:mm:ss";
+	public static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
 	
 	// Service paths
 	public static final String LOGIN_PATH = "/login";

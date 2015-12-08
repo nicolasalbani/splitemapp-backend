@@ -7,6 +7,8 @@ import org.springframework.web.client.RestTemplate;
 
 public class RestUtils {
 	
+	public static final int TIMEOUT = 5000;
+	
 	/**
 	 * 
 	 * @param servicePath String containing the rest service name
@@ -21,7 +23,10 @@ public class RestUtils {
 		restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter);
 
 		// We use old version of request factory that uses HTTPClient instead of HttpURLConnection to avoid bugs
-		restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());  
+		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+		requestFactory.setConnectTimeout(TIMEOUT);
+		requestFactory.setReadTimeout(TIMEOUT);
+		restTemplate.setRequestFactory(requestFactory);  
 
 		// We make the POST rest service call
 		T response = restTemplate.postForObject(serviceUrl, request, responseType);

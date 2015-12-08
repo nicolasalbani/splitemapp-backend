@@ -19,8 +19,6 @@ import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.UserAvatarDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
-import com.splitemapp.commons.domain.id.IdUpdate;
-import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
@@ -39,7 +37,7 @@ public class PushUserAvatarsService {
 	public String printMessage() {
 		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
 	}
-	
+
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<UserAvatarDTO> request) throws ParseException {
 
@@ -55,18 +53,9 @@ public class PushUserAvatarsService {
 				// We create the user avatar object
 				User user = userEndpoint.findById(userAvatarDTO.getUserId());
 				UserAvatar userAvatar = new UserAvatar(user, userAvatarDTO);
-				
-				if(Utils.isDateAfter(userAvatarDTO.getCreatedAt(),request.getLastPushSuccessAt())){
-					// We persist the entry to the database
-					userAvatar.setId(null);
-					userAvatarEndpoint.persist(userAvatar);
-					
-					// We add the IdUpdate element to the response list
-					response.getIdUpdateList().add(new IdUpdate<Long>(userAvatarDTO.getId(), userAvatar.getId()));
-				} else {
-					// We merge the entry to the database
-					userAvatarEndpoint.merge(userAvatar);
-				}
+
+				// We merge the entry to the database
+				userAvatarEndpoint.merge(userAvatar);
 			}
 
 			// We set the success flag
@@ -78,7 +67,7 @@ public class PushUserAvatarsService {
 
 
 	// Getters and setters
-	
+
 	public UserSessionEndpoint getUserSessionEndpoint() {
 		return userSessionEndpoint;
 	}
