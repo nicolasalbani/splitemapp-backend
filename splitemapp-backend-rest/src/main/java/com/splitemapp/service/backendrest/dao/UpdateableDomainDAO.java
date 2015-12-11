@@ -17,7 +17,7 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 	protected static final String PROJECT_ID_PARAMETER = "projectId";
 	protected static final String CREATED_AT_PARAMETER = "createdAt";
 	protected static final String UPDATED_AT_PARAMETER = "updatedAt";
-	protected static final String LINKED_BY_PROJECT_SQL = "UTP WHERE UTP.project.id IN (SELECT DISTINCT UTP.id FROM user_to_project UTP WHERE UTP.user.id = :" +USER_ID_PARAMETER+ ")";
+	protected static final String LINKED_BY_PROJECT_SQL = "UTP WHERE UTP.project.id IN (SELECT DISTINCT UTP.project.id FROM user_to_project UTP WHERE UTP.user.id = :" +USER_ID_PARAMETER+ ")";
 
 	/**
 	 * 
