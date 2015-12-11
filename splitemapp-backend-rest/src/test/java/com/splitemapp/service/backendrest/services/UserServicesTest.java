@@ -51,7 +51,7 @@ public class UserServicesTest extends BaseServiceTest{
 			UserDTO userDTO = iterator.next();
 			if(userDTO.getUsername().equals("juangomez@splitemapp.com")){
 				hasLinkedUsers = true;
-			} else if(userDTO.getUsername().equals("juangutierrez@splitemapp.com")){
+			} else if(userDTO.getUsername().equals("juanperetti@splitemapp.com")){
 				Assert.fail("Should not be obtaining a user from an unlinked project");
 			}
 		}

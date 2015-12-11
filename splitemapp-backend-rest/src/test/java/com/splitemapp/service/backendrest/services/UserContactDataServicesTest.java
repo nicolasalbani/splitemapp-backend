@@ -51,7 +51,7 @@ public class UserContactDataServicesTest extends BaseServiceTest{
 			UserContactDataDTO userContactDataDTO = iterator.next();
 			if(userContactDataDTO.getContactData().equals("juangomez@splitemapp.com")){
 				hasLinkedUserContactData = true;
-			} else if(userContactDataDTO.getContactData().equals("juangutierrez@splitemapp.com")){
+			} else if(userContactDataDTO.getContactData().equals("juanperetti@splitemapp.com")){
 				Assert.fail("Should not be obtaining a user from an unlinked project");
 			}
 		}

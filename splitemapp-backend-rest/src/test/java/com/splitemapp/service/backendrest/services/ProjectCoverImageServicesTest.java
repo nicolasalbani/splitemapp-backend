@@ -51,7 +51,7 @@ public class ProjectCoverImageServicesTest extends BaseServiceTest{
 			ProjectCoverImageDTO projectCoverImageDTO = iterator.next();
 			if(projectCoverImageDTO.getProjectId().equals(1L)){
 				hasLinkedProjectCoverImage = true;
-			} else if(projectCoverImageDTO.getProjectId().equals(2L)){
+			} else if(projectCoverImageDTO.getProjectId().equals(3L)){
 				Assert.fail("Should not be obtaining a project cover image from an unlinked project");
 			}
 		}
