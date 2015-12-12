@@ -66,7 +66,7 @@ values							(1,1,'juanperez@splitemapp.com','01b307acba4f54f55aafc33bb06bbbf6ca
 -- Populating the user_avatar table
 insert into splitemapp.user_avatar		(id,user_id,avatar_data,created_at,updated_at) 
 values									(1,1,'','2014-09-21 02:17:36','2014-09-21 02:17:36'),
-										(2,2,'','2014-09-21 02:17:36','2014-09-21 02:17:36'),
+										(2,2,'00','2014-09-21 02:17:36','2014-09-21 02:17:36'),
 										(10,9,'','2014-09-21 02:17:36','2014-09-21 02:17:36');
 										
 -- Populating the user_to_project table
@@ -74,8 +74,7 @@ insert into splitemapp.user_to_project	(id,user_to_project_status_id,user_id,pro
 values									(1,1,1,1,50),
 										(2,1,2,1,50),
 										(3,1,3,2,50),
-										(4,1,1,2,50);
-										(5,1,1,2,50);
+										(4,1,1,2,50),
 										(6,1,4,4,100);
 								
 -- Populating the user_session table

@@ -15,16 +15,14 @@ import org.springframework.stereotype.Service;
 import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
-import com.splitemapp.commons.domain.UserContactData;
+import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.UserAvatarDTO;
 import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.request.SynchronizeContactsRequest;
 import com.splitemapp.commons.domain.dto.response.SynchronizeContactsResponse;
-import com.splitemapp.commons.utils.Utils;
-import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
-import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
+import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
 @Service
 @Path(ServiceConstants.SYNCHRONIZE_CONTACTS_PATH)
@@ -33,8 +31,7 @@ import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 public class SynchronizeContactsService {
 
 	private UserEndpoint userEndpoint;
-	private UserContactDataEndpoint userContactDataEndpoint;
-	private UserAvatarEndpoint userAvatarEndpoint;
+	private UserSessionEndpoint userSessionEndpoint;
 
 	@GET
 	public String printMessage() {
@@ -48,32 +45,36 @@ public class SynchronizeContactsService {
 		SynchronizeContactsResponse synchronizeContactsResponse = new SynchronizeContactsResponse();
 		synchronizeContactsResponse.setSuccess(false);
 
-		// Setting the references for the User and UserContactData DTO lists
-		List<UserDTO> userDTOList = new  ArrayList<UserDTO>();
-		synchronizeContactsResponse.setUserDTOList(userDTOList);
-		List<UserContactDataDTO> userContactDataDTOList = new ArrayList<UserContactDataDTO>();
-		synchronizeContactsResponse.setUserContactDataDTOList(userContactDataDTOList);
-		List<UserAvatarDTO> userAvatarDTOList = new ArrayList<UserAvatarDTO>();
-		synchronizeContactsResponse.setUserAvatarDTOList(userAvatarDTOList);
+		// Retrieving user session
+		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 
-		// Adding all found User and UserContactData information to the response list
-		for(String emailAddress:request.getContactsEmailAddressList()){
-			// Processing user contact data information if there is any
-			UserContactData userContactData = userContactDataEndpoint.findByField(Utils.getCamelCaseName(TableField.USER_CONTACT_DATA_CONTACT_DATA), emailAddress);
-			if(userContactData != null){
-				userContactDataDTOList.add(new UserContactDataDTO(userContactData));
-				
-				// Processing user information
-				User user = userContactData.getUser();
-				userDTOList.add(new UserDTO(user));
-				
-				// Processing user avatar
-				userAvatarDTOList.add(new UserAvatarDTO(user.getUserAvatars().iterator().next()));
+		if(userSession != null){
+			// Setting the references for the User and UserContactData DTO lists
+			List<UserDTO> userDTOList = new  ArrayList<UserDTO>();
+			synchronizeContactsResponse.setUserDTOList(userDTOList);
+			List<UserContactDataDTO> userContactDataDTOList = new ArrayList<UserContactDataDTO>();
+			synchronizeContactsResponse.setUserContactDataDTOList(userContactDataDTOList);
+			List<UserAvatarDTO> userAvatarDTOList = new ArrayList<UserAvatarDTO>();
+			synchronizeContactsResponse.setUserAvatarDTOList(userAvatarDTOList);
+
+			// Adding all found User and UserContactData information to the response list
+			for(String emailAddress:request.getContactsEmailAddressList()){
+				// Processing user contact data information if there is any
+				User user = userEndpoint.findUserForSyncContacts(TableField.USER_USERNAME, emailAddress);
+				if(user != null){
+					userContactDataDTOList.add(new UserContactDataDTO(user.getUserContactDatas().iterator().next()));
+
+					// Processing user information
+					userDTOList.add(new UserDTO(user));
+
+					// Processing user avatar
+					userAvatarDTOList.add(new UserAvatarDTO(user.getUserAvatars().iterator().next()));
+				}
 			}
-		}
 
-		// Setting the success flag to true
-		synchronizeContactsResponse.setSuccess(true);
+			// Setting the success flag to true
+			synchronizeContactsResponse.setSuccess(true);
+		}
 
 		return synchronizeContactsResponse;
 	}
@@ -87,19 +88,11 @@ public class SynchronizeContactsService {
 		this.userEndpoint = userEndpoint;
 	}
 
-	public UserContactDataEndpoint getUserContactDataEndpoint() {
-		return userContactDataEndpoint;
+	public UserSessionEndpoint getUserSessionEndpoint() {
+		return userSessionEndpoint;
 	}
 
-	public void setUserContactDataEndpoint(UserContactDataEndpoint userContactDataEndpoint) {
-		this.userContactDataEndpoint = userContactDataEndpoint;
-	}
-
-	public UserAvatarEndpoint getUserAvatarEndpoint() {
-		return userAvatarEndpoint;
-	}
-
-	public void setUserAvatarEndpoint(UserAvatarEndpoint userAvatarEndpoint) {
-		this.userAvatarEndpoint = userAvatarEndpoint;
+	public void setUserSessionEndpoint(UserSessionEndpoint userSessionEndpoint) {
+		this.userSessionEndpoint = userSessionEndpoint;
 	}
 }

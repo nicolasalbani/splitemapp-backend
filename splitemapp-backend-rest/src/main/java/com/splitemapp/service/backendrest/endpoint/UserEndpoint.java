@@ -24,5 +24,9 @@ public class UserEndpoint extends UpdateableDomainDAO<User,Long> {
 	public User findUserForLogin(String fieldName, String fieldValue){
 		return findByFieldWithJoins(fieldName, fieldValue, "userContactDatas", "userAvatars");
 	}
+	
+	public User findUserForSyncContacts(String fieldName, String fieldValue){
+		return findByFieldWithJoins(fieldName, fieldValue, "userContactDatas", "userAvatars");
+	}
 
 }
