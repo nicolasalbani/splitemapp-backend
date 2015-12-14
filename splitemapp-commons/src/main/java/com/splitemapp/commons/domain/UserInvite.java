@@ -57,6 +57,10 @@ public class UserInvite implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false, length = 19)
 	private Date updatedAt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "pushed_at", length = 19)
+	private Date pushedAt;
 
 	public UserInvite() {
 		this.createdAt = this.updatedAt = new Date();
@@ -70,25 +74,28 @@ public class UserInvite implements java.io.Serializable {
 		this.email = userInviteDTO.getEmail();
 		this.createdAt = userInviteDTO.getCreatedAt();
 		this.updatedAt = userInviteDTO.getUpdatedAt();
+		this.pushedAt = userInviteDTO.getPushedAt();
 	}
 
 	public UserInvite(User user, Project project, InviteStatus inviteStatus,
-			Date createdAt, Date updatedAt) {
+			Date createdAt, Date updatedAt, Date pushedAt) {
 		this.user = user;
 		this.project = project;
 		this.inviteStatus = inviteStatus;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 	}
 
 	public UserInvite(User user, Project project, InviteStatus inviteStatus,
-			String email, Date createdAt, Date updatedAt) {
+			String email, Date createdAt, Date updatedAt, Date pushedAt) {
 		this.user = user;
 		this.project = project;
 		this.inviteStatus = inviteStatus;
 		this.email = email;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 	}
 
 	public Long getId() {
@@ -145,6 +152,14 @@ public class UserInvite implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 }

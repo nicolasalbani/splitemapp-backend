@@ -33,6 +33,10 @@ public class UserDTO implements java.io.Serializable {
 	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date updatedAt;
 	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date pushedAt;
+	
 	public UserDTO(){}
 
 	public UserDTO(User user) {
@@ -47,11 +51,12 @@ public class UserDTO implements java.io.Serializable {
 		this.createdIpAddress = user.getCreatedIpAddress();
 		this.updatedAt = user.getUpdatedAt();
 		this.updatedIpAddress = user.getUpdatedIpAddress();
+		this.pushedAt = user.getPushedAt();
 	}
 
 	public UserDTO(Short userStatusId, String username, String password,
 			String fullName, String lastName, Date lastLogin, int loginCnt,
-			Date createdAt, String createdIpAddress, Date updatedAt,
+			Date createdAt, String createdIpAddress, Date updatedAt, Date pushedAt,
 			String updatedIpAddress) {
 		this.userStatusId = userStatusId;
 		this.username = username;
@@ -62,6 +67,7 @@ public class UserDTO implements java.io.Serializable {
 		this.createdAt = createdAt;
 		this.createdIpAddress = createdIpAddress;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 		this.updatedIpAddress = updatedIpAddress;
 	}
 
@@ -143,6 +149,14 @@ public class UserDTO implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 	public String getUpdatedIpAddress() {

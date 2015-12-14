@@ -56,6 +56,10 @@ public class UserToProject implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false, length = 19)
 	private Date updatedAt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "pushed_at", length = 19)
+	private Date pushedAt;
 
 	@Column(name = "expenses_share", nullable = false, precision = 3)
 	private Float expensesShare;
@@ -72,6 +76,7 @@ public class UserToProject implements java.io.Serializable {
 		this.userToProjectStatus = userToProjectStatus;
 		this.createdAt = userToProjectDTO.getCreatedAt();
 		this.updatedAt = userToProjectDTO.getUpdatedAt();
+		this.pushedAt = userToProjectDTO.getPushedAt();
 		this.expensesShare = userToProjectDTO.getExpensesShare();
 	}
 
@@ -85,13 +90,14 @@ public class UserToProject implements java.io.Serializable {
 	
 	public UserToProject(Long id, User user, Project project,
 			UserToProjectStatus userToProjectStatus, Date createdAt,
-			Date updatedAt, Float expensesShare) {
+			Date updatedAt, Date pushedAt, Float expensesShare) {
 		this.id = id;
 		this.user = user;
 		this.project = project;
 		this.userToProjectStatus = userToProjectStatus;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 		this.expensesShare = expensesShare;
 	}
 
@@ -149,6 +155,14 @@ public class UserToProject implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 	
 }

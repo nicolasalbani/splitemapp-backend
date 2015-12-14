@@ -21,6 +21,11 @@ public class UserEndpoint extends UpdateableDomainDAO<User,Long> {
 		return "SELECT DISTINCT U FROM user U LEFT JOIN U.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UTP.updatedAt > :" +UPDATED_AT_PARAMETER;
 	}
 	
+	@Override
+	public String getPushedAfterQuery() {
+		return "SELECT DISTINCT U FROM user U LEFT JOIN U.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UTP.pushedAt > :" +PUSHED_AT_PARAMETER;
+	}
+	
 	public User findUserForLogin(String fieldName, String fieldValue){
 		return findByFieldWithJoins(fieldName, fieldValue, "userContactDatas", "userAvatars");
 	}

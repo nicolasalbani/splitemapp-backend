@@ -72,6 +72,10 @@ public class User implements java.io.Serializable {
 
 	@Column(name = "updated_ip_address", length = 15)
 	private String updatedIpAddress;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "pushed_at", length = 19)
+	private Date pushedAt;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<UserToProject> userToProjects = new HashSet<UserToProject>(0);
@@ -104,22 +108,24 @@ public class User implements java.io.Serializable {
 		this.createdIpAddress = userDTO.getCreatedIpAddress();
 		this.updatedAt = userDTO.getUpdatedAt();
 		this.updatedIpAddress = userDTO.getUpdatedIpAddress();
+		this.pushedAt = userDTO.getPushedAt();
 	}
 
 	public User(UserStatus userStatus, String username, int loginCnt,
-			Date createdAt, String createdIpAddress, Date updatedAt, byte[] avatar) {
+			Date createdAt, String createdIpAddress, Date updatedAt, byte[] avatar, Date pushedAt) {
 		this.userStatus = userStatus;
 		this.username = username;
 		this.loginCnt = loginCnt;
 		this.createdAt = createdAt;
 		this.createdIpAddress = createdIpAddress;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 	}
 
 	public User(UserStatus userStatus, String username, String password,
 			String fullName, String lastName, Date lastLogin, int loginCnt,
 			Date createdAt, String createdIpAddress, Date updatedAt, byte[] avatar,
-			String updatedIpAddress, Set<UserToProject> userToProjects,
+			String updatedIpAddress, Date pushedAt, Set<UserToProject> userToProjects,
 			Set<UserExpense> userExpenses, Set<UserInvite> userInvites,
 			Set<UserContactData> userContactDatas, Set<UserAvatar> userAvatars) {
 		this.userStatus = userStatus;
@@ -132,6 +138,7 @@ public class User implements java.io.Serializable {
 		this.createdIpAddress = createdIpAddress;
 		this.updatedAt = updatedAt;
 		this.updatedIpAddress = updatedIpAddress;
+		this.pushedAt = pushedAt;
 		this.userToProjects = userToProjects;
 		this.userExpenses = userExpenses;
 		this.userInvites = userInvites;
@@ -225,6 +232,14 @@ public class User implements java.io.Serializable {
 
 	public void setUpdatedIpAddress(String updatedIpAddress) {
 		this.updatedIpAddress = updatedIpAddress;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 	public Set<UserToProject> getUserToProjects() {

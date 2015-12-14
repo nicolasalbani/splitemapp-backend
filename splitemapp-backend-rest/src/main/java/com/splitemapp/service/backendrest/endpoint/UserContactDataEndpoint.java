@@ -19,5 +19,10 @@ public class UserContactDataEndpoint extends UpdateableDomainDAO<UserContactData
 	public String getUpdatedAfterQuery() {
 		return "SELECT DISTINCT UCD FROM user_contact_data UCD LEFT JOIN UCD.user.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UTP.updatedAt > :" +UPDATED_AT_PARAMETER;
 	}
+	
+	@Override
+	public String getPushedAfterQuery() {
+		return "SELECT DISTINCT UCD FROM user_contact_data UCD LEFT JOIN UCD.user.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UTP.pushedAt > :" +PUSHED_AT_PARAMETER;
+	}
 
 }

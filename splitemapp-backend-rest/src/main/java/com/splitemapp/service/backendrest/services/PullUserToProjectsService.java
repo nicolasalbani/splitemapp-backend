@@ -52,7 +52,7 @@ public class PullUserToProjectsService {
 			
 			// We set the user to project set
 			Set<UserToProjectDTO> userToProjectDTOs = new HashSet<UserToProjectDTO>();
-			for(UserToProject userToProject:userToProjectEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
+			for(UserToProject userToProject:userToProjectEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userToProjectDTOs.add(new UserToProjectDTO(userToProject));
 			}
 			response.setItemSet(userToProjectDTOs);

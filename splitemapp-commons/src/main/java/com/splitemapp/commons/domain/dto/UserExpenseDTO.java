@@ -30,6 +30,10 @@ public class UserExpenseDTO implements java.io.Serializable {
 	
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date pushedAt;
+	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date expenseDate;
 	
 	public UserExpenseDTO(){}
@@ -44,6 +48,7 @@ public class UserExpenseDTO implements java.io.Serializable {
 		this.note = userExpense.getNote();
 		this.createdAt = userExpense.getCreatedAt();
 		this.updatedAt = userExpense.getUpdatedAt();
+		this.pushedAt = userExpense.getPushedAt();
 	}
 
 	public UserExpenseDTO(Long userId, Long projectId,
@@ -127,6 +132,14 @@ public class UserExpenseDTO implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 }

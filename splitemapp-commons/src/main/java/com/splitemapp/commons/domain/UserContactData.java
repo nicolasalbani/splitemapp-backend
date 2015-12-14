@@ -56,8 +56,12 @@ public class UserContactData implements java.io.Serializable {
 	private Date createdAt;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated_at", length = 19)
+	@Column(name = "updated_at", nullable = false, length = 19)
 	private Date updatedAt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "pushed_at", length = 19)
+	private Date pushedAt;
 
 	public UserContactData() {
 		this.createdAt = this.updatedAt = new Date();
@@ -71,6 +75,7 @@ public class UserContactData implements java.io.Serializable {
 		this.verifiedAt = userContactDataDTO.getVerifiedAt();
 		this.createdAt = userContactDataDTO.getCreatedAt();
 		this.updatedAt = userContactDataDTO.getUpdatedAt();
+		this.pushedAt = userContactDataDTO.getPushedAt();
 	}
 
 	public UserContactData(User user, boolean verified, Date createdAt) {
@@ -80,13 +85,14 @@ public class UserContactData implements java.io.Serializable {
 	}
 
 	public UserContactData(User user, String contactData, boolean verified,
-			Date verifiedAt, Date createdAt, Date updatedAt) {
+			Date verifiedAt, Date createdAt, Date updatedAt, Date pushedAt) {
 		this.user = user;
 		this.contactData = contactData;
 		this.verified = verified;
 		this.verifiedAt = verifiedAt;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 	}
 
 	public Long getId() {
@@ -143,6 +149,14 @@ public class UserContactData implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 }

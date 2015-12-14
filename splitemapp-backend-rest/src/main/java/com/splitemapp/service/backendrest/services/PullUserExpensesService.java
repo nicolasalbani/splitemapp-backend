@@ -52,7 +52,7 @@ public class PullUserExpensesService {
 			
 			// We set the user expense set
 			Set<UserExpenseDTO> userExpenseDTOs = new HashSet<UserExpenseDTO>();
-			for(UserExpense userExpense:userExpenseEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
+			for(UserExpense userExpense:userExpenseEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userExpenseDTOs.add(new UserExpenseDTO(userExpense));
 			}
 			response.setItemSet(userExpenseDTOs);

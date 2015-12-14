@@ -52,7 +52,7 @@ public class PullUserContactDatasService {
 
 			// We set the user contact data set
 			Set<UserContactDataDTO> userContactDataDTOs = new HashSet<UserContactDataDTO>();
-			for(UserContactData userContactData:userContactDataEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
+			for(UserContactData userContactData:userContactDataEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userContactDataDTOs.add(new UserContactDataDTO(userContactData));
 			}
 			response.setItemSet(userContactDataDTOs);

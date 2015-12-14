@@ -50,8 +50,12 @@ public class UserAvatar implements java.io.Serializable {
 	private Date createdAt;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated_at", length = 19)
+	@Column(name = "updated_at", nullable = false, length = 19)
 	private Date updatedAt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "pushed_at", length = 19)
+	private Date pushedAt;
 
 	public UserAvatar() {
 		this.createdAt = this.updatedAt = new Date();
@@ -63,14 +67,16 @@ public class UserAvatar implements java.io.Serializable {
 		this.avatarData = userAvatarDTO.getAvatarData();
 		this.createdAt = userAvatarDTO.getCreatedAt();
 		this.updatedAt = userAvatarDTO.getUpdatedAt();
+		this.pushedAt = userAvatarDTO.getPushedAt();
 	}
 
-	public UserAvatar(User user, byte[] avatarData, Date createdAt, Date updatedAt) {
+	public UserAvatar(User user, byte[] avatarData, Date createdAt, Date updatedAt, Date pushedAt) {
 		this.id = user.getId();
 		this.user = user;
 		this.avatarData = avatarData;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 	}
 
 	public Long getId() {
@@ -111,6 +117,14 @@ public class UserAvatar implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 }

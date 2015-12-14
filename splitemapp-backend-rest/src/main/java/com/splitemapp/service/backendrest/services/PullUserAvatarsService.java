@@ -52,7 +52,7 @@ public class PullUserAvatarsService {
 
 			// We set the user contact data set
 			Set<UserAvatarDTO> userAvatarDTOs = new HashSet<UserAvatarDTO>();
-			for(UserAvatar userAvatar:userAvatarEndpoint.findUpdatedAfter(request.getLastPullSuccessAt(), user.getId())){
+			for(UserAvatar userAvatar:userAvatarEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userAvatarDTOs.add(new UserAvatarDTO(userAvatar));
 			}
 			response.setItemSet(userAvatarDTOs);

@@ -27,6 +27,10 @@ public class ProjectDTO implements java.io.Serializable {
 	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date updatedAt;
 	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date pushedAt;
+	
 	public ProjectDTO(){}
 
 	public ProjectDTO(Project project) {
@@ -37,17 +41,19 @@ public class ProjectDTO implements java.io.Serializable {
 		this.budget = project.getBudget();
 		this.createdAt = project.getCreatedAt();
 		this.updatedAt = project.getUpdatedAt();
+		this.pushedAt = project.getPushedAt();
 	}
 
 	public ProjectDTO(Short projectTypeId, Short projectStatusId,
 			String title, String imgCover, BigDecimal budget, Date createdAt,
-			Date updatedAt) {
+			Date updatedAt, Date pushedAt) {
 		this.projectTypeId = projectTypeId;
 		this.projectStatusId = projectStatusId;
 		this.title = title;
 		this.budget = budget;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 	}
 
 	public Long getId() {
@@ -104,6 +110,14 @@ public class ProjectDTO implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 	
 }

@@ -58,6 +58,10 @@ public class UserExpense implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated_at", nullable = false, length = 19)
 	private Date updatedAt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "pushed_at", length = 19)
+	private Date pushedAt;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "expense_date", length = 19)
@@ -81,6 +85,7 @@ public class UserExpense implements java.io.Serializable {
 		this.note = userExpenseDTO.getNote();
 		this.createdAt = userExpenseDTO.getCreatedAt();
 		this.updatedAt = userExpenseDTO.getUpdatedAt();
+		this.pushedAt = userExpenseDTO.getPushedAt();
 	}
 
 	public UserExpense(User user, Project project,
@@ -172,6 +177,14 @@ public class UserExpense implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 }

@@ -62,6 +62,10 @@ public class Project implements java.io.Serializable {
 	@Column(name = "updated_at", nullable = false, length = 19)
 	private Date updatedAt;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "pushed_at", length = 19)
+	private Date pushedAt;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
 	private Set<UserExpense> userExpenses = new HashSet<UserExpense>(0);
 	
@@ -79,11 +83,12 @@ public class Project implements java.io.Serializable {
 	}
 
 	public Project(ProjectType projectType, ProjectStatus projectStatus,
-			Date createdAt, Date updatedAt) {
+			Date createdAt, Date updatedAt, Date pushedAt) {
 		this.projectType = projectType;
 		this.projectStatus = projectStatus;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 	}
 	
 	public Project(ProjectType projectType, ProjectStatus projectStatus, ProjectDTO projectDTO) {
@@ -94,11 +99,12 @@ public class Project implements java.io.Serializable {
 		this.budget = projectDTO.getBudget();
 		this.createdAt = projectDTO.getCreatedAt();
 		this.updatedAt = projectDTO.getUpdatedAt();
+		this.pushedAt = projectDTO.getPushedAt();
 	}
 
 	public Project(ProjectType projectType, ProjectStatus projectStatus,
 			String title, String imgCover, BigDecimal budget, Date createdAt,
-			Date updatedAt, Set<UserExpense> userExpenses,
+			Date updatedAt, Date pushedAt, Set<UserExpense> userExpenses,
 			Set<UserInvite> userInvites, Set<UserToProject> userToProjects, 
 			Set<ProjectCoverImage> projectCoverImages) {
 		this.projectType = projectType;
@@ -107,6 +113,7 @@ public class Project implements java.io.Serializable {
 		this.budget = budget;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 		this.userExpenses = userExpenses;
 		this.userInvites = userInvites;
 		this.userToProjects = userToProjects;
@@ -167,6 +174,14 @@ public class Project implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 	public Set<UserExpense> getUserExpenses() {

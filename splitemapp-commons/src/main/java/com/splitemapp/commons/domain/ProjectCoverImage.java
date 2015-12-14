@@ -50,8 +50,12 @@ public class ProjectCoverImage implements java.io.Serializable {
 	private Date createdAt;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated_at", length = 19)
+	@Column(name = "updated_at", nullable = false, length = 19)
 	private Date updatedAt;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "pushed_at", length = 19)
+	private Date pushedAt;
 
 	public ProjectCoverImage() {
 		this.createdAt = this.updatedAt = new Date();
@@ -63,13 +67,15 @@ public class ProjectCoverImage implements java.io.Serializable {
 		this.avatarData = projectCoverImageDTO.getAvatarData();
 		this.createdAt = projectCoverImageDTO.getCreatedAt();
 		this.updatedAt = projectCoverImageDTO.getUpdatedAt();
+		this.pushedAt = projectCoverImageDTO.getPushedAt();
 	}
 
-	public ProjectCoverImage(Project project, byte[] avatarData, Date createdAt, Date updatedAt) {
+	public ProjectCoverImage(Project project, byte[] avatarData, Date createdAt, Date updatedAt, Date pushedAt) {
 		this.project = project;
 		this.avatarData = avatarData;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 	}
 
 	public Long getId() {
@@ -110,6 +116,14 @@ public class ProjectCoverImage implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 }

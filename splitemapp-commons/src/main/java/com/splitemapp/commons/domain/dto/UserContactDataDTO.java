@@ -29,6 +29,10 @@ public class UserContactDataDTO implements java.io.Serializable {
 	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date updatedAt;
 	
+	@JsonSerialize(using=CustomDateSerializer.class)
+	@JsonDeserialize(using=CustomDateDeserializer.class)
+	private Date pushedAt;
+	
 	public UserContactDataDTO(){}
 
 	public UserContactDataDTO(UserContactData userContactData) {
@@ -39,16 +43,18 @@ public class UserContactDataDTO implements java.io.Serializable {
 		this.verifiedAt = userContactData.getVerifiedAt();
 		this.createdAt = userContactData.getCreatedAt();
 		this.updatedAt = userContactData.getUpdatedAt();
+		this.pushedAt = userContactData.getPushedAt();
 	}
 
 	public UserContactDataDTO(Long userId, String contactData, boolean verified,
-			Date verifiedAt, Date createdAt, Date updatedAt) {
+			Date verifiedAt, Date createdAt, Date updatedAt, Date pushedAt) {
 		this.userId = userId;
 		this.contactData = contactData;
 		this.verified = verified;
 		this.verifiedAt = verifiedAt;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
+		this.pushedAt = pushedAt;
 	}
 
 	public Long getId() {
@@ -105,6 +111,14 @@ public class UserContactDataDTO implements java.io.Serializable {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public Date getPushedAt() {
+		return pushedAt;
+	}
+
+	public void setPushedAt(Date pushedAt) {
+		this.pushedAt = pushedAt;
 	}
 
 }
