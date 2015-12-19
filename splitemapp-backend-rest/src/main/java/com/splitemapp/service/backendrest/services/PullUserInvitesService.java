@@ -38,21 +38,21 @@ public class PullUserInvitesService {
 	public String printMessage() {
 		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
 	}
-	
+
 	@POST
 	public PullResponse<UserInviteDTO> printMessage(PullRequest request) throws ParseException {
 		// We create a pull all sync response object setting success to false by default
 		PullResponse<UserInviteDTO> response = new PullResponse<UserInviteDTO>();
 		response.setSuccess(false);
-		
+
 		// Creating the pulledAt date
-				Date pulledAt = new Date();
+		Date pulledAt = new Date();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 
 		if(userSession != null){
 			User user = userSession.getUser();
-			
+
 			// We set the user invite set
 			Set<UserInviteDTO> userInviteDTOs = new HashSet<UserInviteDTO>();
 			for(UserInvite userInvite:userInviteEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId())){
