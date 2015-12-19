@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,27 +38,30 @@ public class PullUserToProjectsService {
 	public String printMessage() {
 		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
 	}
-	
+
 	@POST
 	public PullResponse<UserToProjectDTO> printMessage(PullRequest request) throws ParseException {
-
 		// We create a pull all sync response object setting success to false by default
 		PullResponse<UserToProjectDTO> response = new PullResponse<UserToProjectDTO>();
 		response.setSuccess(false);
+
+		// Creating the pulledAt date
+		Date pulledAt = new Date();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 
 		if(userSession != null){
 			User user = userSession.getUser();
-			
+
 			// We set the user to project set
 			Set<UserToProjectDTO> userToProjectDTOs = new HashSet<UserToProjectDTO>();
 			for(UserToProject userToProject:userToProjectEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId())){
 				userToProjectDTOs.add(new UserToProjectDTO(userToProject));
 			}
 			response.setItemSet(userToProjectDTOs);
-			
+
 			// We set the success flag
+			response.setPulledAt(pulledAt);
 			response.setSuccess(true);
 		}
 

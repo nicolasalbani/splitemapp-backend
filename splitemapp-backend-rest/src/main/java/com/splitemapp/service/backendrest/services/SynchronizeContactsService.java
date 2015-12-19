@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -42,8 +43,9 @@ public class SynchronizeContactsService {
 	public SynchronizeContactsResponse printMessage(SynchronizeContactsRequest request) {
 
 		// Creating a synchronize contacts response object setting success to false by default
-		SynchronizeContactsResponse synchronizeContactsResponse = new SynchronizeContactsResponse();
-		synchronizeContactsResponse.setSuccess(false);
+		SynchronizeContactsResponse response = new SynchronizeContactsResponse();
+		response.setSuccess(false);
+		response.setPulledAt(new Date());
 
 		// Retrieving user session
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
@@ -51,11 +53,11 @@ public class SynchronizeContactsService {
 		if(userSession != null){
 			// Setting the references for the User and UserContactData DTO lists
 			List<UserDTO> userDTOList = new  ArrayList<UserDTO>();
-			synchronizeContactsResponse.setUserDTOList(userDTOList);
+			response.setUserDTOList(userDTOList);
 			List<UserContactDataDTO> userContactDataDTOList = new ArrayList<UserContactDataDTO>();
-			synchronizeContactsResponse.setUserContactDataDTOList(userContactDataDTOList);
+			response.setUserContactDataDTOList(userContactDataDTOList);
 			List<UserAvatarDTO> userAvatarDTOList = new ArrayList<UserAvatarDTO>();
-			synchronizeContactsResponse.setUserAvatarDTOList(userAvatarDTOList);
+			response.setUserAvatarDTOList(userAvatarDTOList);
 
 			// Adding all found User and UserContactData information to the response list
 			for(String emailAddress:request.getContactsEmailAddressList()){
@@ -73,10 +75,10 @@ public class SynchronizeContactsService {
 			}
 
 			// Setting the success flag to true
-			synchronizeContactsResponse.setSuccess(true);
+			response.setSuccess(true);
 		}
 
-		return synchronizeContactsResponse;
+		return response;
 	}
 
 	//Getters and setters

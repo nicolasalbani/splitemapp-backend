@@ -22,14 +22,8 @@ public class PushResponse<E extends Number> extends ServiceResponse implements S
 	private Date pushedAt;
 	
 	public PushResponse() {
-		super();
 		idUpdateList = new ArrayList<IdUpdate<E>>();
 		pushedAt = new Date();
-	}
-
-	public PushResponse(Boolean success, List<IdUpdate<E>> idUpdateList) {
-		super(success);
-		this.idUpdateList = idUpdateList;
 	}
 
 	public List<IdUpdate<E>> getIdUpdateList() {
