@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -45,13 +46,15 @@ public class PushUserToProjectsService {
 	public String printMessage() {
 		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
 	}
-	
+
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<UserToProjectDTO> request) throws ParseException {
-
 		// We create a pull groups response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
 		response.setSuccess(false);
+
+		// Creating the pushedAt date
+		Date pushedAt = new Date();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 
@@ -63,12 +66,15 @@ public class PushUserToProjectsService {
 				Project project = projectEndpoint.findById(userToProjectDTO.getProjectId());
 				UserToProjectStatus userToProjectStatus = userToProjectStatusEndpoint.findById(userToProjectDTO.getUserToProjectStatusId());
 				UserToProject userToProject = new UserToProject(user, project, userToProjectStatus, userToProjectDTO);
+
+				// We update the pushedAt date
+				userToProject.setPushedAt(pushedAt);
 				
 				if(Utils.isDateAfter(userToProjectDTO.getCreatedAt(),request.getLastPushSuccessAt())){
 					// We persist the entry to the database
 					userToProject.setId(null);
 					userToProjectEndpoint.persist(userToProject);
-					
+
 					// We add the IdUpdate element to the response list
 					response.getIdUpdateList().add(new IdUpdate<Long>(userToProjectDTO.getId(), userToProject.getId()));
 				} else {
@@ -77,7 +83,8 @@ public class PushUserToProjectsService {
 				}
 			}
 
-			// We set the success flag
+			// We set the success flag and pushedAt
+			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
 		}
 
@@ -86,7 +93,7 @@ public class PushUserToProjectsService {
 
 
 	// Getters and setters
-	
+
 	public UserSessionEndpoint getUserSessionEndpoint() {
 		return userSessionEndpoint;
 	}

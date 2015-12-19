@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -45,13 +46,15 @@ public class PushUserExpensesService {
 	public String printMessage() {
 		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
 	}
-	
+
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<UserExpenseDTO> request) throws ParseException {
-
 		// We create a pull groups response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
 		response.setSuccess(false);
+
+		// Creating the pushedAt date
+		Date pushedAt = new Date();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 
@@ -64,11 +67,14 @@ public class PushUserExpensesService {
 				ExpenseCategory expenseCategory = expenseCategoryEndpoint.findById(userExpenseDTO.getExpenseCategoryId());
 				UserExpense userExpense = new UserExpense(user, project, expenseCategory, userExpenseDTO);
 				
+				// We update the pushedAt date
+				userExpense.setPushedAt(pushedAt);
+
 				if(Utils.isDateAfter(userExpenseDTO.getCreatedAt(),request.getLastPushSuccessAt())){
 					// We persist the entry to the database
 					userExpense.setId(null);
 					userExpenseEndpoint.persist(userExpense);
-					
+
 					// We add the IdUpdate element to the response list
 					response.getIdUpdateList().add(new IdUpdate<Long>(userExpenseDTO.getId(), userExpense.getId()));
 				} else {
@@ -77,7 +83,8 @@ public class PushUserExpensesService {
 				}
 			}
 
-			// We set the success flag
+			// We set the success flag and pushedAt 
+			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
 		}
 
@@ -86,7 +93,7 @@ public class PushUserExpensesService {
 
 
 	// Getters and setters
-	
+
 	public UserSessionEndpoint getUserSessionEndpoint() {
 		return userSessionEndpoint;
 	}

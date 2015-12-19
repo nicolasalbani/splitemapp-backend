@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -42,10 +43,12 @@ public class PushProjectCoverImagesService {
 	
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<ProjectCoverImageDTO> request) throws ParseException {
-
 		// We create a push project cover image response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
 		response.setSuccess(false);
+		
+		// Creating the pushedAt date
+		Date pushedAt = new Date();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 
@@ -55,6 +58,9 @@ public class PushProjectCoverImagesService {
 				// We create the project cover image object
 				Project project = projectEndpoint.findById(projectCoverImageDTO.getProjectId());
 				ProjectCoverImage projectCoverImage = new ProjectCoverImage(project, projectCoverImageDTO);
+				
+				// We update the pushedAt date
+				projectCoverImage.setPushedAt(pushedAt);
 				
 				if(Utils.isDateAfter(projectCoverImageDTO.getCreatedAt(),request.getLastPushSuccessAt())){
 					// We persist the entry to the database
@@ -69,7 +75,8 @@ public class PushProjectCoverImagesService {
 				}
 			}
 
-			// We set the success flag
+			// We set the success flag and pushedAt date
+			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
 		}
 

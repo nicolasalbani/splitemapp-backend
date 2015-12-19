@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -40,10 +41,12 @@ public class PushUserContactDatasService {
 
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<UserContactDataDTO> request) throws ParseException {
-
 		// We create a pull groups response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
 		response.setSuccess(false);
+
+		// Creating the pushedAt date
+		Date pushedAt = new Date();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 
@@ -54,11 +57,15 @@ public class PushUserContactDatasService {
 				User user = userEndpoint.findById(userContactDataDTO.getUserId());
 				UserContactData userContactData = new UserContactData(user, userContactDataDTO);
 
+				// We update the pushedAt date
+				userContactData.setPushedAt(pushedAt);
+				
 				// We merge the entry to the database
 				userContactDataEndpoint.merge(userContactData);
 			}
 
-			// We set the success flag
+			// We set the success flag and pushedAt
+			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
 		}
 

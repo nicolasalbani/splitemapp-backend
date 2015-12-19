@@ -1,6 +1,7 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.text.ParseException;
+import java.util.Date;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -43,13 +44,15 @@ public class PushProjectsService {
 	public String printMessage() {
 		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
 	}
-	
+
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<ProjectDTO> request) throws ParseException {
-
 		// We create a pull groups response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
 		response.setSuccess(false);
+
+		// Creating the pushedAt date
+		Date pushedAt = new Date();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 
@@ -61,11 +64,14 @@ public class PushProjectsService {
 				ProjectType projectType = projectTypeEndpoint.findById(projectDTO.getProjectTypeId());
 				Project project = new Project(projectType, projectStatus, projectDTO);
 				
+				// We update the pushedAt date
+				project.setPushedAt(pushedAt);
+
 				if(Utils.isDateAfter(projectDTO.getCreatedAt(),request.getLastPushSuccessAt())){
 					// We persist the entry to the database
 					project.setId(null);
 					projectEndpoint.persist(project);
-					
+
 					// We add the IdUpdate element to the response list
 					response.getIdUpdateList().add(new IdUpdate<Long>(projectDTO.getId(), project.getId()));
 				} else {
@@ -74,7 +80,8 @@ public class PushProjectsService {
 				}
 			}
 
-			// We set the success flag
+			// We set the success flag and pushedAt date
+			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
 		}
 
@@ -83,7 +90,7 @@ public class PushProjectsService {
 
 
 	// Getters and setters
-	
+
 	public UserSessionEndpoint getUserSessionEndpoint() {
 		return userSessionEndpoint;
 	}
