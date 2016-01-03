@@ -78,8 +78,9 @@ values									(1,1,1,1,50,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-
 										(6,1,4,4,100,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36');
 								
 -- Populating the user_session table
-insert into splitemapp.user_session	(id,user_id,token,device,os_version,last_used_at)  
-values								(1,1,'554686b8-7646-402e-9911-f28b8b417d46','samsung GT-I9100','Android REL-4.1.2 SDK-16','2015-08-02 15:59:05.0');
+insert into splitemapp.user_session	(id,user_id,token,gcm_token,device,os_version,last_used_at)  
+values								(1,1,'554686b8-7646-402e-9911-f28b8b417d46',null,'samsung GT-I9100','Android REL-4.1.2 SDK-16','2015-08-02 15:59:05.0'),
+									(2,2,'554686b8-7646-402e-9911-f28b8b417d47',null,'samsung GT-I9100','Android REL-4.1.2 SDK-16','2015-08-02 15:59:05.0');
 
 -- Populating the user_contact_data table
 insert into splitemapp.user_contact_data	(id,user_id,contact_data,verified,verified_at,created_at,updated_at,pushed_at) 

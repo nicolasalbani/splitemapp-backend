@@ -255,6 +255,7 @@ CREATE TABLE `user_session` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL,
   `token` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `gcm_token` varchar(4096) COLLATE utf8_unicode_ci DEFAULT NULL,
   `device` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `os_version` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `last_used_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

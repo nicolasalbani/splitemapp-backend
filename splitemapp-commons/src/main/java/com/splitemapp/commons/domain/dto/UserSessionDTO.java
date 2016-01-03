@@ -15,6 +15,7 @@ public class UserSessionDTO implements java.io.Serializable {
 	private Long id;
 	private Long userId;
 	private String token;
+	private String gcmToken;
 	private String device;
 	private String osVersion;
 	
@@ -28,14 +29,16 @@ public class UserSessionDTO implements java.io.Serializable {
 		this.id = userSession.getId();
 		this.userId = userSession.getUser().getId();
 		this.token = userSession.getToken();
+		this.setGcmToken(userSession.getGcmToken());
 		this.device = userSession.getDevice();
 		this.osVersion = userSession.getOsVersion();
 		this.lastUsedAt = userSession.getLastUsedAt();
 	}
 
-	public UserSessionDTO(Long userId, String token, String device, String osVersion, Date lastUsedAt) {
+	public UserSessionDTO(Long userId, String token, String gcmToken, String device, String osVersion, Date lastUsedAt) {
 		this.userId = userId;
 		this.token = token;
+		this.setGcmToken(gcmToken);
 		this.device = device;
 		this.osVersion = osVersion;
 		this.lastUsedAt = lastUsedAt;
@@ -65,6 +68,14 @@ public class UserSessionDTO implements java.io.Serializable {
 		this.token = token;
 	}
 	
+	public String getGcmToken() {
+		return gcmToken;
+	}
+
+	public void setGcmToken(String gcmToken) {
+		this.gcmToken = gcmToken;
+	}
+
 	public String getDevice() {
 		return this.device;
 	}

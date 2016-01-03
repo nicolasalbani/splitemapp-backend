@@ -44,6 +44,9 @@ public class UserSession implements java.io.Serializable {
 	@Column(name = "token", unique = true, length = 64, nullable = false)
 	private String token;
 	
+	@Column(name = "gcm_token", unique = true, length = 64, nullable = true)
+	private String gcmToken;
+	
 	@Column(name = "device", length = 64, nullable = false)
 	private String device;
 	
@@ -60,14 +63,16 @@ public class UserSession implements java.io.Serializable {
 	public UserSession(User user, UserSessionDTO userSessionDTO) {
 		this.user = user;
 		this.token = userSessionDTO.getToken();
+		this.gcmToken = userSessionDTO.getGcmToken();
 		this.device = userSessionDTO.getDevice();
 		this.osVersion = userSessionDTO.getOsVersion();
 		this.lastUsedAt = userSessionDTO.getLastUsedAt();
 	}
 
-	public UserSession(User user, String token, String device, String osVersion, Date lastUsedAt) {
+	public UserSession(User user, String token, String gcmToken, String device, String osVersion, Date lastUsedAt) {
 		this.user = user;
 		this.token = token;
+		this.gcmToken = gcmToken;
 		this.device = device;
 		this.osVersion = osVersion;
 		this.lastUsedAt = lastUsedAt;
@@ -97,6 +102,14 @@ public class UserSession implements java.io.Serializable {
 		this.token = token;
 	}
 	
+	public String getGcmToken() {
+		return gcmToken;
+	}
+
+	public void setGcmToken(String gcmToken) {
+		this.gcmToken = gcmToken;
+	}
+
 	public String getDevice() {
 		return this.device;
 	}
