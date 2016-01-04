@@ -26,14 +26,14 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 	 * @return
 	 */
 	public abstract String getCreatedAfterQuery();
-	
+
 	/**
 	 * 
 	 * @param session
 	 * @return
 	 */
 	public abstract String getUpdatedAfterQuery();
-	
+
 	/**
 	 * 
 	 * @param session
@@ -43,12 +43,21 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 
 	@SuppressWarnings("unchecked")
 	public List<E> findCreatedAfter(Date createdAt, Long userId) {
-		logger.debug("getting " +getEntityClass().getSimpleName()+ " instances created after " +createdAt+ " for userId " +userId);
+
+		String gettingMessage = "getting " +getEntityClass().getSimpleName() +" instances for userId " +userId;
+
+		if(createdAt != null){
+			gettingMessage +=  " created after " +createdAt;
+		}
+
+		logger.debug(gettingMessage);
 
 		Session session = sessionFactory.openSession();
 		try {
 			Query query = session.createQuery(getCreatedAfterQuery());
-			query.setParameter(CREATED_AT_PARAMETER, createdAt);
+			if(createdAt != null){
+				query.setParameter(CREATED_AT_PARAMETER, createdAt);
+			}
 			query.setParameter(USER_ID_PARAMETER, userId);
 			List<E> resultList = query.list();
 			if(resultList.size() > 0){
@@ -67,12 +76,20 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 
 	@SuppressWarnings("unchecked")
 	public List<E> findUpdatedAfter(Date updatedAt, Long userId) {
-		logger.debug("getting " +getEntityClass().getSimpleName()+ " instances updated after " +updatedAt+ " for userId " +userId);
+		String gettingMessage = "getting " +getEntityClass().getSimpleName()+ " instances for userId " +userId;
+
+		if(updatedAt != null){
+			gettingMessage += " updated after " +updatedAt;
+		}
+
+		logger.debug(gettingMessage);
 
 		Session session = sessionFactory.openSession();
 		try {
 			Query query = session.createQuery(getUpdatedAfterQuery());
-			query.setParameter(UPDATED_AT_PARAMETER, updatedAt);
+			if(updatedAt != null){
+				query.setParameter(UPDATED_AT_PARAMETER, updatedAt);
+			}
 			query.setParameter(USER_ID_PARAMETER, userId);
 			List<E> resultList = query.list();
 			if(resultList.size() > 0){
@@ -88,15 +105,23 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 			session.close();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<E> findPushedAfter(Date pushedAt, Long userId) {
-		logger.debug("getting " +getEntityClass().getSimpleName()+ " instances pushed after " +pushedAt+ " for userId " +userId);
+		String gettingMessage = "getting " +getEntityClass().getSimpleName()+ " instances for userId " +userId;
+
+		if(pushedAt != null){
+			gettingMessage += " pushed after " +pushedAt;
+		}
+
+		logger.debug(gettingMessage);
 
 		Session session = sessionFactory.openSession();
 		try {
 			Query query = session.createQuery(getPushedAfterQuery());
-			query.setParameter(PUSHED_AT_PARAMETER, pushedAt);
+			if(pushedAt != null){
+				query.setParameter(PUSHED_AT_PARAMETER, pushedAt);
+			}
 			query.setParameter(USER_ID_PARAMETER, userId);
 			List<E> resultList = query.list();
 			if(resultList.size() > 0){

@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
-import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserContactData;
 import com.splitemapp.commons.domain.UserSession;
@@ -22,15 +21,13 @@ import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
-import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
 @Service
 @Path(ServiceConstants.PUSH_USER_CONTACT_DATAS_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PushUserContactDatasService {
+public class PushUserContactDatasService extends PushNotificationService{
 
-	UserSessionEndpoint userSessionEndpoint;
 	UserEndpoint userEndpoint;
 	UserContactDataEndpoint userContactDataEndpoint;
 
@@ -48,7 +45,7 @@ public class PushUserContactDatasService {
 		// Creating the pushedAt date
 		Date pushedAt = new Date();
 
-		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
+		UserSession userSession = getUserSession(request.getToken());
 
 		if(userSession != null){
 			// We add or update each one of the items in the DTO list
@@ -59,7 +56,7 @@ public class PushUserContactDatasService {
 
 				// We update the pushedAt date
 				userContactData.setPushedAt(pushedAt);
-				
+
 				// We merge the entry to the database
 				userContactDataEndpoint.merge(userContactData);
 			}
@@ -67,6 +64,9 @@ public class PushUserContactDatasService {
 			// We set the success flag and pushedAt
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
+
+			// Sending GCM notification to all related clients
+			sendGcmNotification(userSession.getUser().getId(), this);
 		}
 
 		return response;
@@ -74,14 +74,6 @@ public class PushUserContactDatasService {
 
 
 	// Getters and setters
-
-	public UserSessionEndpoint getUserSessionEndpoint() {
-		return userSessionEndpoint;
-	}
-
-	public void setUserSessionEndpoint(UserSessionEndpoint userSessionEndpoint) {
-		this.userSessionEndpoint = userSessionEndpoint;
-	}
 
 	public UserEndpoint getUserEndpoint() {
 		return userEndpoint;

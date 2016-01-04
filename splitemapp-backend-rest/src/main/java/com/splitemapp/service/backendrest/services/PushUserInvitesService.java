@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
-import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.InviteStatus;
 import com.splitemapp.commons.domain.Project;
 import com.splitemapp.commons.domain.User;
@@ -28,15 +27,13 @@ import com.splitemapp.service.backendrest.endpoint.InviteStatusEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserInviteEndpoint;
-import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
 @Service
 @Path(ServiceConstants.PUSH_USER_INVITES_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PushUserInvitesService {
+public class PushUserInvitesService extends PushNotificationService{
 
-	UserSessionEndpoint userSessionEndpoint;
 	UserEndpoint userEndpoint;
 	ProjectEndpoint projectEndpoint;
 	InviteStatusEndpoint inviteStatusEndpoint;
@@ -56,7 +53,7 @@ public class PushUserInvitesService {
 		// Creating the pushedAt date
 		Date pushedAt = new Date();
 
-		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
+		UserSession userSession = getUserSession(request.getToken());
 
 		if(userSession != null){
 			// We add or update each one of the items in the DTO list
@@ -69,7 +66,7 @@ public class PushUserInvitesService {
 
 				// We update the pushedAt date
 				userInvite.setPushedAt(pushedAt);
-				
+
 				if(Utils.isDateAfter(userInviteDTO.getCreatedAt(),request.getLastPushSuccessAt())){
 					// We persist the entry to the database
 					userInvite.setId(null);
@@ -86,6 +83,9 @@ public class PushUserInvitesService {
 			// We set the success flag and pushedAt
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
+
+			// Sending GCM notification to all related clients
+			sendGcmNotification(userSession.getUser().getId(), this);
 		}
 
 		return response;
@@ -93,14 +93,6 @@ public class PushUserInvitesService {
 
 
 	// Getters and setters
-
-	public UserSessionEndpoint getUserSessionEndpoint() {
-		return userSessionEndpoint;
-	}
-
-	public void setUserSessionEndpoint(UserSessionEndpoint userSessionEndpoint) {
-		this.userSessionEndpoint = userSessionEndpoint;
-	}
 
 	public UserEndpoint getUserEndpoint() {
 		return userEndpoint;

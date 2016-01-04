@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
-import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserAvatar;
 import com.splitemapp.commons.domain.UserSession;
@@ -22,15 +21,13 @@ import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
 import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
-import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
 @Service
 @Path(ServiceConstants.PUSH_USER_AVATARS_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PushUserAvatarsService {
+public class PushUserAvatarsService extends PushNotificationService{
 
-	UserSessionEndpoint userSessionEndpoint;
 	UserEndpoint userEndpoint;
 	UserAvatarEndpoint userAvatarEndpoint;
 
@@ -48,7 +45,7 @@ public class PushUserAvatarsService {
 		// Creating the pushedAt date
 		Date pushedAt = new Date();
 
-		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
+		UserSession userSession = getUserSession(request.getToken());
 
 		if(userSession != null){
 			// We add or update each one of the items in the DTO list
@@ -56,7 +53,7 @@ public class PushUserAvatarsService {
 				// We create the user avatar object
 				User user = userEndpoint.findById(userAvatarDTO.getUserId());
 				UserAvatar userAvatar = new UserAvatar(user, userAvatarDTO);
-				
+
 				// We update the pushedAt date
 				userAvatar.setPushedAt(pushedAt);
 
@@ -67,6 +64,9 @@ public class PushUserAvatarsService {
 			// We set the success flag and pushedAt
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
+
+			// Sending GCM notification to all related clients
+			sendGcmNotification(userSession.getUser().getId(), this);
 		}
 
 		return response;
@@ -74,14 +74,6 @@ public class PushUserAvatarsService {
 
 
 	// Getters and setters
-
-	public UserSessionEndpoint getUserSessionEndpoint() {
-		return userSessionEndpoint;
-	}
-
-	public void setUserSessionEndpoint(UserSessionEndpoint userSessionEndpoint) {
-		this.userSessionEndpoint = userSessionEndpoint;
-	}
 
 	public UserEndpoint getUserEndpoint() {
 		return userEndpoint;

@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
-import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.Project;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserSession;
@@ -26,7 +25,6 @@ import com.splitemapp.commons.domain.id.IdUpdate;
 import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
-import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserToProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserToProjectStatusEndpoint;
 
@@ -34,9 +32,8 @@ import com.splitemapp.service.backendrest.endpoint.UserToProjectStatusEndpoint;
 @Path(ServiceConstants.PUSH_USER_TO_PROJECTS_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PushUserToProjectsService {
+public class PushUserToProjectsService extends PushNotificationService{
 
-	UserSessionEndpoint userSessionEndpoint;
 	UserEndpoint userEndpoint;
 	ProjectEndpoint projectEndpoint;
 	UserToProjectStatusEndpoint userToProjectStatusEndpoint;
@@ -56,7 +53,7 @@ public class PushUserToProjectsService {
 		// Creating the pushedAt date
 		Date pushedAt = new Date();
 
-		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
+		UserSession userSession = getUserSession(request.getToken());
 
 		if(userSession != null){
 			// We add or update each one of the items in the DTO list
@@ -69,7 +66,7 @@ public class PushUserToProjectsService {
 
 				// We update the pushedAt date
 				userToProject.setPushedAt(pushedAt);
-				
+
 				if(Utils.isDateAfter(userToProjectDTO.getCreatedAt(),request.getLastPushSuccessAt())){
 					// We persist the entry to the database
 					userToProject.setId(null);
@@ -86,21 +83,15 @@ public class PushUserToProjectsService {
 			// We set the success flag and pushedAt
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
+
+			// Sending GCM notification to all related clients
+			sendGcmNotification(userSession.getUser().getId(), this);
 		}
 
 		return response;
 	}
 
-
 	// Getters and setters
-
-	public UserSessionEndpoint getUserSessionEndpoint() {
-		return userSessionEndpoint;
-	}
-
-	public void setUserSessionEndpoint(UserSessionEndpoint userSessionEndpoint) {
-		this.userSessionEndpoint = userSessionEndpoint;
-	}
 
 	public UserEndpoint getUserEndpoint() {
 		return userEndpoint;

@@ -27,15 +27,13 @@ import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectStatusEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectTypeEndpoint;
-import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
 @Service
 @Path(ServiceConstants.PUSH_PROJECTS_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PushProjectsService {
+public class PushProjectsService extends PushNotificationService{
 
-	UserSessionEndpoint userSessionEndpoint;
 	ProjectStatusEndpoint projectStatusEndpoint;
 	ProjectTypeEndpoint projectTypeEndpoint;
 	ProjectEndpoint projectEndpoint;
@@ -54,7 +52,7 @@ public class PushProjectsService {
 		// Creating the pushedAt date
 		Date pushedAt = new Date();
 
-		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
+		UserSession userSession = getUserSession(request.getToken());
 
 		if(userSession != null){
 			// We add or update each one of the items in the DTO list
@@ -63,7 +61,7 @@ public class PushProjectsService {
 				ProjectStatus projectStatus = projectStatusEndpoint.findByField(TableField.ALTER_TABLE_COD, TableFieldCod.GROUP_STATUS_ACTIVE);
 				ProjectType projectType = projectTypeEndpoint.findById(projectDTO.getProjectTypeId());
 				Project project = new Project(projectType, projectStatus, projectDTO);
-				
+
 				// We update the pushedAt date
 				project.setPushedAt(pushedAt);
 
@@ -83,20 +81,12 @@ public class PushProjectsService {
 			// We set the success flag and pushedAt date
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
+
+			// Sending GCM notification to all related clients
+			sendGcmNotification(userSession.getUser().getId(), this);
 		}
 
 		return response;
-	}
-
-
-	// Getters and setters
-
-	public UserSessionEndpoint getUserSessionEndpoint() {
-		return userSessionEndpoint;
-	}
-
-	public void setUserSessionEndpoint(UserSessionEndpoint userSessionEndpoint) {
-		this.userSessionEndpoint = userSessionEndpoint;
 	}
 
 	public ProjectStatusEndpoint getProjectStatusEndpoint() {

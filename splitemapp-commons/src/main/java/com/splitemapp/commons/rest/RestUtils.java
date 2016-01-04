@@ -1,8 +1,13 @@
 package com.splitemapp.commons.rest;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import com.splitemapp.commons.constants.ServiceConstants;
 
 
 public class RestUtils {
@@ -28,8 +33,15 @@ public class RestUtils {
 		requestFactory.setReadTimeout(TIMEOUT);
 		restTemplate.setRequestFactory(requestFactory);  
 
+		// Setting up the request header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.set("Authorization", "key="+ServiceConstants.API_KEY);
+		
 		// We make the POST rest service call
-		T response = restTemplate.postForObject(serviceUrl, request, responseType);
+		HttpEntity<E> entity = new HttpEntity<E>(request,headers);
+		T response = restTemplate.postForObject(serviceUrl, entity, responseType);
+
 		return response;
 	}
 

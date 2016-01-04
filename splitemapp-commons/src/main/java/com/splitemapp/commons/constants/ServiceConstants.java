@@ -4,6 +4,11 @@ public class ServiceConstants {
 	// General service GET success response
 	public static final String GET_SUCCESS = "Your GET request was successfull. Service is alive!";
 	
+	// GCM Constants
+	public static final String GCM_DEFAULT_SENDER_ID = "66220540369";
+	public static final String GCM_SERVER_URL = "https://gcm-http.googleapis.com/gcm/send";
+	public static final String API_KEY = "AIzaSyCREdjyI-IBHiaX07Tbld7ZOqTZxw4p51I";
+	
 	// General service constants
 	public static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
 	

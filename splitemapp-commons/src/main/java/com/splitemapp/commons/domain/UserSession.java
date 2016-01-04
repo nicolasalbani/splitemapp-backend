@@ -62,6 +62,7 @@ public class UserSession implements java.io.Serializable {
 	
 	public UserSession(User user, UserSessionDTO userSessionDTO) {
 		this.user = user;
+		this.id = userSessionDTO.getId();
 		this.token = userSessionDTO.getToken();
 		this.gcmToken = userSessionDTO.getGcmToken();
 		this.device = userSessionDTO.getDevice();

@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
-import com.splitemapp.commons.constants.TableField;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.UserStatus;
@@ -21,16 +20,14 @@ import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
-import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserStatusEndpoint;
 
 @Service
 @Path(ServiceConstants.PUSH_USERS_PATH)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class PushUserService {
+public class PushUserService extends PushNotificationService{
 
-	UserSessionEndpoint userSessionEndpoint;
 	UserStatusEndpoint userStatusEndpoint;
 	UserEndpoint userEndpoint;
 
@@ -48,7 +45,7 @@ public class PushUserService {
 		// Creating the pushedAt date
 		Date pushedAt = new Date();
 
-		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
+		UserSession userSession = getUserSession(request.getToken());
 
 		if(userSession != null){
 			// We add or update each one of the items in the DTO list
@@ -56,7 +53,7 @@ public class PushUserService {
 				// We create the user object
 				UserStatus userStatus = userStatusEndpoint.findById(userDTO.getUserStatusId());
 				User user = new User(userStatus, userDTO);
-				
+
 				// We update the pushedAt date
 				user.setPushedAt(pushedAt);
 
@@ -67,6 +64,9 @@ public class PushUserService {
 			// We set the success flag and pushedAt
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
+
+			// Sending GCM notification to all related clients
+			sendGcmNotification(userSession.getUser().getId(), this);
 		}
 
 		return response;
@@ -74,14 +74,6 @@ public class PushUserService {
 
 
 	// Getters and setters
-
-	public UserSessionEndpoint getUserSessionEndpoint() {
-		return userSessionEndpoint;
-	}
-
-	public void setUserSessionEndpoint(UserSessionEndpoint userSessionEndpoint) {
-		this.userSessionEndpoint = userSessionEndpoint;
-	}
 
 	public UserStatusEndpoint getUserStatusEndpoint() {
 		return userStatusEndpoint;
