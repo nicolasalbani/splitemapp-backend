@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Service;
 
+import com.splitemapp.commons.constants.Action;
 import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.domain.InviteStatus;
 import com.splitemapp.commons.domain.Project;
@@ -53,6 +54,10 @@ public class PushUserInvitesService extends PushNotificationService{
 		// Creating the pushedAt date
 		Date pushedAt = new Date();
 
+		// Defining action and details to be notified
+		String action = "";
+		String details = "for project ";
+
 		UserSession userSession = getUserSession(request.getToken());
 
 		if(userSession != null){
@@ -64,10 +69,16 @@ public class PushUserInvitesService extends PushNotificationService{
 				InviteStatus inviteStatus = inviteStatusEndpoint.findById(userInviteDTO.getInviteStatusId());
 				UserInvite userInvite = new UserInvite(user, project, inviteStatus, userInviteDTO);
 
+				// Adding the project name to the details
+				details += " "+project.getTitle();
+				
 				// We update the pushedAt date
 				userInvite.setPushedAt(pushedAt);
 
 				if(Utils.isDateAfter(userInviteDTO.getCreatedAt(),request.getLastPushSuccessAt())){
+					// Setting the action
+					action = Action.ADD_USER_INVITE;
+					
 					// We persist the entry to the database
 					userInvite.setId(null);
 					userInviteEndpoint.persist(userInvite);
@@ -75,6 +86,9 @@ public class PushUserInvitesService extends PushNotificationService{
 					// We add the IdUpdate element to the response list
 					response.getIdUpdateList().add(new IdUpdate<Long>(userInviteDTO.getId(), userInvite.getId()));
 				} else {
+					// Setting the action
+					action = Action.UPDATE_USER_INVITE;
+					
 					// We merge the entry to the database
 					userInviteEndpoint.merge(userInvite);
 				}
@@ -85,7 +99,7 @@ public class PushUserInvitesService extends PushNotificationService{
 			response.setSuccess(true);
 
 			// Sending GCM notification to all related clients
-			sendGcmNotification(userSession.getUser().getId(), this);
+			sendGcmNotification(userSession, action, details);
 		}
 
 		return response;

@@ -4,19 +4,39 @@ public class GcmHttpDataDTO implements java.io.Serializable {
 
 	private static final long serialVersionUID = -3129894641081934386L;
 
-	private String pushServiceCalled;
+	private String sender;
+	private String action;
+	private String details;
 
 	public GcmHttpDataDTO() {}
 	
-	public GcmHttpDataDTO(String pushServiceCalled) {
-		this.pushServiceCalled = pushServiceCalled;
+	public GcmHttpDataDTO(String sender, String action, String details) {
+		this.sender = sender;
+		this.action = action;
+		this.details = details;
 	}
 
-	public String getPushServiceCalled() {
-		return pushServiceCalled;
+	public String getAction() {
+		return action;
 	}
 
-	public void setPushServiceCalled(String pushServiceCalled) {
-		this.pushServiceCalled = pushServiceCalled;
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public String getSender() {
+		return sender;
+	}
+
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
 	}
 }

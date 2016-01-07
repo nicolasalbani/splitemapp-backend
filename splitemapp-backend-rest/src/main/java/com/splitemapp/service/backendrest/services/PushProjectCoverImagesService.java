@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Service;
 
+import com.splitemapp.commons.constants.Action;
 import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.domain.Project;
 import com.splitemapp.commons.domain.ProjectCoverImage;
@@ -46,6 +47,9 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 		
 		// Creating the pushedAt date
 		Date pushedAt = new Date();
+		
+		// Defining action and details to be notified
+		String action = "";
 
 		UserSession userSession = getUserSession(request.getToken());
 
@@ -60,6 +64,9 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 				projectCoverImage.setPushedAt(pushedAt);
 				
 				if(Utils.isDateAfter(projectCoverImageDTO.getCreatedAt(),request.getLastPushSuccessAt())){
+					// Setting the action
+					action = Action.ADD_PROJECT_COVER_IMAGE;
+					
 					// We persist the entry to the database
 					projectCoverImage.setId(null);
 					projectCoverImageEndpoint.persist(projectCoverImage);
@@ -67,6 +74,9 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 					// We add the IdUpdate element to the response list
 					response.getIdUpdateList().add(new IdUpdate<Long>(projectCoverImageDTO.getId(), projectCoverImage.getId()));
 				} else {
+					// Setting the action
+					action = Action.UPDATE_PROJECT_COVER_IMAGE;
+					
 					// We merge the entry to the database
 					projectCoverImageEndpoint.merge(projectCoverImage);
 				}
@@ -77,7 +87,7 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 			response.setSuccess(true);
 			
 			// Sending GCM notification to all related clients
-			sendGcmNotification(userSession.getUser().getId(), this);
+			sendGcmNotification(userSession, action);
 		}
 
 		return response;

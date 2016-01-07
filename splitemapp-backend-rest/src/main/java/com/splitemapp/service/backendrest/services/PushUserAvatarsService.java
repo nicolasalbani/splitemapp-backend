@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Service;
 
+import com.splitemapp.commons.constants.Action;
 import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserAvatar;
@@ -45,11 +46,17 @@ public class PushUserAvatarsService extends PushNotificationService{
 		// Creating the pushedAt date
 		Date pushedAt = new Date();
 
+		// Defining action and details to be notified
+		String action = "";
+
 		UserSession userSession = getUserSession(request.getToken());
 
 		if(userSession != null){
 			// We add or update each one of the items in the DTO list
 			for(UserAvatarDTO userAvatarDTO:request.getItemList()){
+				// Setting the action
+				action = Action.UPDATE_USER_AVATAR;
+				
 				// We create the user avatar object
 				User user = userEndpoint.findById(userAvatarDTO.getUserId());
 				UserAvatar userAvatar = new UserAvatar(user, userAvatarDTO);
@@ -66,7 +73,7 @@ public class PushUserAvatarsService extends PushNotificationService{
 			response.setSuccess(true);
 
 			// Sending GCM notification to all related clients
-			sendGcmNotification(userSession.getUser().getId(), this);
+			sendGcmNotification(userSession, action);
 		}
 
 		return response;
