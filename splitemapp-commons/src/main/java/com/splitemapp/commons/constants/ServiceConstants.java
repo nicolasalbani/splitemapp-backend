@@ -1,18 +1,34 @@
 package com.splitemapp.commons.constants;
 
 public class ServiceConstants {
-	// General service GET success response
+	/**
+	 *  General service GET success response
+	 */
 	public static final String GET_SUCCESS = "Your GET request was successfull. Service is alive!";
 	
-	// GCM Constants
+	/**
+	 * GCM Constants
+	 */
 	public static final String GCM_DEFAULT_SENDER_ID = "66220540369";
 	public static final String GCM_SERVER_URL = "https://gcm-http.googleapis.com/gcm/send";
 	public static final String API_KEY = "AIzaSyCREdjyI-IBHiaX07Tbld7ZOqTZxw4p51I";
 	
-	// General service constants
+	/**
+	 * Broadcast constants
+	 */
+	public static final String GCM_MESSAGE = "com.splitemapp.android.service.GCM_MESSAGE";
+	public static final String REST_MESSAGE = "com.splitemapp.android.service.REST_MESSAGE";
+	public static final String CONTENT_ACTION = "com.splitemapp.android.service.CONTENT_ACTION";
+	public static final String CONTENT_RESPONSE = "com.splitemapp.android.service.CONTENT_RESPONSE";
+	
+	/**
+	 * General Service Constants
+	 */
 	public static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
 	
-	// Service paths
+	/**
+	 * Service Paths
+	 */
 	public static final String LOGIN_PATH = "/login";
 	public static final String CREATE_ACCOUNT_PATH = "/create_account";
 	public static final String PULL_USERS_PATH = "/pull_users";

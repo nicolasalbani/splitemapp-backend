@@ -19,4 +19,6 @@ public class Action {
 	public static final String UPDATE_USER_EXPENSE = "updated an expense";
 	public static final String UPDATE_USER_INVITE = "updated an invite";
 	public static final String UPDATE_USER_TO_PROJECT = "updated a user relation to project";
+	
+	public static final String REGISTER_GCM = "register GCM";
 }
