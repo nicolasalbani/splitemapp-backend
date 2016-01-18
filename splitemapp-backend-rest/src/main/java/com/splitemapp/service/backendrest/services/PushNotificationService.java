@@ -28,7 +28,8 @@ public abstract class PushNotificationService {
 		
 		// Removing the user that made the update from the notification list
 		for(int i=0; i<userSessionList.size();i++){
-			if(userSessionList.get(i).getGcmToken().equals(senderUserSession.getGcmToken())){
+			String gcmToken = userSessionList.get(i).getGcmToken();
+			if(gcmToken == null || gcmToken.equals(senderUserSession.getGcmToken())){
 				userSessionList.remove(i);
 				break;
 			}
