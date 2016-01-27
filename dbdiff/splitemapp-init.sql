@@ -223,7 +223,7 @@ insert into expense_category values(4,'family','Familia y Personal');
 insert into expense_category values(5,'bills','Cuentas');
 insert into expense_category values(6,'entertainment','Entretenimiento');
 insert into expense_category values(7,'home','Hogar');
-insert into expense_category values(8,'utilities','Utilidades');
+insert into expense_category values(8,'gifts','Regalos');
 insert into expense_category values(9,'shopping','Shopping');
 
 -- -----------------------------------------------------
