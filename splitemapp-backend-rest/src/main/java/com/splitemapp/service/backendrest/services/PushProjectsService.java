@@ -90,14 +90,14 @@ public class PushProjectsService extends PushNotificationService{
 					// We merge the entry to the database
 					projectEndpoint.merge(project);
 				}
+
+				// Sending GCM notification to all related clients
+				sendGcmNotification(userSession, action, details, project.getId());
 			}
 
 			// We set the success flag and pushedAt date
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
-
-			// Sending GCM notification to all related clients
-			sendGcmNotification(userSession, action, details);
 		}
 
 		return response;

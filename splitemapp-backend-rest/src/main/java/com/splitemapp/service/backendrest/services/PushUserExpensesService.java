@@ -92,14 +92,14 @@ public class PushUserExpensesService extends PushNotificationService{
 					// We merge the entry to the database
 					userExpenseEndpoint.merge(userExpense);
 				}
+
+				// Sending GCM notification to all related clients
+				sendGcmNotification(userSession, action, details, userExpense.getProject().getId());
 			}
 
 			// We set the success flag and pushedAt 
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
-
-			// Sending GCM notification to all related clients
-			sendGcmNotification(userSession, action, details);
 		}
 
 		return response;

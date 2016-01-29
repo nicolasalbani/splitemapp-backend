@@ -21,8 +21,13 @@ public class UserSessionEndpoint extends UpdateableDomainDAO<UserSession,Long> {
 	}
 	
 	@Override
-	public String getPushedAfterQuery() {
+	public String getPushedAfterByUserQuery() {
 		return "SELECT DISTINCT US FROM userSession US LEFT JOIN US.user.userToProjects " +LINKED_BY_PROJECT_SQL;
+	}
+
+	@Override
+	public String getPushedAfterByProjectQuery() {
+		return "SELECT DISTINCT US FROM user_session US LEFT JOIN US.user.userToProjects " +LINKED_BY_SINGLE_PROJECT_SQL;
 	}
 
 }

@@ -92,14 +92,14 @@ public class PushUserInvitesService extends PushNotificationService{
 					// We merge the entry to the database
 					userInviteEndpoint.merge(userInvite);
 				}
+
+				// Sending GCM notification to all related clients
+				sendGcmNotification(userSession, action, details, userInvite.getProject().getId());
 			}
 
 			// We set the success flag and pushedAt
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
-
-			// Sending GCM notification to all related clients
-			sendGcmNotification(userSession, action, details);
 		}
 
 		return response;

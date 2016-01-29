@@ -21,8 +21,13 @@ public class ProjectCoverImageEndpoint extends UpdateableDomainDAO<ProjectCoverI
 	}
 	
 	@Override
-	public String getPushedAfterQuery() {
+	public String getPushedAfterByUserQuery() {
 		return "SELECT DISTINCT PCI FROM project_cover_image PCI LEFT JOIN PCI.project.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND PCI.pushedAt > :" +PUSHED_AT_PARAMETER;
+	}
+
+	@Override
+	public String getPushedAfterByProjectQuery() {
+		return "SELECT DISTINCT PCI FROM project_cover_image PCI LEFT JOIN PCI.project.userToProjects " +LINKED_BY_SINGLE_PROJECT_SQL+ " AND PCI.pushedAt > :" +PUSHED_AT_PARAMETER;
 	}
 
 }

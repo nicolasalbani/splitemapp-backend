@@ -56,7 +56,7 @@ public class PullProjectsService {
 
 			// We set the project set
 			Set<ProjectDTO> projectDTOs = new HashSet<ProjectDTO>();
-			List<Project> findUpdatedAfter = projectEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId());
+			List<Project> findUpdatedAfter = projectEndpoint.findPushedAfterByUser(request.getLastPullSuccessAt(), user.getId());
 			for(Project project:findUpdatedAfter){
 				projectDTOs.add(new ProjectDTO(project));
 			}

@@ -21,7 +21,12 @@ public class UserInviteEndpoint extends UpdateableDomainDAO<UserInvite,Long> {
 	}
 	
 	@Override
-	public String getPushedAfterQuery() {
+	public String getPushedAfterByUserQuery() {
+		return "SELECT DISTINCT UI FROM user_invite UI WHERE UI.user.id = :" +USER_ID_PARAMETER + " AND UI.pushedAt > :" +PUSHED_AT_PARAMETER;
+	}
+
+	@Override
+	public String getPushedAfterByProjectQuery() {
 		return "SELECT DISTINCT UI FROM user_invite UI WHERE UI.user.id = :" +USER_ID_PARAMETER + " AND UI.pushedAt > :" +PUSHED_AT_PARAMETER;
 	}
 

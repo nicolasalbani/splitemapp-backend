@@ -22,8 +22,13 @@ public class UserEndpoint extends UpdateableDomainDAO<User,Long> {
 	}
 	
 	@Override
-	public String getPushedAfterQuery() {
+	public String getPushedAfterByUserQuery() {
 		return "SELECT DISTINCT U FROM user U LEFT JOIN U.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UTP.pushedAt > :" +PUSHED_AT_PARAMETER;
+	}
+	
+	@Override
+	public String getPushedAfterByProjectQuery() {
+		return "SELECT DISTINCT U FROM user U LEFT JOIN U.userToProjects " +LINKED_BY_SINGLE_PROJECT_SQL+ " AND UTP.pushedAt > :" +PUSHED_AT_PARAMETER;
 	}
 	
 	public User findUserForLogin(String fieldName, String fieldValue){
@@ -33,5 +38,6 @@ public class UserEndpoint extends UpdateableDomainDAO<User,Long> {
 	public User findUserForSyncContacts(String fieldName, String fieldValue){
 		return findByFieldWithJoins(fieldName, fieldValue, "userContactDatas", "userAvatars");
 	}
+
 
 }

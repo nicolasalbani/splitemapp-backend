@@ -80,14 +80,14 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 					// We merge the entry to the database
 					projectCoverImageEndpoint.merge(projectCoverImage);
 				}
+
+				// Sending GCM notification to all related clients
+				sendGcmNotification(userSession, action, "", projectCoverImage.getProject().getId());
 			}
 
 			// We set the success flag and pushedAt date
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
-			
-			// Sending GCM notification to all related clients
-			sendGcmNotification(userSession, action);
 		}
 
 		return response;

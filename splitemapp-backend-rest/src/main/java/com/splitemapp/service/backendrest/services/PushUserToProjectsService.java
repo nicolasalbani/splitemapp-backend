@@ -71,14 +71,14 @@ public class PushUserToProjectsService extends PushNotificationService{
 
 				// Adding the project name to the details
 				details += " "+project.getTitle();
-				
+
 				// We update the pushedAt date
 				userToProject.setPushedAt(pushedAt);
 
 				if(Utils.isDateAfter(userToProjectDTO.getCreatedAt(),request.getLastPushSuccessAt())){
 					// Setting the action
 					action = Action.ADD_USER_TO_PROJECT;
-					
+
 					// We persist the entry to the database
 					userToProject.setId(null);
 					userToProjectEndpoint.persist(userToProject);
@@ -88,18 +88,18 @@ public class PushUserToProjectsService extends PushNotificationService{
 				} else {
 					// Setting the action
 					action = Action.UPDATE_USER_TO_PROJECT;
-					
+
 					// We merge the entry to the database
 					userToProjectEndpoint.merge(userToProject);
 				}
+
+				// Sending GCM notification to all related clients
+				sendGcmNotification(userSession, action, details, userToProject.getProject().getId());
 			}
 
 			// We set the success flag and pushedAt
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
-
-			// Sending GCM notification to all related clients
-			sendGcmNotification(userSession, action, details);
 		}
 
 		return response;

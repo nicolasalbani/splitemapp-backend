@@ -3,6 +3,7 @@ package com.splitemapp.service.backendrest.services;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
@@ -52,12 +53,22 @@ public class PullUserExpensesService {
 
 		if(userSession != null){
 			User user = userSession.getUser();
+			
+			// Getting the proper list based on parameters
+			List<UserExpense> userExpenses = null;
+			if(request.isPullAllDates()){
+				userExpenses = userExpenseEndpoint.findPushedAfterByProject(new Date(0), request.getProjectId());
+			} else {
+				userExpenses = userExpenseEndpoint.findPushedAfterByUser(request.getLastPullSuccessAt(), user.getId());
+			}
 
 			// We set the user expense set
 			Set<UserExpenseDTO> userExpenseDTOs = new HashSet<UserExpenseDTO>();
-			for(UserExpense userExpense:userExpenseEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId())){
+			for(UserExpense userExpense:userExpenses){
 				userExpenseDTOs.add(new UserExpenseDTO(userExpense));
 			}
+			
+			// Setting the user expense set
 			response.setItemSet(userExpenseDTOs);
 
 			// We set the success flag and pulledAt

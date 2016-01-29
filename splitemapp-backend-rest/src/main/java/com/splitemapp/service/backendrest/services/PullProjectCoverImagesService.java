@@ -56,7 +56,7 @@ public class PullProjectCoverImagesService {
 
 			// We set the project set
 			Set<ProjectCoverImageDTO> projectCoverImageDTOs = new HashSet<ProjectCoverImageDTO>();
-			List<ProjectCoverImage> findUpdatedAfter = projectCoverImageEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId());
+			List<ProjectCoverImage> findUpdatedAfter = projectCoverImageEndpoint.findPushedAfterByUser(request.getLastPullSuccessAt(), user.getId());
 			for(ProjectCoverImage projectCoverImage:findUpdatedAfter){
 				projectCoverImageDTOs.add(new ProjectCoverImageDTO(projectCoverImage));
 			}

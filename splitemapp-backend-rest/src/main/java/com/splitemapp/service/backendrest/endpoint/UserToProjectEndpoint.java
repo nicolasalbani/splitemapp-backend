@@ -21,8 +21,13 @@ public class UserToProjectEndpoint extends UpdateableDomainDAO<UserToProject,Lon
 	}
 	
 	@Override
-	public String getPushedAfterQuery() {
+	public String getPushedAfterByUserQuery() {
 		return "SELECT DISTINCT UTP FROM user_to_project " +LINKED_BY_PROJECT_SQL+ " AND UTP.pushedAt > :" +PUSHED_AT_PARAMETER;
+	}
+
+	@Override
+	public String getPushedAfterByProjectQuery() {
+		return "SELECT DISTINCT UTP FROM user_to_project " +LINKED_BY_SINGLE_PROJECT_SQL+ " AND UTP.pushedAt > :" +PUSHED_AT_PARAMETER;
 	}
 
 }

@@ -6,12 +6,14 @@ public class GcmHttpDataDTO implements java.io.Serializable {
 
 	private String sender;
 	private String action;
+	private String projectId;
 	private String details;
 
 	public GcmHttpDataDTO() {}
 	
-	public GcmHttpDataDTO(String sender, String action, String details) {
+	public GcmHttpDataDTO(String sender, String action, String projectId, String details) {
 		this.sender = sender;
+		this.setProjectId(projectId);
 		this.action = action;
 		this.details = details;
 	}
@@ -38,5 +40,13 @@ public class GcmHttpDataDTO implements java.io.Serializable {
 
 	public void setDetails(String details) {
 		this.details = details;
+	}
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
 	}
 }

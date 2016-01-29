@@ -18,13 +18,14 @@ public abstract class PushNotificationService {
 		return userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, token);
 	}
 	
-	public void sendGcmNotification(UserSession userSession, String action){
-		sendGcmNotification(userSession, action, "");
-	}
-
-	public void sendGcmNotification(UserSession senderUserSession, String action, String details){
+	public void sendGcmNotification(UserSession senderUserSession, String action, String details, Long projectId){
 		// Getting all user sessions related to the one making the push
-		List<UserSession> userSessionList = userSessionEndpoint.findCreatedAfter(null, senderUserSession.getUser().getId());
+		List<UserSession> userSessionList;
+		if(projectId == null){
+			userSessionList = userSessionEndpoint.findCreatedAfter(null, senderUserSession.getUser().getId());
+		} else {
+			userSessionList = userSessionEndpoint.findPushedAfterByProject(null, projectId);
+		}
 		
 		// Removing the user that made the update from the notification list
 		for(int i=0; i<userSessionList.size();i++){
@@ -41,6 +42,7 @@ public abstract class PushNotificationService {
 			GcmHttpDataDTO gcmHttpDataDTO = new GcmHttpDataDTO();
 			gcmHttpDataDTO.setSender(senderUserSession.getUser().getFullName());
 			gcmHttpDataDTO.setAction(action);
+			gcmHttpDataDTO.setProjectId(projectId.toString());
 			gcmHttpDataDTO.setDetails(details);
 			
 			// Obtaining registration IDs

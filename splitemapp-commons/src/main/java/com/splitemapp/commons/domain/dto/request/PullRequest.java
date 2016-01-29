@@ -12,6 +12,10 @@ public class PullRequest {
 
 	private String token;
 	
+	private boolean pullAllDates;
+	
+	private Long projectId;
+	
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date lastPullSuccessAt;
@@ -21,9 +25,11 @@ public class PullRequest {
 	 */
 	public PullRequest() {}
 
-	public PullRequest(String token, Date lastPullSuccessAt) {
+	public PullRequest(String token, Date lastPullSuccessAt, boolean pullAllDates, Long projectId) {
 		this.token = token;
 		this.lastPullSuccessAt = lastPullSuccessAt;
+		this.pullAllDates = pullAllDates;
+		this.projectId = projectId;
 	}
 
 	public String getToken() {
@@ -40,6 +46,22 @@ public class PullRequest {
 
 	public void setLastPullSuccessAt(Date lastPullSuccessAt) {
 		this.lastPullSuccessAt = lastPullSuccessAt;
+	}
+
+	public boolean isPullAllDates() {
+		return pullAllDates;
+	}
+
+	public void setPullAllDates(boolean pullAllDates) {
+		this.pullAllDates = pullAllDates;
+	}
+
+	public Long getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 
 }

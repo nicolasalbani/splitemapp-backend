@@ -21,8 +21,13 @@ public class UserExpenseEndpoint extends UpdateableDomainDAO<UserExpense,Long> {
 	}
 	
 	@Override
-	public String getPushedAfterQuery() {
+	public String getPushedAfterByUserQuery() {
 		return "SELECT DISTINCT UE FROM user_expense UE LEFT JOIN UE.user.userToProjects  " +LINKED_BY_PROJECT_SQL+ " AND UE.pushedAt > :" +PUSHED_AT_PARAMETER;
+	}
+
+	@Override
+	public String getPushedAfterByProjectQuery() {
+		return "SELECT DISTINCT UE FROM user_expense UE LEFT JOIN UE.user.userToProjects  " +LINKED_BY_SINGLE_PROJECT_SQL+ " AND UE.pushedAt > :" +PUSHED_AT_PARAMETER;
 	}
 
 }

@@ -55,7 +55,7 @@ public class PullUserInvitesService {
 
 			// We set the user invite set
 			Set<UserInviteDTO> userInviteDTOs = new HashSet<UserInviteDTO>();
-			for(UserInvite userInvite:userInviteEndpoint.findPushedAfter(request.getLastPullSuccessAt(), user.getId())){
+			for(UserInvite userInvite:userInviteEndpoint.findPushedAfterByUser(request.getLastPullSuccessAt(), user.getId())){
 				userInviteDTOs.add(new UserInviteDTO(userInvite));
 			}
 			response.setItemSet(userInviteDTOs);

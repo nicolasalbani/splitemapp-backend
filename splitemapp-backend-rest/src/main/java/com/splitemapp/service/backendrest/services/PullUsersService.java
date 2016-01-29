@@ -56,7 +56,7 @@ public class PullUsersService {
 			User loggedUser = userSession.getUser();
 
 			// Getting all users linked with the logged user through a project
-			List<User> linkedUsers = userEndpoint.findPushedAfter(request.getLastPullSuccessAt(), loggedUser.getId());
+			List<User> linkedUsers = userEndpoint.findPushedAfterByUser(request.getLastPullSuccessAt(), loggedUser.getId());
 
 			// We set the users
 			Set<UserDTO> userDTOs = new HashSet<UserDTO>();

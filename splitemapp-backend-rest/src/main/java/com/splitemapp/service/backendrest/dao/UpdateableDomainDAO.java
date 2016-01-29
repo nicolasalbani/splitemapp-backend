@@ -19,6 +19,7 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 	protected static final String UPDATED_AT_PARAMETER = "updatedAt";
 	protected static final String PUSHED_AT_PARAMETER = "pushedAt";
 	protected static final String LINKED_BY_PROJECT_SQL = "UTP WHERE UTP.project.id IN (SELECT DISTINCT UTP.project.id FROM user_to_project UTP WHERE UTP.user.id = :" +USER_ID_PARAMETER+ ")";
+	protected static final String LINKED_BY_SINGLE_PROJECT_SQL = "UTP WHERE UTP.project.id = :" +PROJECT_ID_PARAMETER;
 
 	/**
 	 * 
@@ -39,7 +40,14 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 	 * @param session
 	 * @return
 	 */
-	public abstract String getPushedAfterQuery();
+	public abstract String getPushedAfterByUserQuery();
+	
+	/**
+	 * 
+	 * @param session
+	 * @return
+	 */
+	public abstract String getPushedAfterByProjectQuery();
 
 	@SuppressWarnings("unchecked")
 	public List<E> findCreatedAfter(Date createdAt, Long userId) {
@@ -107,7 +115,7 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<E> findPushedAfter(Date pushedAt, Long userId) {
+	public List<E> findPushedAfterByUser(Date pushedAt, Long userId) {
 		String gettingMessage = "getting " +getEntityClass().getSimpleName()+ " instances for userId " +userId;
 
 		if(pushedAt != null){
@@ -118,7 +126,7 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 
 		Session session = sessionFactory.openSession();
 		try {
-			Query query = session.createQuery(getPushedAfterQuery());
+			Query query = session.createQuery(getPushedAfterByUserQuery());
 			if(pushedAt != null){
 				query.setParameter(PUSHED_AT_PARAMETER, pushedAt);
 			}
@@ -138,4 +146,37 @@ public abstract class UpdateableDomainDAO <E extends Serializable,F extends Numb
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<E> findPushedAfterByProject(Date pushedAt,Long projectId) {
+		String gettingMessage = "getting " +getEntityClass().getSimpleName()+ " instances for projectId " +projectId;
+
+		if(pushedAt != null){
+			gettingMessage += " pushed after " +pushedAt;
+		}
+
+		logger.debug(gettingMessage);
+
+		Session session = sessionFactory.openSession();
+		try {
+			Query query = session.createQuery(getPushedAfterByProjectQuery());
+			if(pushedAt != null){
+				query.setParameter(PUSHED_AT_PARAMETER, pushedAt);
+			}
+			if(projectId != null){
+				query.setParameter(PROJECT_ID_PARAMETER, projectId);
+			}
+			List<E> resultList = query.list();
+			if(resultList.size() > 0){
+				logger.debug("get successful");
+			} else {
+				logger.debug("no record found pushed after " +pushedAt);
+			}
+			return resultList;
+		} catch (RuntimeException re) {
+			logger.error("get failed", re);
+			throw re;
+		} finally {
+			session.close();
+		}
+	}
 }

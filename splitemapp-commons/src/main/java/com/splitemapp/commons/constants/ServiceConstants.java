@@ -20,6 +20,7 @@ public class ServiceConstants {
 	public static final String REST_MESSAGE = "com.splitemapp.android.service.REST_MESSAGE";
 	public static final String CONTENT_ACTION = "com.splitemapp.android.service.CONTENT_ACTION";
 	public static final String CONTENT_RESPONSE = "com.splitemapp.android.service.CONTENT_RESPONSE";
+	public static final String PROJECT_ID = "com.splitemapp.android.service.PROJECT_ID";
 	
 	/**
 	 * General Service Constants

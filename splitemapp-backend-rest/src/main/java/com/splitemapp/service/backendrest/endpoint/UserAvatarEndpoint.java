@@ -21,8 +21,13 @@ public class UserAvatarEndpoint extends UpdateableDomainDAO<UserAvatar,Long> {
 	}
 	
 	@Override
-	public String getPushedAfterQuery() {
+	public String getPushedAfterByUserQuery() {
 		return "SELECT DISTINCT UA FROM user_avatar UA LEFT JOIN UA.user.userToProjects " +LINKED_BY_PROJECT_SQL+ " AND UTP.updatedAt > :" +PUSHED_AT_PARAMETER;
+	}
+
+	@Override
+	public String getPushedAfterByProjectQuery() {
+		return "SELECT DISTINCT UA FROM user_avatar UA LEFT JOIN UA.user.userToProjects " +LINKED_BY_SINGLE_PROJECT_SQL+ " AND UTP.updatedAt > :" +PUSHED_AT_PARAMETER;
 	}
 
 }
