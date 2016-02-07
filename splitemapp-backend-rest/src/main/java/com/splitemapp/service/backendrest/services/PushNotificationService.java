@@ -18,7 +18,7 @@ public abstract class PushNotificationService {
 		return userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, token);
 	}
 
-	public void sendGcmNotification(UserSession senderUserSession, String action, String details, Long projectId){
+	public void sendGcmNotification(UserSession senderUserSession, String action, String projectName, Long projectId){
 		// Getting all user sessions related to the one making the push
 		List<UserSession> userSessionList;
 		if(projectId == null){
@@ -45,7 +45,7 @@ public abstract class PushNotificationService {
 			if(projectId != null){
 				gcmHttpDataDTO.setProjectId(projectId.toString());
 			}
-			gcmHttpDataDTO.setDetails(details);
+			gcmHttpDataDTO.setProjectName(projectName);
 
 			// Obtaining registration IDs
 			String[] registrationIds = new String[userSessionList.size()];

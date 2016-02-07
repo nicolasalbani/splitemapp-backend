@@ -73,7 +73,7 @@ public class PushUserContactDatasService extends PushNotificationService{
 			response.setSuccess(true);
 
 			// Sending GCM notification to all related clients
-			sendGcmNotification(userSession, action, "", null);
+			sendGcmNotification(userSession, action, null, null);
 		}
 
 		return response;

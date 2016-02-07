@@ -55,7 +55,6 @@ public class PushProjectsService extends PushNotificationService{
 
 		// Defining action and details to be notified
 		String action = "";
-		String details = "";
 
 		UserSession userSession = getUserSession(request.getToken());
 
@@ -67,9 +66,6 @@ public class PushProjectsService extends PushNotificationService{
 				ProjectType projectType = projectTypeEndpoint.findById(projectDTO.getProjectTypeId());
 				Project project = new Project(projectType, projectStatus, projectDTO);
 
-				// We add the project name to the list
-				details += " "+project.getTitle();
-				
 				// We update the pushedAt date
 				project.setPushedAt(pushedAt);
 
@@ -92,7 +88,7 @@ public class PushProjectsService extends PushNotificationService{
 				}
 
 				// Sending GCM notification to all related clients
-				sendGcmNotification(userSession, action, details, project.getId());
+				sendGcmNotification(userSession, action, project.getTitle(), project.getId());
 			}
 
 			// We set the success flag and pushedAt date

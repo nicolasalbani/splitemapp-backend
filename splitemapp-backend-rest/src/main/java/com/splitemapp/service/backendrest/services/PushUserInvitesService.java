@@ -56,7 +56,6 @@ public class PushUserInvitesService extends PushNotificationService{
 
 		// Defining action and details to be notified
 		String action = "";
-		String details = "for project ";
 
 		UserSession userSession = getUserSession(request.getToken());
 
@@ -69,9 +68,6 @@ public class PushUserInvitesService extends PushNotificationService{
 				InviteStatus inviteStatus = inviteStatusEndpoint.findById(userInviteDTO.getInviteStatusId());
 				UserInvite userInvite = new UserInvite(user, project, inviteStatus, userInviteDTO);
 
-				// Adding the project name to the details
-				details += " "+project.getTitle();
-				
 				// We update the pushedAt date
 				userInvite.setPushedAt(pushedAt);
 
@@ -94,7 +90,7 @@ public class PushUserInvitesService extends PushNotificationService{
 				}
 
 				// Sending GCM notification to all related clients
-				sendGcmNotification(userSession, action, details, userInvite.getProject().getId());
+				sendGcmNotification(userSession, action, userInvite.getProject().getTitle(), userInvite.getProject().getId());
 			}
 
 			// We set the success flag and pushedAt

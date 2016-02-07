@@ -82,7 +82,7 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 				}
 
 				// Sending GCM notification to all related clients
-				sendGcmNotification(userSession, action, "", projectCoverImage.getProject().getId());
+				sendGcmNotification(userSession, action, projectCoverImage.getProject().getTitle(), projectCoverImage.getProject().getId());
 			}
 
 			// We set the success flag and pushedAt date

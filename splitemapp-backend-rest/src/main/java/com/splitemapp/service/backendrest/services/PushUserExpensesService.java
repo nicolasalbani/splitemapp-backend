@@ -56,7 +56,6 @@ public class PushUserExpensesService extends PushNotificationService{
 
 		// Defining action and details to be notified
 		String action = "";
-		String details = "for project ";
 
 		UserSession userSession = getUserSession(request.getToken());
 
@@ -69,9 +68,6 @@ public class PushUserExpensesService extends PushNotificationService{
 				ExpenseCategory expenseCategory = expenseCategoryEndpoint.findById(userExpenseDTO.getExpenseCategoryId());
 				UserExpense userExpense = new UserExpense(user, project, expenseCategory, userExpenseDTO);
 
-				// Adding the project name to the details
-				details += " "+project.getTitle();
-				
 				// We update the pushedAt date
 				userExpense.setPushedAt(pushedAt);
 
@@ -94,7 +90,7 @@ public class PushUserExpensesService extends PushNotificationService{
 				}
 
 				// Sending GCM notification to all related clients
-				sendGcmNotification(userSession, action, details, userExpense.getProject().getId());
+				sendGcmNotification(userSession, action, userExpense.getProject().getTitle(), userExpense.getProject().getId());
 			}
 
 			// We set the success flag and pushedAt 
