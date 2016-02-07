@@ -31,6 +31,7 @@ public class ServiceConstants {
 	 * Service Paths
 	 */
 	public static final String LOGIN_PATH = "/login";
+	public static final String LOGOUT_PATH = "/logout";
 	public static final String CREATE_ACCOUNT_PATH = "/create_account";
 	public static final String PULL_USERS_PATH = "/pull_users";
 	public static final String PULL_USER_AVATARS_PATH = "/pull_user_avatars";
