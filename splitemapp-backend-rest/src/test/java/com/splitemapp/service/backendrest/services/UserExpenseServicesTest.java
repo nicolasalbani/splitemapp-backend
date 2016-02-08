@@ -52,8 +52,10 @@ public class UserExpenseServicesTest extends BaseServiceTest{
 			UserExpenseDTO userExpenseDTO = iterator.next();
 			if(userExpenseDTO.getUserId().equals(2L) && userExpenseDTO.getNote().equals("Gaseosas")){
 				hasLinkedUserExpenses = true;
-			} else if(userExpenseDTO.getUserId().equals(3L) && userExpenseDTO.getExpense().equals(new BigDecimal(140))){
-				Assert.fail("Should not be obtaining a user from an unlinked project");
+			} else if(userExpenseDTO.getId().equals(3L)){
+				Assert.fail("Should not be obtaining an expense from a user from an unlinked project");
+			} else if(userExpenseDTO.getId().equals(20L)){
+				Assert.fail("Should not be obtaining an expense from an unlinked project");
 			}
 		}
 		assertTrue(hasLinkedUserExpenses);
