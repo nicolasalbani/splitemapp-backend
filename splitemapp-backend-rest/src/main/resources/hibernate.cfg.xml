@@ -8,9 +8,9 @@
 		<!-- Database Configuration -->
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/splitemapp</property>
+		<property name="hibernate.connection.url">jdbc:mysql://splitemapp.csxvjb9v5ybr.us-west-2.rds.amazonaws.com:3306/splitemapp</property>
 		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">hell0!</property>
+		<property name="hibernate.connection.password">019713Skull</property>
         
         <!-- Hibernate Configuration -->
 		<property name="hibernate.show_sql">false</property>
