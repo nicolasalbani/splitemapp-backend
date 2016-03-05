@@ -5,13 +5,17 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
-
+import java.util.List;
 
 import org.junit.Test;
 
 import com.splitemapp.commons.constants.ServiceConstants;
+import com.splitemapp.commons.domain.id.IdUpdate;
+import com.splitemapp.commons.domain.id.IdUpdateComparator;
 import com.splitemapp.commons.utils.Utils;
 
 public class UtilsTest {
@@ -154,5 +158,23 @@ public class UtilsTest {
 		assertEquals("userToProject", Utils.getCamelCaseName("user_to_project"));
 		assertEquals("userToProjectStatus", Utils.getCamelCaseName("user_to_project_status"));
 		assertEquals("syncStatus", Utils.getCamelCaseName("sync_status"));
+	}
+	
+	@Test
+	public void testIdUpdateComparator(){
+		List<IdUpdate<Long>> idUpdateList = new ArrayList<IdUpdate<Long>>();
+		
+		idUpdateList.add(new IdUpdate<Long>(4l, 4l));
+		idUpdateList.add(new IdUpdate<Long>(1l, 1l));
+		idUpdateList.add(new IdUpdate<Long>(5l, 5l));
+		idUpdateList.add(new IdUpdate<Long>(8l, 8l));
+		
+		Collections.sort(idUpdateList, new IdUpdateComparator());
+		
+		// Validating correct order
+		assertEquals(new Long(8), idUpdateList.get(0).getOldId());
+		assertEquals(new Long(5), idUpdateList.get(1).getOldId());
+		assertEquals(new Long(4), idUpdateList.get(2).getOldId());
+		assertEquals(new Long(1), idUpdateList.get(3).getOldId());
 	}
 }
