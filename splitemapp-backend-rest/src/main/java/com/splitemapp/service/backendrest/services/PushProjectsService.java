@@ -19,6 +19,7 @@ import com.splitemapp.commons.constants.TableFieldCod;
 import com.splitemapp.commons.domain.Project;
 import com.splitemapp.commons.domain.ProjectStatus;
 import com.splitemapp.commons.domain.ProjectType;
+import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.ProjectDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
@@ -28,6 +29,7 @@ import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectStatusEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectTypeEndpoint;
+import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 
 @Service
 @Path(ServiceConstants.PUSH_PROJECTS_PATH)
@@ -38,6 +40,7 @@ public class PushProjectsService extends PushNotificationService{
 	ProjectStatusEndpoint projectStatusEndpoint;
 	ProjectTypeEndpoint projectTypeEndpoint;
 	ProjectEndpoint projectEndpoint;
+	UserEndpoint userEndpoint;
 
 	@GET
 	public String printMessage() {
@@ -64,7 +67,9 @@ public class PushProjectsService extends PushNotificationService{
 				// We create the project object with an active project status and the incoming type
 				ProjectStatus projectStatus = projectStatusEndpoint.findByField(TableField.ALTER_TABLE_COD, TableFieldCod.GROUP_STATUS_ACTIVE);
 				ProjectType projectType = projectTypeEndpoint.findById(projectDTO.getProjectTypeId());
-				Project project = new Project(projectType, projectStatus, projectDTO);
+				User updatedBy = userEndpoint.findById(projectDTO.getUpdatedBy());
+				User pushedBy = userEndpoint.findById(projectDTO.getPushedBy());
+				Project project = new Project(projectType, projectStatus, updatedBy, pushedBy, projectDTO);
 
 				// We update the pushedAt date
 				project.setPushedAt(pushedAt);
@@ -121,5 +126,13 @@ public class PushProjectsService extends PushNotificationService{
 
 	public void setProjectEndpoint(ProjectEndpoint projectEndpoint) {
 		this.projectEndpoint = projectEndpoint;
+	}
+
+	public UserEndpoint getUserEndpoint() {
+		return userEndpoint;
+	}
+
+	public void setUserEndpoint(UserEndpoint userEndpoint) {
+		this.userEndpoint = userEndpoint;
 	}
 }

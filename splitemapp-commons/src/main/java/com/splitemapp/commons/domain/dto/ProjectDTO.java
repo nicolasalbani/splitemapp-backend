@@ -18,6 +18,8 @@ public class ProjectDTO implements java.io.Serializable {
 	private Short projectStatusId;
 	private String title;
 	private BigDecimal budget;
+	private Long updatedBy;
+	private Long pushedBy;
 	
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
@@ -41,7 +43,11 @@ public class ProjectDTO implements java.io.Serializable {
 		this.budget = project.getBudget();
 		this.createdAt = project.getCreatedAt();
 		this.updatedAt = project.getUpdatedAt();
+		this.updatedBy = project.getUpdatedBy().getId();
 		this.pushedAt = project.getPushedAt();
+		if(project.getPushedBy() != null){
+			this.pushedBy = project.getPushedBy().getId();
+		}
 	}
 
 	public ProjectDTO(Short projectTypeId, Short projectStatusId,
@@ -118,6 +124,22 @@ public class ProjectDTO implements java.io.Serializable {
 
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
+	}
+
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Long getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(Long pushedBy) {
+		this.pushedBy = pushedBy;
 	}
 	
 }

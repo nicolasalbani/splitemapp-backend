@@ -19,6 +19,32 @@ public class UserExpenseDTO implements java.io.Serializable {
 	private Short expenseCategoryId;
 	private BigDecimal expense;
 	private String note;
+	private Long updatedBy;
+	private Long pushedBy;
+
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Long getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(Long pushedBy) {
+		this.pushedBy = pushedBy;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public void setExpenseCategoryId(Short expenseCategoryId) {
+		this.expenseCategoryId = expenseCategoryId;
+	}
 
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
@@ -48,7 +74,11 @@ public class UserExpenseDTO implements java.io.Serializable {
 		this.note = userExpense.getNote();
 		this.createdAt = userExpense.getCreatedAt();
 		this.updatedAt = userExpense.getUpdatedAt();
+		this.updatedBy = userExpense.getUpdatedBy().getId();
 		this.pushedAt = userExpense.getPushedAt();
+		if(userExpense.getPushedBy() != null){
+			this.pushedBy = userExpense.getPushedBy().getId();
+		}
 	}
 
 	public UserExpenseDTO(Long userId, Long projectId,

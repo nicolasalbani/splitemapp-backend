@@ -16,6 +16,7 @@ import com.splitemapp.commons.constants.Action;
 import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.domain.Project;
 import com.splitemapp.commons.domain.ProjectCoverImage;
+import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.ProjectCoverImageDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
@@ -24,6 +25,7 @@ import com.splitemapp.commons.domain.id.IdUpdate;
 import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.ProjectCoverImageEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
+import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 
 @Service
 @Path(ServiceConstants.PUSH_PROJECT_COVER_IMAGES_PATH)
@@ -32,6 +34,7 @@ import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 public class PushProjectCoverImagesService extends PushNotificationService{
 
 	ProjectEndpoint projectEndpoint;
+	UserEndpoint userEndpoint;
 	ProjectCoverImageEndpoint projectCoverImageEndpoint;
 
 	@GET
@@ -58,7 +61,9 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 			for(ProjectCoverImageDTO projectCoverImageDTO:request.getItemList()){
 				// We create the project cover image object
 				Project project = projectEndpoint.findById(projectCoverImageDTO.getProjectId());
-				ProjectCoverImage projectCoverImage = new ProjectCoverImage(project, projectCoverImageDTO);
+				User updatedBy = userEndpoint.findById(projectCoverImageDTO.getUpdatedBy());
+				User pushedBy = userEndpoint.findById(projectCoverImageDTO.getPushedBy());
+				ProjectCoverImage projectCoverImage = new ProjectCoverImage(project, updatedBy, pushedBy, projectCoverImageDTO);
 				
 				// We update the pushedAt date
 				projectCoverImage.setPushedAt(pushedAt);
@@ -108,5 +113,13 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 
 	public void setProjectCoverImageEndpoint(ProjectCoverImageEndpoint projectCoverImageEndpoint) {
 		this.projectCoverImageEndpoint = projectCoverImageEndpoint;
+	}
+
+	public UserEndpoint getUserEndpoint() {
+		return userEndpoint;
+	}
+
+	public void setUserEndpoint(UserEndpoint userEndpoint) {
+		this.userEndpoint = userEndpoint;
 	}
 }

@@ -15,6 +15,8 @@ public class ProjectCoverImageDTO implements java.io.Serializable {
 	private Long id;
 	private Long projectId;
 	private byte[] avatarData;
+	private Long updatedBy;
+	private Long pushedBy;
 	
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
@@ -36,7 +38,11 @@ public class ProjectCoverImageDTO implements java.io.Serializable {
 		this.avatarData = projectCoverImage.getAvatarData();
 		this.createdAt = projectCoverImage.getCreatedAt();
 		this.updatedAt = projectCoverImage.getUpdatedAt();
+		this.updatedBy = projectCoverImage.getUpdatedBy().getId();
 		this.pushedAt = projectCoverImage.getPushedAt();
+		if(projectCoverImage.getPushedBy() != null){
+			this.pushedBy = projectCoverImage.getPushedBy().getId();
+		}
 	}
 
 	public ProjectCoverImageDTO(Long id, Long projectId, byte[] avatarData,
@@ -96,6 +102,22 @@ public class ProjectCoverImageDTO implements java.io.Serializable {
 
 	public void setAvatarData(byte[] avatarData) {
 		this.avatarData = avatarData;
+	}
+
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Long getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(Long pushedBy) {
+		this.pushedBy = pushedBy;
 	}
 
 }

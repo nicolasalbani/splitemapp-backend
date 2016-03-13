@@ -61,12 +61,20 @@ public class UserInvite implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "pushed_at", length = 19)
 	private Date pushedAt;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pushed_by")
+	private User pushedBy;
 
 	public UserInvite() {
 		this.createdAt = this.updatedAt = new Date();
 	}
 	
-	public UserInvite(User user, Project project, InviteStatus inviteStatus, UserInviteDTO userInviteDTO) {
+	public UserInvite(User user, Project project, InviteStatus inviteStatus, User updatedBy, User pushedBy, UserInviteDTO userInviteDTO) {
 		this.id = userInviteDTO.getId();
 		this.user = user;
 		this.project = project;
@@ -74,7 +82,9 @@ public class UserInvite implements java.io.Serializable {
 		this.email = userInviteDTO.getEmail();
 		this.createdAt = userInviteDTO.getCreatedAt();
 		this.updatedAt = userInviteDTO.getUpdatedAt();
+		this.updatedBy = updatedBy;
 		this.pushedAt = userInviteDTO.getPushedAt();
+		this.pushedBy = pushedBy;
 	}
 
 	public UserInvite(User user, Project project, InviteStatus inviteStatus,
@@ -160,6 +170,22 @@ public class UserInvite implements java.io.Serializable {
 
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
+	}
+
+	public User getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(User updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public User getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(User pushedBy) {
+		this.pushedBy = pushedBy;
 	}
 
 }

@@ -18,6 +18,8 @@ public class UserToProjectDTO implements java.io.Serializable {
 	private Long projectId;
 	private Short userToProjectStatusId;
 	private Float expensesShare;
+	private Long updatedBy;
+	private Long pushedBy;
 	
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
@@ -41,7 +43,11 @@ public class UserToProjectDTO implements java.io.Serializable {
 		this.expensesShare = userToProject.getExpensesShare();
 		this.createdAt = userToProject.getCreatedAt();
 		this.updatedAt = userToProject.getUpdatedAt();
+		this.updatedBy = userToProject.getUpdatedBy().getId();
 		this.pushedAt = userToProject.getPushedAt();
+		if(userToProject.getPushedBy() != null){
+			this.pushedBy = userToProject.getPushedBy().getId();
+		}
 	}
 
 	public UserToProjectDTO(Long userId, Long projectId,
@@ -114,6 +120,26 @@ public class UserToProjectDTO implements java.io.Serializable {
 
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
+	}
+
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Long getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(Long pushedBy) {
+		this.pushedBy = pushedBy;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
 	}
 	
 }

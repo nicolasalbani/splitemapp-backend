@@ -114,12 +114,16 @@ CREATE TABLE `project` (
   `budget` decimal(16,6) NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` bigint(20) unsigned NOT NULL,
   `pushed_at` timestamp NULL,
+  `pushed_by` bigint(20) unsigned NULL,
   PRIMARY KEY (`id`),
   KEY `project__status_id` (`status_id`),
   KEY `project__type_id` (`type_id`),
   CONSTRAINT `project__status_id` FOREIGN KEY (`status_id`) REFERENCES `project_status` (`id`),
-  CONSTRAINT `project__type_id` FOREIGN KEY (`type_id`) REFERENCES `project_type` (`id`)
+  CONSTRAINT `project__type_id` FOREIGN KEY (`type_id`) REFERENCES `project_type` (`id`),
+  CONSTRAINT `project__updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `project__pushed_by` FOREIGN KEY (`pushed_by`) REFERENCES `user` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -132,10 +136,14 @@ CREATE TABLE `project_cover_image` (
   `avatar_data` MEDIUMBLOB null,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` bigint(20) unsigned NOT NULL,
   `pushed_at` timestamp NULL,
+  `pushed_by` bigint(20) unsigned NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_u_project_id` (`project_id`),
-  CONSTRAINT `project_cover_image__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`)
+  CONSTRAINT `project_cover_image__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
+  CONSTRAINT `project_cover__updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `project_cover__pushed_by` FOREIGN KEY (`pushed_by`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
@@ -163,14 +171,18 @@ CREATE TABLE `user_to_project` (
   `expenses_share` float(6,3) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` bigint(20) unsigned NOT NULL,
   `pushed_at` timestamp NULL,
+  `pushed_by` bigint(20) unsigned NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id__project_id_u_idx` (`user_id`,`project_id`),
   KEY `user_to_project__user_id` (`user_id`),
   KEY `user_to_project__project_id` (`project_id`),
   CONSTRAINT `user_to_project__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_to_project__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
-  CONSTRAINT `user_to_project__user_to_project_status_id` FOREIGN KEY (`user_to_project_status_id`) REFERENCES `user_to_project_status` (`id`)
+  CONSTRAINT `user_to_project__user_to_project_status_id` FOREIGN KEY (`user_to_project_status_id`) REFERENCES `user_to_project_status` (`id`),
+  CONSTRAINT `user_to_project__updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_to_project__pushed_by` FOREIGN KEY (`pushed_by`) REFERENCES `user` (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
@@ -198,12 +210,16 @@ CREATE TABLE `user_invite` (
   `email` varchar(64) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` bigint(20) unsigned NOT NULL,
   `pushed_at` timestamp NULL,
+  `pushed_by` bigint(20) unsigned NULL,
   PRIMARY KEY (`id`),
   KEY `user_invite__status_id` (`status_id`),
   CONSTRAINT `user_invite__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_invite__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
-  CONSTRAINT `user_invite__status_id` FOREIGN KEY (`status_id`) REFERENCES `invite_status` (`id`)
+  CONSTRAINT `user_invite__status_id` FOREIGN KEY (`status_id`) REFERENCES `invite_status` (`id`),
+  CONSTRAINT `user_invite__updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_invite__pushed_by` FOREIGN KEY (`pushed_by`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
@@ -239,13 +255,17 @@ CREATE TABLE `user_expense` (
   `note` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` bigint(20) unsigned NOT NULL,
   `pushed_at` timestamp NULL,
+  `pushed_by` bigint(20) unsigned NULL,
   PRIMARY KEY (`id`),
   KEY `user_expense__user_id` (`user_id`),
   KEY `user_expense__project_id` (`project_id`),
   CONSTRAINT `user_expense__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_expense__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
-  CONSTRAINT `user_expense__category_id` FOREIGN KEY (`category_id`) REFERENCES `expense_category` (`id`)
+  CONSTRAINT `user_expense__category_id` FOREIGN KEY (`category_id`) REFERENCES `expense_category` (`id`),
+  CONSTRAINT `user_expense__updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_expense__pushed_by` FOREIGN KEY (`pushed_by`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------

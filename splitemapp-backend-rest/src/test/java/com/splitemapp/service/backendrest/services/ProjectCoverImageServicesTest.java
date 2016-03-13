@@ -62,7 +62,7 @@ public class ProjectCoverImageServicesTest extends BaseServiceTest{
 	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<ProjectCoverImageDTO> itemList = new ArrayList<ProjectCoverImageDTO>();
-		ProjectCoverImageDTO projectCoverImageDTO = createProjectCoverImageDTO(3l, 10l);
+		ProjectCoverImageDTO projectCoverImageDTO = createProjectCoverImageDTO(3l, 10l, 1l);
 		itemList.add(projectCoverImageDTO);
 
 		// Crafting the full service URL
@@ -85,7 +85,7 @@ public class ProjectCoverImageServicesTest extends BaseServiceTest{
 	public void pushUpdateServiceTest(){
 		// Creating the user list to push
 		List<ProjectCoverImageDTO> itemList = new ArrayList<ProjectCoverImageDTO>();
-		ProjectCoverImageDTO projectCoverImageDTO = createProjectCoverImageDTO(2l, 3l);
+		ProjectCoverImageDTO projectCoverImageDTO = createProjectCoverImageDTO(2l, 3l, 1l);
 		itemList.add(projectCoverImageDTO);
 
 		// Crafting the full service URL
@@ -104,14 +104,16 @@ public class ProjectCoverImageServicesTest extends BaseServiceTest{
 		assertTrue(response.getSuccess());
 	}
 
-	private ProjectCoverImageDTO createProjectCoverImageDTO(Long id, Long projectId){
+	private ProjectCoverImageDTO createProjectCoverImageDTO(Long id, Long projectId, Long userId){
 		// Creating project cover image DTO object
-		ProjectCoverImageDTO user = new ProjectCoverImageDTO();
-		user.setId(id);
-		user.setProjectId(projectId);
-		user.setAvatarData(new byte[1]);
-		user.setCreatedAt(new Date(1000));
-		user.setUpdatedAt(new Date(1000));
-		return user;
+		ProjectCoverImageDTO projectCoverImageDTO = new ProjectCoverImageDTO();
+		projectCoverImageDTO.setId(id);
+		projectCoverImageDTO.setProjectId(projectId);
+		projectCoverImageDTO.setAvatarData(new byte[1]);
+		projectCoverImageDTO.setCreatedAt(new Date(1000));
+		projectCoverImageDTO.setUpdatedAt(new Date(1000));
+		projectCoverImageDTO.setUpdatedBy(userId);
+		projectCoverImageDTO.setPushedBy(userId);
+		return projectCoverImageDTO;
 	}
 }

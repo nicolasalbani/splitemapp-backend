@@ -66,6 +66,14 @@ public class Project implements java.io.Serializable {
 	@Column(name = "pushed_at", length = 19)
 	private Date pushedAt;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pushed_by")
+	private User pushedBy;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "project")
 	private Set<UserExpense> userExpenses = new HashSet<UserExpense>(0);
 	
@@ -91,7 +99,7 @@ public class Project implements java.io.Serializable {
 		this.pushedAt = pushedAt;
 	}
 	
-	public Project(ProjectType projectType, ProjectStatus projectStatus, ProjectDTO projectDTO) {
+	public Project(ProjectType projectType, ProjectStatus projectStatus, User updatedBy, User pushedBy, ProjectDTO projectDTO) {
 		this.id = projectDTO.getId();
 		this.projectType = projectType;
 		this.projectStatus = projectStatus;
@@ -99,7 +107,9 @@ public class Project implements java.io.Serializable {
 		this.budget = projectDTO.getBudget();
 		this.createdAt = projectDTO.getCreatedAt();
 		this.updatedAt = projectDTO.getUpdatedAt();
+		this.updatedBy = updatedBy;
 		this.pushedAt = projectDTO.getPushedAt();
+		this.pushedBy = pushedBy;
 	}
 
 	public Project(ProjectType projectType, ProjectStatus projectStatus,
@@ -186,6 +196,22 @@ public class Project implements java.io.Serializable {
 
 	public Set<UserExpense> getUserExpenses() {
 		return this.userExpenses;
+	}
+
+	public User getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(User updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public User getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(User pushedBy) {
+		this.pushedBy = pushedBy;
 	}
 
 	public void setUserExpenses(Set<UserExpense> userExpenses) {

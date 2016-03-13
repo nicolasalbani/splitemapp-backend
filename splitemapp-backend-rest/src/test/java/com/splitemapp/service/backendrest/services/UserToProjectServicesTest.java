@@ -114,6 +114,8 @@ public class UserToProjectServicesTest extends BaseServiceTest{
 		userToProject.setUserToProjectStatusId((short)1);
 		userToProject.setCreatedAt(new Date(10000));
 		userToProject.setUpdatedAt(new Date(10000));
+		userToProject.setUpdatedBy(userId);
+		userToProject.setPushedBy(userId);
 		return userToProject;
 	}
 }

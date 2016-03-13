@@ -66,7 +66,9 @@ public class PushUserInvitesService extends PushNotificationService{
 				User user = userEndpoint.findById(userInviteDTO.getUserId());
 				Project project = projectEndpoint.findById(userInviteDTO.getProjectId());
 				InviteStatus inviteStatus = inviteStatusEndpoint.findById(userInviteDTO.getInviteStatusId());
-				UserInvite userInvite = new UserInvite(user, project, inviteStatus, userInviteDTO);
+				User updatedBy = userEndpoint.findById(userInviteDTO.getUpdatedBy());
+				User pushedBy = userEndpoint.findById(userInviteDTO.getPushedBy());
+				UserInvite userInvite = new UserInvite(user, project, inviteStatus, updatedBy, pushedBy, userInviteDTO);
 
 				// We update the pushedAt date
 				userInvite.setPushedAt(pushedAt);

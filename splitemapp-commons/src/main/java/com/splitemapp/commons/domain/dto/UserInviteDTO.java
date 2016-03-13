@@ -17,6 +17,8 @@ public class UserInviteDTO implements java.io.Serializable {
 	private Long projectId;
 	private Short inviteStatusId;
 	private String email;
+	private Long updatedBy;
+	private Long pushedBy;
 	
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
@@ -40,7 +42,11 @@ public class UserInviteDTO implements java.io.Serializable {
 		this.inviteStatusId = userInvite.getInviteStatus().getId();
 		this.createdAt = userInvite.getCreatedAt();
 		this.updatedAt = userInvite.getUpdatedAt();
+		this.updatedBy = userInvite.getUpdatedBy().getId();
 		this.pushedAt = userInvite.getPushedAt();
+		if(userInvite.getPushedBy() != null){
+			this.pushedBy = userInvite.getPushedBy().getId();
+		}
 	}
 
 	public UserInviteDTO(Long userId, Long projectId, Short inviteStatusId,
@@ -116,6 +122,22 @@ public class UserInviteDTO implements java.io.Serializable {
 
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
+	}
+
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Long getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(Long pushedBy) {
+		this.pushedBy = pushedBy;
 	}
 
 }

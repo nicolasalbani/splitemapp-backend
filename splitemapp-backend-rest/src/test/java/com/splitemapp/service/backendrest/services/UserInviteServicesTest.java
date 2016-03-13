@@ -114,6 +114,8 @@ public class UserInviteServicesTest extends BaseServiceTest{
 		userInvite.setInviteStatusId((short)1);
 		userInvite.setCreatedAt(new Date(20000));
 		userInvite.setUpdatedAt(new Date(20000));
+		userInvite.setUpdatedBy(userId);
+		userInvite.setPushedBy(userId);
 		return userInvite;
 	}
 }

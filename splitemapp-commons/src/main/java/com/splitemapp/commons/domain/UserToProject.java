@@ -60,6 +60,14 @@ public class UserToProject implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "pushed_at", length = 19)
 	private Date pushedAt;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pushed_by")
+	private User pushedBy;
 
 	@Column(name = "expenses_share", nullable = false, precision = 3)
 	private Float expensesShare;
@@ -69,14 +77,17 @@ public class UserToProject implements java.io.Serializable {
 	}
 	
 	public UserToProject(User user, Project project,
-			UserToProjectStatus userToProjectStatus, UserToProjectDTO userToProjectDTO) {
+			UserToProjectStatus userToProjectStatus, 
+			User updatedBy, User pushedBy, UserToProjectDTO userToProjectDTO) {
 		this.id = userToProjectDTO.getId();
 		this.user = user;
 		this.project = project;
 		this.userToProjectStatus = userToProjectStatus;
 		this.createdAt = userToProjectDTO.getCreatedAt();
 		this.updatedAt = userToProjectDTO.getUpdatedAt();
+		this.updatedBy = updatedBy;
 		this.pushedAt = userToProjectDTO.getPushedAt();
+		this.pushedBy = pushedBy;
 		this.expensesShare = userToProjectDTO.getExpensesShare();
 	}
 
@@ -163,6 +174,22 @@ public class UserToProject implements java.io.Serializable {
 
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
+	}
+
+	public User getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(User updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public User getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(User pushedBy) {
+		this.pushedBy = pushedBy;
 	}
 	
 }

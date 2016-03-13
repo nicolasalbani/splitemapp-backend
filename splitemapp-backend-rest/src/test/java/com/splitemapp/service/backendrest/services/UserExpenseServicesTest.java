@@ -119,6 +119,8 @@ public class UserExpenseServicesTest extends BaseServiceTest{
 		userExpense.setExpenseDate(new Date(10000));
 		userExpense.setCreatedAt(new Date(10000));
 		userExpense.setUpdatedAt(new Date(10000));
+		userExpense.setUpdatedBy(userId);
+		userExpense.setPushedBy(userId);
 		return userExpense;
 	}
 }

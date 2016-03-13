@@ -62,6 +62,14 @@ public class UserExpense implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "pushed_at", length = 19)
 	private Date pushedAt;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pushed_by")
+	private User pushedBy;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "expense_date", length = 19)
@@ -75,7 +83,7 @@ public class UserExpense implements java.io.Serializable {
 	}
 	
 	public UserExpense(User user, Project project,
-			ExpenseCategory expenseCategory, UserExpenseDTO userExpenseDTO) {
+			ExpenseCategory expenseCategory, User updatedBy, User pushedBy, UserExpenseDTO userExpenseDTO) {
 		this.id = userExpenseDTO.getId();
 		this.user = user;
 		this.project = project;
@@ -85,7 +93,9 @@ public class UserExpense implements java.io.Serializable {
 		this.note = userExpenseDTO.getNote();
 		this.createdAt = userExpenseDTO.getCreatedAt();
 		this.updatedAt = userExpenseDTO.getUpdatedAt();
+		this.updatedBy = updatedBy;
 		this.pushedAt = userExpenseDTO.getPushedAt();
+		this.pushedBy = pushedBy;
 	}
 
 	public UserExpense(User user, Project project,
@@ -185,6 +195,22 @@ public class UserExpense implements java.io.Serializable {
 
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
+	}
+
+	public User getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(User updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public User getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(User pushedBy) {
+		this.pushedBy = pushedBy;
 	}
 
 }

@@ -56,18 +56,28 @@ public class ProjectCoverImage implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "pushed_at", length = 19)
 	private Date pushedAt;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pushed_by")
+	private User pushedBy;
 
 	public ProjectCoverImage() {
 		this.createdAt = this.updatedAt = new Date();
 	}
 	
-	public ProjectCoverImage(Project project, ProjectCoverImageDTO projectCoverImageDTO){
-		this.project = project;
+	public ProjectCoverImage(Project project, User updatedBy, User pushedBy, ProjectCoverImageDTO projectCoverImageDTO){
 		this.id = projectCoverImageDTO.getId();
+		this.project = project;
 		this.avatarData = projectCoverImageDTO.getAvatarData();
 		this.createdAt = projectCoverImageDTO.getCreatedAt();
 		this.updatedAt = projectCoverImageDTO.getUpdatedAt();
+		this.updatedBy = updatedBy;
 		this.pushedAt = projectCoverImageDTO.getPushedAt();
+		this.pushedBy = pushedBy;
 	}
 
 	public ProjectCoverImage(Project project, byte[] avatarData, Date createdAt, Date updatedAt, Date pushedAt) {
@@ -124,6 +134,22 @@ public class ProjectCoverImage implements java.io.Serializable {
 
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
+	}
+
+	public User getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(User updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public User getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(User pushedBy) {
+		this.pushedBy = pushedBy;
 	}
 
 }

@@ -63,7 +63,7 @@ public class ProjectServicesTest extends BaseServiceTest{
 	public void pushCreateServiceTest(){
 		// Creating the user list to push
 		List<ProjectDTO> itemList = new ArrayList<ProjectDTO>();
-		ProjectDTO project = createProjectDTO(4L, "Cuarto Proyecto");
+		ProjectDTO project = createProjectDTO(4L, "Cuarto Proyecto", 1L);
 		itemList.add(project);
 
 		// Crafting the full service URL
@@ -86,7 +86,7 @@ public class ProjectServicesTest extends BaseServiceTest{
 	public void pushUpdateServiceTest(){
 		// Creating the user list to push
 		List<ProjectDTO> itemList = new ArrayList<ProjectDTO>();
-		ProjectDTO project = createProjectDTO(10L, "Decimo Proyecto Actualizado");
+		ProjectDTO project = createProjectDTO(10L, "Decimo Proyecto Actualizado", 1L);
 		itemList.add(project);
 
 		// Crafting the full service URL
@@ -105,7 +105,7 @@ public class ProjectServicesTest extends BaseServiceTest{
 		assertTrue(response.getSuccess());
 	}
 
-	private ProjectDTO createProjectDTO(Long id, String title){
+	private ProjectDTO createProjectDTO(Long id, String title, Long userId){
 		// Creating user DTO object.
 		ProjectDTO project = new ProjectDTO();
 		project.setBudget(new BigDecimal(100));
@@ -115,6 +115,8 @@ public class ProjectServicesTest extends BaseServiceTest{
 		project.setTitle(title);
 		project.setCreatedAt(new Date(10000));
 		project.setUpdatedAt(new Date(10000));
+		project.setUpdatedBy(userId);
+		project.setPushedBy(userId);
 		return project;
 	}
 }

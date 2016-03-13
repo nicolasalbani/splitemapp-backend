@@ -66,7 +66,9 @@ public class PushUserToProjectsService extends PushNotificationService{
 				User user = userEndpoint.findById(userToProjectDTO.getUserId());
 				Project project = projectEndpoint.findById(userToProjectDTO.getProjectId());
 				UserToProjectStatus userToProjectStatus = userToProjectStatusEndpoint.findById(userToProjectDTO.getUserToProjectStatusId());
-				UserToProject userToProject = new UserToProject(user, project, userToProjectStatus, userToProjectDTO);
+				User updatedBy = userEndpoint.findById(userToProjectDTO.getUpdatedBy());
+				User pushedBy = userEndpoint.findById(userToProjectDTO.getPushedBy());
+				UserToProject userToProject = new UserToProject(user, project, userToProjectStatus, updatedBy, pushedBy, userToProjectDTO);
 
 				// We update the pushedAt date
 				userToProject.setPushedAt(pushedAt);

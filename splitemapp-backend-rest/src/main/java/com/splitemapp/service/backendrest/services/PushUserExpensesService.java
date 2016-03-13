@@ -66,7 +66,9 @@ public class PushUserExpensesService extends PushNotificationService{
 				User user = userEndpoint.findById(userExpenseDTO.getUserId());
 				Project project = projectEndpoint.findById(userExpenseDTO.getProjectId());
 				ExpenseCategory expenseCategory = expenseCategoryEndpoint.findById(userExpenseDTO.getExpenseCategoryId());
-				UserExpense userExpense = new UserExpense(user, project, expenseCategory, userExpenseDTO);
+				User updatedBy = userEndpoint.findById(userExpenseDTO.getUpdatedBy());
+				User pushedBy = userEndpoint.findById(userExpenseDTO.getPushedBy());
+				UserExpense userExpense = new UserExpense(user, project, expenseCategory, updatedBy, pushedBy, userExpenseDTO);
 
 				// We update the pushedAt date
 				userExpense.setPushedAt(pushedAt);
