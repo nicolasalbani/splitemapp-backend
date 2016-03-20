@@ -27,7 +27,7 @@ import com.splitemapp.commons.domain.dto.UserAvatarDTO;
  */
 @Entity(name = "user_avatar")
 @Table(name = "user_avatar", catalog = "splitemapp", uniqueConstraints = @UniqueConstraint(columnNames = "user_id"))
-public class UserAvatar implements java.io.Serializable {
+public class UserAvatar implements java.io.Serializable,PushableEntity {
 
 	private static final long serialVersionUID = 8927823575372766924L;
 
@@ -56,18 +56,28 @@ public class UserAvatar implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "pushed_at", length = 19)
 	private Date pushedAt;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pushed_by")
+	private User pushedBy;
 
 	public UserAvatar() {
 		this.createdAt = this.updatedAt = new Date();
 	}
 	
-	public UserAvatar(User user, UserAvatarDTO userAvatarDTO){
+	public UserAvatar(User user, User updatedBy, User pushedBy, UserAvatarDTO userAvatarDTO){
 		this.id = userAvatarDTO.getId();
 		this.user = user;
 		this.avatarData = userAvatarDTO.getAvatarData();
 		this.createdAt = userAvatarDTO.getCreatedAt();
 		this.updatedAt = userAvatarDTO.getUpdatedAt();
+		this.updatedBy = updatedBy;
 		this.pushedAt = userAvatarDTO.getPushedAt();
+		this.pushedBy = pushedBy;
 	}
 
 	public UserAvatar(User user, byte[] avatarData, Date createdAt, Date updatedAt, Date pushedAt) {
@@ -111,20 +121,43 @@ public class UserAvatar implements java.io.Serializable {
 		this.createdAt = createdAt;
 	}
 
+	@Override
 	public Date getUpdatedAt() {
 		return this.updatedAt;
 	}
 
+	@Override
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
+	@Override
 	public Date getPushedAt() {
 		return pushedAt;
 	}
 
+	@Override
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
 	}
 
+	@Override
+	public User getUpdatedBy() {
+		return updatedBy;
+	}
+
+	@Override
+	public void setUpdatedBy(User updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	@Override
+	public User getPushedBy() {
+		return pushedBy;
+	}
+
+	@Override
+	public void setPushedBy(User pushedBy) {
+		this.pushedBy = pushedBy;
+	}
 }

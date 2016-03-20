@@ -27,7 +27,7 @@ import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 @Entity(name = "user_contact_data")
 @Table(name = "user_contact_data", catalog = "splitemapp", uniqueConstraints = @UniqueConstraint(columnNames = {
 		"user_id", "contact_data" }))
-public class UserContactData implements java.io.Serializable {
+public class UserContactData implements java.io.Serializable,PushableEntity {
 
 	private static final long serialVersionUID = 8927823575372766924L;
 
@@ -62,12 +62,20 @@ public class UserContactData implements java.io.Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "pushed_at", length = 19)
 	private Date pushedAt;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "updated_by", nullable = false)
+	private User updatedBy;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pushed_by")
+	private User pushedBy;
 
 	public UserContactData() {
 		this.createdAt = this.updatedAt = new Date();
 	}
 	
-	public UserContactData(User user, UserContactDataDTO userContactDataDTO){
+	public UserContactData(User user, User updatedBy, User pushedBy, UserContactDataDTO userContactDataDTO){
 		this.user = user;
 		this.id = userContactDataDTO.getId();
 		this.contactData = userContactDataDTO.getContactData();
@@ -75,7 +83,9 @@ public class UserContactData implements java.io.Serializable {
 		this.verifiedAt = userContactDataDTO.getVerifiedAt();
 		this.createdAt = userContactDataDTO.getCreatedAt();
 		this.updatedAt = userContactDataDTO.getUpdatedAt();
+		this.updatedBy = updatedBy;
 		this.pushedAt = userContactDataDTO.getPushedAt();
+		this.pushedBy = pushedBy;
 	}
 
 	public UserContactData(User user, boolean verified, Date createdAt) {
@@ -143,20 +153,43 @@ public class UserContactData implements java.io.Serializable {
 		this.createdAt = createdAt;
 	}
 
+	@Override
 	public Date getUpdatedAt() {
 		return this.updatedAt;
 	}
 
+	@Override
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
+	@Override
 	public Date getPushedAt() {
 		return pushedAt;
 	}
 
+	@Override
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
 	}
 
+	@Override
+	public User getUpdatedBy() {
+		return updatedBy;
+	}
+
+	@Override
+	public void setUpdatedBy(User updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	@Override
+	public User getPushedBy() {
+		return pushedBy;
+	}
+
+	@Override
+	public void setPushedBy(User pushedBy) {
+		this.pushedBy = pushedBy;
+	}
 }

@@ -30,7 +30,7 @@ import com.splitemapp.commons.domain.dto.ProjectDTO;
  */
 @Entity(name = "project")
 @Table(name = "project", catalog = "splitemapp")
-public class Project implements java.io.Serializable {
+public class Project implements java.io.Serializable,PushableEntity {
 
 	private static final long serialVersionUID = -1186403556721128678L;
 	
@@ -178,18 +178,22 @@ public class Project implements java.io.Serializable {
 		this.createdAt = createdAt;
 	}
 
+	@Override
 	public Date getUpdatedAt() {
 		return this.updatedAt;
 	}
 
+	@Override
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
+	@Override
 	public Date getPushedAt() {
 		return pushedAt;
 	}
 
+	@Override
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
 	}
@@ -198,18 +202,22 @@ public class Project implements java.io.Serializable {
 		return this.userExpenses;
 	}
 
+	@Override
 	public User getUpdatedBy() {
 		return updatedBy;
 	}
 
+	@Override
 	public void setUpdatedBy(User updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
+	@Override
 	public User getPushedBy() {
 		return pushedBy;
 	}
 
+	@Override
 	public void setPushedBy(User pushedBy) {
 		this.pushedBy = pushedBy;
 	}

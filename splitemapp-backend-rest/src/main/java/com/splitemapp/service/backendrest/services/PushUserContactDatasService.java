@@ -59,7 +59,9 @@ public class PushUserContactDatasService extends PushNotificationService{
 				
 				// We create the user contact data object
 				User user = userEndpoint.findById(userContactDataDTO.getUserId());
-				UserContactData userContactData = new UserContactData(user, userContactDataDTO);
+				User updatedBy = userEndpoint.findById(userContactDataDTO.getUpdatedBy());
+				User pushedBy = userEndpoint.findById(userContactDataDTO.getPushedBy());
+				UserContactData userContactData = new UserContactData(user,updatedBy,pushedBy,userContactDataDTO);
 
 				// We update the pushedAt date
 				userContactData.setPushedAt(pushedAt);

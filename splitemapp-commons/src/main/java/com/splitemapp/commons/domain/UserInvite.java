@@ -25,7 +25,7 @@ import com.splitemapp.commons.domain.dto.UserInviteDTO;
  */
 @Entity(name = "user_invite")
 @Table(name = "user_invite", catalog = "splitemapp")
-public class UserInvite implements java.io.Serializable {
+public class UserInvite implements java.io.Serializable,PushableEntity {
 
 	private static final long serialVersionUID = -2499430771175807337L;
 
@@ -156,34 +156,42 @@ public class UserInvite implements java.io.Serializable {
 		this.createdAt = createdAt;
 	}
 
+	@Override
 	public Date getUpdatedAt() {
 		return this.updatedAt;
 	}
 
+	@Override
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
+	@Override
 	public Date getPushedAt() {
 		return pushedAt;
 	}
 
+	@Override
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
 	}
 
+	@Override
 	public User getUpdatedBy() {
 		return updatedBy;
 	}
 
+	@Override
 	public void setUpdatedBy(User updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
+	@Override
 	public User getPushedBy() {
 		return pushedBy;
 	}
 
+	@Override
 	public void setPushedBy(User pushedBy) {
 		this.pushedBy = pushedBy;
 	}

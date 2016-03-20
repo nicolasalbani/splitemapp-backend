@@ -59,7 +59,9 @@ public class PushUserAvatarsService extends PushNotificationService{
 				
 				// We create the user avatar object
 				User user = userEndpoint.findById(userAvatarDTO.getUserId());
-				UserAvatar userAvatar = new UserAvatar(user, userAvatarDTO);
+				User updatedBy = userEndpoint.findById(userAvatarDTO.getUpdatedBy());
+				User pushedBy = userEndpoint.findById(userAvatarDTO.getPushedBy());
+				UserAvatar userAvatar = new UserAvatar(user,updatedBy,pushedBy,userAvatarDTO);
 
 				// We update the pushedAt date
 				userAvatar.setPushedAt(pushedAt);

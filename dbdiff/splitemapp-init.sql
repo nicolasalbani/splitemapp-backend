@@ -49,10 +49,14 @@ CREATE TABLE `user_avatar` (
   `avatar_data` MEDIUMBLOB NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` bigint(20) unsigned NOT NULL,
   `pushed_at` timestamp NULL,
+  `pushed_by` bigint(20) unsigned NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_u_user_id` (`user_id`),
-  CONSTRAINT `user_avatar__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `user_avatar__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_avatar__updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_avatar__pushed_by` FOREIGN KEY (`pushed_by`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- -----------------------------------------------------
@@ -66,12 +70,16 @@ CREATE TABLE `user_contact_data` (
   `verified_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_by` bigint(20) unsigned NOT NULL,
   `pushed_at` timestamp NULL,
+  `pushed_by` bigint(20) unsigned NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `idx_contact_data` (`contact_data`),
   UNIQUE KEY `user_id_contact_data_idx` (`user_id`,`contact_data`),
-  CONSTRAINT `user_contact_data__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `user_contact_data__user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_contact_data__updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `user_contact_data__pushed_by` FOREIGN KEY (`pushed_by`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

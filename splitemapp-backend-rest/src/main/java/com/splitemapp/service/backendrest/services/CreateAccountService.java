@@ -62,7 +62,6 @@ public class CreateAccountService {
 
 			// We create and persist the user instance
 			User newUser = new User();
-			newUser.setCreatedAt(new Date());
 			newUser.setCreatedIpAddress(request.getIpAddress());
 			newUser.setUpdatedAt(new Date());
 			newUser.setUpdatedIpAddress(request.getIpAddress());
@@ -76,17 +75,19 @@ public class CreateAccountService {
 			// We create and persist the user contact data
 			UserContactData userContactData = new UserContactData();
 			userContactData.setContactData(request.getEmail());
-			userContactData.setCreatedAt(new Date());
 			userContactData.setUser(newUser);
+			userContactData.setUpdatedBy(newUser);
 			userContactData.setPushedAt(new Date());
+			userContactData.setPushedBy(newUser);
 			userContactDataEndpoint.persist(userContactData);
 			
 			// We create and persist the user avatar
 			UserAvatar userAvatar = new UserAvatar();
 			userAvatar.setAvatarData(request.getAvatar());
-			userAvatar.setCreatedAt(new Date());
 			userAvatar.setUser(newUser);
 			userAvatar.setPushedAt(new Date());
+			userAvatar.setUpdatedBy(newUser);
+			userAvatar.setPushedBy(newUser);
 			userAvatarEndpoint.persist(userAvatar);
 
 			// We set the response values

@@ -27,7 +27,7 @@ import com.splitemapp.commons.domain.dto.ProjectCoverImageDTO;
  */
 @Entity(name = "project_cover_image")
 @Table(name = "project_cover_image", catalog = "splitemapp", uniqueConstraints = @UniqueConstraint(columnNames = "project_id"))
-public class ProjectCoverImage implements java.io.Serializable {
+public class ProjectCoverImage implements java.io.Serializable, PushableEntity {
 
 	private static final long serialVersionUID = 8927823575372766924L;
 
@@ -120,34 +120,42 @@ public class ProjectCoverImage implements java.io.Serializable {
 		this.createdAt = createdAt;
 	}
 
+	@Override
 	public Date getUpdatedAt() {
 		return this.updatedAt;
 	}
 
+	@Override
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
+	@Override
 	public Date getPushedAt() {
 		return pushedAt;
 	}
 
+	@Override
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
 	}
 
+	@Override
 	public User getUpdatedBy() {
 		return updatedBy;
 	}
 
+	@Override
 	public void setUpdatedBy(User updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
+	@Override
 	public User getPushedBy() {
 		return pushedBy;
 	}
 
+	@Override
 	public void setPushedBy(User pushedBy) {
 		this.pushedBy = pushedBy;
 	}

@@ -26,7 +26,7 @@ import com.splitemapp.commons.domain.dto.UserExpenseDTO;
  */
 @Entity(name = "user_expense")
 @Table(name = "user_expense", catalog = "splitemapp")
-public class UserExpense implements java.io.Serializable {
+public class UserExpense implements java.io.Serializable,PushableEntity {
 
 	private static final long serialVersionUID = 2204965154783892793L;
 
@@ -181,34 +181,42 @@ public class UserExpense implements java.io.Serializable {
 		this.createdAt = createdAt;
 	}
 
+	@Override
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
+	@Override
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
+	@Override
 	public Date getPushedAt() {
 		return pushedAt;
 	}
 
+	@Override
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
 	}
 
+	@Override
 	public User getUpdatedBy() {
 		return updatedBy;
 	}
 
+	@Override
 	public void setUpdatedBy(User updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
+	@Override
 	public User getPushedBy() {
 		return pushedBy;
 	}
 
+	@Override
 	public void setPushedBy(User pushedBy) {
 		this.pushedBy = pushedBy;
 	}

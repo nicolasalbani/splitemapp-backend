@@ -28,6 +28,9 @@ public class UserAvatarDTO implements java.io.Serializable {
 	@JsonDeserialize(using=CustomDateDeserializer.class)
 	private Date pushedAt;
 	
+	private Long updatedBy;
+	private Long pushedBy;
+	
 	public UserAvatarDTO(){}
 
 	public UserAvatarDTO(UserAvatar userAvatar) {
@@ -36,7 +39,9 @@ public class UserAvatarDTO implements java.io.Serializable {
 		this.avatarData = userAvatar.getAvatarData();
 		this.createdAt = userAvatar.getCreatedAt();
 		this.updatedAt = userAvatar.getUpdatedAt();
+		this.updatedBy = userAvatar.getUpdatedBy().getId();
 		this.pushedAt = userAvatar.getPushedAt();
+		this.pushedBy = userAvatar.getPushedBy().getId();
 	}
 
 	public UserAvatarDTO(Long id, Long userId, byte[] avatarData,
@@ -98,4 +103,19 @@ public class UserAvatarDTO implements java.io.Serializable {
 		this.avatarData = avatarData;
 	}
 
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public Long getPushedBy() {
+		return pushedBy;
+	}
+
+	public void setPushedBy(Long pushedBy) {
+		this.pushedBy = pushedBy;
+	}
 }

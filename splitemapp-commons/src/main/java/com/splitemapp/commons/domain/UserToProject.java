@@ -27,7 +27,7 @@ import com.splitemapp.commons.domain.dto.UserToProjectDTO;
 @Entity(name = "user_to_project")
 @Table(name = "user_to_project", catalog = "splitemapp", uniqueConstraints = @UniqueConstraint(columnNames = {
 		"user_id", "project_id" }))
-public class UserToProject implements java.io.Serializable {
+public class UserToProject implements java.io.Serializable,PushableEntity {
 
 	private static final long serialVersionUID = 7814066964126398718L;
 
@@ -160,34 +160,42 @@ public class UserToProject implements java.io.Serializable {
 		this.createdAt = createdAt;
 	}
 
+	@Override
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
+	@Override
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
+	@Override
 	public Date getPushedAt() {
 		return pushedAt;
 	}
 
+	@Override
 	public void setPushedAt(Date pushedAt) {
 		this.pushedAt = pushedAt;
 	}
 
+	@Override
 	public User getUpdatedBy() {
 		return updatedBy;
 	}
 
+	@Override
 	public void setUpdatedBy(User updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
+	@Override
 	public User getPushedBy() {
 		return pushedBy;
 	}
 
+	@Override
 	public void setPushedBy(User pushedBy) {
 		this.pushedBy = pushedBy;
 	}
