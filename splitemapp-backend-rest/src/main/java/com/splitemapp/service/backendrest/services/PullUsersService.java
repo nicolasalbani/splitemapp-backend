@@ -43,7 +43,6 @@ public class PullUsersService {
 	public PullResponse<UserDTO> printMessage(PullRequest request) throws ParseException {
 		// We create a pull user response object setting success to false by default
 		PullResponse<UserDTO> response = new PullResponse<UserDTO>();
-		response.setSuccess(false);
 
 		// Creating the pulledAt date
 		Date pulledAt = new Date();

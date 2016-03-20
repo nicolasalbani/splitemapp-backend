@@ -17,14 +17,6 @@ public class LoginResponse extends ServiceResponse{
 
 	public LoginResponse() {}
 
-	public LoginResponse(Boolean success,UserSessionDTO userSessionDTO,UserContactDataDTO userContactDataDTO,UserAvatarDTO userAvatarDTO,Boolean changePassword) {
-		super(success);
-		this.userSessionDTO = userSessionDTO;
-		this.setUserAvatarDTO(userAvatarDTO);
-		this.userContactDataDTO = userContactDataDTO;
-		this.changePassword	= changePassword;
-	}
-
 	public UserSessionDTO getUserSessionDTO() {
 		return userSessionDTO;
 	}

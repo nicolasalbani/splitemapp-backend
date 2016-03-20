@@ -14,14 +14,6 @@ public class CreateAccountResponse extends ServiceResponse{
 
 	public CreateAccountResponse() {}
 
-	public CreateAccountResponse(Boolean success, UserDTO userDTO, UserAvatarDTO userAvatarDTO, UserStatusDTO userStatusDTO, UserContactDataDTO userContactDataDTO) {
-		super(success);
-		this.setUserDTO(userDTO);
-		this.setUserAvatarDTO(userAvatarDTO);
-		this.setUserStatusDTO(userStatusDTO);
-		this.setUserContactDataDTO(userContactDataDTO);
-	}
-
 	public UserContactDataDTO getUserContactDataDTO() {
 		return userContactDataDTO;
 	}

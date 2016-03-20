@@ -36,7 +36,6 @@ public class PushUserSessionService {
 	public PushResponse<Long> printMessage(PushRequest<UserSessionDTO> request) throws ParseException {
 		// We create a response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
-		response.setSuccess(false);
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 

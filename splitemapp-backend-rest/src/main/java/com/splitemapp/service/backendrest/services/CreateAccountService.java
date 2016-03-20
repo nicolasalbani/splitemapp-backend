@@ -50,7 +50,6 @@ public class CreateAccountService {
 
 		// We create a create account response object setting success to false by default
 		CreateAccountResponse response = new CreateAccountResponse();
-		response.setSuccess(false);
 
 		// We check if the user already exists
 		User user = userEndpoint.findByField(TableField.USER_USERNAME, request.getEmail());
@@ -97,7 +96,7 @@ public class CreateAccountService {
 			response.setUserAvatarDTO(new UserAvatarDTO(userAvatar));
 			response.setUserStatusDTO(new UserStatusDTO(userStatus));
 		} else {
-			//TODO check the status of the user, if it's disabled we can enable it?
+			response.setMessage(ServiceConstants.ERROR_MESSAGE_ACCOUNT_EXISTS);
 		}
 
 		return response;

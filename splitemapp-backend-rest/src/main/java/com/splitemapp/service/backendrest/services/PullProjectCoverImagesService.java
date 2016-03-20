@@ -44,7 +44,6 @@ public class PullProjectCoverImagesService {
 	public PullResponse<ProjectCoverImageDTO> printMessage(PullRequest request) throws ParseException {
 		// We create a pull projects object setting success to false by default
 		PullResponse<ProjectCoverImageDTO> response = new PullResponse<ProjectCoverImageDTO>();
-		response.setSuccess(false);
 
 		// Creating the pulledAt date
 		Date pulledAt = new Date();

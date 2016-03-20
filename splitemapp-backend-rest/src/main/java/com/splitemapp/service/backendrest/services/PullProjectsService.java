@@ -44,7 +44,6 @@ public class PullProjectsService {
 	public PullResponse<ProjectDTO> printMessage(PullRequest request) throws ParseException {
 		// We create a pull projects object setting success to false by default
 		PullResponse<ProjectDTO> response = new PullResponse<ProjectDTO>();
-		response.setSuccess(false);
 
 		// Creating the pulledAt date
 		Date pulledAt = new Date();

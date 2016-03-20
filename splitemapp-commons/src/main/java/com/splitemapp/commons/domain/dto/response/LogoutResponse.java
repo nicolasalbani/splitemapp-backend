@@ -8,11 +8,6 @@ public class LogoutResponse extends ServiceResponse{
 
 	public LogoutResponse() {}
 
-	public LogoutResponse(Boolean success,UserSessionDTO userSessionDTO) {
-		super(success);
-		this.userSessionDTO = userSessionDTO;
-	}
-
 	public UserSessionDTO getUserSessionDTO() {
 		return userSessionDTO;
 	}

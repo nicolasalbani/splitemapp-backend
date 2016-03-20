@@ -14,7 +14,7 @@ public class ServiceConstants {
 	public static final String API_KEY = "AIzaSyCREdjyI-IBHiaX07Tbld7ZOqTZxw4p51I";
 	
 	/**
-	 * Broadcast constants
+	 * Broadcast Constants
 	 */
 	public static final String REST_MESSAGE = "com.splitemapp.android.service.REST_MESSAGE";
 	public static final String UI_MESSAGE = "com.splitemapp.android.service.UI_MESSAGE";
@@ -26,6 +26,14 @@ public class ServiceConstants {
 	 * General Service Constants
 	 */
 	public static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
+	
+	/**
+	 * Service Error Messages
+	 */
+	public static final String ERROR_MESSAGE_ACCOUNT_EXISTS = "ERROR_MESSAGE_ACCOUNT_EXISTS";
+	public static final String ERROR_MESSAGE_LOGIN_FAILED = "ERROR_MESSAGE_LOGIN_FAILED";
+	public static final String ERROR_MESSAGE_SERVER_ERROR = "ERROR_MESSAGE_SERVER_ERROR";
+	public static final String ERROR_MESSAGE_NETWORK_ERROR = "ERROR_MESSAGE_NETWORK_ERROR";
 	
 	/**
 	 * Service Paths

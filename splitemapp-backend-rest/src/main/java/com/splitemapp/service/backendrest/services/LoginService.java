@@ -51,8 +51,7 @@ public class LoginService {
 	public LoginResponse printMessage(LoginRequest request) {
 
 		// We create a login response object setting success to false by default
-		LoginResponse loginResponse = new LoginResponse();
-		loginResponse.setSuccess(false);
+		LoginResponse response = new LoginResponse();
 
 		// We look for the user
 		User user = userEndpoint.findUserForLogin(TableField.USER_USERNAME, request.getUsername());
@@ -93,17 +92,21 @@ public class LoginService {
 				}
 
 				// We generate the response
-				loginResponse.setSuccess(true);
-				loginResponse.setUserSessionDTO(new UserSessionDTO(userSession));
-				loginResponse.setUserDTO(new UserDTO(userSession.getUser()));
-				loginResponse.setUserStatusDTO(new UserStatusDTO(userSession.getUser().getUserStatus()));
-				loginResponse.setUserContactDataDTO(new UserContactDataDTO(userContactData));
-				loginResponse.setUserAvatarDTO(new UserAvatarDTO(userAvatar));
-				loginResponse.setChangePassword(false);
-			} 
+				response.setSuccess(true);
+				response.setUserSessionDTO(new UserSessionDTO(userSession));
+				response.setUserDTO(new UserDTO(userSession.getUser()));
+				response.setUserStatusDTO(new UserStatusDTO(userSession.getUser().getUserStatus()));
+				response.setUserContactDataDTO(new UserContactDataDTO(userContactData));
+				response.setUserAvatarDTO(new UserAvatarDTO(userAvatar));
+				response.setChangePassword(false);
+			} else {
+				response.setMessage(ServiceConstants.ERROR_MESSAGE_LOGIN_FAILED);
+			}
+		} else {
+			response.setMessage(ServiceConstants.ERROR_MESSAGE_LOGIN_FAILED);
 		}
 
-		return loginResponse;
+		return response;
 	}
 
 	//Getters and setters

@@ -32,8 +32,7 @@ public class LogoutService {
 	@POST
 	public ServiceResponse printMessage(LogoutRequest request) {
 		// We create a logout response object setting success to false by default
-		ServiceResponse logoutResponse = new ServiceResponse();
-		logoutResponse.setSuccess(false);
+		ServiceResponse response = new ServiceResponse();
 
 		// We look for the user
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
@@ -41,10 +40,10 @@ public class LogoutService {
 		// If we found the user session then we remove it
 		if(userSession!=null){
 			userSessionEndpoint.remove(userSession);
-			logoutResponse.setSuccess(true);
+			response.setSuccess(true);
 		}
 
-		return logoutResponse;
+		return response;
 	}
 
 	//Getters and setters

@@ -49,7 +49,6 @@ public class PushUserExpensesService extends PushNotificationService{
 	public PushResponse<Long> printMessage(PushRequest<UserExpenseDTO> request) throws ParseException {
 		// We create a pull groups response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
-		response.setSuccess(false);
 
 		// Creating the pushedAt date
 		Date pushedAt = new Date();

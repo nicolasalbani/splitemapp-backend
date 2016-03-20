@@ -46,7 +46,6 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 	public PushResponse<Long> printMessage(PushRequest<ProjectCoverImageDTO> request) throws ParseException {
 		// We create a push project cover image response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
-		response.setSuccess(false);
 		
 		// Creating the pushedAt date
 		Date pushedAt = new Date();

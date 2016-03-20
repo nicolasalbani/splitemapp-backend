@@ -43,7 +43,6 @@ public class PullUserInvitesService {
 	public PullResponse<UserInviteDTO> printMessage(PullRequest request) throws ParseException {
 		// We create a pull all sync response object setting success to false by default
 		PullResponse<UserInviteDTO> response = new PullResponse<UserInviteDTO>();
-		response.setSuccess(false);
 
 		// Creating the pulledAt date
 		Date pulledAt = new Date();

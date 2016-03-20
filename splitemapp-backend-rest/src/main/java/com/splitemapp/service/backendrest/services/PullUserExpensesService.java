@@ -44,7 +44,6 @@ public class PullUserExpensesService {
 	public PullResponse<UserExpenseDTO> printMessage(PullRequest request) throws ParseException {
 		// We create a pull all sync response object setting success to false by default
 		PullResponse<UserExpenseDTO> response = new PullResponse<UserExpenseDTO>();
-		response.setSuccess(false);
 
 		// Creating the pulledAt date
 		Date pulledAt = new Date();
