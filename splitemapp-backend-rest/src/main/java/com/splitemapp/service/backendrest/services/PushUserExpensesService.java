@@ -23,7 +23,6 @@ import com.splitemapp.commons.domain.dto.UserExpenseDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
 import com.splitemapp.commons.domain.id.IdUpdate;
-import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.ExpenseCategoryEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
@@ -72,7 +71,7 @@ public class PushUserExpensesService extends PushNotificationService{
 				// We update the pushedAt date
 				userExpense.setPushedAt(pushedAt);
 
-				if(Utils.isDateAfter(userExpenseDTO.getCreatedAt(),request.getLastPushSuccessAt())){
+				if(userExpenseDTO.getPushedAt() == null){
 					// Setting the action
 					action = Action.ADD_USER_EXPENSE;
 					

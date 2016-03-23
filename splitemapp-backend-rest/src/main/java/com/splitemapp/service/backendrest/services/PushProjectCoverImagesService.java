@@ -22,7 +22,6 @@ import com.splitemapp.commons.domain.dto.ProjectCoverImageDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
 import com.splitemapp.commons.domain.id.IdUpdate;
-import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.ProjectCoverImageEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
@@ -67,7 +66,7 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 				// We update the pushedAt date
 				projectCoverImage.setPushedAt(pushedAt);
 				
-				if(Utils.isDateAfter(projectCoverImageDTO.getCreatedAt(),request.getLastPushSuccessAt())){
+				if(projectCoverImageDTO.getPushedAt() == null){
 					// Setting the action
 					action = Action.ADD_PROJECT_COVER_IMAGE;
 					

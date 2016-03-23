@@ -23,7 +23,6 @@ import com.splitemapp.commons.domain.dto.UserToProjectDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
 import com.splitemapp.commons.domain.id.IdUpdate;
-import com.splitemapp.commons.utils.Utils;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserToProjectEndpoint;
@@ -72,7 +71,7 @@ public class PushUserToProjectsService extends PushNotificationService{
 				// We update the pushedAt date
 				userToProject.setPushedAt(pushedAt);
 
-				if(Utils.isDateAfter(userToProjectDTO.getCreatedAt(),request.getLastPushSuccessAt())){
+				if(userToProjectDTO.getPushedAt() == null){
 					// Setting the action
 					action = Action.ADD_USER_TO_PROJECT;
 
