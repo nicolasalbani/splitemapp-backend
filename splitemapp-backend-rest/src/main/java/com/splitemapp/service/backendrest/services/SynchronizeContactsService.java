@@ -1,7 +1,6 @@
 package com.splitemapp.service.backendrest.services;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -22,6 +21,7 @@ import com.splitemapp.commons.domain.dto.UserContactDataDTO;
 import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.request.SynchronizeContactsRequest;
 import com.splitemapp.commons.domain.dto.response.SynchronizeContactsResponse;
+import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
@@ -44,7 +44,7 @@ public class SynchronizeContactsService {
 
 		// Creating a synchronize contacts response object setting success to false by default
 		SynchronizeContactsResponse response = new SynchronizeContactsResponse();
-		response.setPulledAt(new Date());
+		response.setPulledAt(TimeUtils.getDateUTC());
 
 		// Retrieving user session
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());

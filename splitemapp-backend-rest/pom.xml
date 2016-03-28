@@ -64,9 +64,12 @@
 
 		<!-- Spring Framework dependencies version -->
 		<spring.version>4.1.1.RELEASE</spring.version>
-		
+
 		<!-- HttpClient dependencies version -->
 		<httpclient.version>4.5.1</httpclient.version>
+		
+		<!-- Java Time dependencies version-->
+		<joda-time.version>2.9.2</joda-time.version>
 	</properties>
 
 	<build>
@@ -253,6 +256,13 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 			<version>${httpclient.version}</version>
+		</dependency>
+
+		<!-- Java Time dependencies -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
 		</dependency>
 	</dependencies>
 

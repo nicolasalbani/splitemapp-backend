@@ -16,6 +16,7 @@ import com.splitemapp.commons.domain.dto.request.PushUserToProjectRequest;
 import com.splitemapp.commons.domain.dto.response.PullUserToProjectResponse;
 import com.splitemapp.commons.domain.dto.response.PushLongResponse;
 import com.splitemapp.commons.rest.RestUtils;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class UserToProjectServicesTest extends BaseServiceTest{
 
@@ -93,7 +94,7 @@ public class UserToProjectServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserToProjectRequest request = new PushUserToProjectRequest();
-		request.setLastPushSuccessAt(new Date());
+		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

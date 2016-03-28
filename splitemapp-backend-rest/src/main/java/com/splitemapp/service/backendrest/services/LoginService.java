@@ -1,6 +1,5 @@
 package com.splitemapp.service.backendrest.services;
 
-import java.util.Date;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
@@ -25,6 +24,7 @@ import com.splitemapp.commons.domain.dto.UserSessionDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
 import com.splitemapp.commons.domain.dto.request.LoginRequest;
 import com.splitemapp.commons.domain.dto.response.LoginResponse;
+import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
@@ -67,13 +67,13 @@ public class LoginService {
 				UserSession userSession = new UserSession();
 				userSession.setDevice(request.getDevice());
 				userSession.setOsVersion(request.getOsVersion());
-				userSession.setLastUsedAt(new Date());
+				userSession.setLastUsedAt(TimeUtils.getDateUTC());
 				userSession.setToken(sessionToken);
 				userSession.setUser(user);
 				userSessionEndpoint.persist(userSession);
 
 				// We update the last login time and login count for the user
-				user.setLastLogin(new Date());
+				user.setLastLogin(TimeUtils.getDateUTC());
 				user.setLoginCnt(user.getLoginCnt()+1);
 				userEndpoint.merge(user);
 

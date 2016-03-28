@@ -1,14 +1,12 @@
 package com.splitemapp.commons.utils.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -78,15 +76,6 @@ public class UtilsTest {
 		dateCal.set(Calendar.MINUTE, 20);
 		dateCal.set(Calendar.SECOND, 56);
 		assertEquals(date,Utils.dateToString(dateCal.getTime(), ServiceConstants.DATE_FORMAT));
-	}
-	
-	@Test
-	public void testIsDateAfter(){
-		Date todayDate = Calendar.getInstance().getTime();
-		Calendar yesterday = Calendar.getInstance();
-		yesterday.add(Calendar.DAY_OF_MONTH, -1);
-		Date yesterdayDate = yesterday.getTime();
-		assertTrue(Utils.isDateAfter(todayDate, yesterdayDate));
 	}
 	
 	@Test

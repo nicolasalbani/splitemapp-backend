@@ -23,6 +23,7 @@ import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.ProjectDTO;
 import com.splitemapp.commons.domain.dto.request.PullRequest;
 import com.splitemapp.commons.domain.dto.response.PullResponse;
+import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
@@ -46,7 +47,7 @@ public class PullProjectsService {
 		PullResponse<ProjectDTO> response = new PullResponse<ProjectDTO>();
 
 		// Creating the pulledAt date
-		Date pulledAt = new Date();
+		Date pulledAt = TimeUtils.getDateUTC();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 

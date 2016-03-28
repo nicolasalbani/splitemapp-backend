@@ -23,6 +23,7 @@ import com.splitemapp.commons.domain.dto.UserInviteDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
 import com.splitemapp.commons.domain.id.IdUpdate;
+import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.InviteStatusEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
@@ -50,7 +51,7 @@ public class PushUserInvitesService extends PushNotificationService{
 		PushResponse<Long> response = new PushResponse<Long>();
 
 		// Creating the pushedAt date
-		Date pushedAt = new Date();
+		Date pushedAt = TimeUtils.getDateUTC();
 
 		// Defining action and details to be notified
 		String action = "";

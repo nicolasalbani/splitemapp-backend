@@ -1,22 +1,21 @@
 package com.splitemapp.service.backendrest.endpoint;
 
-import java.util.Date;
-
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserStatus;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class EntityCreator {
 
 	public static User createUserEntity(long existingUserId){
 		// Creating new user
 		User user = new User();
-		user.setCreatedAt(new Date());
+		user.setCreatedAt(TimeUtils.getDateUTC());
 		user.setCreatedIpAddress("127.0.0.1");
 		user.setFullName("pablo marmol");
-		user.setLastLogin(new Date());
+		user.setLastLogin(TimeUtils.getDateUTC());
 		user.setLoginCnt(0);
 		user.setPassword("!$#&!#$&!#$&!#$");
-		user.setUpdatedAt(new Date());
+		user.setUpdatedAt(TimeUtils.getDateUTC());
 		user.setUpdatedIpAddress("127.0.0.1");
 		user.setUsername("pablomarmol");
 		

@@ -16,6 +16,7 @@ import com.splitemapp.commons.domain.dto.request.PushUserInviteRequest;
 import com.splitemapp.commons.domain.dto.response.PullUserInviteResponse;
 import com.splitemapp.commons.domain.dto.response.PushLongResponse;
 import com.splitemapp.commons.rest.RestUtils;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class UserInviteServicesTest extends BaseServiceTest{
 
@@ -93,7 +94,7 @@ public class UserInviteServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserInviteRequest request = new PushUserInviteRequest();
-		request.setLastPushSuccessAt(new Date());
+		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

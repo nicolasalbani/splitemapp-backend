@@ -22,6 +22,7 @@ import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.UserAvatarDTO;
 import com.splitemapp.commons.domain.dto.request.PullRequest;
 import com.splitemapp.commons.domain.dto.response.PullResponse;
+import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
@@ -45,7 +46,7 @@ public class PullUserAvatarsService {
 		PullResponse<UserAvatarDTO> response = new PullResponse<UserAvatarDTO>();
 
 		// Creating the pulledAt date
-		Date pulledAt = new Date();
+		Date pulledAt = TimeUtils.getDateUTC();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 

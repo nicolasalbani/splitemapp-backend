@@ -22,6 +22,7 @@ import com.splitemapp.commons.domain.UserSession;
 import com.splitemapp.commons.domain.dto.UserInviteDTO;
 import com.splitemapp.commons.domain.dto.request.PullRequest;
 import com.splitemapp.commons.domain.dto.response.PullResponse;
+import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.UserInviteEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 
@@ -45,7 +46,7 @@ public class PullUserInvitesService {
 		PullResponse<UserInviteDTO> response = new PullResponse<UserInviteDTO>();
 
 		// Creating the pulledAt date
-		Date pulledAt = new Date();
+		Date pulledAt = TimeUtils.getDateUTC();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 

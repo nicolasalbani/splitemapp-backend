@@ -74,10 +74,10 @@ values										(1,1,'','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 
 											(4,4,'','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36',1,1);
 
 -- Populating the user_avatar table
-insert into splitemapp.user_avatar		(id,user_id,avatar_data,created_at,updated_at,pushed_at) 
-values									(1,1,'','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36'),
-										(2,2,'00','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36'),
-										(10,9,'','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36');
+insert into splitemapp.user_avatar		(id,user_id,avatar_data,created_at,updated_at,pushed_at,updated_by,pushed_by) 
+values									(1,1,'','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36',1,1),
+										(2,2,'00','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36',2,2),
+										(10,9,'','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36',9,9);
 										
 -- Populating the user_to_project table
 insert into splitemapp.user_to_project	(id,user_to_project_status_id,user_id,project_id,expenses_share,created_at,updated_at,pushed_at,updated_by,pushed_by) 
@@ -94,10 +94,10 @@ values								(1,1,'554686b8-7646-402e-9911-f28b8b417d46',null,'samsung GT-I9100
 									(2,2,'554686b8-7646-402e-9911-f28b8b417d47',null,'samsung GT-I9100','Android REL-4.1.2 SDK-16','2015-08-02 15:59:05.0');
 
 -- Populating the user_contact_data table
-insert into splitemapp.user_contact_data	(id,user_id,contact_data,verified,verified_at,created_at,updated_at,pushed_at) 
-values										(1,1,'juanperez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36'),
-											(2,2,'juangomez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36'),
-											(3,3,'juangutierrez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36');
+insert into splitemapp.user_contact_data	(id,user_id,contact_data,verified,verified_at,created_at,updated_at,pushed_at,updated_by,pushed_by) 
+values										(1,1,'juanperez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36',1,1),
+											(2,2,'juangomez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36',2,2),
+											(3,3,'juangutierrez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36',3,3);
 
 -- Populating the user_expense table
 insert into splitemapp.user_expense		(id,user_id,project_id,category_id,expense,expense_date,note,pushed_at,updated_by,pushed_by) 

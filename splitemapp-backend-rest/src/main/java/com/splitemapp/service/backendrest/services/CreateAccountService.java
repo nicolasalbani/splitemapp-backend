@@ -1,7 +1,5 @@
 package com.splitemapp.service.backendrest.services;
 
-import java.util.Date;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,6 +22,7 @@ import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
 import com.splitemapp.commons.domain.dto.request.CreateAccountRequest;
 import com.splitemapp.commons.domain.dto.response.CreateAccountResponse;
+import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
@@ -62,13 +61,13 @@ public class CreateAccountService {
 			// We create and persist the user instance
 			User newUser = new User();
 			newUser.setCreatedIpAddress(request.getIpAddress());
-			newUser.setUpdatedAt(new Date());
+			newUser.setUpdatedAt(TimeUtils.getDateUTC());
 			newUser.setUpdatedIpAddress(request.getIpAddress());
 			newUser.setPassword(request.getPassword());
 			newUser.setUsername(request.getEmail());
 			newUser.setFullName(request.getFullName());
 			newUser.setUserStatus(userStatus);
-			newUser.setPushedAt(new Date());
+			newUser.setPushedAt(TimeUtils.getDateUTC());
 			userEndpoint.persist(newUser);
 
 			// We create and persist the user contact data
@@ -76,7 +75,7 @@ public class CreateAccountService {
 			userContactData.setContactData(request.getEmail());
 			userContactData.setUser(newUser);
 			userContactData.setUpdatedBy(newUser);
-			userContactData.setPushedAt(new Date());
+			userContactData.setPushedAt(TimeUtils.getDateUTC());
 			userContactData.setPushedBy(newUser);
 			userContactDataEndpoint.persist(userContactData);
 			
@@ -84,7 +83,7 @@ public class CreateAccountService {
 			UserAvatar userAvatar = new UserAvatar();
 			userAvatar.setAvatarData(request.getAvatar());
 			userAvatar.setUser(newUser);
-			userAvatar.setPushedAt(new Date());
+			userAvatar.setPushedAt(TimeUtils.getDateUTC());
 			userAvatar.setUpdatedBy(newUser);
 			userAvatar.setPushedBy(newUser);
 			userAvatarEndpoint.persist(userAvatar);

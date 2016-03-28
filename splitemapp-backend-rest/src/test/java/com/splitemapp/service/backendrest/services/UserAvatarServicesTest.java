@@ -17,6 +17,7 @@ import com.splitemapp.commons.domain.dto.request.PushUserAvatarRequest;
 import com.splitemapp.commons.domain.dto.response.PullUserAvatarResponse;
 import com.splitemapp.commons.domain.dto.response.PushLongResponse;
 import com.splitemapp.commons.rest.RestUtils;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class UserAvatarServicesTest extends BaseServiceTest{
 
@@ -93,7 +94,7 @@ public class UserAvatarServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserAvatarRequest request = new PushUserAvatarRequest();
-		request.setLastPushSuccessAt(new Date());
+		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 
@@ -106,12 +107,13 @@ public class UserAvatarServicesTest extends BaseServiceTest{
 
 	private UserAvatarDTO createUserAvatarDTO(Long id, Long userId){
 		// Creating user avatar DTO object.
-		UserAvatarDTO user = new UserAvatarDTO();
-		user.setId(id);
-		user.setUserId(userId);
-		user.setAvatarData(new byte[1]);
-		user.setCreatedAt(new Date(10000));
-		user.setUpdatedAt(new Date(10000));
-		return user;
+		UserAvatarDTO userAvatarDTO = new UserAvatarDTO();
+		userAvatarDTO.setId(id);
+		userAvatarDTO.setUserId(userId);
+		userAvatarDTO.setAvatarData(new byte[1]);
+		userAvatarDTO.setCreatedAt(new Date(10000));
+		userAvatarDTO.setUpdatedAt(new Date(10000));
+		userAvatarDTO.setUpdatedBy(userId);
+		return userAvatarDTO;
 	}
 }

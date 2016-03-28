@@ -41,6 +41,9 @@
 
 		<!-- Spring Framework dependencies version -->
 		<spring.version>4.1.1.RELEASE</spring.version>
+		
+		<!-- Java Time dependencies version-->
+		<joda-time.version>2.9.2</joda-time.version>
 	</properties>
 
 	<build>
@@ -113,6 +116,13 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- Java Time dependencies -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
 		</dependency>
 	</dependencies>
 </project>

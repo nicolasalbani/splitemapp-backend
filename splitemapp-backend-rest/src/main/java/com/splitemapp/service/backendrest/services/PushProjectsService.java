@@ -25,6 +25,7 @@ import com.splitemapp.commons.domain.dto.ProjectDTO;
 import com.splitemapp.commons.domain.dto.request.PushRequest;
 import com.splitemapp.commons.domain.dto.response.PushResponse;
 import com.splitemapp.commons.domain.id.IdUpdate;
+import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectStatusEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectTypeEndpoint;
@@ -52,7 +53,7 @@ public class PushProjectsService extends PushNotificationService{
 		PushResponse<Long> response = new PushResponse<Long>();
 
 		// Creating the pushedAt date
-		Date pushedAt = new Date();
+		Date pushedAt = TimeUtils.getDateUTC();
 
 		// Defining action and details to be notified
 		String action = "";

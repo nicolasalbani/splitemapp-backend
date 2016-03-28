@@ -3,7 +3,6 @@ package com.splitemapp.service.backendrest.services;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -13,6 +12,7 @@ import com.splitemapp.commons.domain.dto.UserSessionDTO;
 import com.splitemapp.commons.domain.dto.request.PushUserSessionRequest;
 import com.splitemapp.commons.domain.dto.response.PushLongResponse;
 import com.splitemapp.commons.rest.RestUtils;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class UserSessionServicesTest extends BaseServiceTest{
 
@@ -35,7 +35,7 @@ public class UserSessionServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserSessionRequest request = new PushUserSessionRequest();
-		request.setLastPushSuccessAt(new Date());
+		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 
@@ -53,7 +53,7 @@ public class UserSessionServicesTest extends BaseServiceTest{
 		user.setUserId(userId);
 		user.setDevice(device);
 		user.setGcmToken(gcmToken);
-		user.setLastUsedAt(new Date());
+		user.setLastUsedAt(TimeUtils.getDateUTC());
 		user.setOsVersion(osVersion);
 		user.setToken(token);
 		return user;

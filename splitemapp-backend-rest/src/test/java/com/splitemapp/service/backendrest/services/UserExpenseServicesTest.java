@@ -18,6 +18,7 @@ import com.splitemapp.commons.domain.dto.request.PushUserExpenseRequest;
 import com.splitemapp.commons.domain.dto.response.PullUserExpenseResponse;
 import com.splitemapp.commons.domain.dto.response.PushLongResponse;
 import com.splitemapp.commons.rest.RestUtils;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class UserExpenseServicesTest extends BaseServiceTest{
 
@@ -96,7 +97,7 @@ public class UserExpenseServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserExpenseRequest request = new PushUserExpenseRequest();
-		request.setLastPushSuccessAt(new Date());
+		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

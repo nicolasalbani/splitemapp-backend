@@ -17,6 +17,7 @@ import com.splitemapp.commons.domain.dto.request.PushUserContactDataRequest;
 import com.splitemapp.commons.domain.dto.response.PullUserContactDataResponse;
 import com.splitemapp.commons.domain.dto.response.PushLongResponse;
 import com.splitemapp.commons.rest.RestUtils;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class UserContactDataServicesTest extends BaseServiceTest{
 
@@ -93,7 +94,7 @@ public class UserContactDataServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserContactDataRequest request = new PushUserContactDataRequest();
-		request.setLastPushSuccessAt(new Date());
+		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 
@@ -114,6 +115,7 @@ public class UserContactDataServicesTest extends BaseServiceTest{
 		userContactDataDTO.setVerifiedAt(new Date(100));
 		userContactDataDTO.setCreatedAt(new Date(100));
 		userContactDataDTO.setUpdatedAt(new Date(100));
+		userContactDataDTO.setUpdatedBy(userId);
 		return userContactDataDTO;
 	}
 }

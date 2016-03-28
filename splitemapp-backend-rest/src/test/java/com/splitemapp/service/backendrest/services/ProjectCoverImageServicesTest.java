@@ -17,6 +17,7 @@ import com.splitemapp.commons.domain.dto.request.PushProjectCoverImageRequest;
 import com.splitemapp.commons.domain.dto.response.PullProjectCoverImageResponse;
 import com.splitemapp.commons.domain.dto.response.PushLongResponse;
 import com.splitemapp.commons.rest.RestUtils;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class ProjectCoverImageServicesTest extends BaseServiceTest{
 
@@ -93,7 +94,7 @@ public class ProjectCoverImageServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushProjectCoverImageRequest request = new PushProjectCoverImageRequest();
-		request.setLastPushSuccessAt(new Date());
+		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

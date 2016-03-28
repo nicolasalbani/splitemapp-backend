@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
 
@@ -163,22 +162,4 @@ public class Utils {
 		return entityName.toString();
 	}
 	
-	/**
-	 * Calculates whether the left operand date is greater than the right operand date
-	 * @param leftOperand
-	 * @param rightOperand
-	 * @return
-	 */
-	public static boolean isDateAfter(Date leftOperand, Date rightOperand){
-		// We set the left operand
-		Calendar leftOperandCal = Calendar.getInstance();
-		leftOperandCal.setTime(leftOperand);
-		
-		// We set the right operand
-		Calendar rightOperandCal = Calendar.getInstance();
-		rightOperandCal.setTime(rightOperand);
-		
-		// We compare the returned values
-		return leftOperandCal.compareTo(rightOperandCal)>0;
-	}
 }
