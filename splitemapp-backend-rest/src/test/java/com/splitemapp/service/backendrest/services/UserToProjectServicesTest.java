@@ -94,7 +94,7 @@ public class UserToProjectServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserToProjectRequest request = new PushUserToProjectRequest();
-		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
+		request.setLastPushSuccessAt(TimeUtils.getUTCDate());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

@@ -44,7 +44,7 @@ public class SynchronizeContactsService {
 
 		// Creating a synchronize contacts response object setting success to false by default
 		SynchronizeContactsResponse response = new SynchronizeContactsResponse();
-		response.setPulledAt(TimeUtils.getDateUTC());
+		response.setPulledAt(TimeUtils.getUTCDate());
 
 		// Retrieving user session
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());

@@ -97,7 +97,7 @@ public class UserExpenseServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserExpenseRequest request = new PushUserExpenseRequest();
-		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
+		request.setLastPushSuccessAt(TimeUtils.getUTCDate());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

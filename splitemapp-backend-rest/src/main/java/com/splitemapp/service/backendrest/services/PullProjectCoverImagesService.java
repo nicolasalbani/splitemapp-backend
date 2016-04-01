@@ -47,7 +47,7 @@ public class PullProjectCoverImagesService {
 		PullResponse<ProjectCoverImageDTO> response = new PullResponse<ProjectCoverImageDTO>();
 
 		// Creating the pulledAt date
-		Date pulledAt = TimeUtils.getDateUTC();
+		Date pulledAt = TimeUtils.getUTCDate();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 

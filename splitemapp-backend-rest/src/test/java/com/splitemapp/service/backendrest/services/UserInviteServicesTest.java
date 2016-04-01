@@ -94,7 +94,7 @@ public class UserInviteServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserInviteRequest request = new PushUserInviteRequest();
-		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
+		request.setLastPushSuccessAt(TimeUtils.getUTCDate());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

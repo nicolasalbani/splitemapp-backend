@@ -94,7 +94,7 @@ public class UserServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserRequest request = new PushUserRequest();
-		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
+		request.setLastPushSuccessAt(TimeUtils.getUTCDate());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

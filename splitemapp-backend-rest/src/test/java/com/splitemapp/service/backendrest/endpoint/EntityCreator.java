@@ -9,13 +9,13 @@ public class EntityCreator {
 	public static User createUserEntity(long existingUserId){
 		// Creating new user
 		User user = new User();
-		user.setCreatedAt(TimeUtils.getDateUTC());
+		user.setCreatedAt(TimeUtils.getUTCDate());
 		user.setCreatedIpAddress("127.0.0.1");
 		user.setFullName("pablo marmol");
-		user.setLastLogin(TimeUtils.getDateUTC());
+		user.setLastLogin(TimeUtils.getUTCDate());
 		user.setLoginCnt(0);
 		user.setPassword("!$#&!#$&!#$&!#$");
-		user.setUpdatedAt(TimeUtils.getDateUTC());
+		user.setUpdatedAt(TimeUtils.getUTCDate());
 		user.setUpdatedIpAddress("127.0.0.1");
 		user.setUsername("pablomarmol");
 		

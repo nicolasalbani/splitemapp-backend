@@ -67,13 +67,13 @@ public class LoginService {
 				UserSession userSession = new UserSession();
 				userSession.setDevice(request.getDevice());
 				userSession.setOsVersion(request.getOsVersion());
-				userSession.setLastUsedAt(TimeUtils.getDateUTC());
+				userSession.setLastUsedAt(TimeUtils.getUTCDate());
 				userSession.setToken(sessionToken);
 				userSession.setUser(user);
 				userSessionEndpoint.persist(userSession);
 
 				// We update the last login time and login count for the user
-				user.setLastLogin(TimeUtils.getDateUTC());
+				user.setLastLogin(TimeUtils.getUTCDate());
 				user.setLoginCnt(user.getLoginCnt()+1);
 				userEndpoint.merge(user);
 

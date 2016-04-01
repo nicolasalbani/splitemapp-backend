@@ -35,7 +35,7 @@ public class UserSessionServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserSessionRequest request = new PushUserSessionRequest();
-		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
+		request.setLastPushSuccessAt(TimeUtils.getUTCDate());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 
@@ -53,7 +53,7 @@ public class UserSessionServicesTest extends BaseServiceTest{
 		user.setUserId(userId);
 		user.setDevice(device);
 		user.setGcmToken(gcmToken);
-		user.setLastUsedAt(TimeUtils.getDateUTC());
+		user.setLastUsedAt(TimeUtils.getUTCDate());
 		user.setOsVersion(osVersion);
 		user.setToken(token);
 		return user;

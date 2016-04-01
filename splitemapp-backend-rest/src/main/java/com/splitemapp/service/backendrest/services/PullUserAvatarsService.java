@@ -46,7 +46,7 @@ public class PullUserAvatarsService {
 		PullResponse<UserAvatarDTO> response = new PullResponse<UserAvatarDTO>();
 
 		// Creating the pulledAt date
-		Date pulledAt = TimeUtils.getDateUTC();
+		Date pulledAt = TimeUtils.getUTCDate();
 
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());
 

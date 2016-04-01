@@ -94,7 +94,7 @@ public class UserAvatarServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserAvatarRequest request = new PushUserAvatarRequest();
-		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
+		request.setLastPushSuccessAt(TimeUtils.getUTCDate());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

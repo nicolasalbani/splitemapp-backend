@@ -94,7 +94,7 @@ public class UserContactDataServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushUserContactDataRequest request = new PushUserContactDataRequest();
-		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
+		request.setLastPushSuccessAt(TimeUtils.getUTCDate());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 

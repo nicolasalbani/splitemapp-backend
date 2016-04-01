@@ -53,7 +53,7 @@ public class PushProjectsService extends PushNotificationService{
 		PushResponse<Long> response = new PushResponse<Long>();
 
 		// Creating the pushedAt date
-		Date pushedAt = TimeUtils.getDateUTC();
+		Date pushedAt = TimeUtils.getUTCDate();
 
 		// Defining action and details to be notified
 		String action = "";

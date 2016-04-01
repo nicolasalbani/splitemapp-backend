@@ -46,7 +46,7 @@ public class PullUsersService {
 		PullResponse<UserDTO> response = new PullResponse<UserDTO>();
 
 		// Creating the pulledAt date
-		Date pulledAt = TimeUtils.getDateUTC();
+		Date pulledAt = TimeUtils.getUTCDate();
 
 		// Retrieving user session
 		UserSession userSession = userSessionEndpoint.findByField(TableField.USER_SESSION_TOKEN, request.getToken());

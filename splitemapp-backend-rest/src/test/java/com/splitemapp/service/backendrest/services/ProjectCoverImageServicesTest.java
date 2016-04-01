@@ -94,7 +94,7 @@ public class ProjectCoverImageServicesTest extends BaseServiceTest{
 
 		// Crafting the request object
 		PushProjectCoverImageRequest request = new PushProjectCoverImageRequest();
-		request.setLastPushSuccessAt(TimeUtils.getDateUTC());
+		request.setLastPushSuccessAt(TimeUtils.getUTCDate());
 		request.setToken(TOKEN);
 		request.setItemList(itemList);
 
