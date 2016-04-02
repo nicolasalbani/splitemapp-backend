@@ -41,9 +41,13 @@
 
 		<!-- Spring Framework dependencies version -->
 		<spring.version>4.1.1.RELEASE</spring.version>
-		
-		<!-- Java Time dependencies version-->
+
+		<!-- Java Time dependencies version -->
 		<joda-time.version>2.9.2</joda-time.version>
+
+		<!-- Java Mail dependencies version -->
+		<javamail.version>1.4</javamail.version>
+		<mock-javamail.version>1.9</mock-javamail.version>
 	</properties>
 
 	<build>
@@ -117,12 +121,25 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<!-- Java Time dependencies -->
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>${joda-time.version}</version>
+		</dependency>
+
+		<!-- Java Mail dependencies -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${javamail.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.mock-javamail</groupId>
+			<artifactId>mock-javamail</artifactId>
+			<version>${mock-javamail.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
