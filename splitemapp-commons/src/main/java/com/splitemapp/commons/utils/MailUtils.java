@@ -44,7 +44,7 @@ public class MailUtils {
 			message.setFrom(new InternetAddress(fromAddress));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
 			message.setSubject(subject);
-			message.setText(content);
+			message.setContent(content, "text/html");
 
 			Transport.send(message);
 		} catch (MessagingException e) {
