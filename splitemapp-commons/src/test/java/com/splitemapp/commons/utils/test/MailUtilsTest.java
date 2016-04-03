@@ -28,7 +28,8 @@ public class MailUtilsTest {
 		// Sending e-mail
 		MailUtils.sendMail("questions", 
 				"019713skull", 
-				"Question from Nicolas Albani", 
+				"Question from Nicolas Albani",
+				"questions@splitemapp.com",
 				"nicolasalbani@gmail.com", 
 				"This is an email");
 
