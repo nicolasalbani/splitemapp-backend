@@ -116,6 +116,7 @@ public class UserExpenseServicesTest extends BaseServiceTest{
 		userExpense.setProjectId(projectId);
 		userExpense.setExpense(new BigDecimal(expense));
 		userExpense.setExpenseCategoryDTO((short)1);
+		userExpense.setExpenseStatusDTO((short)1);
 		userExpense.setNote(note);
 		userExpense.setExpenseDate(new Date(10000));
 		userExpense.setCreatedAt(new Date(10000));

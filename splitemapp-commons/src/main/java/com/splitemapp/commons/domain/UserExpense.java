@@ -47,6 +47,10 @@ public class UserExpense implements java.io.Serializable,PushableEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id", nullable = false)
 	private ExpenseCategory expenseCategory;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "status_id", nullable = false)
+	private ExpenseStatus expenseStatus;
 
 	@Column(name = "expense", nullable = false, precision = 16, scale = 6)
 	private BigDecimal expense;
@@ -83,11 +87,12 @@ public class UserExpense implements java.io.Serializable,PushableEntity {
 	}
 	
 	public UserExpense(User user, Project project,
-			ExpenseCategory expenseCategory, User updatedBy, User pushedBy, UserExpenseDTO userExpenseDTO) {
+			ExpenseCategory expenseCategory, ExpenseStatus expenseStatus, User updatedBy, User pushedBy, UserExpenseDTO userExpenseDTO) {
 		this.id = userExpenseDTO.getId();
 		this.user = user;
 		this.project = project;
 		this.expenseCategory = expenseCategory;
+		this.expenseStatus = expenseStatus;
 		this.expense = userExpenseDTO.getExpense();
 		this.expenseDate = userExpenseDTO.getExpenseDate();
 		this.note = userExpenseDTO.getNote();
@@ -99,19 +104,21 @@ public class UserExpense implements java.io.Serializable,PushableEntity {
 	}
 
 	public UserExpense(User user, Project project,
-			ExpenseCategory expenseCategory, BigDecimal expense) {
+			ExpenseCategory expenseCategory, ExpenseStatus expenseStatus, BigDecimal expense) {
 		this.user = user;
 		this.project = project;
 		this.expenseCategory = expenseCategory;
+		this.expenseStatus = expenseStatus;
 		this.expense = expense;
 	}
 
 	public UserExpense(User user, Project project,
-			ExpenseCategory expenseCategory, BigDecimal expense,
+			ExpenseCategory expenseCategory, ExpenseStatus expenseStatus, BigDecimal expense,
 			Date expenseDate, String note) {
 		this.user = user;
 		this.project = project;
 		this.expenseCategory = expenseCategory;
+		this.expenseStatus = expenseStatus;
 		this.expense = expense;
 		this.expenseDate = expenseDate;
 		this.note = note;
@@ -147,6 +154,14 @@ public class UserExpense implements java.io.Serializable,PushableEntity {
 
 	public void setExpenseCategory(ExpenseCategory expenseCategory) {
 		this.expenseCategory = expenseCategory;
+	}
+	
+	public ExpenseStatus getExpenseStatus() {
+		return this.expenseStatus;
+	}
+
+	public void setExpenseStatus(ExpenseStatus expenseStatus) {
+		this.expenseStatus = expenseStatus;
 	}
 
 	public BigDecimal getExpense() {

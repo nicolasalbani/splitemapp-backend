@@ -17,6 +17,7 @@ public class UserExpenseDTO implements java.io.Serializable {
 	private Long userId;
 	private Long projectId;
 	private Short expenseCategoryId;
+	private Short expenseStatusId;
 	private BigDecimal expense;
 	private String note;
 	private Long updatedBy;
@@ -45,6 +46,10 @@ public class UserExpenseDTO implements java.io.Serializable {
 	public void setExpenseCategoryId(Short expenseCategoryId) {
 		this.expenseCategoryId = expenseCategoryId;
 	}
+	
+	public void setExpenseStatusId(Short expenseStatusId) {
+		this.expenseStatusId = expenseStatusId;
+	}
 
 	@JsonSerialize(using=CustomDateSerializer.class)
 	@JsonDeserialize(using=CustomDateDeserializer.class)
@@ -69,6 +74,7 @@ public class UserExpenseDTO implements java.io.Serializable {
 		this.userId = userExpense.getUser().getId();
 		this.projectId = userExpense.getProject().getId();
 		this.expenseCategoryId = userExpense.getExpenseCategory().getId();
+		this.expenseStatusId = userExpense.getExpenseStatus().getId();
 		this.expense = userExpense.getExpense();
 		this.expenseDate = userExpense.getExpenseDate();
 		this.note = userExpense.getNote();
@@ -82,11 +88,12 @@ public class UserExpenseDTO implements java.io.Serializable {
 	}
 
 	public UserExpenseDTO(Long userId, Long projectId,
-			Short expenseCategoryId, BigDecimal expense,
+			Short expenseCategoryId, Short expenseStatusId, BigDecimal expense,
 			Date expenseDate, String note) {
 		this.userId = userId;
 		this.projectId = projectId;
 		this.expenseCategoryId = expenseCategoryId;
+		this.expenseStatusId = expenseStatusId;
 		this.expense = expense;
 		this.expenseDate = expenseDate;
 		this.note = note;
@@ -122,6 +129,14 @@ public class UserExpenseDTO implements java.io.Serializable {
 
 	public void setExpenseCategoryDTO(Short expenseCategoryId) {
 		this.expenseCategoryId = expenseCategoryId;
+	}
+	
+	public Short getExpenseStatusId() {
+		return this.expenseStatusId;
+	}
+
+	public void setExpenseStatusDTO(Short expenseStatusId) {
+		this.expenseStatusId = expenseStatusId;
 	}
 
 	public BigDecimal getExpense() {

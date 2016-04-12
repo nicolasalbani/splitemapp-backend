@@ -4,6 +4,7 @@ public class TableName {
 	public static final String SCHEMA = "splitemapp";
 	
 	public static final String EXPENSE_CATEGORY = "expense_category";
+	public static final String EXPENSE_STATUS = "expense_status";
 	public static final String INVITE_STATUS = "invite_status";
 	public static final String PROJECT = "project";
 	public static final String PROJECT_COVER_IMAGE = "project_cover_image";

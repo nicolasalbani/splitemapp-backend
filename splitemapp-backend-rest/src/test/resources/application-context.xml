@@ -39,6 +39,10 @@
 	<bean id="expenseCategoryEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.ExpenseCategoryEndpoint" depends-on="H2Server">
 	</bean>
+	
+	<bean id="expenseStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ExpenseStatusEndpoint" depends-on="H2Server">
+	</bean>
 
 	<bean id="projectEndpoint"
 		class="com.splitemapp.service.backendrest.endpoint.ProjectEndpoint" depends-on="H2Server">

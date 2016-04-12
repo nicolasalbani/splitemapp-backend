@@ -12,6 +12,11 @@ values 								(1,'active','Activo'),
 insert into splitemapp.project_status	(id,cod,title) 
 values 									(1,'active','Activo'),
 										(2,'closed','Cerrado');
+										
+-- Populating the expense_status alter table
+insert into splitemapp.expense_status	(id,cod,title) 
+values 									(1,'active','Activo'),
+										(2,'removed','Eliminado');
 
 -- Populating project_type alter table
 insert into splitemapp.project_type	(id,cod,title) 
@@ -100,11 +105,11 @@ values										(1,1,'juanperez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09
 											(3,3,'juangutierrez@splitemapp.com',1,'2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36','2014-09-21 02:17:36',3,3);
 
 -- Populating the user_expense table
-insert into splitemapp.user_expense		(id,user_id,project_id,category_id,expense,expense_date,note,pushed_at,updated_by,pushed_by) 
-values									(1,1,1,1,200,'2014-09-21 02:17:36','Nafta','2014-09-21 02:17:36',1,1),
-										(2,2,1,1,140,'2014-09-21 02:17:36','Gaseosas','2014-09-21 02:17:36',1,1),
-										(3,3,3,1,140,'2014-09-21 02:17:36','Carne','2014-09-21 02:17:36',1,1),
-										(20,2,20,1,600,'2014-09-21 02:17:36','Carne','2014-09-21 02:17:36',1,1);
+insert into splitemapp.user_expense		(id,user_id,project_id,category_id,status_id,expense,expense_date,note,pushed_at,updated_by,pushed_by) 
+values									(1,1,1,1,1,200,'2014-09-21 02:17:36','Nafta','2014-09-21 02:17:36',1,1),
+										(2,2,1,1,1,140,'2014-09-21 02:17:36','Gaseosas','2014-09-21 02:17:36',1,1),
+										(3,3,3,1,1,140,'2014-09-21 02:17:36','Carne','2014-09-21 02:17:36',1,1),
+										(20,2,20,1,1,600,'2014-09-21 02:17:36','Carne','2014-09-21 02:17:36',1,1);
 
 -- Populating the user_invite table
 insert into splitemapp.user_invite	(id,status_id,user_id,project_id,email,created_at,updated_at,pushed_at,updated_by,pushed_by) 

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.splitemapp.commons.constants.Action;
 import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.domain.ExpenseCategory;
+import com.splitemapp.commons.domain.ExpenseStatus;
 import com.splitemapp.commons.domain.Project;
 import com.splitemapp.commons.domain.User;
 import com.splitemapp.commons.domain.UserExpense;
@@ -25,6 +26,7 @@ import com.splitemapp.commons.domain.dto.response.PushResponse;
 import com.splitemapp.commons.domain.id.IdUpdate;
 import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.ExpenseCategoryEndpoint;
+import com.splitemapp.service.backendrest.endpoint.ExpenseStatusEndpoint;
 import com.splitemapp.service.backendrest.endpoint.ProjectEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserExpenseEndpoint;
@@ -38,6 +40,7 @@ public class PushUserExpensesService extends PushNotificationService{
 	UserEndpoint userEndpoint;
 	ProjectEndpoint projectEndpoint;
 	ExpenseCategoryEndpoint expenseCategoryEndpoint;
+	ExpenseStatusEndpoint expenseStatusEndpoint;
 	UserExpenseEndpoint userExpenseEndpoint;
 
 	@GET
@@ -65,9 +68,10 @@ public class PushUserExpensesService extends PushNotificationService{
 				User user = userEndpoint.findById(userExpenseDTO.getUserId());
 				Project project = projectEndpoint.findById(userExpenseDTO.getProjectId());
 				ExpenseCategory expenseCategory = expenseCategoryEndpoint.findById(userExpenseDTO.getExpenseCategoryId());
+				ExpenseStatus expenseStatus = expenseStatusEndpoint.findById(userExpenseDTO.getExpenseStatusId());
 				User updatedBy = userEndpoint.findById(userExpenseDTO.getUpdatedBy());
 				User pushedBy = userEndpoint.findById(userExpenseDTO.getPushedBy());
-				UserExpense userExpense = new UserExpense(user, project, expenseCategory, updatedBy, pushedBy, userExpenseDTO);
+				UserExpense userExpense = new UserExpense(user, project, expenseCategory, expenseStatus, updatedBy, pushedBy, userExpenseDTO);
 
 				// We update the pushedAt date
 				userExpense.setPushedAt(pushedAt);
