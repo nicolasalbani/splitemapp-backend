@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
 import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class PullResponse<E> extends ServiceResponse implements Serializable {
 	
@@ -22,7 +23,7 @@ public class PullResponse<E> extends ServiceResponse implements Serializable {
 	
 	public PullResponse() {
 		itemSet = new HashSet<E>();
-		pulledAt = new Date();
+		pulledAt = TimeUtils.getUTCDate();
 	}
 	
 	public Set<E> getItemSet() {

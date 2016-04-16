@@ -60,7 +60,7 @@ public class TimeUtils {
 	 * @return
 	 */
 	public static Date getUTCDate(){
-		return getUTCDateTime().toDate();
+		return getUTCDateTime().toLocalDateTime().toDate();
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class TimeUtils {
 		// Creating a new DateTime object based on the provided date
 		DateTime dateTime = new DateTime(date);
 		
-		return getUTCDateTime(dateTime).toDate();
+		return getUTCDateTime(dateTime).toLocalDateTime().toDate();
 	}
 	
 }

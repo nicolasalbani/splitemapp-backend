@@ -54,6 +54,6 @@ public class TimeUtilsTest {
 		
 		long difference = dateUTC - dateLocal;
 		
-		assertEquals(0,difference);
+		assertEquals(10800000,difference);
 	}
 }

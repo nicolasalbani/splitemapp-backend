@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.splitemapp.commons.domain.dto.serializer.CustomDateDeserializer;
 import com.splitemapp.commons.domain.dto.serializer.CustomDateSerializer;
 import com.splitemapp.commons.domain.id.IdUpdate;
+import com.splitemapp.commons.utils.TimeUtils;
 
 public class PushResponse<E extends Number> extends ServiceResponse implements Serializable {
 
@@ -23,7 +24,7 @@ public class PushResponse<E extends Number> extends ServiceResponse implements S
 	
 	public PushResponse() {
 		idUpdateList = new ArrayList<IdUpdate<E>>();
-		pushedAt = new Date();
+		pushedAt = TimeUtils.getUTCDate();
 	}
 
 	public List<IdUpdate<E>> getIdUpdateList() {
