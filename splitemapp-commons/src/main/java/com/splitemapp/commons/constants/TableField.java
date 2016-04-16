@@ -68,6 +68,11 @@ public class TableField {
 	public static final String PROJECT_TYPE_COD = "cod";
 	
 	/**
+	 * 'expense_status' table
+	 */
+	public static final String EXPENSE_STATUS_COD = "cod";
+	
+	/**
 	 * 'sync_status' table
 	 */
 	public static final String SYNC_STATUS_TABLE_NAME = "table_name";

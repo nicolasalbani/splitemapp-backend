@@ -96,6 +96,19 @@ CREATE TABLE `project_status` (
 insert into project_status values(1,'active','Activo');
 insert into project_status values(2,'closed','Cerrado');
 
+-- -----------------------------------------------------
+-- Table `expense_status`
+-- -----------------------------------------------------
+CREATE TABLE `expense_status` (
+  `id` smallint(6) unsigned NOT NULL,
+  `cod` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cod_u_idx` (`cod`)
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+insert into expense_status values(1,'active','Activo');
+insert into expense_status values(2,'archived','Archivado');
+
 
 -- -----------------------------------------------------
 -- Table `project_type`
@@ -257,6 +270,7 @@ CREATE TABLE `user_expense` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned NOT NULL,
   `project_id` bigint(20) unsigned NOT NULL,
+  `status_id` smallint(6) unsigned NOT NULL,
   `category_id` smallint(6) unsigned NOT NULL,
   `expense` decimal(16,6) NOT NULL,
   `expense_date` timestamp NULL,
@@ -272,6 +286,7 @@ CREATE TABLE `user_expense` (
   CONSTRAINT `user_expense__user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   CONSTRAINT `user_expense__project_id` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`),
   CONSTRAINT `user_expense__category_id` FOREIGN KEY (`category_id`) REFERENCES `expense_category` (`id`),
+  CONSTRAINT `user_expense__status_id` FOREIGN KEY (`status_id`) REFERENCES `expense_status` (`id`),
   CONSTRAINT `user_expense__updated_by` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`),
   CONSTRAINT `user_expense__pushed_by` FOREIGN KEY (`pushed_by`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

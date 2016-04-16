@@ -22,6 +22,12 @@ public class TableFieldCod {
 	public static final String PROJECT_STATUS_CLOSED = "closed";
 	
 	/**
+	 * 'expense_status' table cods
+	 */
+	public static final String EXPENSE_STATUS_ACTIVE = "active";
+	public static final String EXPENSE_STATUS_ARCHIVED = "archived";
+	
+	/**
 	 * 'user_to_project' table cods
 	 */
 	public static final String USER_TO_PROJECT_STATUS_ACTIVE = "active";

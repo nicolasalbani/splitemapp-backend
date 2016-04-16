@@ -141,4 +141,12 @@ public class PushUserExpensesService extends PushNotificationService{
 		this.userExpenseEndpoint = userExpenseEndpoint;
 	}
 
+	public ExpenseStatusEndpoint getExpenseStatusEndpoint() {
+		return expenseStatusEndpoint;
+	}
+
+	public void setExpenseStatusEndpoint(ExpenseStatusEndpoint expenseStatusEndpoint) {
+		this.expenseStatusEndpoint = expenseStatusEndpoint;
+	}
+
 }
