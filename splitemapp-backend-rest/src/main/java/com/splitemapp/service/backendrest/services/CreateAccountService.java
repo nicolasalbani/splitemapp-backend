@@ -22,6 +22,7 @@ import com.splitemapp.commons.domain.dto.UserDTO;
 import com.splitemapp.commons.domain.dto.UserStatusDTO;
 import com.splitemapp.commons.domain.dto.request.CreateAccountRequest;
 import com.splitemapp.commons.domain.dto.response.CreateAccountResponse;
+import com.splitemapp.commons.utils.MailUtils;
 import com.splitemapp.commons.utils.TimeUtils;
 import com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint;
 import com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint;
@@ -96,6 +97,32 @@ public class CreateAccountService {
 			response.setUserStatusDTO(new UserStatusDTO(userStatus));
 		} else {
 			response.setMessage(ServiceConstants.ERROR_MESSAGE_ACCOUNT_EXISTS);
+		}
+		
+		// If we successfully created the account, we send a welcome message
+		if(response.getSuccess()){
+			StringBuilder message = new StringBuilder();
+			message.append("<html>");
+			message.append("<body style=\"background-color:#E5E5E5\";\"padding:20\">");
+			message.append("<table cellpadding=\"10\" align=\"center\" border=\"0\" style=\"width:50%\">");
+			message.append("<tr bgcolor=\"#4EA6FF\" align=\"center\">");
+			message.append("<img src=\"http://ec2-52-38-125-216.us-west-2.compute.amazonaws.com/images/splitemapp_logo.png\" style=\"width:80px;height:80px;\">");
+			message.append("</tr>");
+			message.append("<tr bgcolor=\"#FFFFFF\">");
+			message.append("<p>Hi <b>" +request.getFullName()+ "</b>!</p>");
+			message.append("<p>Thanks for creating your account, you are now ready to start using <b>Splitemapp</b>!</p>");
+			message.append("<p>Please don't hesitate to contact us if you have any questions on concerns.</p>");
+			message.append("<p>You can also follow us on <a href=\"https://www.facebook.com/splitemapp\">Facebook</a> and <a href=\"https://twitter.com/SplitemAppTT\">Twitter</a>.</p>");
+			message.append("<i>Best regards,</i>");
+			message.append("<br>");
+			message.append("<i>The Splitemapp Team</i>");
+			message.append("</tr>");
+			message.append("</table>");
+			message.append("</body>");
+			message.append("</html>");
+
+			// Sending the question
+			MailUtils.sendMail("info","019713skull","Welcome to Splitemapp!", request.getEmail(), "info@splitemapp.com", message.toString());
 		}
 
 		return response;
