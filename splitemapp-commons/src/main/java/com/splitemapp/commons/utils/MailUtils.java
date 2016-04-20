@@ -1,5 +1,8 @@
 package com.splitemapp.commons.utils;
 
+import java.io.StringWriter;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -9,6 +12,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
 
 public class MailUtils {
 
@@ -50,6 +57,34 @@ public class MailUtils {
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static String craftMailText(String templateName, Map<String,String> placeholdersMap){
+		// Creating properties to be passed to the velocity engine
+		Properties props = new Properties();
+        props.setProperty("resource.loader", "class");
+        props.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+		
+		// Initializing the Velocity engine
+		VelocityEngine ve = new VelocityEngine(props);
+		ve.init();
+		
+		// Creating a template based on the provided file name
+		Template t = ve.getTemplate(templateName);
+
+		// Creating a context and replacing the place holders
+		VelocityContext context = new VelocityContext();
+		Iterator<String> iterator = placeholdersMap.keySet().iterator();
+		while(iterator.hasNext()){
+			String key = iterator.next();
+			context.put(key, placeholdersMap.get(key));
+		}
+		
+		// Rendering the template into a StringWriter
+		StringWriter writer = new StringWriter();
+		t.merge( context, writer );
+		
+		return writer.toString();
 	}
 
 }

@@ -48,6 +48,9 @@
 		<!-- Java Mail dependencies version -->
 		<javamail.version>1.4</javamail.version>
 		<mock-javamail.version>1.9</mock-javamail.version>
+		
+		<!-- Velocity dependencies version -->
+		<velocity.version>1.7</velocity.version>
 	</properties>
 
 	<build>
@@ -140,6 +143,13 @@
 			<artifactId>mock-javamail</artifactId>
 			<version>${mock-javamail.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- velocity -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>${velocity.version}</version>
 		</dependency>
 	</dependencies>
 </project>

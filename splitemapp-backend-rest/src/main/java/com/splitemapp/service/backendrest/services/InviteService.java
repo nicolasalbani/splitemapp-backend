@@ -1,5 +1,8 @@
 package com.splitemapp.service.backendrest.services;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -48,24 +51,12 @@ public class InviteService {
 			User user = userEndpoint.findById(userSession.getUser().getId());
 			String email = request.getEmail();
 			
-			StringBuilder message = new StringBuilder();
-			message.append("<html>");
-			message.append("<body style=\"background-color:#E5E5E5\";\"padding:20\">");
-			message.append("<table cellpadding=\"10\" align=\"center\" border=\"0\" style=\"width:50%\">");
-			message.append("<tr bgcolor=\"#4EA6FF\" align=\"center\">");
-			message.append("<img src=\"http://ec2-52-38-125-216.us-west-2.compute.amazonaws.com/images/splitemapp_logo.png\" style=\"width:80px;height:80px;\">");
-			message.append("</tr>");
-			message.append("<tr bgcolor=\"#FFFFFF\">");
-			message.append("<p>Hi there!</p>");
-			message.append("<p>This invite was sent to you by <b>" +user.getFullName()+ "</b> to start using <b>Splitemapp</b>!</p>");
-			message.append("<p>You can install the app and create your free account in one step by clicking <a href=\"http://www.splitemapp.com\">here</a></p>");
-			message.append("<i>Best regards,</i>");
-			message.append("<br>");
-			message.append("<i>The Splitemapp Team</i>");
-			message.append("</tr>");
-			message.append("</table>");
-			message.append("</body>");
-			message.append("</html>");
+			// Creating the map with the replacement
+			Map<String,String> placeholdersMap = new HashMap<String,String>();
+			placeholdersMap.put("FULLNAME", user.getFullName());
+			
+			// Crafting email message
+			String message = MailUtils.craftMailText("invite.html", placeholdersMap);
 
 			// Sending the question
 			MailUtils.sendMail("info","019713skull","Splitemapp invite from " +user.getFullName(), email, "info@splitemapp.com", message.toString());
