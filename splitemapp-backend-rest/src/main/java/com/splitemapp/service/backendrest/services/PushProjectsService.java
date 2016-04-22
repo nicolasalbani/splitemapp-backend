@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.Action;
@@ -37,6 +39,8 @@ import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PushProjectsService extends PushNotificationService{
 
+	private static Logger logger = Logger.getLogger(PushProjectsService.class);
+
 	ProjectStatusEndpoint projectStatusEndpoint;
 	ProjectTypeEndpoint projectTypeEndpoint;
 	ProjectEndpoint projectEndpoint;
@@ -49,6 +53,9 @@ public class PushProjectsService extends PushNotificationService{
 
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<ProjectDTO> request) throws ParseException {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
+
 		// We create a pull groups response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
 
@@ -76,7 +83,7 @@ public class PushProjectsService extends PushNotificationService{
 				if(projectDTO.getPushedAt() == null){
 					// Setting the action
 					action = Action.ADD_PROJECT;
-					
+
 					// We persist the entry to the database
 					project.setId(null);
 					projectEndpoint.persist(project);
@@ -86,7 +93,7 @@ public class PushProjectsService extends PushNotificationService{
 				} else {
 					// Setting the action
 					action = Action.UPDATE_PROJECT;
-					
+
 					// We merge the entry to the database
 					projectEndpoint.merge(project);
 				}
@@ -99,6 +106,9 @@ public class PushProjectsService extends PushNotificationService{
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
 		}
+
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
 
 		return response;
 	}

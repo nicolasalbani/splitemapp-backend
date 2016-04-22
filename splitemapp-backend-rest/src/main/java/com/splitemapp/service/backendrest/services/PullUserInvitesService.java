@@ -12,6 +12,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
@@ -32,6 +34,8 @@ import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PullUserInvitesService {
 
+	private static Logger logger = Logger.getLogger(PullUserInvitesService.class);
+
 	UserSessionEndpoint userSessionEndpoint;
 	UserInviteEndpoint userInviteEndpoint;
 
@@ -42,6 +46,9 @@ public class PullUserInvitesService {
 
 	@POST
 	public PullResponse<UserInviteDTO> printMessage(PullRequest request) throws ParseException {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
+
 		// We create a pull all sync response object setting success to false by default
 		PullResponse<UserInviteDTO> response = new PullResponse<UserInviteDTO>();
 
@@ -64,6 +71,9 @@ public class PullUserInvitesService {
 			response.setPulledAt(pulledAt);
 			response.setSuccess(true);
 		}
+
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
 
 		return response;
 	}

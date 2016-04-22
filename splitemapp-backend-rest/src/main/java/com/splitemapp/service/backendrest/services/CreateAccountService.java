@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
@@ -39,6 +41,8 @@ import com.splitemapp.service.backendrest.endpoint.UserStatusEndpoint;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CreateAccountService {
 
+	private static Logger logger = Logger.getLogger(CreateAccountService.class);
+
 	private UserStatusEndpoint userStatusEndpoint;
 	private UserEndpoint userEndpoint;
 	private UserAvatarEndpoint userAvatarEndpoint;
@@ -48,9 +52,11 @@ public class CreateAccountService {
 	public String printMessage() {
 		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
 	}
-	
+
 	@POST
 	public CreateAccountResponse printMessage(CreateAccountRequest request) {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
 
 		// We create a create account response object setting success to false by default
 		CreateAccountResponse response = new CreateAccountResponse();
@@ -83,7 +89,7 @@ public class CreateAccountService {
 			userContactData.setPushedAt(TimeUtils.getUTCDate());
 			userContactData.setPushedBy(newUser);
 			userContactDataEndpoint.persist(userContactData);
-			
+
 			// We create and persist the user avatar
 			UserAvatar userAvatar = new UserAvatar();
 			userAvatar.setAvatarData(request.getAvatar());
@@ -102,23 +108,26 @@ public class CreateAccountService {
 		} else {
 			response.setMessage(ServiceConstants.ERROR_MESSAGE_ACCOUNT_EXISTS);
 		}
-		
+
 		// If we successfully created the account, we send a welcome message
 		if(response.getSuccess()){
 			// Creating the map with the replacement
 			Map<String,String> placeholdersMap = new HashMap<String,String>();
 			placeholdersMap.put("FULLNAME", request.getFullName());
-			
+
 			// Crafting email message
 			String message = MailUtils.craftMailText("welcome.html", placeholdersMap);
-			
+
 			// Sending the question
 			MailUtils.sendMail("info","019713skull","Welcome to Splitemapp!", request.getEmail(), "info@splitemapp.com", message);
 		}
 
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
+
 		return response;
 	}
-	
+
 	// Getters and setters
 
 	public UserStatusEndpoint getUserStatusEndpoint() {

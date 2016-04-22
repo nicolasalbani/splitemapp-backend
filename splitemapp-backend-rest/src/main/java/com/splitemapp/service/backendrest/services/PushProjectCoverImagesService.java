@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.Action;
@@ -33,6 +35,8 @@ import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PushProjectCoverImagesService extends PushNotificationService{
 
+	private static Logger logger = Logger.getLogger(PushProjectCoverImagesService.class);
+
 	ProjectEndpoint projectEndpoint;
 	UserEndpoint userEndpoint;
 	ProjectCoverImageEndpoint projectCoverImageEndpoint;
@@ -41,15 +45,18 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 	public String printMessage() {
 		return this.getClass().getSimpleName() +" - "+ ServiceConstants.GET_SUCCESS;
 	}
-	
+
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<ProjectCoverImageDTO> request) throws ParseException {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
+
 		// We create a push project cover image response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
-		
+
 		// Creating the pushedAt date
 		Date pushedAt = TimeUtils.getUTCDate();
-		
+
 		// Defining action and details to be notified
 		String action = "";
 
@@ -63,24 +70,24 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 				User updatedBy = userEndpoint.findById(projectCoverImageDTO.getUpdatedBy());
 				User pushedBy = userEndpoint.findById(projectCoverImageDTO.getPushedBy());
 				ProjectCoverImage projectCoverImage = new ProjectCoverImage(project, updatedBy, pushedBy, projectCoverImageDTO);
-				
+
 				// We update the pushedAt date
 				projectCoverImage.setPushedAt(pushedAt);
-				
+
 				if(projectCoverImageDTO.getPushedAt() == null){
 					// Setting the action
 					action = Action.ADD_PROJECT_COVER_IMAGE;
-					
+
 					// We persist the entry to the database
 					projectCoverImage.setId(null);
 					projectCoverImageEndpoint.persist(projectCoverImage);
-					
+
 					// We add the IdUpdate element to the response list
 					response.getIdUpdateList().add(new IdUpdate<Long>(projectCoverImageDTO.getId(), projectCoverImage.getId()));
 				} else {
 					// Setting the action
 					action = Action.UPDATE_PROJECT_COVER_IMAGE;
-					
+
 					// We merge the entry to the database
 					projectCoverImageEndpoint.merge(projectCoverImage);
 				}
@@ -93,6 +100,9 @@ public class PushProjectCoverImagesService extends PushNotificationService{
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
 		}
+
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
 
 		return response;
 	}

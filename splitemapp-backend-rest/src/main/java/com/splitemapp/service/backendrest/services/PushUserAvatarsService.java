@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.Action;
@@ -30,6 +32,8 @@ import com.splitemapp.service.backendrest.endpoint.UserEndpoint;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PushUserAvatarsService extends PushNotificationService{
 
+	private static Logger logger = Logger.getLogger(PushUserAvatarsService.class);
+
 	UserEndpoint userEndpoint;
 	UserAvatarEndpoint userAvatarEndpoint;
 
@@ -40,6 +44,9 @@ public class PushUserAvatarsService extends PushNotificationService{
 
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<UserAvatarDTO> request) throws ParseException {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
+
 		// We create a pull groups response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
 
@@ -56,7 +63,7 @@ public class PushUserAvatarsService extends PushNotificationService{
 			for(UserAvatarDTO userAvatarDTO:request.getItemList()){
 				// Setting the action
 				action = Action.UPDATE_USER_AVATAR;
-				
+
 				// We create the user avatar object
 				User user = userEndpoint.findById(userAvatarDTO.getUserId());
 				User updatedBy = userEndpoint.findById(userAvatarDTO.getUpdatedBy());
@@ -77,6 +84,9 @@ public class PushUserAvatarsService extends PushNotificationService{
 			// Sending GCM notification to all related clients
 			sendGcmNotification(userSession, action, null, null);
 		}
+
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
 
 		return response;
 	}

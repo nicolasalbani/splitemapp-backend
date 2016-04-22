@@ -12,7 +12,7 @@ import com.splitemapp.commons.constants.ServiceConstants;
 
 public class RestUtils {
 	
-	public static final int TIMEOUT = 5000;
+	public static final int TIMEOUT = 10000;
 	
 	/**
 	 * 

@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,8 @@ import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ResetPasswordService {
+	
+	private static Logger logger = Logger.getLogger(ResetPasswordService.class);
 
 	private static final int TEMP_CODE_LENGTH = 20;
 	private static final int TEMP_PASSWORD_LENGTH = 8;
@@ -78,14 +81,19 @@ public class ResetPasswordService {
 
 				// Sending the question
 				MailUtils.sendMail("info","019713skull","Password reset success", user.getUsername(), "info@splitemapp.com", message);
+				
+				return "Password reset successful. Please check your e-mail.";
 			}
 		}
 		
-		return "Password reset code expired. Please request a new code";
+		return "Password reset code expired. Please request a new code.";
 	}
 
 	@POST
 	public PasswordResetResponse printMessage(PasswordResetRequest request) {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
+		
 		// We create a response object setting emailFound to false by default
 		PasswordResetResponse response = new PasswordResetResponse();
 		response.setMailFound(false);
@@ -109,7 +117,7 @@ public class ResetPasswordService {
 			// Creating the map with the replacement
 			Map<String,String> placeholdersMap = new HashMap<String,String>();
 			placeholdersMap.put("FULLNAME", user.getFullName());
-			placeholdersMap.put("SERVICEURL", ServiceConstants.BACKEND_HOST+":"+ServiceConstants.BACKEND_PORT+"/"+ServiceConstants.BACKEND_PATH+"/"+ServiceConstants.PASSWORD_RESET_PATH+"/"+key);
+			placeholdersMap.put("SERVICEURL", "http://"+ServiceConstants.BACKEND_HOST+":"+ServiceConstants.BACKEND_PORT+"/"+ServiceConstants.BACKEND_PATH+ServiceConstants.PASSWORD_RESET_PATH+"/"+key);
 
 			// Crafting email message
 			String message = MailUtils.craftMailText("password_reset_request.html", placeholdersMap);
@@ -120,6 +128,9 @@ public class ResetPasswordService {
 			response.setMessage(ServiceConstants.ERROR_MESSAGE_ACCOUNT_NOT_FOUND);
 		}
 
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
+		
 		return response;
 	}
 

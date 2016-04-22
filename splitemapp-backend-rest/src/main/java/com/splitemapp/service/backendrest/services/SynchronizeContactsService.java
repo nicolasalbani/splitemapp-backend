@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
@@ -30,6 +32,8 @@ import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SynchronizeContactsService {
+	
+	private static Logger logger = Logger.getLogger(SynchronizeContactsService.class);
 
 	private UserEndpoint userEndpoint;
 	private UserSessionEndpoint userSessionEndpoint;
@@ -41,6 +45,8 @@ public class SynchronizeContactsService {
 
 	@POST
 	public SynchronizeContactsResponse printMessage(SynchronizeContactsRequest request) {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
 
 		// Creating a synchronize contacts response object setting success to false by default
 		SynchronizeContactsResponse response = new SynchronizeContactsResponse();
@@ -76,6 +82,9 @@ public class SynchronizeContactsService {
 			// Setting the success flag to true
 			response.setSuccess(true);
 		}
+
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
 
 		return response;
 	}

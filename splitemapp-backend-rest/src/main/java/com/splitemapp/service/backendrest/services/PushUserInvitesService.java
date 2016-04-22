@@ -10,6 +10,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.Action;
@@ -35,6 +37,8 @@ import com.splitemapp.service.backendrest.endpoint.UserInviteEndpoint;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PushUserInvitesService extends PushNotificationService{
 
+	private static Logger logger = Logger.getLogger(PushUserInvitesService.class);
+
 	UserEndpoint userEndpoint;
 	ProjectEndpoint projectEndpoint;
 	InviteStatusEndpoint inviteStatusEndpoint;
@@ -47,6 +51,9 @@ public class PushUserInvitesService extends PushNotificationService{
 
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<UserInviteDTO> request) throws ParseException {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
+
 		// We create a pull groups response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
 
@@ -75,7 +82,7 @@ public class PushUserInvitesService extends PushNotificationService{
 				if(userInviteDTO.getPushedAt() == null){
 					// Setting the action
 					action = Action.ADD_USER_INVITE;
-					
+
 					// We persist the entry to the database
 					userInvite.setId(null);
 					userInviteEndpoint.persist(userInvite);
@@ -85,7 +92,7 @@ public class PushUserInvitesService extends PushNotificationService{
 				} else {
 					// Setting the action
 					action = Action.UPDATE_USER_INVITE;
-					
+
 					// We merge the entry to the database
 					userInviteEndpoint.merge(userInvite);
 				}
@@ -98,6 +105,9 @@ public class PushUserInvitesService extends PushNotificationService{
 			response.setPushedAt(pushedAt);
 			response.setSuccess(true);
 		}
+
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
 
 		return response;
 	}

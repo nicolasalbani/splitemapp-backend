@@ -9,6 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
@@ -25,6 +27,8 @@ import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PushUserSessionService {
 
+	private static Logger logger = Logger.getLogger(PushUserSessionService.class);
+
 	UserSessionEndpoint userSessionEndpoint;
 
 	@GET
@@ -34,6 +38,9 @@ public class PushUserSessionService {
 
 	@POST
 	public PushResponse<Long> printMessage(PushRequest<UserSessionDTO> request) throws ParseException {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
+
 		// We create a response object setting success to false by default
 		PushResponse<Long> response = new PushResponse<Long>();
 
@@ -45,13 +52,16 @@ public class PushUserSessionService {
 				// We create the user object
 				UserSession sentUserSession = userSessionEndpoint.findById(userSessionDTO.getId());
 				sentUserSession.setGcmToken(userSessionDTO.getGcmToken());
-				
+
 				// We merge the entry to the database
 				userSessionEndpoint.merge(sentUserSession);
 			}
 
 			response.setSuccess(true);
 		}
+
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
 
 		return response;
 	}

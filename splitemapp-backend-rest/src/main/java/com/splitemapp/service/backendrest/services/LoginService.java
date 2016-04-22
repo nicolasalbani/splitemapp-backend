@@ -9,6 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
@@ -37,6 +39,8 @@ import com.splitemapp.service.backendrest.utils.BackendUtils;
 @Consumes(MediaType.APPLICATION_JSON)
 public class LoginService {
 
+	private static Logger logger = Logger.getLogger(LoginService.class);
+
 	private UserEndpoint userEndpoint;
 	private UserAvatarEndpoint userAvatarEndpoint;
 	private UserContactDataEndpoint userContactDataEndpoint;
@@ -49,6 +53,8 @@ public class LoginService {
 
 	@POST
 	public LoginResponse printMessage(LoginRequest request) {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
 
 		// We create a login response object setting success to false by default
 		LoginResponse response = new LoginResponse();
@@ -83,7 +89,7 @@ public class LoginService {
 				for(UserContactData ucd:userContactDatas){
 					userContactData = ucd;
 				}
-				
+
 				// Getting the existing user avatar from the user
 				UserAvatar userAvatar = null;
 				Set<UserAvatar> userAvatars = user.getUserAvatars();
@@ -105,6 +111,9 @@ public class LoginService {
 		} else {
 			response.setMessage(ServiceConstants.ERROR_MESSAGE_LOGIN_FAILED);
 		}
+
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
 
 		return response;
 	}

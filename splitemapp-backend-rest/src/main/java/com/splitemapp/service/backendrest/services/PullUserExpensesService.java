@@ -13,6 +13,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import com.splitemapp.commons.constants.ServiceConstants;
@@ -33,6 +35,8 @@ import com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PullUserExpensesService {
 
+	private static Logger logger = Logger.getLogger(PullUserExpensesService.class);
+
 	UserSessionEndpoint userSessionEndpoint;
 	UserExpenseEndpoint userExpenseEndpoint;
 
@@ -43,6 +47,9 @@ public class PullUserExpensesService {
 
 	@POST
 	public PullResponse<UserExpenseDTO> printMessage(PullRequest request) throws ParseException {
+		// Service start time
+		DateTime serviceStartTime = new DateTime();
+
 		// We create a pull all sync response object setting success to false by default
 		PullResponse<UserExpenseDTO> response = new PullResponse<UserExpenseDTO>();
 
@@ -53,7 +60,7 @@ public class PullUserExpensesService {
 
 		if(userSession != null){
 			User user = userSession.getUser();
-			
+
 			// Getting the proper list based on parameters
 			List<UserExpense> userExpenses = null;
 			if(request.isPullAllDates()){
@@ -67,7 +74,7 @@ public class PullUserExpensesService {
 			for(UserExpense userExpense:userExpenses){
 				userExpenseDTOs.add(new UserExpenseDTO(userExpense));
 			}
-			
+
 			// Setting the user expense set
 			response.setItemSet(userExpenseDTOs);
 
@@ -75,6 +82,9 @@ public class PullUserExpensesService {
 			response.setPulledAt(pulledAt);
 			response.setSuccess(true);
 		}
+
+		// Calculating service time
+		logger.info(getClass().getSimpleName() +" time was: "+ (new DateTime().getMillis()-serviceStartTime.getMillis()+ "ms"));
 
 		return response;
 	}
