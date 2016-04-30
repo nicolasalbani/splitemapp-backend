@@ -9,7 +9,7 @@ public class ServiceConstants {
 	/**
 	 * Backend information
 	 */
-	public static final String BACKEND_HOST="10.10.10.12";
+	public static final String BACKEND_HOST="ec2-52-27-108-212.us-west-2.compute.amazonaws.com";
 	public static final String BACKEND_PORT="8080";
 	public static final String BACKEND_PATH="splitemapp-backend-rest";
 
