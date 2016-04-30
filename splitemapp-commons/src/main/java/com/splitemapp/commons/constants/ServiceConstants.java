@@ -9,7 +9,7 @@ public class ServiceConstants {
 	/**
 	 * Backend information
 	 */
-	public static final String BACKEND_HOST="192.168.0.28";
+	public static final String BACKEND_HOST="10.10.10.12";
 	public static final String BACKEND_PORT="8080";
 	public static final String BACKEND_PATH="splitemapp-backend-rest";
 
@@ -48,6 +48,7 @@ public class ServiceConstants {
 	 */
 	public static final String LOGIN_PATH = "/login";
 	public static final String LOGOUT_PATH = "/logout";
+	public static final String CHANGE_PASSWORD_PATH = "/change_password";
 	public static final String PASSWORD_RESET_PATH = "/password_reset";
 	public static final String CREATE_ACCOUNT_PATH = "/create_account";
 	public static final String PULL_USERS_PATH = "/pull_users";
