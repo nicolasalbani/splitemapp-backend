@@ -73,6 +73,7 @@ public class ResetPasswordService {
 				// We send an e-mail letting the user know the new password
 				// Creating the map with the replacement
 				Map<String,String> placeholdersMap = new HashMap<String,String>();
+				placeholdersMap.put("SMTPHOST", ServiceConstants.SMTP_HOST);
 				placeholdersMap.put("FULLNAME", user.getFullName());
 				placeholdersMap.put("NEWPASSWORD", tempPassword);
 
@@ -116,6 +117,7 @@ public class ResetPasswordService {
 			// Sending e-mail to user with link to reset password
 			// Creating the map with the replacement
 			Map<String,String> placeholdersMap = new HashMap<String,String>();
+			placeholdersMap.put("SMTPHOST", ServiceConstants.SMTP_HOST);
 			placeholdersMap.put("FULLNAME", user.getFullName());
 			placeholdersMap.put("SERVICEURL", "http://"+ServiceConstants.BACKEND_HOST+":"+ServiceConstants.BACKEND_PORT+"/"+ServiceConstants.BACKEND_PATH+ServiceConstants.PASSWORD_RESET_PATH+"/"+key);
 

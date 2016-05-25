@@ -12,16 +12,13 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import com.splitemapp.commons.constants.ServiceConstants;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 public class MailUtils {
-
-	public static final String SMTP_HOST = "ec2-52-38-125-216.us-west-2.compute.amazonaws.com";
-	public static final String SMTP_PORT = "587";
-	public static final String MAIL_DOMAIN = "splitemapp.com";
 
 	/**
 	 * Sends the email to the appropriate account
@@ -36,8 +33,8 @@ public class MailUtils {
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", SMTP_HOST);
-		props.put("mail.smtp.port", SMTP_PORT);
+		props.put("mail.smtp.host", ServiceConstants.SMTP_HOST);
+		props.put("mail.smtp.port", ServiceConstants.SMTP_PORT);
 
 		Session session = Session.getInstance(props,
 				new javax.mail.Authenticator() {

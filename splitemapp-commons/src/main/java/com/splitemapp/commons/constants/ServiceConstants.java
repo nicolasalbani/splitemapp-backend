@@ -7,11 +7,18 @@ public class ServiceConstants {
 	public static final String GET_SUCCESS = "Your GET request was successfull. Service is alive!";
 
 	/**
-	 * Backend information
+	 * Backend server information
 	 */
-	public static final String BACKEND_HOST="ec2-52-27-108-212.us-west-2.compute.amazonaws.com";
+	public static final String BACKEND_HOST="ec2-52-38-28-15.us-west-2.compute.amazonaws.com";
 	public static final String BACKEND_PORT="8080";
 	public static final String BACKEND_PATH="splitemapp-backend-rest";
+	
+	/**
+	 * Mail server information
+	 */
+	public static final String SMTP_HOST = "ec2-52-39-83-219.us-west-2.compute.amazonaws.com";
+	public static final String SMTP_PORT = "587";
+	public static final String MAIL_DOMAIN = "splitemapp.com";
 
 	/**
 	 * GCM Constants

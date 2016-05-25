@@ -59,6 +59,7 @@ public class InviteService {
 
 			// Creating the map with the replacement
 			Map<String,String> placeholdersMap = new HashMap<String,String>();
+			placeholdersMap.put("SMTPHOST", ServiceConstants.SMTP_HOST);
 			placeholdersMap.put("FULLNAME", user.getFullName());
 
 			// Crafting email message
