@@ -77,11 +77,14 @@ public class ResetPasswordService {
 				placeholdersMap.put("FULLNAME", user.getFullName());
 				placeholdersMap.put("NEWPASSWORD", tempPassword);
 
+				// Creating MailUtils object
+				MailUtils mailUtils = new MailUtils();
+				
 				// Crafting email message
-				String message = MailUtils.craftMailText("password_reset_success.html", placeholdersMap);
+				String message = mailUtils.craftMailText("password_reset_success.html", placeholdersMap);
 
 				// Sending the question
-				MailUtils.sendMail("info","019713skull","Password reset success", user.getUsername(), "info@splitemapp.com", message);
+				mailUtils.sendMail("info","019713skull","Password reset success", user.getUsername(), "info@splitemapp.com", message);
 				
 				return "Password reset successful. Please check your e-mail.";
 			}
@@ -121,11 +124,14 @@ public class ResetPasswordService {
 			placeholdersMap.put("FULLNAME", user.getFullName());
 			placeholdersMap.put("SERVICEURL", "http://"+ServiceConstants.BACKEND_HOST+":"+ServiceConstants.BACKEND_PORT+"/"+ServiceConstants.BACKEND_PATH+ServiceConstants.PASSWORD_RESET_PATH+"/"+key);
 
+			// Creating MailUtils object
+			MailUtils mailUtils = new MailUtils();
+			
 			// Crafting email message
-			String message = MailUtils.craftMailText("password_reset_request.html", placeholdersMap);
+			String message = mailUtils.craftMailText("password_reset_request.html", placeholdersMap);
 
 			// Sending the question
-			MailUtils.sendMail("info","019713skull","Password reset request", request.getUsername(), "info@splitemapp.com", message);
+			mailUtils.sendMail("info","019713skull","Password reset request", request.getUsername(), "info@splitemapp.com", message);
 		} else {
 			response.setMessage(ServiceConstants.ERROR_MESSAGE_ACCOUNT_NOT_FOUND);
 		}

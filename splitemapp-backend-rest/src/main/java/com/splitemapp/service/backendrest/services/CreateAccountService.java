@@ -116,11 +116,14 @@ public class CreateAccountService {
 			placeholdersMap.put("SMTPHOST", ServiceConstants.SMTP_HOST);
 			placeholdersMap.put("FULLNAME", request.getFullName());
 
+			// Creating MailUtils object
+			MailUtils mailUtils = new MailUtils();
+			
 			// Crafting email message
-			String message = MailUtils.craftMailText("welcome.html", placeholdersMap);
+			String message = mailUtils.craftMailText("welcome.html", placeholdersMap);
 
 			// Sending the question
-			MailUtils.sendMail("info","019713skull","Welcome to Splitemapp!", request.getEmail(), "info@splitemapp.com", message);
+			mailUtils.sendMail("info","019713skull","Welcome to Splitemapp!", request.getEmail(), "info@splitemapp.com", message);
 		}
 
 		// Calculating service time

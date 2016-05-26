@@ -28,7 +28,7 @@ public class MailUtilsTest {
 	@Test
 	public void testSendMail() throws MessagingException, IOException {
 		// Sending e-mail
-		MailUtils.sendMail("questions", 
+		new MailUtils().sendMail("questions", 
 				"019713skull", 
 				"Question from Nicolas Albani",
 				"questions@splitemapp.com",
@@ -49,7 +49,7 @@ public class MailUtilsTest {
 		placeholdersMap.put("FULLNAME", "Peter");
 		
 		// Crafting text and validating
-		String mailText = MailUtils.craftMailText("mail_template.html", placeholdersMap);
+		String mailText = new MailUtils().craftMailText("mail_template.html", placeholdersMap);
 		assertEquals("Welcome to Splitemapp Peter",mailText);
 	}
 }

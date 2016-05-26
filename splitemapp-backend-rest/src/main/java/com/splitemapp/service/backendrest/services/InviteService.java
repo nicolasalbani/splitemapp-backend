@@ -62,11 +62,14 @@ public class InviteService {
 			placeholdersMap.put("SMTPHOST", ServiceConstants.SMTP_HOST);
 			placeholdersMap.put("FULLNAME", user.getFullName());
 
+			// Creating MailUtils object
+			MailUtils mailUtils = new MailUtils();
+			
 			// Crafting email message
-			String message = MailUtils.craftMailText("invite.html", placeholdersMap);
+			String message = mailUtils.craftMailText("invite.html", placeholdersMap);
 
 			// Sending the question
-			MailUtils.sendMail("info","019713skull","Splitemapp invite from " +user.getFullName(), email, "info@splitemapp.com", message.toString());
+			mailUtils.sendMail("info","019713skull","Splitemapp invite from " +user.getFullName(), email, "info@splitemapp.com", message.toString());
 
 			// Setting the success flag to true
 			response.setSuccess(true);
