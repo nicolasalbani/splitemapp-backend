@@ -28,12 +28,23 @@ public class MailUtilsTest {
 	@Test
 	public void testSendMail() throws MessagingException, IOException {
 		// Sending e-mail
-		new MailUtils().sendMail("questions", 
+		MailUtils mailUtils = new MailUtils();
+		
+		mailUtils.sendMail("questions", 
 				"019713skull", 
 				"Question from Nicolas Albani",
 				"questions@splitemapp.com",
 				"nicolasalbani@gmail.com", 
 				"This is an email");
+		
+		// Waiting for email thread to send the email
+		while(!mailUtils.isMailSent()){
+			try {
+				Thread.sleep(100l);
+			} catch (InterruptedException e) {
+				// Do nothing
+			}
+		}
 
 		// Validating that e-mail arrived at mocked inbox
 		List<Message> inbox = Mailbox.get("questions@splitemapp.com");

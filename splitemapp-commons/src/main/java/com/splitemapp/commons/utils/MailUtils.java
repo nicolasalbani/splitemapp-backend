@@ -20,6 +20,12 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 public class MailUtils {
+	
+	private boolean mailSent;
+
+	public MailUtils() {
+		mailSent = false;
+	}
 
 	/**
 	 * Sends the email to the appropriate account
@@ -79,6 +85,8 @@ public class MailUtils {
 				message.setContent(content, "text/html");
 
 				Transport.send(message);
+				
+				mailSent = true;
 			} catch (MessagingException e) {
 				throw new RuntimeException(e);
 			}
@@ -112,6 +120,10 @@ public class MailUtils {
 		t.merge( context, writer );
 		
 		return writer.toString();
+	}
+	
+	public boolean isMailSent() {
+		return mailSent;
 	}
 
 }
