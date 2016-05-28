@@ -50,6 +50,14 @@ public class QuestionsServiceTest extends BaseServiceTest {
 
 		// Validating successful response
 		assertTrue(response.getSuccess());
+		
+		while(Mailbox.get("questions@splitemapp.com").size() == 0){
+			try {
+				Thread.sleep(100l);
+			} catch (InterruptedException e) {
+				// Do nothing
+			}
+		}
 
 		// Validating that e-mail arrived at mocked inbox
 		List<Message> inbox = Mailbox.get("questions@splitemapp.com");
