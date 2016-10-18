@@ -54,7 +54,7 @@ public class QuestionsService {
 			String message = request.getQuestionDTO().getMessage();
 
 			// Sending the question
-			new MailUtils().sendMail("questions","019713skull","Question from " +user.getFullName(), "questions@splitemapp.com", user.getUsername(),message);
+			new MailUtils().sendMail(ServiceConstants.INFO_SERVICE_ADDRESS,ServiceConstants.INFO_SERVICE_PASS,"Question from " +user.getFullName(), user.getUsername(),message);
 
 			// Setting the success flag to true
 			response.setSuccess(true);

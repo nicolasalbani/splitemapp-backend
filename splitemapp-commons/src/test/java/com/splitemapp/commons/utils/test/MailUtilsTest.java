@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.jvnet.mock_javamail.Mailbox;
 
+import com.splitemapp.commons.constants.ServiceConstants;
 import com.splitemapp.commons.utils.MailUtils;
 
 public class MailUtilsTest {
@@ -30,10 +31,9 @@ public class MailUtilsTest {
 		// Sending e-mail
 		MailUtils mailUtils = new MailUtils();
 		
-		mailUtils.sendMail("questions", 
+		mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS, 
 				"019713skull", 
 				"Question from Nicolas Albani",
-				"questions@splitemapp.com",
 				"nicolasalbani@gmail.com", 
 				"This is an email");
 		
@@ -47,7 +47,7 @@ public class MailUtilsTest {
 		}
 
 		// Validating that e-mail arrived at mocked inbox
-		List<Message> inbox = Mailbox.get("questions@splitemapp.com");
+		List<Message> inbox = Mailbox.get(ServiceConstants.INFO_SERVICE_ADDRESS);
 		assertTrue(inbox.size() == 1);
 		assertEquals("Question from Nicolas Albani", inbox.get(0).getSubject());
 		assertEquals("This is an email", inbox.get(0).getContent());
