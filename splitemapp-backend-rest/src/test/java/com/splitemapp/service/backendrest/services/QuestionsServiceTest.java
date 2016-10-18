@@ -51,7 +51,7 @@ public class QuestionsServiceTest extends BaseServiceTest {
 		// Validating successful response
 		assertTrue(response.getSuccess());
 		
-		while(Mailbox.get("questions@splitemapp.com").size() == 0){
+		while(Mailbox.get(ServiceConstants.INFO_SERVICE_ADDRESS).size() == 0){
 			try {
 				Thread.sleep(100l);
 			} catch (InterruptedException e) {
@@ -60,7 +60,7 @@ public class QuestionsServiceTest extends BaseServiceTest {
 		}
 
 		// Validating that e-mail arrived at mocked inbox
-		List<Message> inbox = Mailbox.get("questions@splitemapp.com");
+		List<Message> inbox = Mailbox.get(ServiceConstants.INFO_SERVICE_ADDRESS);
 		assertTrue(inbox.size() == 1);
 		assertEquals("Question from juan perez", inbox.get(0).getSubject());
 		assertEquals("This is my question", inbox.get(0).getContent());

@@ -32,7 +32,7 @@ public class MailUtilsTest {
 		MailUtils mailUtils = new MailUtils();
 		
 		mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS, 
-				"019713skull", 
+				ServiceConstants.INFO_SERVICE_PASS, 
 				"Question from Nicolas Albani",
 				"nicolasalbani@gmail.com", 
 				"This is an email");
@@ -47,7 +47,7 @@ public class MailUtilsTest {
 		}
 
 		// Validating that e-mail arrived at mocked inbox
-		List<Message> inbox = Mailbox.get(ServiceConstants.INFO_SERVICE_ADDRESS);
+		List<Message> inbox = Mailbox.get("nicolasalbani@gmail.com");
 		assertTrue(inbox.size() == 1);
 		assertEquals("Question from Nicolas Albani", inbox.get(0).getSubject());
 		assertEquals("This is an email", inbox.get(0).getContent());

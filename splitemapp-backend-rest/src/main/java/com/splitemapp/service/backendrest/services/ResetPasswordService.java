@@ -84,7 +84,7 @@ public class ResetPasswordService {
 				String message = mailUtils.craftMailText("password_reset_success.html", placeholdersMap);
 
 				// Sending the question
-				mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS,"019713skull","Password reset success", user.getUsername(), message);
+				mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS,ServiceConstants.INFO_SERVICE_PASS,"Password reset success", user.getUsername(), message);
 				
 				return "Password reset successful. Please check your e-mail.";
 			}
@@ -131,7 +131,7 @@ public class ResetPasswordService {
 			String message = mailUtils.craftMailText("password_reset_request.html", placeholdersMap);
 
 			// Sending the question
-			mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS,"019713skull","Password reset request", request.getUsername(), message);
+			mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS,"h","Password reset request", request.getUsername(), message);
 		} else {
 			response.setMessage(ServiceConstants.ERROR_MESSAGE_ACCOUNT_NOT_FOUND);
 		}
