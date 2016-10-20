@@ -5,17 +5,13 @@
 
 	<groupId>com.splitemapp</groupId>
 	<artifactId>splitemapp-backend-rest</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>SplitemApp</name>
 	<description>SplitemApp Backend Rest</description>
 
 	<packaging>war</packaging>
 
 	<developers>
-		<developer>
-			<name>Diego Ghersi</name>
-			<email>diego@ghersi.com.ar</email>
-		</developer>
 		<developer>
 			<name>Nicolas Albani</name>
 			<email>nicolasalbani@gmail.com</email>
@@ -56,7 +52,7 @@
 		<resteasy.version>3.0.9.Final</resteasy.version>
 
 		<!-- SplitemApp Common Domain Model -->
-		<commons.version>0.0.1-SNAPSHOT</commons.version>
+		<commons.version>1.0.0-SNAPSHOT</commons.version>
 
 		<!-- Source code version -->
 		<source.java.version>1.7</source.java.version>
@@ -76,6 +72,7 @@
 	</properties>
 
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
