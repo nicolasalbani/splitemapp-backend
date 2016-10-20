@@ -123,7 +123,7 @@ public class CreateAccountService {
 			String message = mailUtils.craftMailText("welcome.html", placeholdersMap);
 
 			// Sending the question
-			mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS,ServiceConstants.INFO_SERVICE_PASS,"Welcome to Splitemapp!", request.getEmail(), message);
+			mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS,ServiceConstants.INFO_SERVICE_PASS,"Welcome to Splitemapp!", request.getEmail(), ServiceConstants.INFO_SERVICE_ADDRESS, message);
 		}
 
 		// Calculating service time

@@ -69,7 +69,7 @@ public class InviteService {
 			String message = mailUtils.craftMailText("invite.html", placeholdersMap);
 
 			// Sending the question
-			mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS,ServiceConstants.INFO_SERVICE_PASS,"Splitemapp invite from " +user.getFullName(), email, message.toString());
+			mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS,ServiceConstants.INFO_SERVICE_PASS,"Splitemapp invite from " +user.getFullName(), email, ServiceConstants.INFO_SERVICE_ADDRESS, message.toString());
 
 			// Setting the success flag to true
 			response.setSuccess(true);

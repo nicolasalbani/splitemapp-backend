@@ -35,9 +35,9 @@ public class MailUtils {
 	 * @param toAddress
 	 * @param content
 	 */
-	public void sendMail(final String username, final String password, String subject, String toAddress, String content){
+	public void sendMail(final String username, final String password, String subject, String toAddress, String replyToAddress, String content){
 		// Creating mail sender
-		MailSender mailSender = new MailSender(username, password, subject, toAddress, content);
+		MailSender mailSender = new MailSender(username, password, subject, toAddress, replyToAddress, content);
 		// Sending mail in new thread
 		new Thread(mailSender).start();
 	}
@@ -48,14 +48,16 @@ public class MailUtils {
 		private String password;
 		private String subject;
 		private String toAddress;
+		private String replyToAddress;
 		private String content;
 		
 		public MailSender(String username, String password, String subject,
-				String toAddress, String content) {
+				String toAddress, String replyToAddress, String content) {
 			this.username = username;
 			this.password = password;
 			this.subject = subject;
 			this.toAddress = toAddress;
+			this.replyToAddress = replyToAddress;
 			this.content = content;
 		}
 
@@ -77,6 +79,7 @@ public class MailUtils {
 			try {
 				Message message = new MimeMessage(session);
 				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toAddress));
+				message.setReplyTo(InternetAddress.parse(replyToAddress));
 				message.setSubject(subject);
 				message.setContent(content, "text/html");
 

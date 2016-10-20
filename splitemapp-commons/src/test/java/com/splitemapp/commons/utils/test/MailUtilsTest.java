@@ -34,7 +34,8 @@ public class MailUtilsTest {
 		mailUtils.sendMail(ServiceConstants.INFO_SERVICE_ADDRESS, 
 				ServiceConstants.INFO_SERVICE_PASS, 
 				"Question from Nicolas Albani",
-				"nicolasalbani@gmail.com", 
+				"nicolasalbani@gmail.com",
+				ServiceConstants.INFO_SERVICE_ADDRESS,
 				"This is an email");
 		
 		// Waiting for email thread to send the email
