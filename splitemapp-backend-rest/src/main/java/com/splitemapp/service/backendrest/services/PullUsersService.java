@@ -68,7 +68,7 @@ public class PullUsersService {
 			// We set the users
 			Set<UserDTO> userDTOs = new HashSet<UserDTO>();
 			for(User user:linkedUsers){
-				userDTOs.add(new UserDTO(user));
+				userDTOs.add(new UserDTO(user,false));
 			}
 			response.setItemSet(userDTOs);
 

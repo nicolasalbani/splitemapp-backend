@@ -72,7 +72,7 @@ public class SynchronizeContactsService {
 					userContactDataDTOList.add(new UserContactDataDTO(user.getUserContactDatas().iterator().next()));
 
 					// Processing user information
-					userDTOList.add(new UserDTO(user));
+					userDTOList.add(new UserDTO(user,false));
 
 					// Processing user avatar
 					userAvatarDTOList.add(new UserAvatarDTO(user.getUserAvatars().iterator().next()));

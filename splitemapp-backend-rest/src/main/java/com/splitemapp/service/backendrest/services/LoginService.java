@@ -100,7 +100,7 @@ public class LoginService {
 				// We generate the response
 				response.setSuccess(true);
 				response.setUserSessionDTO(new UserSessionDTO(userSession));
-				response.setUserDTO(new UserDTO(userSession.getUser()));
+				response.setUserDTO(new UserDTO(userSession.getUser(),false));
 				response.setUserStatusDTO(new UserStatusDTO(userSession.getUser().getUserStatus()));
 				response.setUserContactDataDTO(new UserContactDataDTO(userContactData));
 				response.setUserAvatarDTO(new UserAvatarDTO(userAvatar));

@@ -54,6 +54,23 @@ public class UserDTO implements java.io.Serializable {
 		this.pushedAt = user.getPushedAt();
 	}
 
+	public UserDTO(User user, boolean includePassword) {
+		this.id = user.getId();
+		this.userStatusId = user.getUserStatus().getId();
+		this.username = user.getUsername();
+		if(includePassword){
+			this.password = user.getPassword();
+		}
+		this.fullName = user.getFullName();
+		this.lastLogin = user.getLastLogin();
+		this.loginCnt = user.getLoginCnt();
+		this.createdAt = user.getCreatedAt();
+		this.createdIpAddress = user.getCreatedIpAddress();
+		this.updatedAt = user.getUpdatedAt();
+		this.updatedIpAddress = user.getUpdatedIpAddress();
+		this.pushedAt = user.getPushedAt();
+	}
+
 	public UserDTO(Short userStatusId, String username, String password,
 			String fullName, String lastName, Date lastLogin, int loginCnt,
 			Date createdAt, String createdIpAddress, Date updatedAt, Date pushedAt,

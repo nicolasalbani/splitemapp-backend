@@ -102,7 +102,7 @@ public class CreateAccountService {
 			// We set the response values
 			response.setSuccess(true);
 			response.setUserContactDataDTO(new UserContactDataDTO(userContactData));
-			response.setUserDTO(new UserDTO(newUser));
+			response.setUserDTO(new UserDTO(newUser, false));
 			response.setUserAvatarDTO(new UserAvatarDTO(userAvatar));
 			response.setUserStatusDTO(new UserStatusDTO(userStatus));
 		} else {
