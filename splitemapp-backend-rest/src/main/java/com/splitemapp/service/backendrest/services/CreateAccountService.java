@@ -1,5 +1,6 @@
 package com.splitemapp.service.backendrest.services;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.splitemapp.commons.rest.RestUtils;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
@@ -90,9 +92,19 @@ public class CreateAccountService {
 			userContactData.setPushedBy(newUser);
 			userContactDataEndpoint.persist(userContactData);
 
+			// We get the avatar from facebook
+			byte[] avatar = null;
+			if(request.getAvatarUrl() != null){
+				try {
+					avatar = RestUtils.downloadImage(request.getAvatarUrl());
+				} catch (IOException e) {
+					logger.error("Error getting profile picture from Facebook", e);
+				}
+			}
+
 			// We create and persist the user avatar
 			UserAvatar userAvatar = new UserAvatar();
-			userAvatar.setAvatarData(request.getAvatar());
+			userAvatar.setAvatarData(avatar);
 			userAvatar.setUser(newUser);
 			userAvatar.setPushedAt(TimeUtils.getUTCDate());
 			userAvatar.setUpdatedBy(newUser);

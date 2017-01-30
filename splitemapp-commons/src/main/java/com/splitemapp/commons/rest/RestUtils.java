@@ -9,17 +9,26 @@ import org.springframework.web.client.RestTemplate;
 
 import com.splitemapp.commons.constants.ServiceConstants;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 
 public class RestUtils {
 	
 	public static final int TIMEOUT = 10000;
-	
+
 	/**
-	 * 
-	 * @param servicePath String containing the rest service name
-	 * @param request <E> The request object used in the rest service call
-	 * @param responseType <T> The response class that the rest service call is supposed to return
-	 * @return	<T> An instance of the response type specified as a parameter
+	 *
+	 * @param serviceUrl
+	 * @param request
+	 * @param responseType
+	 * @param <E>
+	 * @param <T>
+	 * @return
 	 */
 	public static <E,T> T callRestService(String serviceUrl, E request, Class<T> responseType){
 		// We get an instance of the spring framework RestTemplate and configure wrapping the root XML element
@@ -43,6 +52,21 @@ public class RestUtils {
 		T response = restTemplate.postForObject(serviceUrl, entity, responseType);
 
 		return response;
+	}
+
+	/**
+	 * Returns a byte[] containing the image
+	 * @param imageUrl
+	 * @return
+	 * @throws IOException
+	 */
+	public static byte[] downloadImage(String imageUrl) throws IOException {
+		URL imageURL = new URL(imageUrl);
+		BufferedImage originalImage = ImageIO.read(imageURL);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(originalImage, "jpg", baos);
+
+		return baos.toByteArray();
 	}
 
 }

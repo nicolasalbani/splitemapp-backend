@@ -57,6 +57,7 @@ public class ServiceConstants {
 	 */
 	public static final String LOGIN_PATH = "/login";
 	public static final String LOGOUT_PATH = "/logout";
+	public static final String CHECK_ACCOUNT_PATH = "/check_account";
 	public static final String CHANGE_PASSWORD_PATH = "/change_password";
 	public static final String PASSWORD_RESET_PATH = "/password_reset";
 	public static final String CREATE_ACCOUNT_PATH = "/create_account";
