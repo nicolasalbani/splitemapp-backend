@@ -1,0 +1,277 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.splitemapp</groupId>
+	<artifactId>splitemapp-backend-rest</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>SplitemApp</name>
+	<description>SplitemApp Backend Rest</description>
+
+	<packaging>war</packaging>
+
+	<developers>
+		<developer>
+			<name>Nicolas Albani</name>
+			<email>nicolasalbani@gmail.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<!-- Encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Plugins version -->
+		<maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+
+		<!-- JPA dependencies version -->
+		<javax.ejb.version>3.0</javax.ejb.version>
+		<javax.ws.rs.version>2.0.1</javax.ws.rs.version>
+		<commons-logging.version>1.1.1</commons-logging.version>
+
+		<!-- Logging dependencies version -->
+		<log4j.version>1.2.14</log4j.version>
+
+		<!-- Hibernate dependencies version -->
+		<hibernate.version>4.3.6.Final</hibernate.version>
+
+		<!-- MySQL dependencies version -->
+		<mysql.jdbc.version>5.1.32</mysql.jdbc.version>
+
+		<!-- H2 dependencies version -->
+		<h2.jdbc.version>1.4.181</h2.jdbc.version>
+
+		<!-- Jetty dependencies version -->
+		<jetty.version>6.1.14</jetty.version>
+
+		<!-- Testing dependencies version -->
+		<junit.version>4.8.1</junit.version>
+
+		<!-- REST Easy dependencies version -->
+		<resteasy.version>3.0.9.Final</resteasy.version>
+
+		<!-- SplitemApp Common Domain Model -->
+		<commons.version>1.0.0-SNAPSHOT</commons.version>
+
+		<!-- Source code version -->
+		<source.java.version>1.7</source.java.version>
+		<target.java.version>1.7</target.java.version>
+
+		<!-- Spring Framework dependencies version -->
+		<spring.version>4.1.1.RELEASE</spring.version>
+
+		<!-- HttpClient dependencies version -->
+		<httpclient.version>4.5.1</httpclient.version>
+		
+		<!-- Java Time dependencies version-->
+		<joda-time.version>2.9.2</joda-time.version>
+		
+		<!-- Java Mail dependencies version -->
+		<mock-javamail.version>1.9</mock-javamail.version>
+	</properties>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<source>${source.java.version}</source>
+						<target>${target.java.version}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>maven-jetty-plugin</artifactId>
+					<version>6.1.10</version>
+					<configuration>
+						<connectors>
+							<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+								<port>9090</port>
+								<maxIdleTime>60000</maxIdleTime>
+							</connector>
+						</connectors>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+		<!-- logging dependencies -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+
+		<!-- javax dependencies -->
+		<dependency>
+			<groupId>javax.ejb</groupId>
+			<artifactId>ejb-api</artifactId>
+			<version>${javax.ejb.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>${javax.ws.rs.version}</version>
+		</dependency>
+
+		<!-- Jetty Server -->
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
+		<!--jsp support for jetty -->
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jsp-2.1</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jsp-api-2.1</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
+		<!-- Hibernate dependencies -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<!-- Testing dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+
+		<!-- MySQL jdbc dependencies -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.jdbc.version}</version>
+		</dependency>
+
+		<!-- H2 jdbc dependencies -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.jdbc.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Common Domain Model dependencies -->
+		<dependency>
+			<groupId>com.splitemapp</groupId>
+			<artifactId>splitemapp-commons</artifactId>
+			<version>${commons.version}</version>
+		</dependency>
+
+		<!-- Resteasy dependencies -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-spring</artifactId>
+			<version>${resteasy.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.resteasy</groupId>
+					<artifactId>resteasy-jettison-provider</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+
+
+		<!-- Spring dependencies for jUnit tests -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- HttpClient dependencies for jUnit tests -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
+
+		<!-- Java Time dependencies -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
+		</dependency>
+		
+		<!-- Java Mail dependencies -->
+		<dependency>
+			<groupId>org.jvnet.mock-javamail</groupId>
+			<artifactId>mock-javamail</artifactId>
+			<version>${mock-javamail.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+</project>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:ehcache="http://www.springmodules.org/schema/ehcache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+	default-autowire="byName">
+
+	<!-- Spring POJO's config -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.splitemapp.service.backendrest" />
+
+
+	<bean id="userEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="userAvatarEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserAvatarEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="userSessionEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserSessionEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="userContactDataEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserContactDataEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="userStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserStatusEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="expenseCategoryEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ExpenseCategoryEndpoint" depends-on="H2Server">
+	</bean>
+	
+	<bean id="expenseStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ExpenseStatusEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="projectEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ProjectEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="projectCoverImageEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ProjectCoverImageEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="projectStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ProjectStatusEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="projectTypeEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.ProjectTypeEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="userExpenseEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserExpenseEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="userInviteEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserInviteEndpoint" depends-on="H2Server">
+	</bean>
+	
+	<bean id="inviteStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.InviteStatusEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="userToProjectEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserToProjectEndpoint" depends-on="H2Server">
+	</bean>
+	
+	<bean id="userToProjectStatusEndpoint"
+		class="com.splitemapp.service.backendrest.endpoint.UserToProjectStatusEndpoint" depends-on="H2Server">
+	</bean>
+
+	<bean id="H2Server" class="org.h2.tools.Server"
+		factory-method="createTcpServer" init-method="start" destroy-method="stop">
+		<constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9998" />
+	</bean>
+
+    <bean id="H2WebServer" class="org.h2.tools.Server"
+    	factory-method="createWebServer" init-method="start">
+    	<constructor-arg value="-web,-webAllowOthers,-webPort,9997" />
+    </bean>
+
+</beans>

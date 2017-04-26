@@ -1,0 +1,155 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.splitemapp</groupId>
+	<artifactId>splitemapp-commons</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>SplitemApp Commons</name>
+	<description>SplitemApp Commons</description>
+	<packaging>jar</packaging>
+
+	<developers>
+		<developer>
+			<name>Diego Ghersi</name>
+			<email>diego@ghersi.com.ar</email>
+		</developer>
+		<developer>
+			<name>Nicolas Albani</name>
+			<email>nicolasalbani@gmail.com</email>
+		</developer>
+	</developers>
+
+	<properties>
+		<!-- Encoding -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Plugins version -->
+		<maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+
+		<!-- JPA dependencies version -->
+		<javax.persistence.version>1.0.2</javax.persistence.version>
+		<ormlite.version>4.48</ormlite.version>
+
+		<!-- Testing dependencies version -->
+		<junit.version>4.8.1</junit.version>
+
+		<!-- Source code version -->
+		<source.java.version>1.7</source.java.version>
+		<target.java.version>1.7</target.java.version>
+
+		<!-- Spring Framework dependencies version -->
+		<spring.version>4.1.1.RELEASE</spring.version>
+
+		<!-- Java Time dependencies version -->
+		<joda-time.version>2.9.2</joda-time.version>
+
+		<!-- Java Mail dependencies version -->
+		<javamail.version>1.4</javamail.version>
+		<mock-javamail.version>1.9</mock-javamail.version>
+		
+		<!-- Velocity dependencies version -->
+		<velocity.version>1.7</velocity.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<source>${source.java.version}</source>
+						<target>${target.java.version}</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<dependencies>
+		<!-- javax dependencies -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>${javax.persistence.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.4.3</version>
+		</dependency>
+
+		<!-- ORM Lite dependencies -->
+		<dependency>
+			<groupId>com.j256.ormlite</groupId>
+			<artifactId>ormlite-core</artifactId>
+			<version>${ormlite.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.j256.ormlite</groupId>
+			<artifactId>ormlite-android</artifactId>
+			<version>${ormlite.version}</version>
+		</dependency>
+
+		<!-- Testing dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+
+		<!-- Spring dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Java Time dependencies -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.version}</version>
+		</dependency>
+
+		<!-- Java Mail dependencies -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${javamail.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jvnet.mock-javamail</groupId>
+			<artifactId>mock-javamail</artifactId>
+			<version>${mock-javamail.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- velocity -->
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>${velocity.version}</version>
+		</dependency>
+	</dependencies>
+</project>
