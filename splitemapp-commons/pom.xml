@@ -40,7 +40,7 @@
 		<target.java.version>1.7</target.java.version>
 
 		<!-- Spring Framework dependencies version -->
-		<spring.version>4.1.1.RELEASE</spring.version>
+		<spring.version>5.3.19</spring.version>
 
 		<!-- Java Time dependencies version -->
 		<joda-time.version>2.9.2</joda-time.version>
