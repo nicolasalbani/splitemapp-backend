@@ -43,7 +43,7 @@
 		<h2.jdbc.version>1.4.181</h2.jdbc.version>
 
 		<!-- Jetty dependencies version -->
-		<jetty.version>6.1.14</jetty.version>
+		<jetty.version>6.1.23</jetty.version>
 
 		<!-- Testing dependencies version -->
 		<junit.version>4.8.1</junit.version>
