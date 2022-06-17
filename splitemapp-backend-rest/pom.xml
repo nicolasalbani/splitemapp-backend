@@ -49,7 +49,7 @@
 		<junit.version>4.8.1</junit.version>
 
 		<!-- REST Easy dependencies version -->
-		<resteasy.version>3.0.9.Final</resteasy.version>
+		<resteasy.version>3.0.11.Final</resteasy.version>
 
 		<!-- SplitemApp Common Domain Model -->
 		<commons.version>1.0.0-SNAPSHOT</commons.version>
